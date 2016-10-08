@@ -191,7 +191,17 @@ textarea {
    Modify as content requires.
    ========================================================================== */
 
+* {
+    line-height: 1.2;
+}
+
+html {
+    font-family: sans-serif;
+}
+  
 h1 {
+    font-size: 2em;
+    font-weight: 400;
     color: #555;
 }
 
@@ -200,14 +210,8 @@ p {
 }
 
 @media only screen and (min-width: 380px) {
-  * {
-      line-height: 1.2;
-      margin: 0;
-  }
-
   html {
       display: table;
-      font-family: sans-serif;
       height: 100%;
       text-align: center;
       width: 100%;
@@ -219,14 +223,16 @@ p {
       margin: 2em auto;
   }
 
-  h1 {
-      font-size: 2em;
-      font-weight: 400;
-  }
 
   p {
       margin: 1em auto;
       width: 380px;
+  }
+}
+
+@media only screen and (max-width: 380px) {
+  body {
+    margin: 2em;
   }
 }
 
