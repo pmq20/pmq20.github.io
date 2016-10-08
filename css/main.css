@@ -197,8 +197,18 @@ textarea {
 
 html {
     font-family: sans-serif;
+    display: table;
+    height: 100%;
+    width: 100%;
 }
-  
+
+body {
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+    margin: 2em auto;
+}
+
 h1 {
     font-size: 2em;
     font-weight: 400;
@@ -210,20 +220,6 @@ p {
 }
 
 @media only screen and (min-width: 380px) {
-  html {
-      display: table;
-      height: 100%;
-      text-align: center;
-      width: 100%;
-  }
-
-  body {
-      display: table-cell;
-      vertical-align: middle;
-      margin: 2em auto;
-  }
-
-
   p {
       margin: 1em auto;
       width: 380px;
@@ -231,8 +227,8 @@ p {
 }
 
 @media only screen and (max-width: 380px) {
-  body {
-    margin: 2em;
+  p {
+      padding: 0 1em;
   }
 }
 
