@@ -223,16 +223,16 @@ p, p a, ol, ol li, ol a {
     color: #888;
 }
 
-@media only screen and (min-width: 380px) {
+@media only screen and (min-width: 420px) {
   p, ol {
       margin: 1em auto;
       width: 380px;
   }
 }
 
-@media only screen and (max-width: 380px) {
+@media only screen and (max-width: 420px) {
   p, ol {
-      padding: 0 1em;
+      padding: 0 1em 0 2em;
   }
 }
 
