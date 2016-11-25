@@ -231,7 +231,11 @@ p, p a, ol, ol li, ol a {
 }
 
 @media only screen and (max-width: 420px) {
-  p, ol {
+  p {
+      padding: 0 1em;
+  }
+
+  ol {
       padding: 0 1em 0 2em;
   }
 }
