@@ -230,7 +230,7 @@ p, p a, ol, ol li, ol a {
 @media only screen and (min-width: 420px) {
   p, ol {
       margin: 1em auto;
-      width: 380px;
+      width: 366px;
   }
 }
 
