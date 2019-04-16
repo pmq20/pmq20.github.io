@@ -219,6 +219,10 @@ h1 {
     color: #555;
 }
 
+h2 {
+    font-family: "Bitstream Charter","URW Palladio L",Palatino,"Palatino Linotype","Hoefler Text",Georgia,"Book Antiqua",Times,"Times New Roman",serif;
+}
+
 ol {
   text-align: left;
 }
