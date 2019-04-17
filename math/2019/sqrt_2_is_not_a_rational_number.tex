@@ -1,0 +1,60 @@
+\documentclass[11pt]{amsart}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{epstopdf}
+
+\geometry{a4paper}
+
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{lemma*}{Lemma}
+\newtheorem*{proposition*}{Proposition}
+
+\title{\(\sqrt{2}\) is not a rational number}
+\author{Minqi Pan}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{lemma*}
+$\forall n\in \mathbb{N}$, $n^2$ is even implies that $n$ is even.
+\end{lemma*}
+
+\begin{proof}
+Suppose that $n$ is odd, then
+\[n=2k+1\]
+for some $k\in \mathbb{N}$. Thus,
+\[n^2=4k^2+4k+1=2(2k^2+2k)+1\]
+which means $n^2$ is odd. The lemma thus holds by contraposition.
+\end{proof}
+
+\begin{proposition*}
+\(\sqrt{2}\) is not a rational number.
+\end{proposition*}
+
+\begin{proof}
+Suppose that \(\sqrt{2}\) is a rational number, then
+\[\sqrt{2}=\frac{m}{n}\]
+for some $m\in \mathbb{N}$, $n\in \mathbb{N}$ and $(m, n)$ are co-prime integers. Also,
+\[2=\frac{m^2}{n^2}\]
+which means that
+\begin{equation} \label{1}
+m^2=2n^2
+\end{equation}
+thus $m^2$ is even. And by Lemma, $m$ is even. Thus there exists $k\in \mathbb{N}$ such that
+\begin{equation} \label{2}
+m=2k
+\end{equation}
+Now substitute equation~\ref{2} into equation~\ref{1},
+\[
+4k^2=2n^2
+\]
+That is,
+\[
+2k^2=n^2
+\]
+Thus $n^2$ is even. By Lemma, $n$ is even. Thus $n$ and $m$ are both even, contradicting the proposition that $(m, n)$ are co-prime integers.
+\end{proof}
+
+\end{document}

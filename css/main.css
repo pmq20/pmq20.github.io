@@ -195,10 +195,6 @@ textarea {
    Modify as content requires.
    ========================================================================== */
 
-* {
-    line-height: 1.4;
-}
-
 html {
     font-family: sans-serif;
     display: table;
