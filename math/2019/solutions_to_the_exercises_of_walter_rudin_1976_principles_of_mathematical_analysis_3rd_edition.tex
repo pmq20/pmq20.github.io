@@ -1,0 +1,50 @@
+\documentclass{amsbook}
+
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{lemma}[theorem]{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{xca}[theorem]{Exercise}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\numberwithin{section}{chapter}
+\numberwithin{equation}{chapter}
+
+\begin{document}
+
+\frontmatter
+
+\title{Solutions to the Exercises of Walter Rudin (1976), Principles of Mathematical Analysis (3rd Edition)}
+
+\author{Minqi Pan}
+
+\date{\today}
+
+\maketitle
+
+\setcounter{page}{4}
+
+\tableofcontents
+
+\mainmatter
+
+\chapter{The Real and Complex Number Systems}
+
+\section{Problem 1}
+
+If $r$ is rational ($r\ne 0$) and $x$ is irrational, prove that $r+x$ and $rx$ are irrational.
+
+\begin{proof}
+Denote $\alpha=r+x, \beta=rx$.
+
+Suppose $\alpha\in\mathbb{Q}$. Then $x=\alpha-r$ is also in $\mathbb{Q}$, because $\mathbb{Q}$ is a field that is closed with respect to additive inverse and addition. This contradicts with the presumption that $x\notin\mathbb{Q}$.
+
+Suppose $\beta\in\mathbb{Q}$. Then $x=\beta/r$ is also in $\mathbb{Q}$, because $r\ne 0$ and $\mathbb{Q}$ is a field that is closed with respect to multiplicative inverse and multiplication. This contradicts with the presumption that $x\notin\mathbb{Q}$.
+
+\end{proof}
+
+\end{document}
