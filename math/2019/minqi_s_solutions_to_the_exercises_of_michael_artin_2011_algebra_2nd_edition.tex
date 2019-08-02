@@ -162,8 +162,29 @@ Verify the associative law for the matrix product $\begin{bmatrix}
 38\\
 14\end{bmatrix}
 \]
+\end{proof}
 
+\section{Problem 1.5}
 
+Let $A$, $B$ and $C$ be matrices of size $l\times m$, $m\times n$ and $n\times p$. How many multiplications are required to compute the product $AB$? In which order should the triple product $ABC$ be computed, so as to minimize the number of multiplications required?
+
+\begin{proof}[Answer]
+$AB$ has $l\times n$ entries, each in need of $m$ multiplications. Therefore $l\times m\times n$ multiplications are required to compute the product $AB$.
+
+There are $2$ ways to compute $ABC$.
+
+\begin{enumerate}
+\item Compute $(AB)C$ with $l\times m\times n + l\times n\times p$ multiplications.
+\item Compute $A(BC)$ with $m\times n\times p + l\times m\times p$ multiplications.
+\end{enumerate}
+
+Therefore,
+
+\begin{enumerate}
+\item If $lmn+lnp>mnp+lmp$, the product $ABC$ should be computed in the order of $A(BC)$.
+\item If $lmn+lnp<mnp+lmp$, the product $ABC$ should be computed in the order of $(AB)C$.
+\item Otherwise, both orders are equally good.
+\end{enumerate}
 
 \end{proof}
 
