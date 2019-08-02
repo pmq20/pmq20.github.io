@@ -171,10 +171,10 @@ Let $A$, $B$ and $C$ be matrices of size $l\times m$, $m\times n$ and $n\times p
 \begin{proof}[Answer]
 $AB$ has $l\times n$ entries, each in need of $m$ multiplications. Therefore $l\times m\times n$ multiplications are required to compute the product $AB$.
 
-There are $2$ ways to compute $ABC$.
+There are $2$ ways to compute $ABC$:
 
 \begin{enumerate}
-\item Compute $(AB)C$ with $l\times m\times n + l\times n\times p$ multiplications.
+\item Compute $(AB)C$ with $l\times m\times n + l\times n\times p$ multiplications;
 \item Compute $A(BC)$ with $m\times n\times p + l\times m\times p$ multiplications.
 \end{enumerate}
 
@@ -293,8 +293,177 @@ Note that,
 \end{equation*}
 
 Therefore the equation holds for all $n\in\mathbb{N}, n\geq 2$.
-
 \end{proof}
 
+\section{Problem 1.8}
+Compute the following products by block multiplications:
+\[
+\left[
+\begin{array}{c|c}
+\begin{matrix}
+1&1\\
+0&1\end{matrix} & \begin{matrix}
+1&5\\
+0&1\end{matrix}\\\hline
+\begin{matrix}
+1&0\\
+0&1\end{matrix}&\begin{matrix}
+0&1\\
+1&0\end{matrix}
+\end{array}
+\right]
+\left[
+\begin{array}{c|c}
+\begin{matrix}
+1&2\\
+0&1\end{matrix} & \begin{matrix}
+1&0\\
+0&1\end{matrix}\\\hline
+\begin{matrix}
+1&0\\
+0&1\end{matrix}&\begin{matrix}
+0&1\\
+1&3\end{matrix}
+\end{array}
+\right],
+\left[
+\begin{array}{c|c}
+0&\begin{matrix}1&2\end{matrix}\\\hline
+\begin{matrix}0\\3\end{matrix}&\begin{matrix}
+1&0\\0&1\end{matrix}
+\end{array}
+\right]
+\left[
+\begin{array}{c|c}
+1&\begin{matrix}2&3\end{matrix}\\\hline
+\begin{matrix}4\\5\end{matrix}&\begin{matrix}
+2&3\\0&4\end{matrix}
+\end{array}
+\right]
+\]
+
+\begin{proof}[Answer]
+\[
+\left[
+\begin{array}{c|c}
+\begin{matrix}
+1&1\\
+0&1\end{matrix} & \begin{matrix}
+1&5\\
+0&1\end{matrix}\\\hline
+\begin{matrix}
+1&0\\
+0&1\end{matrix}&\begin{matrix}
+0&1\\
+1&0\end{matrix}
+\end{array}
+\right]
+\left[
+\begin{array}{c|c}
+\begin{matrix}
+1&2\\
+0&1\end{matrix} & \begin{matrix}
+1&0\\
+0&1\end{matrix}\\\hline
+\begin{matrix}
+1&0\\
+0&1\end{matrix}&\begin{matrix}
+0&1\\
+1&3\end{matrix}
+\end{array}
+\right]
+\]
+\[
+=\left[
+\begin{array}{c|c}
+\begin{bmatrix}
+1&1\\
+0&1\end{bmatrix}\begin{bmatrix}
+1&2\\
+0&1\end{bmatrix}+\begin{bmatrix}
+1&5\\
+0&1\end{bmatrix}\begin{bmatrix}
+1&0\\
+0&1\end{bmatrix} & \begin{bmatrix}
+1&1\\
+0&1\end{bmatrix}\begin{bmatrix}
+1&0\\
+0&1\end{bmatrix}+\begin{bmatrix}
+1&5\\
+0&1\end{bmatrix}\begin{bmatrix}
+0&1\\
+1&3\end{bmatrix}\\\hline
+\begin{bmatrix}
+1&0\\
+0&1\end{bmatrix}\begin{bmatrix}
+1&2\\
+0&1\end{bmatrix}+\begin{bmatrix}
+0&1\\
+1&0\end{bmatrix}\begin{bmatrix}
+1&0\\
+0&1\end{bmatrix}&\begin{bmatrix}
+1&0\\
+0&1\end{bmatrix}\begin{bmatrix}
+1&0\\
+0&1\end{bmatrix}+\begin{bmatrix}
+0&1\\
+1&0\end{bmatrix}\begin{bmatrix}
+0&1\\
+1&3\end{bmatrix}
+\end{array}
+\right]\\
+\]
+\[
+=\left[
+\begin{array}{c|c}
+\begin{matrix}2&8\\0&2\end{matrix}&
+\begin{matrix}6&17\\1&4\end{matrix}\\\hline
+\begin{matrix}1&3\\1&1\end{matrix}&
+\begin{matrix}2&3\\0&2\end{matrix}
+\end{array}
+\right].
+\]
+
+\[
+\left[
+\begin{array}{c|c}
+0&\begin{matrix}1&2\end{matrix}\\\hline
+\begin{matrix}0\\3\end{matrix}&\begin{matrix}
+1&0\\0&1\end{matrix}
+\end{array}
+\right]
+\left[
+\begin{array}{c|c}
+1&\begin{matrix}2&3\end{matrix}\\\hline
+\begin{matrix}4\\5\end{matrix}&\begin{matrix}
+2&3\\0&4\end{matrix}
+\end{array}
+\right]
+\]
+\[
+=\left[
+\begin{array}{c|c}
+0*1+\begin{bmatrix}1&2\end{bmatrix}\begin{bmatrix}4\\5\end{bmatrix}&
+0*\begin{bmatrix}2&3\end{bmatrix}+\begin{bmatrix}1&2\end{bmatrix}\begin{bmatrix}
+2&3\\0&4\end{bmatrix}\\\hline
+\begin{bmatrix}0\\3\end{bmatrix}*1+\begin{bmatrix}
+1&0\\0&1\end{bmatrix}*\begin{bmatrix}4\\5\end{bmatrix}&
+\begin{bmatrix}0\\3\end{bmatrix}*\begin{bmatrix}2&3\end{bmatrix}+
+\begin{bmatrix}1&0\\0&1\end{bmatrix}\begin{bmatrix}
+2&3\\0&4\end{bmatrix}
+\end{array}
+\right]
+\]
+\[
+=\left[
+\begin{array}{c|c}
+14&\begin{bmatrix}2&11\end{bmatrix}\\\hline
+\begin{bmatrix}4\\8\end{bmatrix}&\begin{bmatrix}
+2&3\\6&13
+\end{bmatrix}
+\end{array}
+\right]
+\]
+\end{proof}
 
 \end{document}
