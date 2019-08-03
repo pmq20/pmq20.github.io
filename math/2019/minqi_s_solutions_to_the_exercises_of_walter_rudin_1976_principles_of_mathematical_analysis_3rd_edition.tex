@@ -34,7 +34,7 @@
 
 \chapter{The Real and Complex Number Systems}
 
-\section{Problem 1}
+\section{Problem 1: Mixed Operations between Rational and Irrational Numbers Produce Irrational Numbers}
 
 If $r$ is rational ($r\ne 0$) and $x$ is irrational, prove that $r+x$ and $rx$ are irrational.
 
@@ -44,6 +44,68 @@ Denote $\alpha=r+x, \beta=rx$.
 Suppose $\alpha\in\mathbb{Q}$. Then $x=\alpha-r$ is also in $\mathbb{Q}$, because $\mathbb{Q}$ is a field that is closed with respect to additive inverse and addition. This contradicts with the presumption that $x\notin\mathbb{Q}$.
 
 Suppose $\beta\in\mathbb{Q}$. Then $x=\beta/r$ is also in $\mathbb{Q}$, because $r\ne 0$ and $\mathbb{Q}$ is a field that is closed with respect to multiplicative inverse and multiplication. This contradicts with the presumption that $x\notin\mathbb{Q}$.
+\end{proof}
+
+\section{Problem 2: $\sqrt{12}\notin\mathbb{Q}$}
+
+Prove that there is no rational number whose square is $12$.
+
+\begin{lemma}\label{l1}
+$\forall n\in \mathbb{Z}, \forall p\in \{2, 3\}$,
+\[
+n^2\equiv 0 \implies n\equiv 0 \pmod p.
+\]
+\end{lemma}
+
+\begin{proof}
+We check the squares of every element of $\mathbb{Z}/2\mathbb{Z}=\{0,1\}$, the ring of integers modulo $2$.
+\[0^2 = 0\]
+\[1^2 = 1\]
+
+Thus $n^2=0$ implies $n=0$ in $\mathbb{Z}/2\mathbb{Z}$ by exhaustion.
+
+Similarly we check the squares of every element in $\mathbb{Z}/3\mathbb{Z}=\{0,1,2\}$, the ring of integers modulo $3$.
+\[0^2 = 0\]
+\[1^2 = 1\]
+\[2^2 = 1\]
+
+Thus $n^2=0$ implies $n=0$ in $\mathbb{Z}/3\mathbb{Z}$ by exhaustion.
+\end{proof}
+
+\begin{lemma}\label{l2}
+There is no rational number whose square is $3$.
+\end{lemma}
+
+\begin{proof}
+We now show that the equation
+\begin{equation}\label{e1}
+p^2=3
+\end{equation}
+is not satisfied by any rational $p$. If there was such a $p$, we could write $p=\frac{m}{n}$ where $m\equiv 0 \pmod{3}$ and $n\equiv 0 \pmod{3}$ are not both true. Let us assume this is done. Then \ref{e1} implies
+\begin{equation}\label{e2}
+m^2=3n^2,
+\end{equation}
+This shows that $m^2\equiv 0\pmod{3}$ and we have $m\equiv 0 \pmod{3}$ by Lemma~\ref{l1}. So $m^2\equiv 0\pmod{9}$. It follows that the right side of \ref{e2} is divisible by 9, so that $n^2\equiv 0\pmod{3}$, which implies that $n\equiv 0\pmod{3}$ again by Lemma~\ref{l1}.
+
+The assumption that \ref{e1} holds thus leads to the conclusion that both $m\equiv 0 \pmod{3}$ and $n\equiv 0 \pmod{3}$ are true, contrary to our choice of $m$ and $n$. Hence \ref{e1} is impossible for rational $p$.
+\end{proof}
+
+\begin{proof}[Main Proof]
+Suppose that there existed $p\in\mathbb{Q}$ such that $p^2=12$. Then there exists $m, n\in\mathbb{Z}$ such that
+\[
+p=\frac{m}{n} \implies 12=\frac{m^2}{n^2} \implies m^2=2\times 6n^2 \implies m^2\equiv 0 \pmod{2}.
+\]
+So it follows from Lemma~\ref{l1} that
+\[
+m\equiv 0 \pmod{2}.
+\]
+
+Therefore there exists $k\in\mathbb{Z}$ such that $m=2k$, and
+\[
+4k^2=12n^2 \implies k^2=3n^2 \implies \left(\frac{k}{n}\right)^2=3.
+\]
+
+This contradicts with Lemma~\ref{l2}.
 
 \end{proof}
 
