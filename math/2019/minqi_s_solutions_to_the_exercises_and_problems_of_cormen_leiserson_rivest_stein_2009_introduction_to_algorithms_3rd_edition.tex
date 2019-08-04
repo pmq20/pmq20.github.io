@@ -1,0 +1,44 @@
+\documentclass{amsbook}
+
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{lemma}[theorem]{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{xca}[theorem]{Exercise}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\numberwithin{section}{chapter}
+\numberwithin{equation}{chapter}
+
+\begin{document}
+
+\frontmatter
+\title{Minqi's Solutions to the Exercises and Problems of Cormen, Leiserson, Rivest, Stein (2009), Introduction to Algorithms (3rd Edition)}
+
+\author{Minqi Pan}
+
+\date{\today}
+
+\maketitle
+
+\setcounter{page}{4}
+
+\tableofcontents
+
+\mainmatter
+
+\chapter{The Role of Algorithms in Computing}
+
+\section{Exercise 1.1-1}
+
+Give a real-world example that requires sorting or a real-world example that requires computing a convex hull.
+\begin{proof}[Answer]
+Microsoft Windows provides a feature to sort all files in a folder by their sizes.
+
+Computing a convex hull is required in ethology to estimate an animal's home range based on the points where the animal has been observed.
+\end{proof}
+\end{document}
