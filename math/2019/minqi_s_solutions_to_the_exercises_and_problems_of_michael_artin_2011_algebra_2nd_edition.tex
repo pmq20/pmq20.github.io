@@ -1,5 +1,7 @@
 \documentclass{amsbook}
 
+\usepackage{enumitem}
+
 \newtheorem{theorem}{Theorem}[chapter]
 \newtheorem{lemma}[theorem]{Lemma}
 
@@ -18,7 +20,7 @@
 
 \frontmatter
 
-\title{Minqi's Solutions to the Exercises of Michael Artin (2011), Algebra (2nd Edition)}
+\title{Minqi's Solutions to the Exercises and Problems of Michael Artin (2011), Algebra (2nd Edition)}
 
 \author{Minqi Pan}
 
@@ -464,6 +466,21 @@ Compute the following products by block multiplications:
 \end{array}
 \right].
 \]
+\end{proof}
+
+\section{Problem 1.9: Laws of Matrix Operations}
+Let $A, B$ be square matrices.
+
+\begin{enumerate}[label=(\alph*)]
+\item When is $(A+B)(A-B)=A^2-B^2$?
+\item Expand $(A+B)^3$.
+\end{enumerate}
+
+\begin{proof}[Answer]
+\begin{enumerate}[label=(\alph*)]
+\item When $BA=AB$.
+\item $(A+B)^3 = A^3 + ABA + BAA + BBA + AAB + ABB + BAB + B^3$.
+\end{enumerate}
 \end{proof}
 
 \end{document}
