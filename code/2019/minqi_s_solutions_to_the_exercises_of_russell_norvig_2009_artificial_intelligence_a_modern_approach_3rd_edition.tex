@@ -1,0 +1,58 @@
+\documentclass{amsbook}
+
+\usepackage{enumitem}
+
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{lemma}[theorem]{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{xca}[theorem]{Exercise}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\numberwithin{section}{chapter}
+\numberwithin{equation}{chapter}
+
+\begin{document}
+
+\frontmatter
+
+\title{Minqi's Solutions to the Exercises of Russell, Norvig (2009), Artificial Intelligence: A Modern Approach (3rd Edition)}
+
+\author{Minqi Pan}
+
+\date{\today}
+
+\maketitle
+
+\setcounter{page}{4}
+
+\tableofcontents
+
+\mainmatter
+
+\chapter{Introduction}
+
+\section{Exercise 1.1}
+Define in your own words:
+\begin{enumerate}[label=(\alph*)]
+\item intelligence,
+\item artificial intelligence,
+\item agent,
+\item rationality,
+\item logical reasoning.
+\end{enumerate}
+\begin{proof}[Answer]
+\begin{enumerate}[label=(\alph*)]
+\item Intelligence is the ability to perceive information, perform reasoning and thinkings, retain knowledge, and take according actions.
+\item Artificial intelligence is the study of the design of intelligent agents.
+\item An agent is an independent entity that operates autonomously, perceives its environment, persists knowledge over a prolonged time period, adapts to changes, and creates and purses goals.
+\item Rationality is a characteristic of an agent's behavior, that is, to always achieve the best outcome or the best expected outcome.
+\item Logical reasoning is to reason according to the formal rules and norms of logic.
+\end{enumerate}
+
+\end{proof}
+\end{document}
