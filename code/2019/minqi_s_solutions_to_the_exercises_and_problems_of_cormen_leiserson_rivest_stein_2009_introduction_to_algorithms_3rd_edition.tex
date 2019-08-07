@@ -53,4 +53,11 @@ Select a data structure that you have seen previously, and discuss its strengths
 A red-black tree automatically keeps its height small in the face of arbitrary item insertions and deletions. Thus it has the strength of faster search operations which takes time proportional to the height of the tree. But it has the limitation of slowing down insertion and deletion operations because of additional rebalancing procedures. 
 \end{proof}
 
+\section{Exercise 1.1-4}
+How are the shortest-path and traveling-salesman problems given above similar? How are they different?
+\begin{proof}[Answer]
+Both are trying to optimize path lengths to the shortest.
+
+The traveling-salesman problem has more constraints than the shortest-path problem, in that it requires all nodes to be visited and the path to be a loop. The shortest-path problem, on the other hand, does not require any particular set of nodes to be visited other than the source node and/or the destination node, nor does it require the path to be a loop.
+\end{proof}
 \end{document}
