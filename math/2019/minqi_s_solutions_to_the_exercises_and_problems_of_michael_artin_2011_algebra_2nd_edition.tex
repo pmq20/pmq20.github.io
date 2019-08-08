@@ -483,4 +483,24 @@ Let $A, B$ be square matrices.
 \end{enumerate}
 \end{proof}
 
+\section{Exercise 1.10: Multiplications with Diagonal Matrices}
+Let $D$ be the diagonal matrix with diagonal entries $d_1, \dots, d_n$, and let $A=(a_{ij})$ be an arbitrary $n\times n$ matrix. Compute the products $DA$ and $AD$.
+\begin{proof}[Answer]
+\[
+DA=\begin{bmatrix}
+d_1a_{11} & d_1a_{12} & \dots & d_1a_{1n}\\
+d_2a_{21} & d_2a_{22} & \dots & d_2a_{2n}\\
+\dots & \dots & \dots & \dots\\
+d_na_{n1} & d_na_{n2} & \dots & d_na_{nn}
+\end{bmatrix},
+\]
+\[
+AD=\begin{bmatrix}
+d_1a_{11} & d_2a_{12} & \dots & d_na_{1n}\\
+d_1a_{21} & d_2a_{22} & \dots & d_na_{2n}\\
+\dots & \dots & \dots & \dots\\
+d_1a_{n1} & d_2a_{n2} & \dots & d_na_{nn}
+\end{bmatrix}.
+\]
+\end{proof}
 \end{document}
