@@ -60,4 +60,14 @@ Both are trying to optimize path lengths to the shortest.
 
 The traveling-salesman problem has more constraints than the shortest-path problem, in that it requires all nodes to be visited and the path to be a loop. The shortest-path problem, on the other hand, does not require any particular set of nodes to be visited other than the source node and/or the destination node, nor does it require the path to be a loop.
 \end{proof}
+
+\section{Exercise 1.1-5}
+Come up with a real-world problem in which only the best solution will do. Then come up with one in which a solution that is ``approximately'' the best is good enough.
+\begin{proof}[Answer]
+Consider a delivery company with a central depot. Each day, it loads up each delivery truck at the depot and sends it around to deliver goods to several addresses. At the end of the day, each truck must end up back at the depot so that it is ready to be loaded for the next day.
+
+Suppose that the company has already purchased many delivery trucks and is trying to determine whether the fuel tank of each truck is big enough to finish a one-day delivery tour without refueling. Also suppose that the fuel tank capacities are relatively small, so that it is not obvious to decide. Then only the best solution (i.e., the shortest tour route) can answer this question.
+
+On the other hand, suppose that the delivery company has not purchased its delivery trucks yet, then the company can use the ``approximately'' best solution (i.e., the ``approximately'' shortest tour route) to decide the minimal fuel-tank capacity of the trucks to purchase.
+\end{proof}
 \end{document}
