@@ -1,5 +1,6 @@
 \documentclass{amsbook}
 \usepackage{graphicx}
+\usepackage{makecell}
 
 \newtheorem{theorem}{Theorem}[chapter]
 \newtheorem{lemma}[theorem]{Lemma}
@@ -47,7 +48,7 @@ Computing a convex hull is required in ethology to estimate an animal's home ran
 \section{Exercise 1.1-2}
 Other than speed, what other measures of efficiency might one use in a real-world setting?
 \begin{proof}[Answer]
-Number of CPU instructions, and memory usage.
+Number of CPU cycles / CPU instructions, memory usage, and scalability.
 \end{proof}
 
 \section{Exercise 1.1-3}
@@ -85,7 +86,7 @@ Suppose we are comparing inplementations of insertion sort and merge sort on the
 \begin{proof}[Answer]
 For $n=1, 2, \dots, 43$, insertion sort beats merge sort. See Figure~\ref{Exercise 1.2-2}.
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \begin{center}
 \includegraphics[width=.8\textwidth]{clrs_e_1_2_2.png}
 \end{center}
@@ -99,12 +100,104 @@ What is the smallest value of $n$ such that an algorithm whose running time is $
 \begin{proof}[Answer]
 The smallest value of $n$ is $15$. See Figure~\ref{Exercise 1.2-3}.
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \begin{center}
 \includegraphics[width=.8\textwidth]{clrs_e_1_2_3.png}
 \end{center}
 \caption{Exercise 1.2-3}
 \label{Exercise 1.2-3}
 \end{figure}
+\end{proof}
+
+\section{Problem 1-1: Comparison of running times}
+For each function $f(n)$ and time $t$ in the following table, determine the largest size $n$ of a problem that can be solved in time $t$, assuming that the algorithm to solve the problem takes $f(n)$ microseconds.
+\begin{proof}[Answer]
+See Table~\ref{Problem 1-1}.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{c|c|c|c|c|c|c|c}
+                & \makecell{1\\second}
+                & \makecell{1\\minute}
+                & \makecell{1\\hour}
+                & \makecell{1\\day}
+                & \makecell{1\\month}
+                & \makecell{1\\year}
+                & \makecell{1\\century} \\\hline
+$\lg n$     
+&  $\approx 10^{10^6} $   
+& $\approx 10^{10^8} $
+& $\approx 10^{10^9} $
+& $\approx 10^{10^{10}} $
+& $\approx 10^{10^{11}} $
+& $\approx 10^{10^{12}} $
+& $\approx 10^{10^{14}} $
+\\\hline
+$\sqrt{n}$ 
+& $10^{12}$                    
+& $\approx 10^{15}$
+& $\approx 10^{19}$
+& $\approx 10^{21}$
+& $\approx 10^{24}$
+& $\approx 10^{26}$
+& $\approx 10^{30}$
+\\\hline
+$n$          
+& $10^{6}$                      
+&  $\approx 10^7$
+&  $\approx 10^9$
+&  $\approx 10^{10}$
+&  $\approx 10^{12}$
+&  $\approx 10^{13}$
+&  $\approx 10^{15}$
+\\\hline
+$n\lg n$   
+&  $62,746$ 
+&  $\approx 10^6$
+&  $\approx 10^8$
+&  $\approx 10^9$
+&  $\approx 10^{10}$
+&  $\approx 10^{11}$
+&  $\approx 10^{13}$
+\\\hline
+$n^2$     
+&  $1,000$                       
+&  $7,745$        
+&  $60,000$
+&  $\approx 10^5$
+&  $\approx 10^6$
+&  $\approx 10^6$
+&  $\approx 10^7$
+\\\hline
+$n^3$      
+&  $100$                         
+&  $391$        
+&  $1,532$
+&  $4,420$
+&  $13,737$
+&  $31,594$
+&  $146,645$
+\\\hline
+$2^n$    
+&   $19$                          
+&  $25$        
+&    $31$    
+&   $36$    
+&   $41$       
+&   $44$
+&   $51$
+\\\hline
+$n!$        
+&   $9$                            
+&  $11$        
+&        $13$
+&  $14$     
+&  $16$
+&  $17$
+&  $18$        
+\end{tabular}
+\caption{Problem 1-1}
+\label{Problem 1-1}
+\end{table}
 \end{proof}
 \end{document}
