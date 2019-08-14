@@ -1,0 +1,63 @@
+\documentclass{amsbook}
+
+\usepackage{enumitem}
+
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{lemma}[theorem]{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{xca}[theorem]{Exercise}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\numberwithin{section}{chapter}
+\numberwithin{equation}{chapter}
+
+\begin{document}
+
+\frontmatter
+
+\title{Minqi's Solutions to the Exercises of Sheldon Axler (2014), Linear Algebra Done Right (3rd Edition)}
+
+\author{Minqi Pan}
+
+\date{\today}
+
+\maketitle
+
+\setcounter{page}{4}
+
+\tableofcontents
+
+\mainmatter
+
+\chapter{Vector Spaces}
+
+\section{Exercise 1.A.1}
+Suppose $a$ and $b$ are real numbers, not both $0$. Find real numbers $c$ and $d$ such that
+\[
+1/(a+bi)=c+di
+\]
+\begin{proof}[Answer]
+Since at least one of the real numbers $a, b$ is different from $0$, we have $a^2+b^2\ne 0$. We can then let
+\[
+c=\frac{a}{a^2+b^2},
+\]
+\[
+d=\frac{-b}{a^2+b^2}.
+\]
+Then
+\begin{equation*}
+\begin{split}
+&\left(a+bi\right)\left(\frac{a}{a^2+b^2}-\frac{b}{a^2+b^2}i\right)\\
+&=\left(a\frac{a}{a^2+b^2}-b\left(-\frac{b}{a^2+b^2}\right)\right) + \left(a\left(-\frac{b}{a^2+b^2}\right)+b\frac{a}{a^2+b^2}\right)i\\
+&=1 + 0i\\
+&=1.
+\end{split}
+\end{equation*}
+
+\end{proof}
+\end{document}
