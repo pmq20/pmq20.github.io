@@ -1,4 +1,5 @@
 \documentclass{amsbook}
+\usepackage{graphicx}
 
 \newtheorem{theorem}{Theorem}[chapter]
 \newtheorem{lemma}[theorem]{Lemma}
@@ -28,6 +29,8 @@
 \setcounter{page}{4}
 
 \tableofcontents
+
+\listoffigures 
 
 \mainmatter
 
@@ -76,4 +79,20 @@ Give an example of an application that requires algorithmic content at the appli
 \begin{proof}[Answer]
 The Nest Learning Thermostat is a smart thermostat that optimizes heating and cooling of homes and businesses to conserve energy. This application requires energy load management and HVAC control algorithms to make it smart and helpful, whether that be through sensing, machine perception, control systems, pattern recognition, or preference learning. The function of the algorithms involved is to keep its users comfortable while saving them money and reducing the world's energy consumption. 
 \end{proof}
+
+\section{Exercise 1.2-2}
+Suppose we are comparing inplementations of insertion sort and merge sort on the same machine. For inputs of size $n$, insertion sort runs in $8n^2$ steps, while merge sort runs in $64n\lg n$ steps. For which values on $n$ does insertion sort beat merge sort?
+\begin{proof}[Answer]
+For $n=1, 2, \dots, 43$, insertion sort beats merge sort. See Figure~\ref{Exercise 1.2-2}.
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=.8\textwidth]{clrs_e_1_2_2.png}
+\end{center}
+\caption{Exercise 1.2-2}
+\label{Exercise 1.2-2}
+\end{figure}
+
+\end{proof}
+
 \end{document}
