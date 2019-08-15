@@ -1,0 +1,47 @@
+\documentclass{amsbook}
+
+\usepackage{enumitem}
+
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{lemma}[theorem]{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{xca}[theorem]{Exercise}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\numberwithin{section}{chapter}
+\numberwithin{equation}{chapter}
+
+\begin{document}
+\setcounter{chapter}{1}
+
+\frontmatter
+
+\title{Minqi's Solutions to the Problems of Gonzalez and Woods (2018), Digital Image Processing (4th Edition)}
+
+\author{Minqi Pan}
+
+\date{\today}
+
+\maketitle
+
+\setcounter{page}{4}
+
+\tableofcontents
+
+\mainmatter
+
+\chapter{Digital Image Fundamentals}
+\section{Problem 2.1}
+If you use a sheet of white paper to shield your eyes
+when looking directly at the sun, the side of
+the sheet facing you appears black. Which of the visual
+processes discussed in Section 2.1 ``Elements of Visual Perception'' is responsible for this?
+\begin{proof}[Answer]
+The simultaneous contrast phenomenon of the brightness adaptation and discrimination processes of visual proception.
+\end{proof}
+\end{document}
