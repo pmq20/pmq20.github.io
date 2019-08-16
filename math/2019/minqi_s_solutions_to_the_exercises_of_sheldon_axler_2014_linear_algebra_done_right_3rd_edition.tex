@@ -77,7 +77,7 @@ is a cube root of $1$ (meaning that its cube equals $1$).
 \end{equation*}
 \end{proof}
 
-\section{Exercise 1.A.2}
+\section{Exercise 1.A.3}
 Find two distinct square roots of $i$.
 \begin{proof}[Answer]
 Note that 
@@ -90,7 +90,7 @@ Thus the following two numbers are two distinct square roots of $i$:
 \]
 \end{proof}
 
-\section{Exercise 1.A.3}
+\section{Exercise 1.A.4}
 Show that $\alpha+\beta=\beta+\alpha$ for all $\alpha, \beta\in\mathbb{C}$.
 \begin{proof}
 Suppose $\alpha=a+bi$ and $\beta=c+di$, where $a,b,c,d\in\mathbb{R}$. Then the definition of addition of complex numbers shows that
@@ -102,5 +102,25 @@ and
 \beta+\alpha=(c+a)+(d+b)i.
 \]
 The equations above and the commutativity of addition of real numbers show that $\alpha+\beta=\beta+\alpha$.
+\end{proof}
+
+\section{Exercise 1.A.5}
+Show that $(\alpha+\beta)+\lambda=\alpha+(\beta+\lambda)$ for all $\alpha,\beta,\lambda\in\mathbb{C}$.
+\begin{proof}
+Suppose $\alpha=a+bi$, $\beta=c+di$ and $\lambda=e+fi$, where $a,b,c,d,e,f\in\mathbb{R}$. Then the definition of addition of complex numbers shows that
+\begin{equation*}
+\begin{split}
+(\alpha+\beta)+\lambda&=((a+c)+(b+d)i)+e+fi\\
+&=((a+c)+e)+((b+d)+f)i
+\end{split}
+\end{equation*}
+and
+\begin{equation*}
+\begin{split}
+\alpha+(\beta+\lambda)&=a+bi+((c+e)+(d+f)i)\\
+&=(a+(c+e))+(b+(d+f))i
+\end{split}
+\end{equation*}
+The equations above and the associativity of addition of real numbers show that $(\alpha+\beta)+\lambda=\alpha+(\beta+\lambda)$.
 \end{proof}
 \end{document}
