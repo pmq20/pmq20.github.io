@@ -219,7 +219,7 @@ Explain why there does not exist $\lambda\in\mathbb{C}$ such that
 \lambda(2-3i,5+4i,-6+7i)=(12-5i,7+22i,-32-9i).
 \]
 \begin{proof}
-If there exists such $\lambda$ then by the definition of scalar multiplication,
+If there exists such $\lambda$ then the definition of scalar multiplication in $\mathbb{C}^3$ shows that,
 \[
 \lambda(2-3i)=12-5i.
 \]
@@ -293,5 +293,26 @@ Suppose $x=(x_1,\dots,x_n)$ where $x_1,\dots,x_n\in\mathbb{F}$. Then the definit
 &=x.
 \end{split}
 \end{equation*}
+\end{proof}
+
+\section{Exercise 1.A.15}
+Show that $\lambda(x+y)=\lambda x+\lambda y$ for all $\lambda\in\mathbb{F}$ and $x,y\in\mathbb{F}^n$.
+\begin{proof}
+Suppose $x=(x_1,\dots,x_n)$ and $y=(y_1,\dots,y_n)$ where $x_1,\dots,x_n,y_1,\dots,y_n\in\mathbb{F}$. Then the definition of addition and scalar multiplication in $\mathbb{F}^n$ shows that
+\begin{equation*}
+\begin{split}
+\lambda(x+y)&=\lambda(x_1+y_1,\dots,x_n+y_n)\\
+&=(\lambda(x_1+y_1),\dots,\lambda(x_n+y_n))
+\end{split}
+\end{equation*}
+and
+\begin{equation*}
+\begin{split}
+\lambda x+\lambda y&=(\lambda x_1,\dots,\lambda x_n) + (\lambda y_1,\dots,\lambda y_n)\\
+&=(\lambda x_1+\lambda y_1,\dots,\lambda x_n+\lambda y_n)
+\end{split}
+\end{equation*}
+
+The equations above and the distributive property of $\mathbb{F}$ show that $\lambda(x+y)=\lambda x+\lambda y$.
 \end{proof}
 \end{document}
