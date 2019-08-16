@@ -407,4 +407,29 @@ The empty set is not a vector space. The empty set fails to satisfy only one of 
 \begin{proof}[Answer]
 The empty set fails to satisfy the ``Additive Identity'' requirement. Because there does not exist an element $0\in\varnothing$.
 \end{proof}
+
+\section{Exercise 1.B.5}
+Show that in the definition of a vector space (1.19), the additive inverse condition can be replaced with the condition that
+\[
+0v=0, \forall v\in V.
+\]
+
+Here the $0$ on the left side is the number $0$, and the $0$ on the right side is the additive identity of $V$. 
+\begin{proof}
+We will show that the new condition is equal to the original condition, which states that for every $v\in V$, there exists $w\in V$ such that $v+w=0$. That the old condition implies the new condition has been shown in Theorem 1.29 ``The number $0$ times a vector''. Therefore it suffices to show that the new condition implies the old condition.
+
+Suppose that the new condition holds.
+
+Pick $v\in V$, and let $w=(-1)v$. It follows that
+\begin{equation*}
+\begin{split}
+v+w&=1v+(-1)v\\
+&=(1-1)v\\
+&=0v\\
+&=0.
+\end{split}
+\end{equation*}
+
+Therefore the old condition holds.
+\end{proof}
 \end{document}
