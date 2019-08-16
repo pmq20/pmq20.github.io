@@ -432,4 +432,49 @@ v+w&=1v+(-1)v\\
 
 Therefore the old condition holds.
 \end{proof}
+
+\section{Exercise 1.B.6}
+Let $\infty$ and $-\infty$ denote two distinct objects, neither of which is in $\mathbb{R}$. Define an addition and scalar multiplication on $\mathbb{R}\cup\{\infty\}\cup\{-\infty\}$ as you could guess from the notation. Specifically, the sum and product of two real numbers is as usual, and for $t\in\mathbb{R}$ define
+\[
+\begin{array}{cc}
+t\infty=\begin{cases} 
+-\infty & \text{if } t<0,\\
+0 & \text{if } t=0,\\
+\infty & \text{if } t>0,
+\end{cases}
+&
+t(-\infty)=\begin{cases} 
+\infty & \text{if } t<0,\\
+0 & \text{if } t=0,\\
+-\infty & \text{if } t>0,
+\end{cases}
+\end{array}
+\]
+\[
+\begin{array}{cc}
+t+\infty=\infty+t=\infty,
+&
+t+(-\infty)=(-\infty)+t=(-\infty),
+\end{array}
+\]
+\[
+\begin{array}{ccc}
+\infty+\infty=\infty,
+&
+(-\infty)+(-\infty)=(-\infty),
+&
+\infty+(-\infty)=0.
+\end{array}
+\]
+Is $\mathbb{R}\cup\{\infty\}\cup\{-\infty\}$ a vector space over $\mathbb{R}$? Explain.
+\begin{proof}[Answer]
+No. Because the associativity of vector addition fails:
+\[
+(1024+\infty)-\infty=\infty-\infty=0
+\]
+but
+\[
+1024+(\infty-\infty)=1024+0=1024.
+\]
+\end{proof}
 \end{document}
