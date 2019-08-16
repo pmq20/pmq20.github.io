@@ -144,4 +144,21 @@ and
 \end{equation*}
 The equations above and the communitivity of addition of real numbers show that $(\alpha\beta)\lambda=\alpha(\beta\lambda)$.
 \end{proof}
+
+\section{Exercise 1.A.7}
+Show that for every $\alpha\in\mathbb{C}$, there exists a unique $\beta\in\mathbb{C}$ such that $\alpha+\beta=0$.
+\begin{proof}
+Suppose $\alpha=a+bi$ where $a,b\in\mathbb{R}$, then $\beta=-a-bi$ satisfies $\alpha+\beta=0$.
+
+Suppose that there exists $\beta'\in\mathbb{C}$ such that $\beta'\ne\beta$ and $\alpha+\beta'=0$. Then
+\begin{equation*}
+\begin{split}
+\beta&=\beta+(\alpha+\beta')\\
+&=(\beta+\alpha)+\beta'\\
+&=\beta'.
+\end{split}
+\end{equation*}
+
+The equations above show that $\beta=\beta'$, contradicting with $\beta'\ne\beta$.
+\end{proof}
 \end{document}
