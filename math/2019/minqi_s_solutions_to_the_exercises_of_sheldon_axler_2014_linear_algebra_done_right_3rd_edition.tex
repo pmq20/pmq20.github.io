@@ -240,4 +240,25 @@ But
 
 Therefore $\lambda$ does not exist.
 \end{proof}
+
+\section{Exercise 1.A.12}
+Show that $(x+y)+z=x+(y+z)$ for all $x,y,z\in\mathbb{F}^n$.
+\begin{proof}
+Suppose $x=(x_1,\dots,x_n)$, $y=(y_1,\dots,y_n)$ and $z=(z_1,\dots,z_n)$. Then the definition of addition in $\mathbb{F}^n$ shows that
+\begin{equation*}
+\begin{split}
+(x+y)+z&=(x_1+y_1,\dots,x_n+y_n)+(z_1,\dots,z_n)\\
+&=((x_1+y_1)+z_1,\dots,(x_n+y_n)+z_n)
+\end{split}
+\end{equation*}
+and
+\begin{equation*}
+\begin{split}
+x+(y+z)&=(x_1,\dots,x_n)+(y_1+z_1,\dots,y_n+z_n)\\
+&=(x_1+(y_1+z_1),\dots,x_n+(y_n+z_n))
+\end{split}
+\end{equation*}
+
+The equations above and the associativity of addition in $\mathbb{F}$ show that $(x+y)+z=x+(y+z)$.
+\end{proof}
 \end{document}
