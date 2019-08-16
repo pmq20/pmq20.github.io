@@ -118,7 +118,7 @@ and
 \begin{equation*}
 \begin{split}
 \alpha+(\beta+\lambda)&=a+bi+((c+e)+(d+f)i)\\
-&=(a+(c+e))+(b+(d+f))i
+&=(a+(c+e))+(b+(d+f))i.
 \end{split}
 \end{equation*}
 The equations above and the associativity of addition of real numbers show that $(\alpha+\beta)+\lambda=\alpha+(\beta+\lambda)$.
@@ -139,10 +139,10 @@ and
 \begin{split}
 \alpha(\beta\lambda)&=(a+bi)((ce-df)+(cf+de)i)\\
 &=(a(ce-df)-b(cf+de))+(a(cf+de)+b(ce-df))i\\
-&=(ace-adf-bcf-bde)+(acf+ade+bce-bdf)i
+&=(ace-adf-bcf-bde)+(acf+ade+bce-bdf)i.
 \end{split}
 \end{equation*}
-The equations above and the communitivity of addition of real numbers show that $(\alpha\beta)\lambda=\alpha(\beta\lambda)$.
+The equations above and the commutativity of addition of real numbers show that $(\alpha\beta)\lambda=\alpha(\beta\lambda)$.
 \end{proof}
 
 \section{Exercise 1.A.7}
@@ -177,5 +177,28 @@ Suppose that there exists $\beta'\in\mathbb{C}$ such that $\beta'\ne\beta$ and $
 \end{equation*}
 
 The equations above show that $\beta=\beta'$, contradicting with $\beta'\ne\beta$.
+\end{proof}
+
+\section{Exercise 1.A.9}
+Show that $\lambda(\alpha+\beta)=\lambda\alpha+\lambda\beta$ for all $\lambda,\alpha,\beta\in\mathbb{C}$.
+\begin{proof}
+Suppose $\alpha=a+bi$, $\beta=c+di$ and $\lambda=e+fi$, where $a,b,c,d,e,f\in\mathbb{R}$. Then the definition of multiplication and addition of complex numbers shows that
+\begin{equation*}
+\begin{split}
+\lambda(\alpha+\beta)&=(e+fi)((a+c)+(b+d)i)\\
+&=(e(a+c)-f(b+d))+(e(b+d)+f(a+c))i\\
+&=(ea+ec-fb-fd)+(eb+ed+fa+fc)i
+\end{split}
+\end{equation*}
+and
+\begin{equation*}
+\begin{split}
+\lambda\alpha+\lambda\beta&=(e+fi)(a+bi)+(e+fi)(c+di)\\
+&=((ea-fb)+(eb+fa)i)+((ec-fd)+(ed+fc)i)\\
+&=(ea-fb+ec-fd)+(eb+fa+ed+fc)i.
+\end{split}
+\end{equation*}
+
+The equations above and the commutativity of addition of real numbers show that $\lambda(\alpha+\beta)=\lambda\alpha+\lambda\beta$.
 \end{proof}
 \end{document}
