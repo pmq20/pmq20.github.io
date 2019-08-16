@@ -352,14 +352,11 @@ Prove that $-(-v)=v$ for every $v\in V$.
 \section{Exercise 1.B.2}
 Suppose $a\in\mathbb{F}, v\in V$, and $av=0$. Prove that $a=0$ or $v=0$.
 \begin{proof}
-Suppose that $v=(v_1,\dots,v_n)$ where $v_1,\dots,v_n\in\mathbb{F}$. Then by the definition of scalar multiplication
+For the purpose of arriving at a contradiction, assume that both $a\ne 0$ and $v\ne 0$. Then
 \[
-av=(av_1,\dots,av_n).
+v=1v=(\frac{1}{a}a)v=\frac{1}{a}(av)=0
 \]
-
-For the purpose of arriving at a contradiction, assume that both $a\ne 0$ and $v\ne 0$.
-
-Now $v\ne 0$ implies that there exists some $i\in\{1,\dots,n\}$ such that $v_i\ne 0$. Thus $av_i\ne 0$, which leads to $av\ne 0$ contradicting with the premise that $av=0$.
+which contradicts with $v\ne 0$.
 
 Therefore $a=0$ or $v=0$.
 \end{proof}
