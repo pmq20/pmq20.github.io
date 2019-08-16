@@ -212,4 +212,32 @@ Find $x\in\mathbb{R}^4$ such that
 x=\left(\frac{1}{2},6,-\frac{7}{2},\frac{1}{2}\right).
 \]
 \end{proof}
+
+\section{Exercise 1.A.11}
+Explain why there does not exist $\lambda\in\mathbb{C}$ such that
+\[
+\lambda(2-3i,5+4i,-6+7i)=(12-5i,7+22i,-32-9i).
+\]
+\begin{proof}
+If there exists such $\lambda$ then by the definition of scalar multiplication,
+\[
+\lambda(2-3i)=12-5i.
+\]
+
+Thus
+\[
+\lambda=\frac{12-5i}{2-3i}=3+2i.
+\]
+
+But
+\begin{equation*}
+\begin{split}
+\lambda(2-3i,5+4i,-6+7i)&=(3+2i)(2-3i,5+4i,-6+7i)\\
+&=(12-5i,7+22i,-32+9i)\\
+&\ne(12-5i,7+22i,-32-9i).
+\end{split}
+\end{equation*}
+
+Therefore $\lambda$ does not exist.
+\end{proof}
 \end{document}
