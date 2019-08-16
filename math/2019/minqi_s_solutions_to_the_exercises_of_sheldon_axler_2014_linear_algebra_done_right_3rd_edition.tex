@@ -244,7 +244,7 @@ Therefore $\lambda$ does not exist.
 \section{Exercise 1.A.12}
 Show that $(x+y)+z=x+(y+z)$ for all $x,y,z\in\mathbb{F}^n$.
 \begin{proof}
-Suppose $x=(x_1,\dots,x_n)$, $y=(y_1,\dots,y_n)$ and $z=(z_1,\dots,z_n)$. Then the definition of addition in $\mathbb{F}^n$ shows that
+Suppose $x=(x_1,\dots,x_n)$, $y=(y_1,\dots,y_n)$ and $z=(z_1,\dots,z_n)$ where $x_1,\dots,x_n,y_1,\dots,y_n,z_1,\dots,z_n\in\mathbb{F}$. Then the definition of addition in $\mathbb{F}^n$ shows that
 \begin{equation*}
 \begin{split}
 (x+y)+z&=(x_1+y_1,\dots,x_n+y_n)+(z_1,\dots,z_n)\\
@@ -261,4 +261,25 @@ x+(y+z)&=(x_1,\dots,x_n)+(y_1+z_1,\dots,y_n+z_n)\\
 
 The equations above and the associativity of addition in $\mathbb{F}$ show that $(x+y)+z=x+(y+z)$.
 \end{proof}
+
+\section{Exercise 1.A.12}
+Show that $(ab)x=a(bx)$ for all $x\in\mathbb{F}^n$ and all $a,b\in\mathbb{F}$.
+\begin{proof}
+Suppose $x=(x_1,\dots,x_n)$ where $x_1,\dots,x_n\in\mathbb{F}$. Then the definition of scalar multiplication in $\mathbb{F}^n$ shows that
+\begin{equation*}
+\begin{split}
+(ab)x&=((ab)x_1,\dots,(ab)x_n)
+\end{split}
+\end{equation*}
+and
+\begin{equation*}
+\begin{split}
+a(bx)&=a(bx_1,\dots,bx_n)\\
+&=(a(bx_1),\dots,a(x_n))
+\end{split}
+\end{equation*}
+
+The equations above and the associativity of multiplication in $\mathbb{F}$ show that $(ab)x=a(bx)$.
+\end{proof}
+
 \end{document}
