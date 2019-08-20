@@ -596,6 +596,21 @@ Denote $X=\{f\in\mathbb{R}^{(-4,4)}: f \text{ is differentiable and }f'(-1)=3f(2
 \end{enumerate}
 \end{proof}
 
+\section{Exercise 1.C.4}
+Suppose $b\in\mathbb{R}$. Show that the set of continuous real-valued functions $f$ on the interval $[0,1]$ such that $\int_0^1 f=b$ is a subspace of $\mathbb{R}^{[0,1]}$ if and only if $b=0$.
+\begin{proof}
+Denote $X=\{f\in\mathbb{R}^{[0,1]}: $f$\text{ is continuous and} \int_0^1 f=b\}$.
+
+Suppose that $b=0$. We now verify that $X$ is a subspace.
+\begin{enumerate}
+\item We can verify that $0\in X$ because $0(x)=0$ is continuous and $\int_0^1 0(x)dx=0$.
+\item Pick $f,g\in X$. It follows that $f+g$ is continuous by Theorem~4.9 of \cite{rudin1976principles} and Riemann-integrable by Theorem~6.8 of \cite{rudin1976principles}. Further by Theorem~6.12 of \cite{rudin1976principles}, we have $\int_0^1 (f(x)+g(x))dx=\int_0^1 f(x)dx+\int_0^1 g(x)=0+0=0$.
+\item Pick $a\in\mathbb{F}, f\in X$. By Theorem~4.9 of \cite{rudin1976principles}, $af$ is continuous. Thus $af$ is Riemann-integrable by Theorem~6.8 of \cite{rudin1976principles}. Further by Theorem~6.12 of \cite{rudin1976principles}, we have $\int_0^1 (af(x))dx=a\int_0^1 f(x)dx=a\times 0=0$.
+\end{enumerate}
+
+On the other hand, suppose that $X$ is a subspace. Then it follows that $0\in X$, which implies that $\int_0^1 0(x)dx=0=b$.
+\end{proof}
+
 \backmatter
 \bibliographystyle{amsalpha}
 \bibliography{minqi_s_solutions_to_the_exercises_of_sheldon_axler_2014_linear_algebra_done_right_3rd_edition}
