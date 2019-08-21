@@ -617,6 +617,25 @@ Is $\mathbb{R}^2$ a subspace of the complex vector space $\mathbb{C}^2$?
 No. Because $\mathbb{R}^2 \not\subset\mathbb{C}^2$.
 \end{proof}
 
+\section{Exercise 1.C.6}
+\begin{enumerate}[label=(\roman*)]
+\item Is $\{(a,b,c)\in\mathbb{R}^3:a^3=b^3\}$ a subspace of $\mathbb{R}^3$?
+\item Is $\{(a,b,c)\in\mathbb{C}^3:a^3=b^3\}$ a subspace of $\mathbb{C}^3$?
+\end{enumerate}
+\begin{proof}[Answer]
+\begin{enumerate}[label=(\roman*)]
+\item Yes. Let's observe the real function $f(x)=x^3$. $f(x)$ is a 1-1 correspondence between $\mathbb{R}$ and $\mathbb{R}$. Therefore the condition $a^3=b^3$ is equivalent to $a=b$ in $\mathbb{R}$.
+\item No. Set $u=(2,2e^{\frac{2\pi}{3}i},0)$ and $v=(e^{\frac{2\pi}{3}i},1,0)$. Then $u+v=(2+e^{\frac{2\pi}{3}i},2e^{\frac{2\pi}{3}i}+1,0)$ where
+\[
+\left(2+e^{\frac{2\pi}{3}i}\right)^3=3\sqrt{3}i,
+\]
+\[
+\left(2e^{\frac{2\pi}{3}i}+1\right)^3=-3\sqrt{3}i.
+\]
+\end{enumerate}
+
+\end{proof}
+
 \backmatter
 \bibliographystyle{amsalpha}
 \bibliography{minqi_s_solutions_to_the_exercises_of_sheldon_axler_2014_linear_algebra_done_right_3rd_edition}
