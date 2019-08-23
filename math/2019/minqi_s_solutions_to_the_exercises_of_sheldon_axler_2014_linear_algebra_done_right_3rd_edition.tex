@@ -651,6 +651,47 @@ U=\{(0,y):y\in\mathbb{R}\}\cup\{(x,0):x\in\mathbb{R}\}.
 \]
 \end{proof}
 
+\section{Exercise 1.C.9}
+A function $f: \mathbb{R}\to\mathbb{R}$ is called periodic if there exists a positive number $p$ such that $f(x)=f(x+p)$ for all $x\in\mathbb{R}$. Is the set of periodic functions from $\mathbb{R}$ to $\mathbb{R}$ a subspace of $\mathbb{R}^\mathbb{R}$? Explain.
+
+\begin{lemma}\label{l1}
+$f(x)=\cos(\pi x)+\cos(x)$ is not periodic.
+\end{lemma}
+
+\begin{proof}
+Suppose that $f(x)=\cos(\pi x)+\cos(x)$ is periodic, then there exists $\theta\in\mathbb{R}$ such that $\theta>0$ and $f(x+\theta)=f(x)$ for all $x\in\mathbb{R}$. Pick $x=0$, we have
+\begin{equation}\label{eq1}
+f(\theta+0)=\cos(\pi\theta)+\cos(\theta)=f(0)=\cos(0)+\cos(0)=2.
+\end{equation}
+
+Note that $-1\leqslant \cos(\pi\theta)\leqslant 1$ and $-1\leqslant \cos(\theta)\leqslant 1$. However, if $\cos(\pi\theta)<1$ and $\cos(\theta)<1$, then $\cos(\pi\theta)+\cos(\theta)<1$. Thus Equation~(\ref{eq1}) implies that
+\[
+\begin{cases}
+\cos(\pi\theta)=1\\
+\cos(\theta)=1
+\end{cases}.
+\]
+
+This further implies that there exists some $m,n\in\mathbb{Z}$ such that,
+\[
+\begin{cases}
+\pi\theta=2m\pi\\
+\theta=2n\pi
+\end{cases}.
+\]
+
+Since $\theta\ne 0$, dividing the above two equations yields
+\[
+\pi=\frac{m}{n}.
+\]
+
+This contradicts with the fact that $\pi$ is irrational.
+\end{proof}
+
+\begin{proof}[Main Answer]
+No, because Lemma~\ref{l1} gives an example of two periodic functions where their addition is not periodic.
+\end{proof}
+
 \backmatter
 \bibliographystyle{amsalpha}
 \bibliography{minqi_s_solutions_to_the_exercises_of_sheldon_axler_2014_linear_algebra_done_right_3rd_edition}
