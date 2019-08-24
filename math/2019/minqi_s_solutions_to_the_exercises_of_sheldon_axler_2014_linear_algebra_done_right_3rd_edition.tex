@@ -692,6 +692,23 @@ This contradicts with the fact that $\pi$ is irrational.
 No, because Lemma~\ref{l1} gives an example of two periodic functions where their addition is not periodic.
 \end{proof}
 
+\section{Exercise 1.C.10}
+Suppose $U_1$ and $U_2$ are subspaces of $V$. Prove that the intersection $U_1\cap U_2$ is a subspace of $V$.
+\begin{proof}
+We prove by verifying the three conditions for a subspace.
+\begin{enumerate}
+\item That $U_1$ is a subspace implies $0\in U_1$. That $U_2$ is a subspace implies $0\in U_2$. Therefore $0\in U_1\cap U_2$.
+\item Pick $u,w\in U_1\cap U_2$. That $U_1$ is a subspace implies $u+w\in U_1$. That $U_2$ is a subspace implies $u+w\in U_2$. Therefore $u+w\in U_1\cap U_2$.
+\item Pick $a\in \mathbb{F}$ and $u\in U_1\cap U_2$. That $U_1$ is a subspace implies that $au\in U_1$. That $U_2$ is a subspace implies $au\in U_2$. Therefore $au\in U_1\cap U_2$.
+\end{enumerate}
+\end{proof}
+
+
+
+
+
+
+
 \backmatter
 \bibliographystyle{amsalpha}
 \bibliography{minqi_s_solutions_to_the_exercises_of_sheldon_axler_2014_linear_algebra_done_right_3rd_edition}
