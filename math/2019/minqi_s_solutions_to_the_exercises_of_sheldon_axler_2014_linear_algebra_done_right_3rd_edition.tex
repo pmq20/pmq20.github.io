@@ -695,18 +695,25 @@ No, because Lemma~\ref{l1} gives an example of two periodic functions where thei
 \section{Exercise 1.C.10}
 Suppose $U_1$ and $U_2$ are subspaces of $V$. Prove that the intersection $U_1\cap U_2$ is a subspace of $V$.
 \begin{proof}
-We prove by verifying the three conditions for a subspace.
+We prove by verifying the three conditions for $U_1\cap U_2$ being a subspace.
 \begin{enumerate}
-\item That $U_1$ is a subspace implies $0\in U_1$. That $U_2$ is a subspace implies $0\in U_2$. Therefore $0\in U_1\cap U_2$.
-\item Pick $u,w\in U_1\cap U_2$. That $U_1$ is a subspace implies $u+w\in U_1$. That $U_2$ is a subspace implies $u+w\in U_2$. Therefore $u+w\in U_1\cap U_2$.
-\item Pick $a\in \mathbb{F}$ and $u\in U_1\cap U_2$. That $U_1$ is a subspace implies that $au\in U_1$. That $U_2$ is a subspace implies $au\in U_2$. Therefore $au\in U_1\cap U_2$.
+\item The premise that $U_1$ is a subspace implies $0\in U_1$. The premise that $U_2$ is a subspace implies $0\in U_2$. Therefore $0\in U_1\cap U_2$.
+\item Pick $u,w\in U_1\cap U_2$. The premise that $U_1$ is a subspace implies $u+w\in U_1$. The premise that $U_2$ is a subspace implies $u+w\in U_2$. Therefore $u+w\in U_1\cap U_2$.
+\item Pick $a\in \mathbb{F}$ and $u\in U_1\cap U_2$. The premise that $U_1$ is a subspace implies that $au\in U_1$. The premise that $U_2$ is a subspace implies $au\in U_2$. Therefore $au\in U_1\cap U_2$.
 \end{enumerate}
 \end{proof}
 
+\section{Exercise 1.C.11}
+Prove that the intersection of every collection of subspaces of $V$ is a subspace of $V$.
 
-
-
-
+\begin{proof}
+Pick set $I$ and $(S_i)_{i\in I}$, a family of sets indexed over set $I$. Suppose that $S_i$ is a subspace of $V$ for all $i\in I$. We prove by verifying the three conditions for $\cap_{i\in I} S_i$ being a subspace.
+\begin{enumerate}
+\item For all $i\in I$, the premise that $S_i$ is a subspace implies that $0\in S_i$. Therefore $0\in \cap_{i\in I} S_i$.
+\item Pick $u,w\in \cap_{i\in I} S_i$. For all $i\in I$, the premise that $S_i$ is a subspace implies $u+w\in S_i$. Therefore $u+w\in \cap_{i\in I} S_i$.
+\item Pick $a\in \mathbb{F}$ and $u\in \cap_{i\in I} S_i$. For all $i\in I$, the premise that $U_i$ is a subspace implies that $au\in U_i$. Therefore $au\in \cap_{i\in I} S_i$.
+\end{enumerate}
+\end{proof}
 
 
 \backmatter
