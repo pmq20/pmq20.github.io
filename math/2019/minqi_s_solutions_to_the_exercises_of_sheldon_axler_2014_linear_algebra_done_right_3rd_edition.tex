@@ -715,6 +715,27 @@ Pick set $I$ and $(S_i)_{i\in I}$, a family of sets indexed over set $I$. Suppos
 \end{enumerate}
 \end{proof}
 
+\section{Exercise 1.C.12}
+Prove that the union of two subspaces of $V$ is a subspace of $V$ if and only if one of the subspaces is contained in the other.
+\begin{proof}
+Pick two subspaces $V_1, V_2$ of $V$.
+\begin{enumerate}
+\item If $V_1\subset V_2$, then $V_1\cup V_2=V_2$. Since $V_2$ is a subspace, it follows that $V_1\cup V_2$ is a subspace.
+\item Suppose that $V_1\cup V_2$ is a subspace. To prove by contradiction, suppose that $V_1\not\subset V_2$ and $V_2\not\subset V_1$. Thus there exists $v_1\in V_1$ such that $v_1\notin V_2$, and there exists $v_2\in V_2$ such that $v_2\notin V_1$.
+
+We claim that $v_1+v_2\notin V_1$. Because if $v_1+v_2$ was in $V_1$, the premise that $V_1$ is a subspace would imply that $v_2=(v_1+v_2)-v_1$ is also in $V_1$.
+
+We claim that $v_1+v_2\notin V_2$. Because if $v_1+v_2$ was in $V_2$, the premise that $V_2$ is a subspace would imply that $v_1=(v_1+v_2)-v_2$ is also in $V_2$.
+
+Thus $v_1+v_2\notin V_1\cup V_2$, contradicting with the premise that $V_1\cup V_2$ is a subspace.
+\end{enumerate}
+\end{proof}
+
+
+
+
+
+
 
 \backmatter
 \bibliographystyle{amsalpha}
