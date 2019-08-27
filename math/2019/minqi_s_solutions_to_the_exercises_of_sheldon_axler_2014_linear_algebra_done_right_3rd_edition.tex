@@ -731,8 +731,27 @@ Thus $v_1+v_2\notin V_1\cup V_2$, contradicting with the premise that $V_1\cup V
 \end{enumerate}
 \end{proof}
 
+\section{Exercise 1.C.13}
+Prove that the union of three subspaces of $V$ is a subspace of $V$ if and only if one of the subspaces contains the other two.
+\begin{proof}
+Pick three subspaces $V_1, V_2, V_3$ of $V$.
+\begin{enumerate}
+\item If $V_1\subset V_3$ and $V_2\subset V_3$, then $V_1\cup V_2\cup V_3=V_3$. Since $V_3$ is a subspace, it follows that $V_1\cup V_2\cup V_3$ is a subspace.
+\item Suppose that $V_1\cup V_2\cup V_3$ is a subspace of $V$.
 
+If $V_1\subset V_2$, then $V_1\cup V_2\cup V_3$ becomes $V_2\cup V_3$. By Exercise~1.C.12, it follows that either $V_2\subset V_3$ or $V_3 \subset V_2$. Thus either $V_3$ or $V_2$ is the subspace that contains the other two.
 
+If $V_2\subset V_1$, then $V_1\cup V_2\cup V_3$ becomes $V_1\cup V_3$. By Exercise~1.C.12, it follows that either $V_1\subset V_3$ or $V_3 \subset V_1$. Thus either $V_3$ or $V_1$ is the subspace that contains the other two.
+
+If $V_1\not\subset V_2$ and $V_2\not\subset V_1$, then there exists $u\in V_1$ and $w\in V_2$ such that $u\notin V_2$ and $w\notin V_1$.
+\begin{enumerate}[label=(\roman*)]
+\item We claim that $V_1\setminus (V_1\cap V_2)\subset V_3$. Pick $x\in V_1\setminus (V_1\cap V_2)\subset V_3$. The premise that $V_1\cup V_2\cup V_3$ is a subspace implies that $x+w\in V_1\cup V_2\cup V_3$ and $2x+w\in V_1\cup V_2\cup V_3$. If $x+w$ was in $V_1$, then $w=(x+w)-x$ would be in $V_1$ which is a contradiction. If $2x+w$ was in $V_1$, then $w=(2x+w)-2x$ would be in $V_1$ which is a contradiction. If $x+w$ was in $V_2$, then $x=(x+w)-w$ would be in $V_2$ which is a contradiction. If $2x+w$ was in $V_2$, then $2x=(2x+w)-w$ would be in $V_2$ which is a contradiction. Therefore $x+w\in V_3$ and $2x+w\in V_3$. And it follows that $x=(2x+w)-(x+w)$ is in $V_3$.
+\item We claim that $V_2\setminus (V_1\cap V_2)\subset V_3$. Pick $y\in V_2\setminus (V_1\cap V_2)\subset V_3$. The premise that $V_1\cup V_2\cup V_3$ is a subspace implies that $u+y\in V_1\cup V_2\cup V_3$ and $u+2y\in V_1\cup V_2\cup V_3$. If $u+y$ was in $V_1$, then $y=(u+y)-u$ would be in $V_1$ which is a contradiction. If $u+2y$ was in $V_1$, then $2y=(u+2y)-u$ would be in $V_1$ which is a contradiction. If $u+y$ was in $V_2$, then $u=(u+y)-y$ would be in $V_2$ which is a contradiction. If $u+2y$ was in $V_2$, then $u=(u+2y)-2y$ would be in $V_2$ which is a contradiction. Therefore $u+y\in V_3$ and $u+2y\in V_3$. And it follows that $y=(u+2y)-(u+y)$ is in $V_3$.
+\item We claim that $V_1\cap V_2\subset V_3$.  Pick $z\in V_1\cap V_2$. The premise that $V_1$ is a subspace implies that $u+z\in V_1$. If $u+z\in V_1\cap V_2$, then $u=(u+z)-z\in V_2$ which is a contradiction. Thus $u+z\in V_1\setminus(V_1\cap V_2)$. By (i) we have $u+z\in V_3$. Also by (i) we have $u\in V_3$. The premise that $V_3$ is a subspace implies that $z=(u+z)-u$ is in $V_3$.
+\end{enumerate}
+The above (i) and (iii) implies that $V_1\subset V_3$. The above (ii) and (iii) implies that $V_2\subset V_3$.
+\end{enumerate}
+\end{proof}
 
 
 
