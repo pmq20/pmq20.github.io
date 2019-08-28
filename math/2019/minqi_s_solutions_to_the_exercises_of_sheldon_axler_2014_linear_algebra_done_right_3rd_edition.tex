@@ -753,6 +753,18 @@ The above (i) and (iii) implies that $V_1\subset V_3$. The above (ii) and (iii) 
 \end{enumerate}
 \end{proof}
 
+\section{Exercise 1.C.14}
+Verify the assertion in Example~1.38: Suppose that $U=\{(x,x,y,y)\in\mathbb{F}^4: x,y\in\mathbb{F}\}$ and W=$\{(x,x,x,y)\in\mathbb{F}^4:x,y\in\mathbb{F}\}$. Then
+\[
+U+W=\{(x,x,y,z)\in\mathbb{F}^4:x,y,z\in\mathbb{F}\}.
+\]
+\begin{proof}
+\begin{enumerate}
+\item Pick $x\in U+W$. Then there exists $u=(x_u,x_u,y_u,y_u)\in U$ and $w=(x_w,x_w,x_w,y_w)\in W$ such that $x_u, y_u, x_w, y_w\in \mathbb{F}$ and $x=u+w$. Thus $x=(x_u+x_w,x_u+x_w,y_u+x_w,y_u+y_w)$, which shows that $x\in \{(x,x,y,z)\in\mathbb{F}^4:x,y,z\in\mathbb{F}\}$. Therefore $U+W\subset \{(x,x,y,z)\in\mathbb{F}^4:x,y,z\in\mathbb{F}\}$.
+\item Pick $v\in\{(x,x,y,z)\in\mathbb{F}^4:x,y,z\in\mathbb{F}\}$. Then there exists $x,y,z\in\mathbb{F}$ such that $v=(x,x,y,z)$. By choosing $u=(x,x,y,y)\in U$ and $w=(0,0,0,z-y)\in W$, we have $u+w=v$. Thus $v\in U+W$. Therefore $\{(x,x,y,z)\in\mathbb{F}^4:x,y,z\in\mathbb{F}\}\subset U+W$.
+\end{enumerate}
+The above (1) and (2) imply that $U+W=\{(x,x,y,z)\in\mathbb{F}^4:x,y,z\in\mathbb{F}\}$.
+\end{proof}
 
 
 
