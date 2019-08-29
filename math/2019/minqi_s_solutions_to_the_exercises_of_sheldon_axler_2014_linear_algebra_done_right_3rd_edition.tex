@@ -766,7 +766,16 @@ U+W=\{(x,x,y,z)\in\mathbb{F}^4:x,y,z\in\mathbb{F}\}.
 The above (1) and (2) imply that $U+W=\{(x,x,y,z)\in\mathbb{F}^4:x,y,z\in\mathbb{F}\}$.
 \end{proof}
 
-
+\section{Exercise 1.C.15}
+Suppose $U$ is a subspace of $V$. What is $U+U$?
+\begin{proof}
+We claim that $U+U=U$.
+\begin{enumerate}
+\item Pick $z\in U+U$, then there exists $x,y\in U$ such that $z=x+y$. Since $U$ is closed under addition, we have $x+y\in U$, i.e. $z\in U$. Thus $U+U\subset U$.
+\item Pick $u\in U$, then $u=1u=(\frac{1}{2}+\frac{1}{2})u=\frac{1}{2}u+\frac{1}{2}u$, i.e. $u\in U+U$. Thus $U\subset U+U$.
+\end{enumerate}
+The above (1) and (2) imply that $U+U=U$.
+\end{proof}
 
 \backmatter
 \bibliographystyle{amsalpha}
