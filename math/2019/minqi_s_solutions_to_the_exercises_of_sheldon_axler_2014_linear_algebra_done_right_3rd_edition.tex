@@ -788,6 +788,19 @@ We claim that $U+W=W+U$.
 The above (1) and (2) imply that $U+W=W+U$.
 \end{proof}
 
+\section{Exercise 1.C.17}
+Is the operation of addition on the subspaces of $V$ associative? In other words, if $U_1, U_2, U_3$ are subspaces of $V$, is
+\[
+(U_1+U_2)+U_3=U_1+(U_2+U_3)?
+\]
+\begin{proof}
+We claim that $(U_1+U_2)+U_3=U_1+(U_2+U_3)$.
+\begin{enumerate}
+\item Pick $v\in (U_1+U_2)+U_3$, then there exists $u_1,u_2,u_3\in U$ such that $v=(u_1+u_2)+u_3$. Since the addition on $V$ is associative, $(u_1+u_2)+u_3=u_1+(u_2+u_3)$, and this shows that $v=u_1+(u_2+u_3)$ is in $U_1+(U_2+U_3)$. Thus $(U_1+U_2)+U_3\subset U_1+(U_2+U_3)$.
+\item Pick $v\in U_1+(U_2+U_3)$, then there exists $u_1,u_2,u_3\in U$ such that $v=u_1+(u_2+u_3)$. Since the addition on $V$ is associative, $u_1+(u_2+u_3)=(u_1+u_2)+u_3$, and this shows that $v=(u_1+u_2)+u_3$ is in $(U_1+U_2)+U_3$. Thus $U_1+(U_2+U_3)\subset (U_1+U_2)+U_3$.
+\end{enumerate}
+The above (1) and (2) imply that $(U_1+U_2)+U_3=U_1+(U_2+U_3)$.
+\end{proof}
 
 \backmatter
 \bibliographystyle{amsalpha}
