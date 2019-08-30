@@ -777,6 +777,18 @@ We claim that $U+U=U$.
 The above (1) and (2) imply that $U+U=U$.
 \end{proof}
 
+\section{Exercise 1.C.16}
+Is the operation of addition on the subspaces of $V$ commutative? In other words, if $U$ and $W$ are subspaces of $V$, is $U+W=W+U$?
+\begin{proof}
+We claim that $U+W=W+U$.
+\begin{enumerate}
+\item Pick $v\in U+W$, then there exists $u\in U$ and $w\in W$ such that $v=u+w$. Since the addition on $V$ is commutative, $u+w=w+u$, and this shows that $v=w+u$ is in $W+U$. Thus $U+W\subset W+U$.
+\item Pick $v\in W+U$, then there exists $w\in W$ and $u\in U$ such that $v=w+u$. Since the addition on $V$ is commutative, $w+u=u+w$, and this shows that $v=u+w$ is in $U+W$. Thus $W+U\subset U+W$.
+\end{enumerate}
+The above (1) and (2) imply that $U+W=W+U$.
+\end{proof}
+
+
 \backmatter
 \bibliographystyle{amsalpha}
 \bibliography{minqi_s_solutions_to_the_exercises_of_sheldon_axler_2014_linear_algebra_done_right_3rd_edition}
