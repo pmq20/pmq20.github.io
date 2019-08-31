@@ -802,6 +802,22 @@ We claim that $(U_1+U_2)+U_3=U_1+(U_2+U_3)$.
 The above (1) and (2) imply that $(U_1+U_2)+U_3=U_1+(U_2+U_3)$.
 \end{proof}
 
+\section{Exercise 1.C.18}
+Does the operation of addition on the subspaces of $V$ have an additive identity? Which subspaces have additive inverses?
+\begin{proof}
+We claim that the subspace $\{0\}$ is the additive identity, i.e. $U+\{0\}=U$ for all subspaces $U$.
+\begin{enumerate}
+\item Pick $v\in U+\{0\}$, then there exists $u\in U$ such that $v=u+0$, and this shows that $v=u$ is in $U$. Thus $U+\{0\}\subset U$.
+\item Pick $u\in U$, then $u=u+0$ shows that $u\in U+\{0\}$. Thus $U\subset U+\{0\}$.
+\end{enumerate}
+The above (1) and (2) imply that $U+\{0\}=U$.
+
+We claim that for all subspaces $U$ and $W$, $U+W=\{0\}$ implies $U=W=\{0\}$, which means that the subspaces that have additive inverses are only $\{0\}$ itself.
+
+Pick subspaces $U$ and $W$. Assume $U+W=\{0\}$. Theorem~1.39 shows that $U\subset U+W$ and $W\subset U+W$. Thus $U\subset \{0\}$ and $W\subset \{0\}$. Note that the only two subsets of $\{0\}$ are $\varnothing$ and $\{0\}$. Also, the premise that $U$ and $W$ are subspaces implies $0\in U$ and $0\in W$, thus $U=W=\{0\}$.
+\end{proof}
+
+
 \backmatter
 \bibliographystyle{amsalpha}
 \bibliography{minqi_s_solutions_to_the_exercises_of_sheldon_axler_2014_linear_algebra_done_right_3rd_edition}
