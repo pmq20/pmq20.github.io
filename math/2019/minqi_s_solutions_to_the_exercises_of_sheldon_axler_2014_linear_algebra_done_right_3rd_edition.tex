@@ -814,7 +814,7 @@ The above (1) and (2) imply that $U+\{0\}=U$.
 
 We claim that for all subspaces $U$ and $W$, $U+W=\{0\}$ implies $U=W=\{0\}$, which means that the subspaces that have additive inverses are only $\{0\}$ itself.
 
-Pick subspaces $U$ and $W$. Assume $U+W=\{0\}$. Theorem~1.39 shows that $U\subset U+W$ and $W\subset U+W$. Thus $U\subset \{0\}$ and $W\subset \{0\}$. Note that the only two subsets of $\{0\}$ are $\varnothing$ and $\{0\}$. Also, the premise that $U$ and $W$ are subspaces implies $0\in U$ and $0\in W$, thus $U=W=\{0\}$.
+Pick subspaces $U$ and $W$. Assume $U+W=\{0\}$. 1.39 of \cite{axler2014linear} shows that $U\subset U+W$ and $W\subset U+W$. Thus $U\subset \{0\}$ and $W\subset \{0\}$. Note that the only two subsets of $\{0\}$ are $\varnothing$ and $\{0\}$. Also, the premise that $U$ and $W$ are subspaces implies $0\in U$ and $0\in W$, thus $U=W=\{0\}$.
 \end{proof}
 
 \section{Exercise 1.C.19}
@@ -827,11 +827,29 @@ then $U_1=U_2$.
 Set $V=\mathbb{R}^2, U_1=\{(x,x):x\in\mathbb{R}\}, U_2=\{(-x,x):x\in\mathbb{R}\}, W=\{(0,x):x\in\mathbb{R}\}$. Then $U_1, U_2, W$ are subspaces of $V$, $U_1+W=\mathbb{R}^2$, $U_2+W=\mathbb{R}^2$ but $U_1\ne U_2$.
 \end{proof}
 
+\section{Exercise 1.C.20}
+Suppose\[
+U=\{(x,x,y,y)\in\mathbb{F}^4:x,y\in\mathbb{F}\}.
+\]
+Find a subspace $W$ of $\mathbb{F}^4$ such that $\mathbb{F}^4=U\oplus W$.
+\begin{proof}
+We claim that the following $W$ is a subspace of $\mathbb{F}^4$ such that $\mathbb{F}^4=U\oplus W$:
+\[
+W=\{(0,x,0,y)\in\mathbb{F}^4:x,y\in\mathbb{F}\}.
+\]
 
+We first verify that $W$ is a subspace of $\mathbb{F}^4$ by 1.34 of \cite{axler2014linear}.
 
+\begin{enumerate}
+\item We can show that $0\in W$ by choosing $x=0,y=0$ in $(0,x,0,y)$.
+\item Suppose that $u,w\in W$ where $u=(0,x_u,0,y_u)$ and w=$(0,x_w,0,y_w)$. Then $u+w=(0,x_u+x_w,0,y_u+y_w)$ shows that $u+w$ in $W$.
+\item Pick $a\in\mathbb{F}$ and $u\in W$ where $u=(0,x_u,0,y_u)$. Then $au=(0,ax_u,0,ay_u)$ shows that $au$ is in $W$.
+\end{enumerate}
 
+We then verify that $\mathbb{F}^4=U\oplus W$ by 1.45 of \cite{axler2014linear}.
 
-
+Pick $v\in U\cap W$. Then there exists $x,y,s,t\in\mathbb{F}$ such that $v=(x,x,y,y)=(0,s,0,t)$, which implies that $x=0, s=0, y=0, t=0$, i.e. $v=0$. Therefore $U+W$ is a direct sum.
+\end{proof}
 
 
 
