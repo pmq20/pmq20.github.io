@@ -624,7 +624,7 @@ No. Because $\mathbb{R}^2 \not\subset\mathbb{C}^2$.
 \end{enumerate}
 \begin{proof}[Answer]
 \begin{enumerate}[label=(\roman*)]
-\item Yes. Let's observe the real function $f(x)=x^3$. $f(x)$ is a 1-1 correspondence between $\mathbb{R}$ and $\mathbb{R}$. Therefore the condition $a^3=b^3$ is equivalent to $a=b$ in $\mathbb{R}$.
+\item Yes. Let's observe the real function $f(x)=x^3$. $f(x)$ is a 1-1 correspondence between $\mathbb{R}$ and $\mathbb{R}$. Therefore the condition $a^3=b^3$ is equivalent to $a=b$ being in $\mathbb{R}$.
 \item No. Set $u=(2,2e^{\frac{2\pi}{3}i},0)$ and $v=(e^{\frac{2\pi}{3}i},1,0)$. Then $u+v=(2+e^{\frac{2\pi}{3}i},2e^{\frac{2\pi}{3}i}+1,0)$ where
 \[
 \left(2+e^{\frac{2\pi}{3}i}\right)^3=3\sqrt{3}i,
@@ -842,7 +842,7 @@ We first verify that $W$ is a subspace of $\mathbb{F}^4$ by 1.34 of \cite{axler2
 
 \begin{enumerate}
 \item We can show that $0\in W$ by choosing $x=0,y=0$ in $(0,x,0,y)$.
-\item Suppose that $u,w\in W$ where $u=(0,x_u,0,y_u)$ and w=$(0,x_w,0,y_w)$. Then $u+w=(0,x_u+x_w,0,y_u+y_w)$ shows that $u+w$ in $W$.
+\item Suppose that $u,w\in W$ where $u=(0,x_u,0,y_u)$ and w=$(0,x_w,0,y_w)$. Then $u+w=(0,x_u+x_w,0,y_u+y_w)$ shows that $u+w$ is in $W$.
 \item Pick $a\in\mathbb{F}$ and $u\in W$ where $u=(0,x_u,0,y_u)$. Then $au=(0,ax_u,0,ay_u)$ shows that $au$ is in $W$.
 \end{enumerate}
 
@@ -851,8 +851,29 @@ We then verify that $\mathbb{F}^4=U\oplus W$ by 1.45 of \cite{axler2014linear}.
 Pick $v\in U\cap W$. Then there exists $x,y,s,t\in\mathbb{F}$ such that $v=(x,x,y,y)=(0,s,0,t)$, which implies that $x=0, s=0, y=0, t=0$, i.e. $v=0$. Therefore $U+W$ is a direct sum.
 \end{proof}
 
+\section{Exercise 1.C.21}
+Suppose\[
+U=\{(x,y,x+y,x-y,2x)\in\mathbb{F}^5:x,y\in\mathbb{F}\}.
+\]
+Find a subspace $W$ of $\mathbb{F}^5$ such that $\mathbb{F}=U\oplus W$.
+\begin{proof}
+We claim that the following $W$ is a subspace of $\mathbb{F}^5$ such that $\mathbb{F}^4=U\oplus W$:
+\[
+W=\{(0,0,x,y,z)\in\mathbb{F}^5:x,y,z\in\mathbb{F}\}.
+\]
 
+We first verify that $W$ is a subspace of $\mathbb{F}^5$ by 1.34 of \cite{axler2014linear}.
 
+\begin{enumerate}
+\item We can show that $0\in W$ by choosing $x=0,y=0,z=0$ in $(0,0,x,y,z)$.
+\item Suppose that $u,w\in W$ where \[u=(0,0,x_u,y_u,z_u), w=(0,0,x_w,y_w,z_w).\] Then $u+w=(0,0,x_u+x_w,y_u+y_w,z_u+z_w)$ shows that $u+w$ is in $W$.
+\item Pick $a\in\mathbb{F}$ and $u\in W$ where $u=(0,0,x_u,y_u,z_u)$. Then \[au=(0,0,ax_u,ay_u,az_u)\] shows that $au$ is in $W$.
+\end{enumerate}
+
+We then verify that $\mathbb{F}^5=U\oplus W$ by 1.45 of \cite{axler2014linear}.
+
+Pick $v\in U\cap W$. Then there exists $x,y,a,b,c\in\mathbb{F}$ such that $v=(x,y,x+y,x-y,2x)=(0,0,a,b,c)$, which implies that $x=0, y=0, a=0, b=0, c=0$, i.e. $v=0$. Therefore $U+W$ is a direct sum.
+\end{proof}
 
 
 \backmatter
