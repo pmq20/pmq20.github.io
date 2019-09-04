@@ -875,6 +875,55 @@ We then verify that $\mathbb{F}^5=U\oplus W$ by 1.45 of \cite{axler2014linear}.
 Pick $v\in U\cap W$. Then there exists $x,y,a,b,c\in\mathbb{F}$ such that $v=(x,y,x+y,x-y,2x)=(0,0,a,b,c)$, which implies that $x=0, y=0, a=0, b=0, c=0$, i.e. $v=0$. Therefore $U+W$ is a direct sum.
 \end{proof}
 
+\section{Exercise 1.C.22}
+Suppose \[
+U=\{(x,y,x+y,x-y,2x)\in\mathbb{F}^5:x,y\in\mathbb{F}\}.
+\]
+Find three subspaces $W_1,W_2,W_3$ of $\mathbb{F}^5$, none of which equals $\{0\}$, such that $\mathbb{F}^5=U\oplus W_1\oplus W_2\oplus W_3$.
+\begin{proof}
+We claim that the following $W_1,W_2,W_3$ are subspaces of $\mathbb{F}^5$ such that $\mathbb{F}^5=U\oplus W_1\oplus W_2\oplus W_3$:
+\begin{equation*}
+\begin{split}
+W_1&=\{(0,0,x,0,0)\in\mathbb{F}^5:x\in\mathbb{F}\},\\
+W_2&=\{(0,0,0,x,0)\in\mathbb{F}^5:x\in\mathbb{F}\},\\
+W_3&=\{(0,0,0,0,x)\in\mathbb{F}^5:x\in\mathbb{F}\}.
+\end{split}
+\end{equation*}
+
+Suppose that
+\begin{equation}
+\label{eq2}
+0=u+w_1+w_2+w_3
+\end{equation}
+for some $u=(x,y,x+y,x-y,2x), w_1=(0,0,a,0,0), w_2=(0,0,0,b,0), w_3=(0,0,0,0,c)$ where $x,y,a,b,c\in\mathbb{F}$. Them Equation~(\ref{eq2}) is equivalent to the following system of linear equations.
+\[
+\begin{bmatrix}
+1 &0 &0 &0 &0\\
+0 &1 &0 &0 &0\\
+1 &1 &1 &0 &0\\
+1 &-1 &0 &1 &0\\
+2 &0 &0 &0 &1
+\end{bmatrix}
+\begin{bmatrix}
+x\\
+y\\
+a\\
+b\\
+c\\
+\end{bmatrix}
+=
+\begin{bmatrix}
+0\\
+0\\
+0\\
+0\\
+0
+\end{bmatrix}.
+\]
+
+It is now clear that the coefficient matrix is nonsingular, thus $x=y=a=b=c=0$ is the only solution. By 1.44 of \cite{axler2014linear}, we conclude that $\mathbb{F}^5=U\oplus W_1\oplus W_2\oplus W_3$.
+\end{proof}
+
 
 \backmatter
 \bibliographystyle{amsalpha}
