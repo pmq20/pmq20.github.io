@@ -824,7 +824,7 @@ U_1+W=U_2+W,
 \]
 then $U_1=U_2$.
 \begin{proof}[Counterexample]
-Set $V=\mathbb{R}^2, U_1=\{(x,x):x\in\mathbb{R}\}, U_2=\{(-x,x):x\in\mathbb{R}\}, W=\{(0,x):x\in\mathbb{R}\}$. Then $U_1, U_2, W$ are subspaces of $V$, $U_1+W=\mathbb{R}^2$, $U_2+W=\mathbb{R}^2$ but $U_1\ne U_2$.
+Set $V=\mathbb{R}^2, U_1=\mathbb{R}^2, U_2=\{(x,0):x\in\mathbb{R}\}, W=\{(0,x):x\in\mathbb{R}\}$. Then $U_1, U_2, W$ are subspaces of $V$, $U_1+W=\mathbb{R}^2$, $U_2+W=\mathbb{R}^2$ but $U_1\ne U_2$.
 \end{proof}
 
 \section{Exercise 1.C.20}
@@ -923,6 +923,20 @@ c\\
 
 It is now clear that the coefficient matrix is nonsingular, thus $x=y=a=b=c=0$ is the only solution. By 1.44 of \cite{axler2014linear}, we conclude that $\mathbb{F}^5=U\oplus W_1\oplus W_2\oplus W_3$.
 \end{proof}
+
+\section{Exercise 1.C.23}
+Prove or give a counterexample: if $U_1, U_2, W$ are subspaces of $V$ such that\[
+V=U_1\oplus W\text{ and }V=U_2\oplus W,
+\]then $U_1=U_2$.
+\begin{proof}[Counterexample]
+Set $V=\mathbb{R}^2, U_1=\{(x,x):x\in\mathbb{R}\}, U_2=\{(-x,x):x\in\mathbb{R}\}, W=\{(0,x):x\in\mathbb{R}\}$. Then $U_1, U_2, W$ are subspaces of $V$, $U_1\oplus W=\mathbb{R}^2$, $U_2\oplus W=\mathbb{R}^2$ but $U_1\ne U_2$.
+\end{proof}
+
+
+
+
+
+
 
 
 \backmatter
