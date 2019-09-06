@@ -1,0 +1,1004 @@
+\chapter{Vector Spaces}
+
+\section{Exercise 1.A.1: Multiplicative Inverse of Complex Numbers}
+Suppose $a$ and $b$ are real numbers, not both $0$. Find real numbers $c$ and $d$ such that
+\[
+1/(a+bi)=c+di
+\]
+\begin{proof}[Answer]
+Since at least one of the real numbers $a, b$ is different from $0$, we have $a^2+b^2\ne 0$. We can then let
+\[
+c=\frac{a}{a^2+b^2},
+\]
+\[
+d=\frac{-b}{a^2+b^2}.
+\]
+Then
+\begin{equation*}
+\begin{split}
+&\left(a+bi\right)\left(\frac{a}{a^2+b^2}-\frac{b}{a^2+b^2}i\right)\\
+&=\left(a\frac{a}{a^2+b^2}-b\left(-\frac{b}{a^2+b^2}\right)\right) + \left(a\left(-\frac{b}{a^2+b^2}\right)+b\frac{a}{a^2+b^2}\right)i\\
+&=1 + 0i\\
+&=1.
+\end{split}
+\end{equation*}
+\end{proof}
+
+\section{Exercise 1.A.2: A Cubic Root of 1}
+Show that
+\[
+\frac{-1+\sqrt{3}i}{2}
+\]
+is a cube root of $1$ (meaning that its cube equals $1$).
+\begin{proof}[Answer]
+\begin{equation*}
+\begin{split}
+&\frac{-1+\sqrt{3}i}{2}*\frac{-1+\sqrt{3}i}{2}*\frac{-1+\sqrt{3}i}{2}\\
+&=\frac{-2-2\sqrt{3}i}{4}*\frac{-1+\sqrt{3}i}{2}\\
+&=\frac{(-2)(-1)-(-2\sqrt{3})(\sqrt{3})+(-2\sqrt{3}+(-2\sqrt{3})(-1))i}{8}\\
+&=1
+\end{split}
+\end{equation*}
+\end{proof}
+
+\section{Exercise 1.A.3: Square Roots of $i$}
+Find two distinct square roots of $i$.
+\begin{proof}[Answer]
+Note that 
+\[
+i=e^{i\frac{\pi}{2}}.
+\]
+Thus the following two numbers are two distinct square roots of $i$:
+\[
+\pm e^{i\frac{\pi}{4}} = \pm (\frac{\sqrt{2}}{2} + \frac{\sqrt{2}}{2}i).
+\]
+\end{proof}
+
+\section{Exercise 1.A.4: Commutativity of Addition of Complex Numbers}
+Show that $\alpha+\beta=\beta+\alpha$ for all $\alpha, \beta\in\mathbb{C}$.
+\begin{proof}
+Suppose $\alpha=a+bi$ and $\beta=c+di$, where $a,b,c,d\in\mathbb{R}$. Then the definition of addition of complex numbers shows that
+\[
+\alpha+\beta=(a+c)+(b+d)i
+\]
+and
+\[
+\beta+\alpha=(c+a)+(d+b)i.
+\]
+The equations above and the commutativity of addition of real numbers show that $\alpha+\beta=\beta+\alpha$.
+\end{proof}
+
+\section{Exercise 1.A.5: Associativity of Addition of Complex Numbers}
+Show that $(\alpha+\beta)+\lambda=\alpha+(\beta+\lambda)$ for all $\alpha,\beta,\lambda\in\mathbb{C}$.
+\begin{proof}
+Suppose $\alpha=a+bi$, $\beta=c+di$ and $\lambda=e+fi$, where $a,b,c,d,e,f\in\mathbb{R}$. Then the definition of addition of complex numbers shows that
+\begin{equation*}
+\begin{split}
+(\alpha+\beta)+\lambda&=((a+c)+(b+d)i)+e+fi\\
+&=((a+c)+e)+((b+d)+f)i
+\end{split}
+\end{equation*}
+and
+\begin{equation*}
+\begin{split}
+\alpha+(\beta+\lambda)&=a+bi+((c+e)+(d+f)i)\\
+&=(a+(c+e))+(b+(d+f))i.
+\end{split}
+\end{equation*}
+The equations above and the associativity of addition of real numbers show that $(\alpha+\beta)+\lambda=\alpha+(\beta+\lambda)$.
+\end{proof}
+
+\section{Exercise 1.A.6: Associativity of Multiplication of Complex Numbers}
+Show that $(\alpha\beta)\lambda=\alpha(\beta\lambda)$ for all $\alpha,\beta,\lambda\in\mathbb{C}$.\begin{proof}
+Suppose $\alpha=a+bi$, $\beta=c+di$ and $\lambda=e+fi$, where $a,b,c,d,e,f\in\mathbb{R}$. Then the definition of multiplication of complex numbers shows that
+\begin{equation*}
+\begin{split}
+(\alpha\beta)\lambda&=((ac-bd)+(ad+bc)i)(e+fi)\\
+&=((ac-bd)e-(ad+bc)f)+((ac-bd)f+(ad+bc)e)i\\
+&=(ace-bde-adf-bcf)+(acf-bdf+ade+bce)i
+\end{split}
+\end{equation*}
+and
+\begin{equation*}
+\begin{split}
+\alpha(\beta\lambda)&=(a+bi)((ce-df)+(cf+de)i)\\
+&=(a(ce-df)-b(cf+de))+(a(cf+de)+b(ce-df))i\\
+&=(ace-adf-bcf-bde)+(acf+ade+bce-bdf)i.
+\end{split}
+\end{equation*}
+The equations above and the commutativity of addition of real numbers show that $(\alpha\beta)\lambda=\alpha(\beta\lambda)$.
+\end{proof}
+
+\section{Exercise 1.A.7: Existence and Uniqueness of Additive Inverse in $\mathbb{C}$}
+Show that for every $\alpha\in\mathbb{C}$, there exists a unique $\beta\in\mathbb{C}$ such that $\alpha+\beta=0$.
+\begin{proof}
+Suppose $\alpha=a+bi$ where $a,b\in\mathbb{R}$, then $\beta=-a-bi$ satisfies $\alpha+\beta=0$.
+
+Suppose that there exists another $\beta'\in\mathbb{C}$ such that $\alpha+\beta'=0$. Then
+\begin{equation*}
+\begin{split}
+\beta&=\beta+(\alpha+\beta')\\
+&=(\beta+\alpha)+\beta'\\
+&=\beta'.
+\end{split}
+\end{equation*}
+
+The equations above show that $\beta'=\beta$.
+\end{proof}
+
+\section{Exercise 1.A.8: Existence and Uniqueness of Multiplicative Inverse in $\mathbb{C}$}
+Show that for every $\alpha\in\mathbb{C}$ with $\alpha\ne 0$, there exists a unique $\beta\in\mathbb{C}$ such that $\alpha\beta=1$.
+\begin{proof}
+The existence of $\beta$ has been shown in Exercise 1.A.1.
+
+Suppose that there exists another $\beta'\in\mathbb{C}$ such that and $\alpha\beta'=1$. Then
+\begin{equation*}
+\begin{split}
+\beta&=\beta(\alpha\beta')\\
+&=(\beta\alpha)\beta'\\
+&=\beta'.
+\end{split}
+\end{equation*}
+
+The equations above show that $\beta'=\beta$.
+\end{proof}
+
+\section{Exercise 1.A.9: The Distributive Property of Complex Numbers}
+Show that $\lambda(\alpha+\beta)=\lambda\alpha+\lambda\beta$ for all $\lambda,\alpha,\beta\in\mathbb{C}$.
+\begin{proof}
+Suppose $\alpha=a+bi$, $\beta=c+di$ and $\lambda=e+fi$, where $a,b,c,d,e,f\in\mathbb{R}$. Then the definition of multiplication and addition of complex numbers shows that
+\begin{equation*}
+\begin{split}
+\lambda(\alpha+\beta)&=(e+fi)((a+c)+(b+d)i)\\
+&=(e(a+c)-f(b+d))+(e(b+d)+f(a+c))i\\
+&=(ea+ec-fb-fd)+(eb+ed+fa+fc)i
+\end{split}
+\end{equation*}
+and
+\begin{equation*}
+\begin{split}
+\lambda\alpha+\lambda\beta&=(e+fi)(a+bi)+(e+fi)(c+di)\\
+&=((ea-fb)+(eb+fa)i)+((ec-fd)+(ed+fc)i)\\
+&=(ea-fb+ec-fd)+(eb+fa+ed+fc)i.
+\end{split}
+\end{equation*}
+
+The equations above and the commutativity of addition of real numbers show that $\lambda(\alpha+\beta)=\lambda\alpha+\lambda\beta$.
+\end{proof}
+
+\section{Exercise 1.A.10: A Vector Addition and Scalar Multiplication Example in $\mathbb{R}^4$}
+Find $x\in\mathbb{R}^4$ such that
+\[
+(4,-3,1,7)+2x=(5,9,-6,8).
+\]
+\begin{proof}[Answer]
+\[
+x=\left(\frac{1}{2},6,-\frac{7}{2},\frac{1}{2}\right).
+\]
+\end{proof}
+
+\section{Exercise 1.A.11: A Scalar Multiplication Example in $\mathbb{C}^3$}
+Explain why there does not exist $\lambda\in\mathbb{C}$ such that
+\[
+\lambda(2-3i,5+4i,-6+7i)=(12-5i,7+22i,-32-9i).
+\]
+\begin{proof}
+If there exists such $\lambda$ then the definition of scalar multiplication in $\mathbb{C}^3$ shows that,
+\[
+\lambda(2-3i)=12-5i.
+\]
+
+Thus
+\[
+\lambda=\frac{12-5i}{2-3i}=3+2i.
+\]
+
+But
+\begin{equation*}
+\begin{split}
+\lambda(2-3i,5+4i,-6+7i)&=(3+2i)(2-3i,5+4i,-6+7i)\\
+&=(12-5i,7+22i,-32+9i)\\
+&\ne(12-5i,7+22i,-32-9i).
+\end{split}
+\end{equation*}
+
+Therefore $\lambda$ does not exist.
+\end{proof}
+
+\section{Exercise 1.A.12: Associativity of Vector Addition in $\mathbb{F}^n$}
+Show that $(x+y)+z=x+(y+z)$ for all $x,y,z\in\mathbb{F}^n$.
+\begin{proof}
+Suppose $x=(x_1,\dots,x_n)$, $y=(y_1,\dots,y_n)$ and $z=(z_1,\dots,z_n)$ where $x_1,\dots,x_n,y_1,\dots,y_n,z_1,\dots,z_n\in\mathbb{F}$. Then the definition of addition in $\mathbb{F}^n$ shows that
+\begin{equation*}
+\begin{split}
+(x+y)+z&=(x_1+y_1,\dots,x_n+y_n)+(z_1,\dots,z_n)\\
+&=((x_1+y_1)+z_1,\dots,(x_n+y_n)+z_n)
+\end{split}
+\end{equation*}
+and
+\begin{equation*}
+\begin{split}
+x+(y+z)&=(x_1,\dots,x_n)+(y_1+z_1,\dots,y_n+z_n)\\
+&=(x_1+(y_1+z_1),\dots,x_n+(y_n+z_n))
+\end{split}
+\end{equation*}
+
+The equations above and the associativity of addition in $\mathbb{F}$ show that $(x+y)+z=x+(y+z)$.
+\end{proof}
+
+\section{Exercise 1.A.13: Associativity of Scalar Multiplication in $\mathbb{F}^n$}
+Show that $(ab)x=a(bx)$ for all $x\in\mathbb{F}^n$ and all $a,b\in\mathbb{F}$.
+\begin{proof}
+Suppose $x=(x_1,\dots,x_n)$ where $x_1,\dots,x_n\in\mathbb{F}$. Then the definition of scalar multiplication in $\mathbb{F}^n$ shows that
+\begin{equation*}
+\begin{split}
+(ab)x&=((ab)x_1,\dots,(ab)x_n)
+\end{split}
+\end{equation*}
+and
+\begin{equation*}
+\begin{split}
+a(bx)&=a(bx_1,\dots,bx_n)\\
+&=(a(bx_1),\dots,a(x_n))
+\end{split}
+\end{equation*}
+
+The equations above and the associativity of multiplication in $\mathbb{F}$ show that $(ab)x=a(bx)$.
+\end{proof}
+
+\section{Exercise 1.A.14: Scalar Multiplication by $1$ in $\mathbb{F}^n$}
+Show that $1x=x$ for all $x\in\mathbb{F}^n$.
+\begin{proof}
+Suppose $x=(x_1,\dots,x_n)$ where $x_1,\dots,x_n\in\mathbb{F}$. Then the definition of scalar multiplication in $\mathbb{F}^n$ and the fact that $1$ is the multiplicative identity of $\mathbb{F}$ shows that
+\begin{equation*}
+\begin{split}
+1x&=(1x_1,\dots,1x_n)\\
+&=(x_1,\dots,x_n)\\
+&=x.
+\end{split}
+\end{equation*}
+\end{proof}
+
+\section{Exercise 1.A.15: Left-distributive Property of Operations in $\mathbb{F}^n$}
+Show that $\lambda(x+y)=\lambda x+\lambda y$ for all $\lambda\in\mathbb{F}$ and $x,y\in\mathbb{F}^n$.
+\begin{proof}
+Suppose $x=(x_1,\dots,x_n)$ and $y=(y_1,\dots,y_n)$ where $x_1,\dots,x_n\in\mathbb{F}$ and $y_1,\dots,y_n\in\mathbb{F}$. Then the definition of addition and scalar multiplication in $\mathbb{F}^n$ shows that
+\begin{equation*}
+\begin{split}
+\lambda(x+y)&=\lambda(x_1+y_1,\dots,x_n+y_n)\\
+&=(\lambda(x_1+y_1),\dots,\lambda(x_n+y_n))
+\end{split}
+\end{equation*}
+and
+\begin{equation*}
+\begin{split}
+\lambda x+\lambda y&=(\lambda x_1,\dots,\lambda x_n) + (\lambda y_1,\dots,\lambda y_n)\\
+&=(\lambda x_1+\lambda y_1,\dots,\lambda x_n+\lambda y_n)
+\end{split}
+\end{equation*}
+
+The equations above and the distributive property of $\mathbb{F}$ show that $\lambda(x+y)=\lambda x+\lambda y$.
+\end{proof}
+
+\section{Exercise 1.A.16: Right-distributive Property of Operations in $\mathbb{F}^n$}
+Show that $(a+b)x=ax+bx$ for all $a,b\in\mathbb{F}$ and all $x\in\mathbb{F}^n$.
+\begin{proof}
+Suppose $x=(x_1,\dots,x_n)$ where $x_1,\dots,x_n\in\mathbb{F}$. Then the definition of scalar multiplication and addition in $\mathbb{F}^n$ shows that
+\[
+(a+b)x=((a+b)x_1,\dots,(a+b)x_n)
+\]
+and
+\begin{equation*}
+\begin{split}
+ax+bx&=(ax_1,\dots,ax_n)+(bx_1,\dots,bx_n)\\
+&=(ax_1+bx_1,\dots,ax_n+bx_n).
+\end{split}
+\end{equation*}
+
+The equations above and the distributive property of $\mathbb{F}$ show that $(a+b)x=ax+bx$.
+\end{proof}
+
+\section{Exercise 1.B.1: $-(-v)=v$ in Vector Spaces}
+Prove that $-(-v)=v$ for every $v\in V$.
+\begin{proof}
+\begin{equation*}
+\begin{split}
+-(-v)&=-(-v)+0\\
+&=-(-v)+((-v)+v)\\
+&=(-(-v)+(-v))+v\\
+&=0+v\\
+&=v
+\end{split}
+\end{equation*}
+\end{proof}
+
+\section{Exercise 1.B.2: $av=0$ Implies $a=0$ or $v=0$ in Vector Spaces}
+Suppose $a\in\mathbb{F}, v\in V$, and $av=0$. Prove that $a=0$ or $v=0$.
+\begin{proof}
+For the purpose of arriving at a contradiction, assume that both $a\ne 0$ and $v\ne 0$. Then
+\[
+v=1v=(\frac{1}{a}a)v=\frac{1}{a}(av)=0
+\]
+which contradicts with $v\ne 0$.
+
+Therefore $a=0$ or $v=0$.
+\end{proof}
+
+\section{Exercise 1.B.3: Existence and Uniqueness of the Solution of a Vector Equation}
+Suppose $v,w\in V$. Explain why there exists a unique $x\in V$ such that $v+3x=w$.
+\begin{proof}
+We claim that the following $x\in V$ satisfies $v+3x=w$:
+\[
+x=\frac{1}{3}(w-v).
+\]
+
+We can verify it by showing that,
+\begin{equation*}
+\begin{split}
+v+3x&=v+3\times\frac{1}{3}(w-v)\\
+&=v+w-v\\
+&=w.
+\end{split}
+\end{equation*}
+
+Suppose that there exists another $x'\in V$ that also satisfies $v+3x'=w$, then
+\begin{equation*}
+\begin{split}
+0&=w-w\\
+&=(v+3x)-(v+3x')\\
+&=v+3x-v-3x'\\
+&=3x-3x'.
+\end{split}
+\end{equation*}
+
+Thus
+\begin{equation*}
+\begin{split}
+x'&=x'+\frac{1}{3}\times0\\
+&=x'+\frac{1}{3}(3x-3x')\\
+&=x'+x-x'\\
+&=x.
+\end{split}
+\end{equation*}
+\end{proof}
+
+\section{Exercise 1.B.4: The Empty Set is NOT a Vector Space}
+The empty set is not a vector space. The empty set fails to satisfy only one of the requirements listed in 1.19. Which one?
+\begin{proof}[Answer]
+The empty set fails to satisfy the ``Additive Identity'' requirement. Because there does not exist an element $0\in\varnothing$.
+\end{proof}
+
+\section{Exercise 1.B.5: An Alternative Definition of Vector Space}
+Show that in the definition of a vector space (1.19), the additive inverse condition can be replaced with the condition that
+\[
+0v=0, \forall v\in V.
+\]
+
+Here the $0$ on the left side is the number $0$, and the $0$ on the right side is the additive identity of $V$. 
+\begin{proof}
+We will show that the new condition is equal to the original condition, which states that for every $v\in V$, there exists $w\in V$ such that $v+w=0$. That the old condition implies the new condition has been shown in Theorem 1.29 ``The number $0$ times a vector''. Therefore it suffices to show that the new condition implies the old condition.
+
+Suppose that the new condition holds.
+
+Pick $v\in V$, and let $w=(-1)v$. It follows that
+\begin{equation*}
+\begin{split}
+v+w&=1v+(-1)v\\
+&=(1-1)v\\
+&=0v\\
+&=0.
+\end{split}
+\end{equation*}
+
+Therefore the old condition holds.
+\end{proof}
+
+\section{Exercise 1.B.6: A Definition of $\mathbb{R}\cup\{\infty\}\cup\{-\infty\}$}
+Let $\infty$ and $-\infty$ denote two distinct objects, neither of which is in $\mathbb{R}$. Define an addition and scalar multiplication on $\mathbb{R}\cup\{\infty\}\cup\{-\infty\}$ as you could guess from the notation. Specifically, the sum and product of two real numbers is as usual, and for $t\in\mathbb{R}$ define
+\[
+\begin{array}{cc}
+t\infty=\begin{cases} 
+-\infty & \text{if } t<0,\\
+0 & \text{if } t=0,\\
+\infty & \text{if } t>0,
+\end{cases}
+&
+t(-\infty)=\begin{cases} 
+\infty & \text{if } t<0,\\
+0 & \text{if } t=0,\\
+-\infty & \text{if } t>0,
+\end{cases}
+\end{array}
+\]
+\[
+\begin{array}{cc}
+t+\infty=\infty+t=\infty,
+&
+t+(-\infty)=(-\infty)+t=(-\infty),
+\end{array}
+\]
+\[
+\begin{array}{ccc}
+\infty+\infty=\infty,
+&
+(-\infty)+(-\infty)=(-\infty),
+&
+\infty+(-\infty)=0.
+\end{array}
+\]
+Is $\mathbb{R}\cup\{\infty\}\cup\{-\infty\}$ a vector space over $\mathbb{R}$? Explain.
+\begin{proof}[Answer]
+No. Because the associativity of vector addition fails:
+\[
+(1024+\infty)-\infty=\infty-\infty=0
+\]
+but
+\[
+1024+(\infty-\infty)=1024+0=1024.
+\]
+\end{proof}
+
+\section{Exercise 1.C.1: Examples and Counterexamples of Subspaces of $\mathbb{F}^3$}
+For each of the following subsets of $\mathbb{F}^3$, determine whether it is a subspace of $\mathbb{F}^3$:
+\begin{enumerate}[label=(\alph*)]
+\item $\{(x_1,x_2,x_3)\in\mathbb{F}^3: x_1+2x_2+3x_3=0\}$;
+\item $\{(x_1,x_2,x_3)\in\mathbb{F}^3: x_1+2x_2+3x_3=4\}$;
+\item $\{(x_1,x_2,x_3)\in\mathbb{F}^3: x_1x_2x_3=0\}$;
+\item $\{(x_1,x_2,x_3)\in\mathbb{F}^3: x_1=5x_3\}$.
+\end{enumerate}
+\begin{proof}[Answer]
+\begin{enumerate}[label=(\alph*)]
+\item Denote $A=\{(x_1,x_2,x_3)\in\mathbb{F}^3: x_1+2x_2+3x_3=0\}$. We claim that $A$ is a subspace of $\mathbb{F}^3$ with the following verifications.
+\begin{enumerate}[label=(\roman*)]
+\item $(0,0,0)\in A$ because $0+2*0+3*0=0$.
+\item Pick $u,w\in A$, where $u=(u_1,u_2,u_3), w=(w_1,w_2,w_3)$. It follows that $u+w=(u_1+w_1, u_2+w_2, u_3+w_3)$. We can show that $u+w\in A$ by the following equations:
+\begin{equation*}
+\begin{split}
+&(u_1+w_1)+2(u_2+w_2)+3(u_3+w_3)\\
+&=(u_1+2u_2+3u_3)+(w_1+2w_2+3w_3)\\
+&=0+0=0.
+\end{split}
+\end{equation*}
+\item Pick $a\in \mathbb{F}$ and $u\in A$, where $u=(u_1,u_2,u_3)$. It follows that $au=(au_1,au_2,au_3)$. We can show that $au\in A$ by the following equations:
+\begin{equation*}
+\begin{split}
+(au_1)+2(au_2)+3(au_3)&=a(u_1+2u_2+3u_3)\\
+&=a0=0.
+\end{split}
+\end{equation*}
+\end{enumerate}
+\item Denote $B=\{(x_1,x_2,x_3)\in\mathbb{F}^3: x_1+2x_2+3x_3=4\}$. $B$ is not a subspace of $\mathbb{F}^3$, because vector $(0,0,0)\notin B$ (as $0+2*0+3*0\ne 4$).
+\item Denote $C=\{(x_1,x_2,x_3)\in\mathbb{F}^3: x_1x_2x_3=0\}$. $C$ is not a subspace of $\mathbb{F}^3$ because by setting $u=(0,1,1)\in C$ and $w=(1,1,0)\in C$, we find out that $u+w=(1,2,1) \notin C$.
+\item Denote $D=\{(x_1,x_2,x_3)\in\mathbb{F}^3: x_1=5x_3\}$. We claim that $D$ is a subspace of $\mathbb{F}^3$ with the following verifications.
+\begin{enumerate}[label=(\roman*)]
+\item $(0,0,0)\in A$ because $0=5*0$.
+\item Pick $u,w\in A$, where $u=(u_1,u_2,u_3), w=(w_1,w_2,w_3)$. It follows that $u+w=(u_1+w_1, u_2+w_2, u_3+w_3)$. We can show that $u+w\in A$ by the following equations:
+\begin{equation*}
+\begin{split}
+u_1+w_1 &= 5u_3+5w_3\\
+&=5(u_1+w_3)
+\end{split}
+\end{equation*}
+\item Pick $a\in \mathbb{F}$ and $u\in A$, where $u=(u_1,u_2,u_3)$. It follows that $au=(au_1,au_2,au_3)$. We can show that $au\in A$ by the following equations:
+\begin{equation*}
+\begin{split}
+au_1&=a(5u_3)\\
+&=5(au_3).
+\end{split}
+\end{equation*}
+\end{enumerate}
+\end{enumerate}
+\end{proof}
+
+\section{Exercise 1.C.2: Supplying Proofs for Examples of Vector Spaces}
+Verify all the assertions in Example 1.35.
+\begin{enumerate}[label=(\alph*)]
+\item If $b\in\mathbb{F}$, then
+\[
+\{(x_1,x_2,x_3,x_4)\in\mathbb{F}^4: x_3=5x_4+b\}
+\]
+is a subspace of $\mathbb{F}^4$ if and only if $b=0$.
+\item The set of continuous real-values functions on the interval $[0,1]$ is a subspace of $\mathbb{R}^{[0,1]}$.
+\item The set of differentiable real-valued functions on $\mathbb{R}$ is a subspace of $\mathbb{R}^\mathbb{R}$
+\item The set of differentiable real-valued functions $f$ on the interval $(0,3)$ such that $f'(2)=b$ is a subspace of $\mathbb{R}^{(0,3)}$ if and only if $b=0$.
+\item The set of all sequences of complex numbers with limit $0$ is a subspace of $\mathbb{C}^\infty$.
+\end{enumerate}
+\begin{proof}[Answer]
+\begin{enumerate}[label=(\alph*)]
+\item Denote $A=\{(x_1,x_2,x_3,x_4)\in\mathbb{F}^4: x_3=5x_4+b\}$.
+
+If $b=0$, then $A$ is a subspace by a verification similar to Exercise 1.C.2 (d).
+
+On the other hand, if $A$ is a subspace, then $0\in A$. It follows that
+\[
+0=5*0+b=b.
+\]
+\item Denote $B=\{f\in\mathbb{R}^{[0,1]}:f \text{ is continuous}\}$.
+
+We can verify that $0\in B$ because the constant function $f=0$ is continuous.
+
+Suppose that $u,w\in B$, we can verify that $(u+w)\in B$ because the addition of two complex continuous functions is continuous by Theorem~4.9 of \cite{rudin1976principles}.
+
+Suppose that $a\in\mathbb{F}$ and $u\in B$. Note that the constant function $f=a$ is continuous. We can verify that $au\in B$ because the multiplication of two continuous complex functions is continuous by Theorem~4.9 of \cite{rudin1976principles}.
+\item Denote $C=\{f\in\mathbb{R}^{\mathbb{R}}:f \text{ is differentiable}\}$.
+
+We can verify that $0\in C$ because the constant function $f=0$ is differentiable.
+
+Suppose that $u,w\in C$, we can verify that $(u+w)\in C$ because the addition of two differentiable real functions is differentiable by Theorem~5.3 of \cite{rudin1976principles}.
+
+Suppose that $a\in\mathbb{R}$ and $u\in C$. Note that the constant function $a(x)=a$ is differentiable. We can verify that $au\in C$ because the multiplication of two differentiable real functions is differentiable by Theorem~5.3 of \cite{rudin1976principles}.
+\item Denote $D=\{f\in\mathbb{R}^{(0,3)}:f \text{ is differentiable and }f'(2)=b\}$.
+
+Suppose that $b=0$. We claim that $D$ is a subspace of $\mathbb{R}^{(0,3)}$ with the following verifications.
+\begin{enumerate}[label=(\roman*)]
+\item $0\in D$ because the constant function $0(x)=0$ is differentiable and $0'(2)=0$.
+\item Suppose that $u,w\in D$. $(u+w)$ is also differentiable by Theorem~5.3 of \cite{rudin1976principles}. Also by Theorem~5.3 of \cite{rudin1976principles}, $(u+v)'(2)=u'(2)+v'(2)=0+0=0$. Thus $(u+w)\in D$.
+\item Suppose that $a\in\mathbb{R}$ and $u\in D$. Note that the constant function $a(x)=a$ is differentiable, so $au$ is differentiable by Theorem~5.3 of \cite{rudin1976principles}. Also by Theorem~5.3 of \cite{rudin1976principles}, $(au)'(2)=a'(2)u(2)+a(2)u'(2)=0\times u(2)+a\times0=0$. Thus $au\in D$.
+\end{enumerate}
+
+On the other hand, suppose that $D$ is a subspace. Then it implies that $0\in D$ where $0(x)=0$, and $0'(x)=0$ implies that $0'(2)=b=0$.
+\item Denote $E=\{z_n\in\mathbb{C}^{\infty}:\lim_{n\to\infty} z_n=0\}$.
+
+We can verify that $0_n\in E$ where $0_n=(0, 0, 0, \dots)$ because \[
+\lim_{n\to\infty}0_n=0.
+\]
+
+Suppose that $u_n,w_n\in E$, we can verify that $(u_n+w_n)\in C$ because $\lim_{n\to\infty}(u_n+w_n)=\lim_{n\to\infty}u_n+\lim_{n\to\infty}w_n=0+0=0$ by Theorem~3.3 of \cite{rudin1976principles}.
+
+Suppose that $a\in\mathbb{F}$ and $u_n\in E$, we can verify that $au_n\in E$ because $\lim_{n\to\infty}au_n=a\lim_{n\to\infty}u_n=a0=0$ by Theorem~3.3 of \cite{rudin1976principles}.
+\end{enumerate}
+\end{proof}
+
+\section{Exercise 1.C.3: A Subspace of $\mathbb{R}^{(-4,4)}$}
+Show that the set of differentiable real-valued functions $f$ on the interval $(-4,4)$ such that $f'(-1)=3f(2)$ is a subspace of $\mathbb{R}^{(-4,4)}$.
+\begin{proof}
+Denote $X=\{f\in\mathbb{R}^{(-4,4)}: f \text{ is differentiable and }f'(-1)=3f(2)\}$
+
+\begin{enumerate}
+\item We claim that $0\in X$ where $0(x)=0$. Note that $0$ is differentiable and $0'(-1)=0, 0(2)=0$, thus $0'(-1)=3\times0(2)$.
+\item Pick $f,g\in X$. That $f+g$ is differentiable follows from Theorem~5.3 of \cite{rudin1976principles}. Also by Theorem~5.3 of \cite{rudin1976principles}, $(f+g)'(-1)=f'(-1)+g'(-1)=3f(2)+3g(2)=3(f(2)+g(2))=3((f+g)(2))$. Thus $f+g\in X$.
+\item Pick $f\in X$ and $a\in \mathbb{F}$. That $af$ is differentiable follows from Theorem~5.3 of \cite{rudin1976principles} by considering $a$ as a constant function $a(x)=a$. Also by Theorem~5.3 of \cite{rudin1976principles}, $(af)'(-1)=a(f'(-1))=a(3f(2))=3(af(2))=3((af)(2))$. Thus $af\in X$.
+\end{enumerate}
+\end{proof}
+
+\section{Exercise 1.C.4: A Subspace of $\mathbb{R}^{[0,1]}$}
+Suppose $b\in\mathbb{R}$. Show that the set of continuous real-valued functions $f$ on the interval $[0,1]$ such that $\int_0^1 f=b$ is a subspace of $\mathbb{R}^{[0,1]}$ if and only if $b=0$.
+\begin{proof}
+Denote $X=\{f\in\mathbb{R}^{[0,1]}: $f$\text{ is continuous and} \int_0^1 f=b\}$.
+
+Suppose that $b=0$. We now verify that $X$ is a subspace.
+\begin{enumerate}
+\item We can verify that $0\in X$ because $0(x)=0$ is continuous and $\int_0^1 0(x)dx=0$.
+\item Pick $f,g\in X$. It follows that $f+g$ is continuous by Theorem~4.9 of \cite{rudin1976principles} and Riemann-integrable by Theorem~6.8 of \cite{rudin1976principles}. Further by Theorem~6.12 of \cite{rudin1976principles}, we have $\int_0^1 (f(x)+g(x))dx=\int_0^1 f(x)dx+\int_0^1 g(x)=0+0=0$.
+\item Pick $a\in\mathbb{F}, f\in X$. By Theorem~4.9 of \cite{rudin1976principles}, $af$ is continuous. Thus $af$ is Riemann-integrable by Theorem~6.8 of \cite{rudin1976principles}. Further by Theorem~6.12 of \cite{rudin1976principles}, we have $\int_0^1 (af(x))dx=a\int_0^1 f(x)dx=a\times 0=0$.
+\end{enumerate}
+
+On the other hand, suppose that $X$ is a subspace. Then it follows that $0\in X$, which implies that $\int_0^1 0(x)dx=0=b$.
+\end{proof}
+
+\section{Exercise 1.C.5: $\mathbb{R}^2$ is NOT a Subspace of $\mathbb{C}^2$}
+Is $\mathbb{R}^2$ a subspace of the complex vector space $\mathbb{C}^2$?
+\begin{proof}[Answer]
+No. Because multiplying the vector $(1,1)\in\mathbb{R}^2$ by scalar $i$ gives $(i,i)$ which is not in $\mathbb{R}^2$.
+\end{proof}
+
+\section{Exercise 1.C.6: Comparing Subspaces of $\mathbb{R}^3$ and $\mathbb{C}^3$}
+\begin{enumerate}[label=(\roman*)]
+\item Is $\{(a,b,c)\in\mathbb{R}^3:a^3=b^3\}$ a subspace of $\mathbb{R}^3$?
+\item Is $\{(a,b,c)\in\mathbb{C}^3:a^3=b^3\}$ a subspace of $\mathbb{C}^3$?
+\end{enumerate}
+\begin{proof}[Answer]
+\begin{enumerate}[label=(\roman*)]
+\item Yes. Let's observe the real function $f(x)=x^3$. $f(x)$ is a 1-1 correspondence between $\mathbb{R}$ and $\mathbb{R}$. Therefore the condition $a^3=b^3$ is equivalent to $a=b$.
+\item No. Denote $X=\{(a,b,c)\in\mathbb{C}^3:a^3=b^3\}$. Set $u=(2,2e^{\frac{2\pi}{3}i},0)$ and $v=(e^{\frac{2\pi}{3}i},1,0)$, then $u+v=(2+e^{\frac{2\pi}{3}i},2e^{\frac{2\pi}{3}i}+1,0)$. Note that $u\in X$ and $v\in X$ but $u+v\notin X$ because,
+\[
+\left(2+e^{\frac{2\pi}{3}i}\right)^3=3\sqrt{3}i,
+\]
+\[
+\left(2e^{\frac{2\pi}{3}i}+1\right)^3=-3\sqrt{3}i.
+\]
+\end{enumerate}
+\end{proof}
+
+\section{Exercise 1.C.7: A Quasi-subspace Unclosed under Scalar Multiplication}
+Give an example of a nonempty subset $U$ of $\mathbb{R}^2$ such that $U$ is closed under addition and under taking additive inverses (meaning $-u\in U$ whenever $u\in U$), but $U$ is not a subspace of $\mathbb{R}^2$.
+\begin{proof}[Answer]
+\[
+U=\{(0,0),(1,1),(-1,-1)\}.
+\]
+\end{proof}
+
+\section{Exercise 1.C.8: A Quasi-subspace Unclosed under Vector Addition}
+Give an example of a nonempty subset $U$ of $\mathbb{R}^2$ such that $U$ is closed under scalar multiplication, but $U$ is not a subspace of $\mathbb{R}^2$.
+\begin{proof}[Answer]
+\[
+U=\{(0,y):y\in\mathbb{R}\}\cup\{(x,0):x\in\mathbb{R}\}.
+\]
+\end{proof}
+
+\section{Exercise 1.C.9: The Set of Periodic Functions from $\mathbb{R}$ to $\mathbb{R}$ is NOT a Subspace of $\mathbb{R}^\mathbb{R}$}
+A function $f: \mathbb{R}\to\mathbb{R}$ is called periodic if there exists a positive number $p$ such that $f(x)=f(x+p)$ for all $x\in\mathbb{R}$. Is the set of periodic functions from $\mathbb{R}$ to $\mathbb{R}$ a subspace of $\mathbb{R}^\mathbb{R}$? Explain.
+
+\begin{lemma}\label{l1}
+$f(x)=\cos(\pi x)+\cos(x)$ is not periodic.
+\end{lemma}
+
+\begin{proof}
+Suppose that $f(x)=\cos(\pi x)+\cos(x)$ is periodic, then there exists $\theta\in\mathbb{R}$ such that $\theta>0$ and $f(x+\theta)=f(x)$ for all $x\in\mathbb{R}$. Pick $x=0$, we have
+\begin{equation}\label{eq1}
+f(\theta+0)=\cos(\pi\theta)+\cos(\theta)=f(0)=\cos(0)+\cos(0)=2.
+\end{equation}
+
+Note that $-1\leqslant \cos(\pi\theta)\leqslant 1$ and $-1\leqslant \cos(\theta)\leqslant 1$. However, if $\cos(\pi\theta)<1$ and $\cos(\theta)<1$, then $\cos(\pi\theta)+\cos(\theta)<1$. Thus Equation~(\ref{eq1}) implies that
+\[
+\begin{cases}
+\cos(\pi\theta)=1\\
+\cos(\theta)=1
+\end{cases}.
+\]
+
+This further implies that there exists some $m,n\in\mathbb{Z}$ such that,
+\[
+\begin{cases}
+\pi\theta=2m\pi\\
+\theta=2n\pi
+\end{cases}.
+\]
+
+Since $\theta\ne 0$, dividing the above two equations yields
+\[
+\pi=\frac{m}{n}.
+\]
+
+This contradicts with the fact that $\pi$ is irrational.
+\end{proof}
+
+\begin{proof}[Main Answer]
+No, because Lemma~\ref{l1} gives an example of two periodic functions where their addition is not periodic.
+\end{proof}
+
+\section{Exercise 1.C.10: The Intersection of 2 Subspaces is a Subspace}
+Suppose $U_1$ and $U_2$ are subspaces of $V$. Prove that the intersection $U_1\cap U_2$ is a subspace of $V$.
+\begin{proof}
+We prove by verifying the three conditions for $U_1\cap U_2$ being a subspace.
+\begin{enumerate}
+\item The premise that $U_1$ is a subspace implies $0\in U_1$. The premise that $U_2$ is a subspace implies $0\in U_2$. Therefore $0\in U_1\cap U_2$.
+\item Pick $u,w\in U_1\cap U_2$. The premise that $U_1$ is a subspace implies $u+w\in U_1$. The premise that $U_2$ is a subspace implies $u+w\in U_2$. Therefore $u+w\in U_1\cap U_2$.
+\item Pick $a\in \mathbb{F}$ and $u\in U_1\cap U_2$. The premise that $U_1$ is a subspace implies that $au\in U_1$. The premise that $U_2$ is a subspace implies $au\in U_2$. Therefore $au\in U_1\cap U_2$.
+\end{enumerate}
+\end{proof}
+
+\section{Exercise 1.C.11: The Intersection of Every Collection of Subspaces is a Subspace}
+Prove that the intersection of every collection of subspaces of $V$ is a subspace of $V$.
+
+\begin{proof}
+Pick set $I$ and $(S_i)_{i\in I}$, a family of sets indexed over set $I$. Suppose that $S_i$ is a subspace of $V$ for all $i\in I$. We prove by verifying the three conditions for $\cap_{i\in I} S_i$ being a subspace.
+\begin{enumerate}
+\item For all $i\in I$, the premise that $S_i$ is a subspace implies that $0\in S_i$. Therefore $0\in \cap_{i\in I} S_i$.
+\item Pick $u,w\in \cap_{i\in I} S_i$. For all $i\in I$, the premise that $S_i$ is a subspace implies $u+w\in S_i$. Therefore $u+w\in \cap_{i\in I} S_i$.
+\item Pick $a\in \mathbb{F}$ and $u\in \cap_{i\in I} S_i$. For all $i\in I$, the premise that $U_i$ is a subspace implies that $au\in U_i$. Therefore $au\in \cap_{i\in I} S_i$.
+\end{enumerate}
+\end{proof}
+
+\section{Exercise 1.C.12: When the Union of 2 Subspaces is a Subspace}
+Prove that the union of two subspaces of $V$ is a subspace of $V$ if and only if one of the subspaces is contained in the other.
+\begin{proof}
+Pick two subspaces $V_1, V_2$ of $V$.
+\begin{enumerate}
+\item If $V_1\subset V_2$, then $V_1\cup V_2=V_2$. Since $V_2$ is a subspace, it follows that $V_1\cup V_2$ is a subspace.
+\item Suppose that $V_1\cup V_2$ is a subspace. To prove by contradiction, suppose that $V_1\not\subset V_2$ and $V_2\not\subset V_1$. Thus there exists $v_1\in V_1$ such that $v_1\notin V_2$, and there exists $v_2\in V_2$ such that $v_2\notin V_1$.
+
+We claim that $v_1+v_2\notin V_1$. Because if $v_1+v_2$ was in $V_1$, the premise that $V_1$ is a subspace would imply that $v_2=(v_1+v_2)-v_1$ is also in $V_1$.
+
+We claim that $v_1+v_2\notin V_2$. Because if $v_1+v_2$ was in $V_2$, the premise that $V_2$ is a subspace would imply that $v_1=(v_1+v_2)-v_2$ is also in $V_2$.
+
+Thus $v_1+v_2\notin V_1\cup V_2$, contradicting with the premise that $V_1\cup V_2$ is a subspace.
+\end{enumerate}
+\end{proof}
+
+\section{Exercise 1.C.13: When the Union of 3 Subspaces is a Subspace}
+Prove that the union of three subspaces of $V$ is a subspace of $V$ if and only if one of the subspaces contains the other two.
+\begin{proof}
+Pick three subspaces $V_1, V_2, V_3$ of $V$.
+\begin{enumerate}
+\item If $V_1\subset V_3$ and $V_2\subset V_3$, then $V_1\cup V_2\cup V_3=V_3$. Since $V_3$ is a subspace, it follows that $V_1\cup V_2\cup V_3$ is a subspace.
+\item Suppose that $V_1\cup V_2\cup V_3$ is a subspace of $V$.
+
+If $V_1\subset V_2$, then $V_1\cup V_2\cup V_3$ becomes $V_2\cup V_3$. By Exercise~1.C.12, it follows that either $V_2\subset V_3$ or $V_3 \subset V_2$. Thus either $V_3$ or $V_2$ is the subspace that contains the other two.
+
+If $V_2\subset V_1$, then $V_1\cup V_2\cup V_3$ becomes $V_1\cup V_3$. By Exercise~1.C.12, it follows that either $V_1\subset V_3$ or $V_3 \subset V_1$. Thus either $V_3$ or $V_1$ is the subspace that contains the other two.
+
+If $V_1\not\subset V_2$ and $V_2\not\subset V_1$, then there exists $u\in V_1$ and $w\in V_2$ such that $u\notin V_2$ and $w\notin V_1$.
+\begin{enumerate}[label=(\roman*)]
+\item We claim that $V_1\setminus (V_1\cap V_2)\subset V_3$. Pick $x\in V_1\setminus (V_1\cap V_2)\subset V_3$. The premise that $V_1\cup V_2\cup V_3$ is a subspace implies that $x+w\in V_1\cup V_2\cup V_3$ and $2x+w\in V_1\cup V_2\cup V_3$. If $x+w$ was in $V_1$, then $w=(x+w)-x$ would be in $V_1$ which is a contradiction. If $2x+w$ was in $V_1$, then $w=(2x+w)-2x$ would be in $V_1$ which is a contradiction. If $x+w$ was in $V_2$, then $x=(x+w)-w$ would be in $V_2$ which is a contradiction. If $2x+w$ was in $V_2$, then $2x=(2x+w)-w$ would be in $V_2$ which is a contradiction. Therefore $x+w\in V_3$ and $2x+w\in V_3$. And it follows that $x=(2x+w)-(x+w)$ is in $V_3$.
+\item We claim that $V_2\setminus (V_1\cap V_2)\subset V_3$. Pick $y\in V_2\setminus (V_1\cap V_2)\subset V_3$. The premise that $V_1\cup V_2\cup V_3$ is a subspace implies that $u+y\in V_1\cup V_2\cup V_3$ and $u+2y\in V_1\cup V_2\cup V_3$. If $u+y$ was in $V_1$, then $y=(u+y)-u$ would be in $V_1$ which is a contradiction. If $u+2y$ was in $V_1$, then $2y=(u+2y)-u$ would be in $V_1$ which is a contradiction. If $u+y$ was in $V_2$, then $u=(u+y)-y$ would be in $V_2$ which is a contradiction. If $u+2y$ was in $V_2$, then $u=(u+2y)-2y$ would be in $V_2$ which is a contradiction. Therefore $u+y\in V_3$ and $u+2y\in V_3$. And it follows that $y=(u+2y)-(u+y)$ is in $V_3$.
+\item We claim that $V_1\cap V_2\subset V_3$.  Pick $z\in V_1\cap V_2$. The premise that $V_1$ is a subspace implies that $u+z\in V_1$. If $u+z\in V_1\cap V_2$, then $u=(u+z)-z\in V_2$ which is a contradiction. Thus $u+z\in V_1\setminus(V_1\cap V_2)$. By (i) we have $u+z\in V_3$. Also by (i) we have $u\in V_3$. The premise that $V_3$ is a subspace implies that $z=(u+z)-u$ is in $V_3$.
+\end{enumerate}
+The above (i) and (iii) implies that $V_1\subset V_3$. The above (ii) and (iii) implies that $V_2\subset V_3$.
+\end{enumerate}
+\end{proof}
+
+\section{Exercise 1.C.14: An Example of Sums of Subspaces}
+Verify the assertion in Example~1.38: Suppose that $U=\{(x,x,y,y)\in\mathbb{F}^4: x,y\in\mathbb{F}\}$ and W=$\{(x,x,x,y)\in\mathbb{F}^4:x,y\in\mathbb{F}\}$. Then
+\[
+U+W=\{(x,x,y,z)\in\mathbb{F}^4:x,y,z\in\mathbb{F}\}.
+\]
+\begin{proof}
+\begin{enumerate}
+\item Pick $x\in U+W$. Then there exists $u=(x_u,x_u,y_u,y_u)\in U$ and $w=(x_w,x_w,x_w,y_w)\in W$ such that $x_u, y_u, x_w, y_w\in \mathbb{F}$ and $x=u+w$. Thus $x=(x_u+x_w,x_u+x_w,y_u+x_w,y_u+y_w)$, which shows that $x\in \{(x,x,y,z)\in\mathbb{F}^4:x,y,z\in\mathbb{F}\}$. Therefore $U+W\subset \{(x,x,y,z)\in\mathbb{F}^4:x,y,z\in\mathbb{F}\}$.
+\item Pick $v\in\{(x,x,y,z)\in\mathbb{F}^4:x,y,z\in\mathbb{F}\}$. Then there exists $x,y,z\in\mathbb{F}$ such that $v=(x,x,y,z)$. By choosing $u=(x,x,y,y)\in U$ and $w=(0,0,0,z-y)\in W$, we have $u+w=v$. Thus $v\in U+W$. Therefore $\{(x,x,y,z)\in\mathbb{F}^4:x,y,z\in\mathbb{F}\}\subset U+W$.
+\end{enumerate}
+The above (1) and (2) imply that $U+W=\{(x,x,y,z)\in\mathbb{F}^4:x,y,z\in\mathbb{F}\}$.
+\end{proof}
+
+\section{Exercise 1.C.15: $U+U=U$ for Any Subspace $U$}
+Suppose $U$ is a subspace of $V$. What is $U+U$?
+\begin{proof}
+We claim that $U+U=U$.
+\begin{enumerate}
+\item Pick $z\in U+U$, then there exists $x,y\in U$ such that $z=x+y$. Since $U$ is closed under addition, we have $x+y\in U$, i.e. $z\in U$. Thus $U+U\subset U$.
+\item Pick $u\in U$, then $u=1u=(\frac{1}{2}+\frac{1}{2})u=\frac{1}{2}u+\frac{1}{2}u$, i.e. $u\in U+U$. Thus $U\subset U+U$.
+\end{enumerate}
+The above (1) and (2) imply that $U+U=U$.
+\end{proof}
+
+\section{Exercise 1.C.16: Commutativity of the Sum of Subspaces}
+Is the operation of addition on the subspaces of $V$ commutative? In other words, if $U$ and $W$ are subspaces of $V$, is $U+W=W+U$?
+\begin{proof}
+We claim that $U+W=W+U$.
+\begin{enumerate}
+\item Pick $v\in U+W$, then there exists $u\in U$ and $w\in W$ such that $v=u+w$. Since the addition on $V$ is commutative, $u+w=w+u$, and this shows that $v=w+u$ is in $W+U$. Thus $U+W\subset W+U$.
+\item Pick $v\in W+U$, then there exists $w\in W$ and $u\in U$ such that $v=w+u$. Since the addition on $V$ is commutative, $w+u=u+w$, and this shows that $v=u+w$ is in $U+W$. Thus $W+U\subset U+W$.
+\end{enumerate}
+The above (1) and (2) imply that $U+W=W+U$.
+\end{proof}
+
+\section{Exercise 1.C.17: Associativity of the Sum of Subspaces}
+Is the operation of addition on the subspaces of $V$ associative? In other words, if $U_1, U_2, U_3$ are subspaces of $V$, is
+\[
+(U_1+U_2)+U_3=U_1+(U_2+U_3)?
+\]
+\begin{proof}
+We claim that $(U_1+U_2)+U_3=U_1+(U_2+U_3)$.
+\begin{enumerate}
+\item Pick $v\in (U_1+U_2)+U_3$, then there exists $u_1,u_2,u_3\in U$ such that $v=(u_1+u_2)+u_3$. Since the addition on $V$ is associative, $(u_1+u_2)+u_3=u_1+(u_2+u_3)$, and this shows that $v=u_1+(u_2+u_3)$ is in $U_1+(U_2+U_3)$. Thus $(U_1+U_2)+U_3\subset U_1+(U_2+U_3)$.
+\item Pick $v\in U_1+(U_2+U_3)$, then there exists $u_1,u_2,u_3\in U$ such that $v=u_1+(u_2+u_3)$. Since the addition on $V$ is associative, $u_1+(u_2+u_3)=(u_1+u_2)+u_3$, and this shows that $v=(u_1+u_2)+u_3$ is in $(U_1+U_2)+U_3$. Thus $U_1+(U_2+U_3)\subset (U_1+U_2)+U_3$.
+\end{enumerate}
+The above (1) and (2) imply that $(U_1+U_2)+U_3=U_1+(U_2+U_3)$.
+\end{proof}
+
+\section{Exercise 1.C.18: The Identity of Sum of Subspaces}
+Does the operation of addition on the subspaces of $V$ have an additive identity? Which subspaces have additive inverses?
+\begin{proof}
+We claim that the subspace $\{0\}$ is the additive identity, i.e. $U+\{0\}=U$ for all subspaces $U$.
+\begin{enumerate}
+\item Pick $v\in U+\{0\}$, then there exists $u\in U$ such that $v=u+0$, and this shows that $v=u$ is in $U$. Thus $U+\{0\}\subset U$.
+\item Pick $u\in U$, then $u=u+0$ shows that $u\in U+\{0\}$. Thus $U\subset U+\{0\}$.
+\end{enumerate}
+The above (1) and (2) imply that $U+\{0\}=U$.
+
+We claim that for all subspaces $U$ and $W$, $U+W=\{0\}$ implies $U=W=\{0\}$, which means that the subspaces that have additive inverses are only $\{0\}$ itself.
+
+Pick subspaces $U$ and $W$. Assume $U+W=\{0\}$. 1.39 of \cite{axler2014linear} shows that $U\subset U+W$ and $W\subset U+W$. Thus $U\subset \{0\}$ and $W\subset \{0\}$. Note that the only two subsets of $\{0\}$ are $\varnothing$ and $\{0\}$. Also, the premise that $U$ and $W$ are subspaces implies $0\in U$ and $0\in W$, thus $U=W=\{0\}$.
+\end{proof}
+
+\section{Exercise 1.C.19: There is NO Cancellation Law for Sums of Subspaces}
+Prove or give a counterexample: if $U_1, U_2, W$ are subspaces of $V$ such that
+\[
+U_1+W=U_2+W,
+\]
+then $U_1=U_2$.
+\begin{proof}[Counterexample]
+Set $V=\mathbb{R}^2, U_1=\mathbb{R}^2, U_2=\{(x,0):x\in\mathbb{R}\}, W=\{(0,x):x\in\mathbb{R}\}$. Then $U_1, U_2, W$ are subspaces of $V$, $U_1+W=\mathbb{R}^2$, $U_2+W=\mathbb{R}^2$ but $U_1\ne U_2$.
+\end{proof}
+
+\section{Exercise 1.C.20: A Direct Sum of 2 Subspaces that Equals to $\mathbb{F}^4$}
+Suppose\[
+U=\{(x,x,y,y)\in\mathbb{F}^4:x,y\in\mathbb{F}\}.
+\]
+Find a subspace $W$ of $\mathbb{F}^4$ such that $\mathbb{F}^4=U\oplus W$.
+\begin{proof}
+We claim that the following $W$ is a subspace of $\mathbb{F}^4$ such that $\mathbb{F}^4=U\oplus W$:
+\[
+W=\{(0,x,0,y)\in\mathbb{F}^4:x,y\in\mathbb{F}\}.
+\]
+
+We first verify that $W$ is a subspace of $\mathbb{F}^4$ by 1.34 of \cite{axler2014linear}.
+
+\begin{enumerate}
+\item We can show that $0\in W$ by choosing $x=0,y=0$ in $(0,x,0,y)$.
+\item Suppose that $u,w\in W$ where $u=(0,x_u,0,y_u)$ and w=$(0,x_w,0,y_w)$. Then $u+w=(0,x_u+x_w,0,y_u+y_w)$ shows that $u+w$ is in $W$.
+\item Pick $a\in\mathbb{F}$ and $u\in W$ where $u=(0,x_u,0,y_u)$. Then $au=(0,ax_u,0,ay_u)$ shows that $au$ is in $W$.
+\end{enumerate}
+
+We then verify that $U+W$ is a direct sum by 1.45 of \cite{axler2014linear}.
+
+Pick $v\in U\cap W$. Then there exists $x,y,s,t\in\mathbb{F}$ such that $v=(x,x,y,y)=(0,s,0,t)$, which implies that $x=0, s=0, y=0, t=0$, i.e. $v=0$. Therefore $U+W$ is a direct sum.
+
+Finally, we verify that $\mathbb{F}^4=U\oplus W$.
+
+\begin{enumerate}
+\item 1.39 of \cite{axler2014linear} implies that $U\oplus W$ is a subspace of $\mathbb{F}^4$. Therefore $U\oplus W\subset\mathbb{F}^4$.
+\item Pick $v\in \mathbb{F}^4$ where $v=(a,b,c,d)$ and $a,b,c,d\in\mathbb{F}$. Define \[
+u=(a,a,c,c), w=(0,b-a,0,d-c).
+\]
+Then $u\in U, w\in W$ and $v=u+w$, which shows that $v\in U\oplus W$. Thus $\mathbb{F}^4\subset U\oplus W$.
+\end{enumerate}
+\end{proof}
+
+\section{Exercise 1.C.21: A Direct Sum of 2 Subspaces that Equals to $\mathbb{F}^5$}
+Suppose\[
+U=\{(x,y,x+y,x-y,2x)\in\mathbb{F}^5:x,y\in\mathbb{F}\}.
+\]
+Find a subspace $W$ of $\mathbb{F}^5$ such that $\mathbb{F}=U\oplus W$.
+\begin{proof}
+We claim that the following $W$ is a subspace of $\mathbb{F}^5$ such that $\mathbb{F}^4=U\oplus W$:
+\[
+W=\{(0,0,x,y,z)\in\mathbb{F}^5:x,y,z\in\mathbb{F}\}.
+\]
+
+We first verify that $W$ is a subspace of $\mathbb{F}^5$ by 1.34 of \cite{axler2014linear}.
+
+\begin{enumerate}
+\item We can show that $0\in W$ by choosing $x=0,y=0,z=0$ in $(0,0,x,y,z)$.
+\item Suppose that $u,w\in W$ where \[u=(0,0,x_u,y_u,z_u), w=(0,0,x_w,y_w,z_w).\] Then $u+w=(0,0,x_u+x_w,y_u+y_w,z_u+z_w)$ shows that $u+w$ is in $W$.
+\item Pick $a\in\mathbb{F}$ and $u\in W$ where $u=(0,0,x_u,y_u,z_u)$. Then \[au=(0,0,ax_u,ay_u,az_u)\] shows that $au$ is in $W$.
+\end{enumerate}
+
+We then verify that $U+W$ is a direct sum by 1.45 of \cite{axler2014linear}.
+
+Pick $v\in U\cap W$. Then there exists $x,y,a,b,c\in\mathbb{F}$ such that $v=(x,y,x+y,x-y,2x)=(0,0,a,b,c)$, which implies that $x=0, y=0, a=0, b=0, c=0$, i.e. $v=0$. Therefore $U+W$ is a direct sum.
+
+Finally, we verify that $\mathbb{F}^5=U\oplus W$.
+
+\begin{enumerate}
+\item 1.39 of \cite{axler2014linear} implies that $U\oplus W$ is a subspace of $\mathbb{F}^5$. Therefore $U+W\subset\mathbb{F}^5$.
+\item Pick $v\in \mathbb{F}^5$ where $v=(a,b,c,d,e)$ and $a,b,c,d,e\in\mathbb{F}$. Define $u=(a,b,a+b,a-b,2a), w=(0,0,c-a-b,d-a+b,e-2a)$. Then $u\in U, w\in W$ and $v=u+w$, which shows that $v\in U+W$. Thus $\mathbb{F}^5\subset U\oplus W$.
+\end{enumerate}
+\end{proof}
+
+\section{Exercise 1.C.22: A Direct Sum of 4 Subspaces that Equals to $\mathbb{F}^5$}
+Suppose \[
+U=\{(x,y,x+y,x-y,2x)\in\mathbb{F}^5:x,y\in\mathbb{F}\}.
+\]
+Find three subspaces $W_1,W_2,W_3$ of $\mathbb{F}^5$, none of which equals $\{0\}$, such that $\mathbb{F}^5=U\oplus W_1\oplus W_2\oplus W_3$.
+\begin{proof}
+We claim that the following $W_1,W_2,W_3$ are subspaces of $\mathbb{F}^5$ such that $\mathbb{F}^5=U\oplus W_1\oplus W_2\oplus W_3$:
+\begin{equation*}
+\begin{split}
+W_1&=\{(0,0,x,0,0)\in\mathbb{F}^5:x\in\mathbb{F}\},\\
+W_2&=\{(0,0,0,x,0)\in\mathbb{F}^5:x\in\mathbb{F}\},\\
+W_3&=\{(0,0,0,0,x)\in\mathbb{F}^5:x\in\mathbb{F}\}.
+\end{split}
+\end{equation*}
+
+Suppose that
+\begin{equation}
+\label{eq2}
+0=u+w_1+w_2+w_3
+\end{equation}
+for some $u=(x,y,x+y,x-y,2x), w_1=(0,0,a,0,0), w_2=(0,0,0,b,0), w_3=(0,0,0,0,c)$ where $x,y,a,b,c\in\mathbb{F}$. Them Equation~(\ref{eq2}) is equivalent to the following system of linear equations.
+\[
+\begin{bmatrix}
+1 &0 &0 &0 &0\\
+0 &1 &0 &0 &0\\
+1 &1 &1 &0 &0\\
+1 &-1 &0 &1 &0\\
+2 &0 &0 &0 &1
+\end{bmatrix}
+\begin{bmatrix}
+x\\
+y\\
+a\\
+b\\
+c\\
+\end{bmatrix}
+=
+\begin{bmatrix}
+0\\
+0\\
+0\\
+0\\
+0
+\end{bmatrix}.
+\]
+
+It is now clear that the coefficient matrix is nonsingular, thus $x=y=a=b=c=0$ is the only solution. By 1.44 of \cite{axler2014linear}, we conclude that $\mathbb{F}^5=U\oplus W_1\oplus W_2\oplus W_3$.
+\end{proof}
+
+\section{Exercise 1.C.23: There is NO Cancellation Law for Direct Sums of Subspaces}
+Prove or give a counterexample: if $U_1, U_2, W$ are subspaces of $V$ such that\[
+V=U_1\oplus W\text{ and }V=U_2\oplus W,
+\]then $U_1=U_2$.
+\begin{proof}[Counterexample]
+Set $V=\mathbb{R}^2, U_1=\{(x,x):x\in\mathbb{R}\}, U_2=\{(-x,x):x\in\mathbb{R}\}, W=\{(0,x):x\in\mathbb{R}\}$. Then $U_1, U_2, W$ are subspaces of $V$, $U_1\oplus W=\mathbb{R}^2$, $U_2\oplus W=\mathbb{R}^2$ but $U_1\ne U_2$.
+\end{proof}
+
+\section{Exercise 1.C.24: A Direct Sum Decomposition of $\mathbb{R}^\mathbb{R}$}
+A function $f: \mathbb{R}\to\mathbb{R}$ is called even if\[
+f(-x)=f(x)
+\] for all $x\in\mathbb{R}$. A function $f: \mathbb{R}\to\mathbb{R}$ is called odd if\[
+f(-x)=-f(x)
+\] for all $x\in\mathbb{R}$. Let $U_e$ denote the set of real-valued even functions on $\mathbb{R}$ and let $U_o$ denote the set of real-valued odd functions on $\mathbb{R}$. Show that $\mathbb{R}^\mathbb{R}=U_e\oplus U_o$.
+\begin{proof}
+We first verify that $U_e$ and $U_o$ are subspaces of $\mathbb{R}^\mathbb{R}$ by 1.34 of \cite{axler2014linear}.
+
+\begin{enumerate}
+\item We can show that $0\in U_e$ and $0\in U_o$ because the $0(-x)=0(x)=0$ and $0(-x)=-0(x)=0$ for all $x\in\mathbb{R}$.
+\item Suppose that $u_e,w_e\in U_e, u_o,w_o \in U_o$, then
+\begin{equation*}
+\begin{split}
+(u_e+w_e)(-x)&=u_e(-x)+w_e(-x)\\
+&=u_e(x)+w_e(x)\\
+&=(u_e+w_e)(x).
+\end{split}
+\end{equation*}
+Thus $u_e+w_e\in U_e$. Also,
+\begin{equation*}
+\begin{split}
+(u_o+w_o)(-x)&=u_o(-x)+w_o(-x)\\
+&=-u_o(x)-w_o(x)\\
+&=-(u_o(x)+w_o(x))\\
+&=-(u_o+w_o)(x).
+\end{split}
+\end{equation*}
+Thus $u_o+w_o\in U_o$.
+\item Pick $a\in\mathbb{F}$ and $u_e\in U_e, u_o\in U_o$, then
+\begin{equation*}
+\begin{split}
+(au_e)(-x)&=a\cdot u_e(-x)\\
+&=a\cdot u_e(x)\\
+&=(au_e)(x).
+\end{split}
+\end{equation*}
+Thus $au_e\in U_e$. Also,
+\begin{equation*}
+\begin{split}
+(au_o)(-x)&=a\cdot u_o(-x)\\
+&=-a\cdot u_o(x)\\
+&=-(au_o)(x).
+\end{split}
+\end{equation*}
+Thus $au_o\in U_o$.
+\end{enumerate}
+
+We then verify that $U_e+U_o$ is a direct sum by 1.45 of \cite{axler2014linear}.
+
+Pick $u\in U_e\cap U_o$, then $u(-x)=u(x)=-u(x)$ for all $x\in\mathbb{R}$. Thus $u(x)=0$ for all $x\in\mathbb{R}$, which means that $u$ is the $0$ function.
+
+Finally, we prove that $\mathbb{R}^\mathbb{R}=U_e\oplus U_o$.
+
+\begin{enumerate}
+\item 1.39 of \cite{axler2014linear} implies that $U_e\oplus U_o$ is a subspace of $\mathbb{R}^\mathbb{R}$. Therefore $U_e\oplus U_o\subset\mathbb{R}^\mathbb{R}$.
+\item Pick $f(x)\in \mathbb{R}^\mathbb{R}$. Define
+\[
+f_e(x)=\frac{f(x)+f(-x)}{2}, f_o(x)=\frac{f(x)-f(-x)}{2}.
+\]
+
+Then
+\begin{equation*}
+\begin{split}
+f_e(-x)&=\frac{f(-x)+f(x)}{2}\\
+&=\frac{f(x)+f(-x)}{2}\\
+&=f_e(x),
+\end{split}
+\end{equation*}
+which implies that $f_e(x)\in U_e$. Also,
+\begin{equation*}
+\begin{split}
+f_o(-x)&=\frac{f(-x)-f(x)}{2}\\
+&=-\frac{f(x)-f(-x)}{2}\\
+&=-f_o(x),
+\end{split}
+\end{equation*}
+which implies that $f_o(x)\in U_o$. And,
+\begin{equation*}
+\begin{split}
+f_e(x)+f_o(x)&=\frac{f(x)+f(-x)}{2}+\frac{f(x)-f(-x)}{2}\\
+&=-\frac{f(x)+f(-x)+f(x)-f(-x)}{2}\\
+&=f(x),
+\end{split}
+\end{equation*}
+which shows that $f(x)\in U_e\oplus U_o$. Therefore $\mathbb{R}^\mathbb{R}\subset U_e\oplus U_o$.
+\end{enumerate}
+\end{proof}
