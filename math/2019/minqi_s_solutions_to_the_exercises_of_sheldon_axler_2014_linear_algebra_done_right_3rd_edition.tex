@@ -849,6 +849,13 @@ We first verify that $W$ is a subspace of $\mathbb{F}^4$ by 1.34 of \cite{axler2
 We then verify that $U+W$ is a direct sum by 1.45 of \cite{axler2014linear}.
 
 Pick $v\in U\cap W$. Then there exists $x,y,s,t\in\mathbb{F}$ such that $v=(x,x,y,y)=(0,s,0,t)$, which implies that $x=0, s=0, y=0, t=0$, i.e. $v=0$. Therefore $U+W$ is a direct sum.
+
+Finally, we verify that $\mathbb{F}^4=U\oplus W$.
+
+\begin{enumerate}
+\item 1.39 of \cite{axler2014linear} implies that $U\oplus W$ is a subspace of $\mathbb{F}^4$. Therefore $U\oplus W\subset\mathbb{F}^4$.
+\item Pick $v\in \mathbb{F}^4$ where $v=(a,b,c,d)$ and $a,b,c,d\in\mathbb{F}$. Define $u=(a,a,c,c), w=(0,b-a,0,d-c)$. Then $u\in U, w\in W$ and $v=u+w$, which shows that $v\in U\oplus W$. Thus $\mathbb{F}^4\subset U\oplus W$.
+\end{enumerate}
 \end{proof}
 
 \section{Exercise 1.C.21}
@@ -873,6 +880,13 @@ We first verify that $W$ is a subspace of $\mathbb{F}^5$ by 1.34 of \cite{axler2
 We then verify that $U+W$ is a direct sum by 1.45 of \cite{axler2014linear}.
 
 Pick $v\in U\cap W$. Then there exists $x,y,a,b,c\in\mathbb{F}$ such that $v=(x,y,x+y,x-y,2x)=(0,0,a,b,c)$, which implies that $x=0, y=0, a=0, b=0, c=0$, i.e. $v=0$. Therefore $U+W$ is a direct sum.
+
+Finally, we verify that $\mathbb{F}^5=U\oplus W$.
+
+\begin{enumerate}
+\item 1.39 of \cite{axler2014linear} implies that $U\oplus W$ is a subspace of $\mathbb{F}^5$. Therefore $U+W\subset\mathbb{F}^5$.
+\item Pick $v\in \mathbb{F}^5$ where $v=(a,b,c,d,e)$ and $a,b,c,d,e\in\mathbb{F}$. Define $u=(a,b,a+b,a-b,2a), w=(0,0,c-a-b,d-a+b,e-2a)$. Then $u\in U, w\in W$ and $v=u+w$, which shows that $v\in U+W$. Thus $\mathbb{F}^5\subset U\oplus W$.
+\end{enumerate}
 \end{proof}
 
 \section{Exercise 1.C.22}
