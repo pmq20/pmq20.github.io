@@ -846,7 +846,7 @@ We first verify that $W$ is a subspace of $\mathbb{F}^4$ by 1.34 of \cite{axler2
 \item Pick $a\in\mathbb{F}$ and $u\in W$ where $u=(0,x_u,0,y_u)$. Then $au=(0,ax_u,0,ay_u)$ shows that $au$ is in $W$.
 \end{enumerate}
 
-We then verify that $\mathbb{F}^4=U\oplus W$ by 1.45 of \cite{axler2014linear}.
+We then verify that $U+W$ is a direct sum by 1.45 of \cite{axler2014linear}.
 
 Pick $v\in U\cap W$. Then there exists $x,y,s,t\in\mathbb{F}$ such that $v=(x,x,y,y)=(0,s,0,t)$, which implies that $x=0, s=0, y=0, t=0$, i.e. $v=0$. Therefore $U+W$ is a direct sum.
 \end{proof}
@@ -870,7 +870,7 @@ We first verify that $W$ is a subspace of $\mathbb{F}^5$ by 1.34 of \cite{axler2
 \item Pick $a\in\mathbb{F}$ and $u\in W$ where $u=(0,0,x_u,y_u,z_u)$. Then \[au=(0,0,ax_u,ay_u,az_u)\] shows that $au$ is in $W$.
 \end{enumerate}
 
-We then verify that $\mathbb{F}^5=U\oplus W$ by 1.45 of \cite{axler2014linear}.
+We then verify that $U+W$ is a direct sum by 1.45 of \cite{axler2014linear}.
 
 Pick $v\in U\cap W$. Then there exists $x,y,a,b,c\in\mathbb{F}$ such that $v=(x,y,x+y,x-y,2x)=(0,0,a,b,c)$, which implies that $x=0, y=0, a=0, b=0, c=0$, i.e. $v=0$. Therefore $U+W$ is a direct sum.
 \end{proof}
@@ -932,10 +932,94 @@ V=U_1\oplus W\text{ and }V=U_2\oplus W,
 Set $V=\mathbb{R}^2, U_1=\{(x,x):x\in\mathbb{R}\}, U_2=\{(-x,x):x\in\mathbb{R}\}, W=\{(0,x):x\in\mathbb{R}\}$. Then $U_1, U_2, W$ are subspaces of $V$, $U_1\oplus W=\mathbb{R}^2$, $U_2\oplus W=\mathbb{R}^2$ but $U_1\ne U_2$.
 \end{proof}
 
+\section{Exercise 1.C.24}
+A function $f: \mathbb{R}\to\mathbb{R}$ is called even if\[
+f(-x)=f(x)
+\] for all $x\in\mathbb{R}$. A function $f: \mathbb{R}\to\mathbb{R}$ is called odd if\[
+f(-x)=-f(x)
+\] for all $x\in\mathbb{R}$. Let $U_e$ denote the set of real-valued even functions on $\mathbb{R}$ and let $U_o$ denote the set of real-valued odd functions on $\mathbb{R}$. Show that $\mathbb{R}^\mathbb{R}=U_e\oplus U_o$.
+\begin{proof}
+We first verify that $U_e$ and $U_o$ are subspaces of $\mathbb{R}^\mathbb{R}$ by 1.34 of \cite{axler2014linear}.
 
+\begin{enumerate}
+\item We can show that $0\in U_e$ and $0\in U_o$ because the $0(-x)=0(x)=0$ and $0(-x)=-0(x)=0$ for all $x\in\mathbb{R}$.
+\item Suppose that $u_e,w_e\in U_e, u_o,w_o \in U_o$, then
+\begin{equation*}
+\begin{split}
+(u_e+w_e)(-x)&=u_e(-x)+w_e(-x)\\
+&=u_e(x)+w_e(x)\\
+&=(u_e+w_e)(x).
+\end{split}
+\end{equation*}
+Thus $u_e+w_e\in U_e$. Also,
+\begin{equation*}
+\begin{split}
+(u_o+w_o)(-x)&=u_o(-x)+w_o(-x)\\
+&=-u_o(x)-w_o(x)\\
+&=-(u_o(x)+w_o(x))\\
+&=-(u_o+w_o)(x).
+\end{split}
+\end{equation*}
+Thus $u_o+w_o\in U_o$.
+\item Pick $a\in\mathbb{F}$ and $u_e\in U_e, u_o\in U_o$, then
+\begin{equation*}
+\begin{split}
+(au_e)(-x)&=a\cdot u_e(-x)\\
+&=a\cdot u_e(x)\\
+&=(au_e)(x).
+\end{split}
+\end{equation*}
+Thus $au_e\in U_e$. Also,
+\begin{equation*}
+\begin{split}
+(au_o)(-x)&=a\cdot u_o(-x)\\
+&=-a\cdot u_o(x)\\
+&=-(au_o)(x).
+\end{split}
+\end{equation*}
+Thus $au_o\in U_o$.
+\end{enumerate}
 
+We then verify that $U_e+U_o$ is a direct sum by 1.45 of \cite{axler2014linear}.
 
+Pick $u\in U_e\cap U_o$, then $u(-x)=u(x)=-u(x)$ for all $x\in\mathbb{R}$. Thus $u(x)=0$ for all $x\in\mathbb{R}$, which means that $u$ is the $0$ function.
 
+Finally, we prove that $\mathbb{R}^\mathbb{R}=U_e\oplus U_o$.
+
+\begin{enumerate}
+\item 1.39 of \cite{axler2014linear} implies that $U_e\oplus U_o$ is a subspace of $\mathbb{R}^\mathbb{R}$. Therefore $U_e\oplus U_o\subset\mathbb{R}^\mathbb{R}$.
+\item Pick $f(x)\in \mathbb{R}^\mathbb{R}$. Define
+\[
+f_e(x)=\frac{f(x)+f(-x)}{2}, f_o(x)=\frac{f(x)-f(-x)}{2}.
+\]
+
+Then
+\begin{equation*}
+\begin{split}
+f_e(-x)&=\frac{f(-x)+f(x)}{2}\\
+&=\frac{f(x)+f(-x)}{2}\\
+&=f_e(x),
+\end{split}
+\end{equation*}
+which implies that $f_e(x)\in U_e$. Also,
+\begin{equation*}
+\begin{split}
+f_o(-x)&=\frac{f(-x)-f(x)}{2}\\
+&=-\frac{f(x)-f(-x)}{2}\\
+&=-f_o(x),
+\end{split}
+\end{equation*}
+which implies that $f_o(x)\in U_o$. And,
+\begin{equation*}
+\begin{split}
+f_e(x)+f_o(x)&=\frac{f(x)+f(-x)}{2}+\frac{f(x)-f(-x)}{2}\\
+&=-\frac{f(x)+f(-x)+f(x)-f(-x)}{2}\\
+&=f(x),
+\end{split}
+\end{equation*}
+which shows that $f(x)\in U_e\oplus U_o$. Therefore $\mathbb{R}^\mathbb{R}\subset U_e\oplus U_o$.
+\end{enumerate}
+\end{proof}
 
 
 
