@@ -37,8 +37,130 @@
 
 \include{minqi_s_solutions_to_the_exercises_of_sheldon_axler_2014_linear_algebra_done_right_3rd_edition_ch1}
 
+\chapter{Finite-Dimensional Vector Space}
+
+\section{Exercise 2.A.1}
+Suppose $v_1,v_2,v_3,v_4$ spans $V$. Prove that the list
+\[
+v_1-v_2,v_2-v_3,v_3-v_4,v_4
+\] also spans $V$.
+\begin{proof}
+Denote $w_1=v_1-v_2, w_2=v_2-v_3, w_3=v_3-v_4, w_4=v_4$. Let
+\[
+A=\begin{bmatrix}
+1& -1& 0&0\\
+0& 1&-1&0\\
+0& 0&1&-1\\
+0& 0&0&1
+\end{bmatrix},
+\]
+then \[
+A\begin{bmatrix}
+v_1\\
+v_2\\
+v_3\\
+v_4\end{bmatrix}=\begin{bmatrix}
+w_1\\
+w_2\\
+w_3\\
+w_4\end{bmatrix},
+\begin{bmatrix}
+v_1\\
+v_2\\
+v_3\\
+v_4\end{bmatrix}=A^{-1}\begin{bmatrix}
+w_1\\
+w_2\\
+w_3\\
+w_4\end{bmatrix}.
+\]
+
+Moreover, it can be calculated that
+\[
+A^{-1}=
+\begin{bmatrix}
+     1&     1&     1&     1\\
+     0&     1&     1&     1\\
+     0&     0&     1&     1\\
+     0&     0&     0&     1
+\end{bmatrix}.
+\]
+
+\begin{enumerate}
+\item Pick $x\in\text{span}(v_1,v_2,v_3,v_4)$, then there exists $x_1,x_2,x_3,x_4\in\mathbb{F}$ such that
+\begin{equation*}
+\begin{split}
+v&=\begin{bmatrix}
+x_1&x_2&x_3&x_4
+\end{bmatrix}
+\begin{bmatrix}v_1\\v_2\\v_3\\v_4\end{bmatrix}\\
+&=\begin{bmatrix}
+x_1&x_2&x_3&x_4
+\end{bmatrix}
+\begin{bmatrix}
+     1&     1&     1&     1\\
+     0&     1&     1&     1\\
+     0&     0&     1&     1\\
+     0&     0&     0&     1
+\end{bmatrix}
+\begin{bmatrix}
+w_1\\
+w_2\\
+w_3\\
+w_4\end{bmatrix}\\
+&=
+\begin{bmatrix}
+     x_1&     x_1+x_2&     x_1+x_2+x_3&     x_1+x_2+x_3+x_4
+\end{bmatrix}
+\begin{bmatrix}
+w_1\\
+w_2\\
+w_3\\
+w_4
+\end{bmatrix}.
+\end{split}
+\end{equation*}
+
+Therefore $v\in\text{span}(w_1,w_2,w_3,w_4)$.
+\item Pick $w\in\text{span}(w_1,w_2,w_3,w_4)$, then there exists $y_1,y_2,y_3,y_4\in\mathbb{F}$ such that
+\begin{equation*}
+\begin{split}
+w&=\begin{bmatrix}
+y_1&y_2&y_3&y_4
+\end{bmatrix}
+\begin{bmatrix}w_1\\w_2\\w_3\\w_4\end{bmatrix}\\
+&=\begin{bmatrix}
+y_1&y_2&y_3&y_4
+\end{bmatrix}
+\begin{bmatrix}
+1& -1& 0&0\\
+0& 1&-1&0\\
+0& 0&1&-1\\
+0& 0&0&1
+\end{bmatrix}
+\begin{bmatrix}
+v_1\\
+v_2\\
+v_3\\
+v_4\end{bmatrix}\\
+&=
+\begin{bmatrix}
+     y_1&     y_2-y_1&     y_3-y_2&     y_4-y_3
+\end{bmatrix}
+\begin{bmatrix}
+v_1\\
+v_2\\
+v_3\\
+v_4
+\end{bmatrix}.
+\end{split}
+\end{equation*}
+Therefore $w\in\text{span}(v_1,v_2,v_3,v_4)$.
+\end{enumerate}
+The above (1) and (2) imply that $\text{span}(w_1,w_2,w_3,w_4)=\text{span}(v_1,v_2,v_3,v_4)$.
+\end{proof}
+
 \backmatter
 \bibliographystyle{amsalpha}
 \bibliography{minqi_s_solutions_to_the_exercises_of_sheldon_axler_2014_linear_algebra_done_right_3rd_edition}
-
 \end{document}
