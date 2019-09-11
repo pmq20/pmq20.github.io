@@ -220,6 +220,27 @@ x_{N-1}
 Note that the above coefficient matrix is a Vandermonde matrix. Since all the numbers $1, 2, \dots, N$ are distinct, its determinant is non-zero. Therefore the only solution is $x_0=x_1=\dots=x_{N-1}=0$.
 \end{enumerate}
 \end{proof}
+
+\section{Exercise 2.A.3}
+Find a number $t$ such that
+\[
+(3,1,4),(2,-3,5),(5,9,t)
+\]
+is not linearly independent in $\mathbb{R}^3$.
+\begin{proof}
+We claim that $t=2$ makes the list not linearly independent in $\mathbb{R}^3$. This can be shown by
+\begin{equation*}
+\begin{split}
+&-3\cdot (3,1,4)+2\cdot (2,-3,5)+1\cdot (5,9,2)\\
+&=((-9)+4+5,(-3)+(-6)+9,(-12)+10+2)\\
+&=0.
+\end{split}
+\end{equation*}
+\end{proof}
+
+
+
+
 \backmatter
 \bibliographystyle{amsalpha}
 \bibliography{minqi_s_solutions_to_the_exercises_of_sheldon_axler_2014_linear_algebra_done_right_3rd_edition}
