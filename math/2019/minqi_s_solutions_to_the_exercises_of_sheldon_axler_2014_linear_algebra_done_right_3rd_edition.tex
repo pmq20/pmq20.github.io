@@ -252,6 +252,49 @@ A=\begin{bmatrix}
 Then the list $(2,3,1),(1,-1,2),(7,3,c)$ is linearly dependent if and only if $\text{det}(A)=0$. Since $\text{det}(A)=40-5c$, it follows that $\text{det}(A)=0$ if and only if $c=8$.
 \end{proof}
 
+\section{Exercise 2.A.5}
+\begin{enumerate}[label=(\alph*)]
+\item Show that if we think of $\mathbb{C}$ as a vector space over $\mathbb{R}$, then the list $(1+i,1-i)$ is linearly independent.
+\item Show that if we think of $\mathbb{C}$ as a vector space over $\mathbb{C}$, then the list $(1+i,1-i)$ is linearly dependent.
+\end{enumerate}
+\begin{proof}
+Suppose that there exists $a+bi, c+di\in\mathbb{C}$ such that $a,b,c,d\in\mathbb{R}$ and $(a+bi)(1+i)+(c+di)(1-i)=0$, then
+\[
+(a-b+c+d)+(a+b-c+d)i=0,
+\]
+
+Rewrite the above linear system in the matrix form,
+\[
+\begin{bmatrix}
+1&-1&1&1\\
+1&1&-1&1
+\end{bmatrix}
+\begin{bmatrix}
+a\\
+b\\
+c\\
+d
+\end{bmatrix}
+=
+\begin{bmatrix}
+0\\
+0
+\end{bmatrix},
+\]
+then its solutions are
+\[
+\left\{\begin{bmatrix}-y\\x\\x\\y\end{bmatrix}:x,y\in\mathbb{R}\right\}.
+\]
+
+\begin{enumerate}[label=(\alph*)]
+\item If we think of $\mathbb{C}$ as a vector space over $\mathbb{R}$, then the list is linearly independent because \[
+\left\{\begin{bmatrix}-y\\x\\x\\y\end{bmatrix}:x,y\in\mathbb{R}\right\}\cap\left\{\begin{bmatrix}x\\0\\y\\0\end{bmatrix}:x,y\in\mathbb{R}\right\}=\left\{\begin{bmatrix}0\\0\\0\\0\end{bmatrix}\right\}.
+\]
+\item If we think of $\mathbb{C}$ as a vector space over $\mathbb{C}$, then the list is linearly dependent because \[
+\begin{bmatrix}-1\\1\\1\\1\end{bmatrix}\in\left\{\begin{bmatrix}-y\\x\\x\\y\end{bmatrix}:x,y\in\mathbb{R}\right\}
+\].
+\end{enumerate}
+\end{proof}
 
 \backmatter
 \bibliographystyle{amsalpha}
