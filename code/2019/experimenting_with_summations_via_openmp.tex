@@ -10,7 +10,7 @@
 
 \DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
 
-\title{Experimenting Summations with OpenMP}
+\title{Experimenting with Summations via OpenMP}
 \author{Minqi Pan}
 %\date{}                                           % Activate to display a given date or no date
 
@@ -22,7 +22,7 @@ The result was obtained by calculating $\sum_{i=1}^{4294967296}i=922337203470729
 
 \begin{figure}[ht]
 \begin{center}
-\includegraphics[width=.8\textwidth]{experimenting_summations_with_openmp.png}
+\includegraphics[width=.8\textwidth]{experimenting_with_summations_via_openmp.png}
 \end{center}
 \end{figure}
 
@@ -39,6 +39,6 @@ The result was obtained by calculating $\sum_{i=1}^{4294967296}i=922337203470729
 \section{Code}
 
 \renewcommand{\ttdefault}{pcr}
-\lstinputlisting[language=c++,basicstyle=\ttfamily,numbers=left,xleftmargin=1cm,frame=L,keepspaces=true]{experimenting_summations_with_openmp.cpp}
+\lstinputlisting[language=c++,basicstyle=\ttfamily,numbers=left,xleftmargin=1cm,frame=L,keepspaces=true]{experimenting_with_summations_via_openmp.cpp}
 
 \end{document}
