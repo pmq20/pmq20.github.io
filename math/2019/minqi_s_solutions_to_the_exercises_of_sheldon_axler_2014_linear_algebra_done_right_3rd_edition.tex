@@ -296,6 +296,46 @@ then its solutions are
 \end{enumerate}
 \end{proof}
 
+\section{Exercise 2.A.6}
+Suppose $v_1,v_2,v_3,v_4$ is linearly independent in $V$. Prove that the list\[
+v_1-v_2,v_2-v_3,v_3-v_4,v_4
+\] is also linearly independent. 
+\begin{proof}
+Use the same notation as the proof of Exercise~2.A.1. If $v_1,v_2,v_3,v_4$ is linearly independent in $V$, then there exists $a_1,a_2,a_3,a_4\in\mathbb{F}$, not all $0$, such that\[
+\begin{bmatrix}
+a_1&a_2&a_3&a_4
+\end{bmatrix}
+\begin{bmatrix}
+v_1\\v_2\\v_3\\v_4
+\end{bmatrix}
+=0.
+\]
+Therefore,\[
+\begin{bmatrix}
+a_1&a_2&a_3&a_4
+\end{bmatrix}
+A^{-1}
+\begin{bmatrix}
+w_1\\w_2\\w_3\\w_4
+\end{bmatrix}
+=0.
+\]
+
+Since $A$ is nonsingular, \[
+\begin{bmatrix}
+a_1&a_2&a_3&a_4
+\end{bmatrix}
+A^{-1}\ne
+\begin{bmatrix}
+0&0&0&0
+\end{bmatrix}.
+\]
+
+Therefore the list\[
+v_1-v_2,v_2-v_3,v_3-v_4,v_4
+\] is also linearly independent. 
+\end{proof}
+
 \backmatter
 \bibliographystyle{amsalpha}
 \bibliography{minqi_s_solutions_to_the_exercises_of_sheldon_axler_2014_linear_algebra_done_right_3rd_edition}
