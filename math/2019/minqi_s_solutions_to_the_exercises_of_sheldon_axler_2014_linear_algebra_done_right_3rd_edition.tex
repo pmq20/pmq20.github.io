@@ -301,22 +301,32 @@ Suppose $v_1,v_2,v_3,v_4$ is linearly independent in $V$. Prove that the list\[
 v_1-v_2,v_2-v_3,v_3-v_4,v_4
 \] is also linearly independent. 
 \begin{proof}
-Use the same notation as the proof of Exercise~2.A.1. If $v_1,v_2,v_3,v_4$ is linearly independent in $V$, then there exists $a_1,a_2,a_3,a_4\in\mathbb{F}$, not all $0$, such that\[
+Use the same notation as the proof of Exercise~2.A.1. If the list\[
+v_1-v_2,v_2-v_3,v_3-v_4,v_4
+\] is linearly dependent, then there exists $a_1,a_2,a_3,a_4\in\mathbb{F}$, such that\[
 \begin{bmatrix}
 a_1&a_2&a_3&a_4
 \end{bmatrix}
 \begin{bmatrix}
-v_1\\v_2\\v_3\\v_4
+w_1\\w_2\\w_3\\w_4
 \end{bmatrix}
-=0.
+=0
+\] and \[
+\begin{bmatrix}
+a_1&a_2&a_3&a_4
+\end{bmatrix}\ne
+\begin{bmatrix}
+0&0&0&0
+\end{bmatrix}.
 \]
+
 Therefore,\[
 \begin{bmatrix}
 a_1&a_2&a_3&a_4
 \end{bmatrix}
-A^{-1}
+A
 \begin{bmatrix}
-w_1\\w_2\\w_3\\w_4
+v_1\\v_2\\v_3\\v_4
 \end{bmatrix}
 =0.
 \]
@@ -325,16 +335,65 @@ Since $A$ is nonsingular, \[
 \begin{bmatrix}
 a_1&a_2&a_3&a_4
 \end{bmatrix}
-A^{-1}\ne
+A\ne
 \begin{bmatrix}
 0&0&0&0
 \end{bmatrix}.
 \]
 
-Therefore the list\[
-v_1-v_2,v_2-v_3,v_3-v_4,v_4
-\] is also linearly independent. 
+Therefore it follows that the list $v_1,v_2,v_3,v_4$ is linearly dependent. 
 \end{proof}
+
+\section{Exercise 2.A.7}
+
+Prove or give a counterexample: If $v_1,v_2,\dots,v_m$ is a linearly independent list of vectors in $V$, then\[
+5v_1-4v_2,v_2,v_3,\dots,v_m
+\] is linearly independent.
+\begin{proof}
+We claim that the proposition is true. Define \[
+A=\begin{bmatrix}
+5&-4&0&\dots &0\\
+0&1&0&\dots &0\\
+0&0&1&\dots &0\\
+\vdots&\vdots&\vdots&\ddots&\vdots\\
+0&0&0&\dots &1
+\end{bmatrix}.
+\]
+
+Suppose that \[
+5v_1-4v_2,v_2,v_3,\dots,v_m
+\] is linearly dependent, then there exists $a_1,a_2,a_3,\dots,a_m\in\mathbb{F}$, such that \[
+\begin{bmatrix}
+a_1&a_2&a_3&\dots &a_m
+\end{bmatrix}
+A
+\begin{bmatrix}
+v_1\\v_2\\v_3\\\dots\\v_m
+\end{bmatrix}
+=
+0
+\] and \[
+\begin{bmatrix}
+a_1&a_2&a_3&\dots &a_m
+\end{bmatrix}\ne
+\begin{bmatrix}
+0&0&0&\dots &0
+\end{bmatrix}.
+\]
+
+Since $\text{det}(A)=5$, the matrix $A$ is nonsingular. Thus \[
+\begin{bmatrix}
+a_1&a_2&a_3&\dots &a_m
+\end{bmatrix}A\ne
+\begin{bmatrix}
+0&0&0&\dots &0
+\end{bmatrix}.
+\]
+
+Therefore it follows that the list $v_1,v_2,\dots,v_m$ is linearly dependent.
+\end{proof}
+
+
 
 \backmatter
 \bibliographystyle{amsalpha}
