@@ -393,6 +393,19 @@ a_1&a_2&a_3&\dots &a_m
 Therefore it follows that the list $v_1,v_2,\dots,v_m$ is linearly dependent.
 \end{proof}
 
+\section{Exercise 2.A.8}
+Prove or give a counterexample: If $v_1,v_2,\dots,v_m$ is a linearly independent list of vectors in $V$ and $\lambda\in\mathbb{F}$ with $\lambda\ne 0$, then $\lambda v_1,\lambda v_2,\dots,\lambda v_m$ is linearly independent.
+\begin{proof}
+We claim that the proposition is true. Suppose that $\lambda v_1,\lambda v_2,\dots,\lambda v_m$ is linearly dependent, then there exists $a_1,a_2,\dots,a_m$, not all $0$, such that\[
+a_1\lambda v_1+a_2\lambda v_2+\dots+a_m\lambda v_m=0.
+\]
+
+Since $\lambda\ne 0$, $\lambda^{-1}$ exists in $\mathbb{F}$. Multiplying the above equation by $\lambda^{-1}$ yields \[
+a_1 v_1+a_2 v_2+\dots+a_m v_m=0.
+\]
+
+Note that not all of $a_1, a_2,\dots,a_m$ are zero. Therefore it follows that $v_1,v_2,\dots,v_m$ is a linearly dependent list.
+\end{proof}
 
 
 \backmatter
