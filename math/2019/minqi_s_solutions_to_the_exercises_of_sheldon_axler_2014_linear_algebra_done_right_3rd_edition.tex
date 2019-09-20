@@ -417,6 +417,19 @@ v_2+w_2=(0,0)
 \] is not a linearly independent list.
 \end{proof}
 
+\section{Exercise 2.A.10}
+Suppose $v_1,\dots,v_m$ is linearly independent in $V$ and $w\in V$. Prove that if $v_1+w,\dots,v_m+w$ is linearly dependent, then $w\in \text{span}(v_1,\dots,v_m)$.
+\begin{proof}
+If $v_1+w,\dots,v_m+w$ is linearly dependent, then there exists $a_1,\dots,a_m$, not all $0$, such that\[
+a_1(v_1+w)+\dots+a_m(v_m+w)=0.
+\]
+
+The above equation implies that\[
+w=-\frac{a_1}{a_1+\dots+a_m}v_1-\dots-\frac{a_m}{a_1+\dots+a_m}v_m,
+\]
+thus $w\in\text{span}(v_1,\dots,v_m)$.
+\end{proof}
+
 
 
 \backmatter
