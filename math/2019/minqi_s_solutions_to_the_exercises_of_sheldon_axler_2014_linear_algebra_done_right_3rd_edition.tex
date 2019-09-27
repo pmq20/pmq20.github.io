@@ -488,6 +488,22 @@ v_n=-\frac{a_1}{a_n}v_1-\dots-\frac{a_{n-1}}{a_n}v_{n-1},
 \end{enumerate}
 \end{proof}
 
+\section{Exercise 2.A.15}
+Prove that $\mathbb{F}^\infty$ is infinite-dimensional.
+\begin{proof}
+Suppose that $\mathbb{F}^\infty$ is finite-dimensional, then there exists a list $v_1,\dots,v_k\in\mathbb{F}^\infty$ such that $\mathbb{F}^\infty=\text{span}(v_1,\dots,v_k)$. But we may construct the following independent list of vectors in $\mathbb{F}^\infty$ which has length $k+1$, contradicting with 2.23 of \cite{axler2014linear}.
+\begin{equation*}
+\begin{split}
+v_1&=(1, 0, 0, \dots, 0, 0, 0, 0, \dots)\\
+v_2&=(0, 1, 0, \dots, 0, 0, 0, 0, \dots)\\
+v_3&=(0, 0, 1, \dots, 0, 0, 0, 0, \dots)\\
+\vdots&\\
+v_{k-1}&=(0, 0, 0, \dots, 1, 0, 0, 0, \dots)\\
+v_k&=(0, 0, 0, \dots, 0, 1, 0, 0, \dots)\\
+v_{k+1}&=(0, 0, 0, \dots, 0, 0, 1, 0, \dots)
+\end{split}
+\end{equation*}
+\end{proof}
 
 \backmatter
 \bibliographystyle{amsalpha}
