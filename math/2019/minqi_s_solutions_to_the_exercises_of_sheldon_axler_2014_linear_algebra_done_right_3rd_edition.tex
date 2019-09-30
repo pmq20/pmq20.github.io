@@ -505,6 +505,26 @@ v_{k+1}&=(0, 0, 0, \dots, 0, 0, 1, 0, \dots)
 \end{equation*}
 \end{proof}
 
+\section{Exercise 2.A.16}
+Prove that the real vector space of all continuous real-valued functions
+on the interval $[0,1]$ is infinite-dimensional.
+\begin{proof}
+Suppose that $\mathbb{R}^{[0,1]}$ is finite-dimensional, then there exists a list \[
+v_1,\dots,v_k\in\mathbb{R}^{[0,1]}
+\] such that $\mathbb{R}^{[0,1]}=\text{span}(v_1,\dots,v_k)$. But we may construct the following independent list of vectors in $\mathbb{R}^{[0,1]}$ which has length $k+1$, contradicting with 2.23 of \cite{axler2014linear}.
+\begin{equation*}
+\begin{split}
+v_1(x)&=1\text{ if }x=\frac{1}{k+2}\text{; otherwise }0\\
+v_2(x)&=1\text{ if }x=\frac{2}{k+2}\text{; otherwise }0\\
+v_3(x)&=1\text{ if }x=\frac{3}{k+2}\text{; otherwise }0\\
+\vdots&\\
+v_{k-1}(x)&=1\text{ if }x=\frac{k-1}{k+2}\text{; otherwise }0\\
+v_k(x)&=1\text{ if }x=\frac{k}{k+2}\text{; otherwise }0\\
+v_{k+1}(x)&=1\text{ if }x=\frac{k+1}{k+2}\text{; otherwise }0
+\end{split}
+\end{equation*}
+\end{proof}
+
 \backmatter
 \bibliographystyle{amsalpha}
 \bibliography{minqi_s_solutions_to_the_exercises_of_sheldon_axler_2014_linear_algebra_done_right_3rd_edition}
