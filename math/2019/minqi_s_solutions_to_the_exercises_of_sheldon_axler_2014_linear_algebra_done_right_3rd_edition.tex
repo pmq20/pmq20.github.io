@@ -520,9 +520,62 @@ v_3(x)&=1\text{ if }x=\frac{3}{k+2}\text{; otherwise }0\\
 \vdots&\\
 v_{k-1}(x)&=1\text{ if }x=\frac{k-1}{k+2}\text{; otherwise }0\\
 v_k(x)&=1\text{ if }x=\frac{k}{k+2}\text{; otherwise }0\\
-v_{k+1}(x)&=1\text{ if }x=\frac{k+1}{k+2}\text{; otherwise }0
+v_{k+1}(x)&=1\text{ if }x=\frac{k+1}{k+2}\text{; otherwise }0.
 \end{split}
 \end{equation*}
+\end{proof}
+
+\section{Exercise 2.A.17}
+Suppose $p_0, p_1,\dots, p_m$ are polynomials in $\mathcal{P}_m(\mathbb{F})$ such that $p_j(2)=0$ for each $j$. Prove that $p_0, p_1,\dots, p_m$ is not linearly independent in $\mathcal{P}_m(\mathbb{F})$.
+\begin{proof}
+Denote $p_j(z)=a_{j0}+a_{j1}z+a_{j2}z^2+\dots+a_{jm}z^m$ for each $j$ and let\[
+A=\begin{bmatrix}
+a_{00} & a_{01} & a_{02} & \dots & a_{0m}\\
+a_{00} & a_{01} & a_{02} & \dots & a_{0m}\\
+\vdots & \vdots  & \vdots & \ddots &\vdots\\
+a_{m0} & a_{m1} & a_{m2} & \dots & a_{mm}
+\end{bmatrix}.
+\]
+
+That $p_j(2)=0$ for each $j$ implies\[
+A\begin{bmatrix}
+2^0\\
+2^1\\
+2^2\\
+\vdots\\
+2^m
+\end{bmatrix}=\begin{bmatrix}
+0\\
+0\\
+0\\
+\vdots\\
+0
+\end{bmatrix}.
+\]
+
+Thus $A$ is a singular matrix, and so is $A^T$.
+
+Suppose there exists $s_0,s_1,\dots,s_m\in\mathbb{F}$ such that $s_0p_0+s_1p_1+\dots+s_mp_m=0$, then\[
+\begin{bmatrix}
+a_{00} & a_{10} & \dots & a_{m0}\\
+a_{01} & a_{11} & \dots & a_{m1}\\
+\vdots  & \vdots & \ddots &\vdots\\
+a_{0m} & a_{1m} & \dots & a_{mm}\\
+\end{bmatrix}
+\begin{bmatrix}
+s_0\\
+s_1\\
+\vdots\\
+s_m
+\end{bmatrix}=\begin{bmatrix}
+0\\
+0\\
+\vdots\\
+0
+\end{bmatrix}.
+\]
+
+Note that the coefficient matrix of the above linear system is $A^T$, which we have shown is a singular matrix. So the linear system has a nonzero solution. We therefore conclude that the list $p_0,p_1,\dots,p_m$ is linearly dependent.
 \end{proof}
 
 \backmatter
