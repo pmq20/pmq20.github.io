@@ -54,7 +54,17 @@ A=\begin{bmatrix}
 0& 0&0&1
 \end{bmatrix},
 \]
-then \[
+then $A$ is nonsingular and\[
+A^{-1}=
+\begin{bmatrix}
+     1&     1&     1&     1\\
+     0&     1&     1&     1\\
+     0&     0&     1&     1\\
+     0&     0&     0&     1
+\end{bmatrix}.
+\]
+
+Moreover,\[
 A\begin{bmatrix}
 v_1\\
 v_2\\
@@ -73,17 +83,6 @@ w_1\\
 w_2\\
 w_3\\
 w_4\end{bmatrix}.
-\]
-
-Moreover, it can be calculated that
-\[
-A^{-1}=
-\begin{bmatrix}
-     1&     1&     1&     1\\
-     0&     1&     1&     1\\
-     0&     0&     1&     1\\
-     0&     0&     0&     1
-\end{bmatrix}.
 \]
 
 \begin{enumerate}
@@ -577,6 +576,28 @@ s_m
 
 Note that the coefficient matrix of the above linear system is $A^T$, which we have shown is a singular matrix. So the linear system has a nonzero solution. We therefore conclude that the list $p_0,p_1,\dots,p_m$ is linearly dependent.
 \end{proof}
+
+\section{Exercise 2.B.1}
+Find all vector spaces that have exactly one basis.
+\begin{proof}
+We claim that no vector spaces over $\mathbb{F}$ (which is either $\mathbb{R}$ or $\mathbb{C}$) have exactly one basis.
+
+Given a vector space $V$. Suppose that $v_1,\dots,v_k$ is the only basis of $V$. Denote \[
+v=\begin{bmatrix}
+v_1\\
+\vdots\\
+v_k\end{bmatrix}.\]
+
+Note that $Av$ is also a basis of $V$ for any nonsingular matrix $A$, then\[
+Av=v\text{, for all nonsingular }A.
+\]
+
+In particular, take $A=2I$. Then\[
+(2I-I)v=0,
+\] which implies that $v=0$. But the list $0$ is not linearly dependent, contradicting with the presumption that $v_1,\dots,v_k$ is a basis.
+\end{proof}
+
+
 
 \backmatter
 \bibliographystyle{amsalpha}
