@@ -596,11 +596,20 @@ In particular, take $A=2I$. Then\[
 (2I-I)v=0,
 \] which implies that $v=0$. But the list $0$ is not linearly dependent, contradicting with the presumption that $v_1,\dots,v_k$ is a basis.
 \end{proof}
+
 \section{Exercise 2.B.2}
 Verify all the assertions in Example 2.28.
 \begin{enumerate}[label=(\alph*)]
-\item The list $(1,0,\dots,0),(0,1,0,\dots,0),\dots,(0,\dots,0,1)$ is a basis of $\mathbb{F}^n$,called the standard basis of $\mathbb{F}^n$.\item The list $(1, 2), (3,5)$ is a basis of $\mathbb{F}^2$.\item The list $(1, 2, -4), (7,-5, 6)$ is linearly independent in $\mathbb{F}^3$ but is not a basis of $\mathbb{F}^3$ because it does not span $\mathbb{F}^3$.\item The list $(1, 2), (3, 5), (4, 13)$ spans $\mathbb{F}^2$ but is not a basis of $\mathbb{F}^2$ because it is not linearly independent.\item The list $(1,1,0),(0,0,1)$ is a basis of $\{(x,x,y)\in\mathbb{F}^3:x,y\in\mathbb{F}\}$.\item The list $(1,-1,0),(1,0,-1)$ is a basis of\[\{(x,y,z)\in\mathbb{F}^3: x+y+z=0\}.
-\]\item The list $1,z,\dots,z^m$ is a basis of $\mathcal{P}_m(\mathbb{F})$.
+\item The list $(1,0,\dots,0),(0,1,0,\dots,0),\dots,(0,\dots,0,1)$ is a basis of $\mathbb{F}^n$,
+called the standard basis of $\mathbb{F}^n$.
+\item The list $(1, 2), (3,5)$ is a basis of $\mathbb{F}^2$.
+\item The list $(1, 2, -4), (7,-5, 6)$ is linearly independent in $\mathbb{F}^3$ but is not a basis of $\mathbb{F}^3$ because it does not span $\mathbb{F}^3$.
+\item The list $(1, 2), (3, 5), (4, 13)$ spans $\mathbb{F}^2$ but is not a basis of $\mathbb{F}^2$ because it is not linearly independent.
+\item The list $(1,1,0),(0,0,1)$ is a basis of $\{(x,x,y)\in\mathbb{F}^3:x,y\in\mathbb{F}\}$.
+\item The list $(1,-1,0),(1,0,-1)$ is a basis of\[
+\{(x,y,z)\in\mathbb{F}^3: x+y+z=0\}.
+\]
+\item The list $1,z,\dots,z^m$ is a basis of $\mathcal{P}_m(\mathbb{F})$.
 \end{enumerate}
 \begin{proof}
 \begin{enumerate}[label=(\alph*)]
@@ -647,7 +656,7 @@ b\\
 \end{bmatrix}.
 \]
 
-Note that the above linear system is an overdetermined system, so it has either no solutions or a unique solution and it can be shown that \[
+Note that the above linear system is an overdetermined system, so it has either no solutions or a unique solution. Moreover, it can be shown that \[
 \begin{bmatrix}-b\\
 a+b\end{bmatrix}
 \] is one possible solution. Therefore every $v\in V$ can be written uniquely using $(1,-1,0),(1,0,-1)$.
@@ -656,6 +665,62 @@ a_0\cdot 1+a_1\cdot z+a_2\cdot z^2+\dots+a_m\cdot z^m.
 \]
 \end{enumerate}
 \end{proof}
+
+\section{Exercise 2.B.3}
+\begin{enumerate}[label=(\alph*)]
+\item Let $U$ be the subspace of $\mathbb{R}^5$ defined by\[
+U=\{(x_1,x_2,x_3,x_4,x_5)\in\mathbb{R}^5:x_1=3x_2\text{ and }x_3=7x_4\}.
+\]
+Find a basis of $U$.
+\item Extend the basis in part (a) to a basis of $\mathbb{R}^5$.
+\item Find a subspace $W$ of $\mathbb{R}^5$ such that $\mathbb{R}^5=U\oplus W$.
+\end{enumerate}
+\begin{proof}
+\begin{enumerate}[label=(\alph*)]
+\item Let
+\begin{equation*}
+\begin{split}
+u_1&=(3,1,0,0,0)\\
+u_2&=(0,0,7,1,0)\\
+u_3&=(0,0,0,0,1).
+\end{split}
+\end{equation*}
+
+We claim that the list $u_1,u_2,u_3$ is a basis of $U$. To prove this, pick $u=(x_1,x_2,x_3,x_4,x_5)\in U$, then it is obvious that $u$ can be uniquely represented as\[
+x_2u_1+x_4u_2+x_5u_3.
+\]
+\item Let
+\begin{equation*}
+\begin{split}
+v_1&=(1,0,0,0,0)\\
+v_2&=(0,1,0,0,0)\\
+v_3&=(0,0,1,0,0)\\
+v_4&=(0,0,0,1,0)\\
+v_5&=(0,0,0,0,1).
+\end{split}
+\end{equation*}
+
+Then $v_1,v_2,v_3,v_4,v_5$ is a basis of $\mathbb{R}^5$. Thus the list\[
+u_1,u_2,u_3,v_1,v_2,v_3,v_4,v_5
+\] spans $\mathbb{R}^5$. The procedure of the proof of 2.31 of \cite{axler2014linear} deletes $v_2,v_4,v_5$ and leaves $v_1,v_3$ unchanged, resulting in the following basis of $\mathbb{R}^5$ extended from the basis in part (a):
+\[
+u_1,u_2,u_3,v_1,v_3.
+\]
+\item Let $W=\text{span}(v_1,v_3)$. We claim that $\mathbb{R}^5=U\oplus W$. To prove this, by 1.45 of \cite{axler2014linear}, we only need to show that\[
+\mathbb{R}^5=U+W\text{ and }U\cap W=\{0\}.
+\]
+
+To prove the 1st equation above, suppose $v\in \mathbb{R}^5$. Then because the list $u_1,u_2,u_3,v_1,v_3$ spans $\mathbb{R}^5$, there exists $a_1,a_2,a_3,b_1,b_3\in\mathbb{F}$ such that\[
+v=a_1u_1+a_2u_2+a_3u_3+b_1v_1+b_3v_3.
+\]
+
+In other words, we have $v=u+w$, where $u=(a_1u_1+a_2u_2+a_3u_3)\in U$ and $w=(b_1v_1+b_3v_3)\in W$. Thus $v\in U+W$, completing the proof that $\mathbb{R}^5=U+W$.
+
+To show that $
+\end{enumerate}
+\end{proof}
+
+
 
 \backmatter
 \bibliographystyle{amsalpha}
