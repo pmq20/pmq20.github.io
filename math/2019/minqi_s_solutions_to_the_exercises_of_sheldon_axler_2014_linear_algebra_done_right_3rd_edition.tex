@@ -251,7 +251,7 @@ A=\begin{bmatrix}
 Then the list $(2,3,1),(1,-1,2),(7,3,c)$ is linearly dependent if and only if $\text{det}(A)=0$. Since $\text{det}(A)=40-5c$, it follows that $\text{det}(A)=0$ if and only if $c=8$.
 \end{proof}
 
-\section{Exercise 2.A.5: the Role of Scalar Field on Linear Independence}
+\section{Exercise 2.A.5: Difference between $\mathbb{C}$ and $\mathbb{R}$ as Scalar Fields}
 \begin{enumerate}[label=(\alph*)]
 \item Show that if we think of $\mathbb{C}$ as a vector space over $\mathbb{R}$, then the list $(1+i,1-i)$ is linearly independent.
 \item Show that if we think of $\mathbb{C}$ as a vector space over $\mathbb{C}$, then the list $(1+i,1-i)$ is linearly dependent.
@@ -716,9 +716,81 @@ v=a_1u_1+a_2u_2+a_3u_3+b_1v_1+b_3v_3.
 
 In other words, we have $v=u+w$, where $u=(a_1u_1+a_2u_2+a_3u_3)\in U$ and $w=(b_1v_1+b_3v_3)\in W$. Thus $v\in U+W$, completing the proof that $\mathbb{R}^5=U+W$.
 
-To show that $
+To show that $U\cap W=\{0\}$, suppose $v\in U\cap W$. Then there exist scalars $a_1,a_2,a_3,b_1,b_3\in\mathbb{F}$ such that\[
+v= a_1u_1+a_2u_2+a_3u_3=b_1v_1+b_3v_3.
+\]
+
+Thus\[
+a_1u_1+a_2u_2+a_3u_3-b_1v_1-b_3v_3=0.
+\]
+
+Because $u_1,u_2,u_3,v_1,v_3$ is linearly independent, this implies that $a_1=a_2=a_3=b_1=b_3=0$. Thus $v=0$, completing the proof that $U\cap W=\{0\}$.
 \end{enumerate}
 \end{proof}
+
+\section{Exercise 2.B.4}
+\begin{enumerate}[label=(\alph*)]
+\item Let $U$ be the subspace of $\mathbb{C}^5$ defined by\[
+U=\{(z_1,z_2,z_3,z_4,z_5)\in\mathbb{C}^5:6z_1=x_2\text{ and }z_3+2z_4+3z_5=0\}.
+\]
+Find a basis of $U$.
+\item Extend the basis in part (a) to a basis of $\mathbb{C}^5$.
+\item Find a subspace $W$ of $\mathbb{C}^5$ such that $\mathbb{C}^5=U\oplus W$.
+\end{enumerate}
+
+\begin{proof}
+\begin{enumerate}[label=(\alph*)]
+\item Let
+\begin{equation*}
+\begin{split}
+u_1&=(1,6,0,0,0)\\
+u_2&=(0,0,-2,1,0)\\
+u_3&=(0,0,-3,0,1).
+\end{split}
+\end{equation*}
+
+We claim that the list $u_1,u_2,u_3$ is a basis of $U$. To prove this, pick $u=(z_1,z_2,z_3,z_4,z_5)\in U$, then it is obvious that $u$ can be uniquely represented as\[
+x_1u_1+x_4u_2+x_5u_3.
+\]
+\item Let
+\begin{equation*}
+\begin{split}
+v_1&=(1,0,0,0,0)\\
+v_2&=(0,1,0,0,0)\\
+v_3&=(0,0,1,0,0)\\
+v_4&=(0,0,0,1,0)\\
+v_5&=(0,0,0,0,1).
+\end{split}
+\end{equation*}
+
+Then $v_1,v_2,v_3,v_4,v_5$ is a basis of $\mathbb{C}^5$. Thus the list\[
+u_1,u_2,u_3,v_1,v_2,v_3,v_4,v_5
+\] spans $\mathbb{C}^5$. The procedure of the proof of 2.31 of \cite{axler2014linear} deletes $v_2,v_4,v_5$ and leaves $v_1,v_3$ unchanged, resulting in the following basis of $\mathbb{C}^5$ extended from the basis in part (a):
+\[
+u_1,u_2,u_3,v_1,v_3.
+\]
+\item Let $W=\text{span}(v_1,v_3)$. We claim that $\mathbb{C}^5=U\oplus W$. To prove this, by 1.45 of \cite{axler2014linear}, we only need to show that\[
+\mathbb{C}^5=U+W\text{ and }U\cap W=\{0\}.
+\]
+
+To prove the 1st equation above, suppose $v\in \mathbb{C}^5$. Then because the list $u_1,u_2,u_3,v_1,v_3$ spans $\mathbb{C}^5$, there exists $a_1,a_2,a_3,b_1,b_3\in\mathbb{F}$ such that\[
+v=a_1u_1+a_2u_2+a_3u_3+b_1v_1+b_3v_3.
+\]
+
+In other words, we have $v=u+w$, where $u=(a_1u_1+a_2u_2+a_3u_3)\in U$ and $w=(b_1v_1+b_3v_3)\in W$. Thus $v\in U+W$, completing the proof that $\mathbb{C}^5=U+W$.
+
+To show that $U\cap W=\{0\}$, suppose $v\in U\cap W$. Then there exist scalars $a_1,a_2,a_3,b_1,b_3\in\mathbb{F}$ such that\[
+v= a_1u_1+a_2u_2+a_3u_3=b_1v_1+b_3v_3.
+\]
+
+Thus\[
+a_1u_1+a_2u_2+a_3u_3-b_1v_1-b_3v_3=0.
+\]
+
+Because $u_1,u_2,u_3,v_1,v_3$ is linearly independent, this implies that $a_1=a_2=a_3=b_1=b_3=0$. Thus $v=0$, completing the proof that $U\cap W=\{0\}$.
+\end{enumerate}
+\end{proof}
+
 
 
 
