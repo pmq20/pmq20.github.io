@@ -660,7 +660,7 @@ Note that the above linear system is an overdetermined system, so it has either 
 \begin{bmatrix}-b\\
 a+b\end{bmatrix}
 \] is one possible solution. Therefore every $v\in V$ can be written uniquely using $(1,-1,0),(1,0,-1)$.
-\item Pick $v=a_0+a_1z+a_2z^2+\dots+a_mz^m\in\mathcal{P}_m(\mathbb{F})$ where $a_0,a_1,a_2,\dots,a_m\in\mathbb{F}$. Then 4.7 of \cite{axler2014linear} implies that $v$ can be written uniquely as\[
+\item Pick $v(z)=a_0+a_1z+a_2z^2+\dots+a_mz^m\in\mathcal{P}_m(\mathbb{F})$ where $a_0,a_1,a_2,\dots,a_m\in\mathbb{F}$. Then 4.7 of \cite{axler2014linear} implies that $v$ can be written uniquely as\[
 a_0\cdot 1+a_1\cdot z+a_2\cdot z^2+\dots+a_m\cdot z^m.
 \]
 \end{enumerate}
@@ -791,9 +791,125 @@ Because $u_1,u_2,u_3,v_1,v_3$ is linearly independent, this implies that $a_1=a_
 \end{enumerate}
 \end{proof}
 
+\section{Exercise 2.B.5}
+Prove or disprove: there exists a basis $p_0,p_1,p_2,p_3$ of $\mathcal{P}_3(\mathbb{F})$ such that none of the polynomials $p_0,p_1,p_2,p_3$ has degree $2$.
+\begin{proof}
+We claim that the following list is a possible choice of such $p_0,p_1,p_2,p_3$:
+\begin{equation*}
+\begin{split}
+p_0(z)&=1+z^3\\
+p_1(z)&=z+z^3\\
+p_2(z)&=z^2+z^3\\
+p_3(z)&=z^3.
+\end{split}
+\end{equation*}
 
+To prove this, note that $p_0,p_1,p_2,p_3$ each has degree $3$. Thus it only suffices to show that $p_0,p_1,p_2,p_3$ is a basis of $\mathcal{P}_3(\mathbb{F})$.
 
+Pick $p(z)\in \mathcal{P}_3(\mathbb{F})$. As shown in Exercise 2.B.2, $1,z,z^2,z^3$ is a basis $\mathcal{P}_3(\mathbb{F})$. Thus there exists a unique list of scalars $a_0,a_1,a_2,a_3\in\mathbb{F}$ such that\[
+p(z)=a_0+a_1z+a_2z^2+a_3z^3.
+\]
+\end{proof}
 
+Let us denote \[
+A=\begin{bmatrix}
+1&0&0&1\\
+0&1&0&1\\
+0&0&1&1\\
+0&0&0&1
+\end{bmatrix},
+\]then $A$ is a nonsingular matrix and\[
+A^{-1}=\begin{bmatrix}
+1&0&0&-1\\
+0&1&0&-1\\
+0&0&1&-1\\
+0&0&0&1
+\end{bmatrix}.
+\]
+
+Using this notation, we have\[
+\begin{bmatrix}
+p_0\\
+p_1\\
+p_2\\
+p_3
+\end{bmatrix}
+=
+A\begin{bmatrix}
+1\\
+z\\
+z^2\\
+z^3
+\end{bmatrix},
+\] and \[
+A^{-1}
+\begin{bmatrix}
+p_0\\
+p_1\\
+p_2\\
+p_3
+\end{bmatrix}
+=
+\begin{bmatrix}
+1\\
+z\\
+z^2\\
+z^3
+\end{bmatrix}.
+\]
+
+Therefore
+\begin{equation*}
+\begin{split}
+p(z)&=\begin{bmatrix}a_0&a_1&a_2&a_3\end{bmatrix}
+\begin{bmatrix}
+1\\
+z\\
+z^2\\
+z^3
+\end{bmatrix}\\
+&=\left(\begin{bmatrix}a_0&a_1&a_2&a_3\end{bmatrix}A^{-1}\right)
+\begin{bmatrix}
+p_0\\
+p_1\\
+p_2\\
+p_3
+\end{bmatrix}.
+\end{split}
+\end{equation*}
+
+The above equation implies that $p_0,p_1,p_2,p_3$ spans $\mathcal{P}_3(\mathbb{F})$.
+
+To show that $p_0,p_1,p_2,p_3$ is linearly independent, suppose $b_0,b_1,b_2,b_3\in\mathbb{F}$ are such that
+\[
+0=\begin{bmatrix}b_0&b_1&b_2&b_3\end{bmatrix}
+\begin{bmatrix}
+p_0\\
+p_1\\
+p_2\\
+p_3
+\end{bmatrix}.
+\]
+
+Then the above equation implies that\[
+0=\left(\begin{bmatrix}b_0&b_1&b_2&b_3\end{bmatrix}
+A\right)\begin{bmatrix}
+1\\
+z\\
+z^2\\
+z^3
+\end{bmatrix}.
+\]
+
+Since $1,z,z^2,z^3$ is linearly independent, this implies that\[
+0=\begin{bmatrix}b_0&b_1&b_2&b_3\end{bmatrix}A.
+\]
+
+Since $A$ is nonsingular, this further implies that\[
+0=\begin{bmatrix}b_0&b_1&b_2&b_3\end{bmatrix}.
+\]
+
+Thus $p_0,p_1,p_2,p_3$ is linearly independent and hence is a basis of $\mathcal{P}_3(\mathbb{F})$.
 \backmatter
 \bibliographystyle{amsalpha}
 \bibliography{minqi_s_solutions_to_the_exercises_of_sheldon_axler_2014_linear_algebra_done_right_3rd_edition}
