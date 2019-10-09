@@ -809,7 +809,6 @@ To prove this, note that $p_0,p_1,p_2,p_3$ each has degree $3$. Thus it only suf
 Pick $p(z)\in \mathcal{P}_3(\mathbb{F})$. As shown in Exercise 2.B.2, $1,z,z^2,z^3$ is a basis $\mathcal{P}_3(\mathbb{F})$. Thus there exists a unique list of scalars $a_0,a_1,a_2,a_3\in\mathbb{F}$ such that\[
 p(z)=a_0+a_1z+a_2z^2+a_3z^3.
 \]
-\end{proof}
 
 Let us denote \[
 A=\begin{bmatrix}
@@ -910,6 +909,128 @@ Since $A$ is nonsingular, this further implies that\[
 \]
 
 Thus $p_0,p_1,p_2,p_3$ is linearly independent and hence is a basis of $\mathcal{P}_3(\mathbb{F})$.
+\end{proof}
+\section{Exercise 2.B.6}
+Suppose $v_1,v_2,v_3,v_4$ is a basis of $V$. Prove that\[
+v_1+v_2,v_2+v_3,v_3+v_4,v_4
+\] is also a basis of $V$.
+\begin{proof}
+Denote 
+\begin{equation*}
+\begin{split}
+u_1&=v_1+v_2\\
+u_2&=v_2+v_3\\
+u_3&=v_3+v_4\\
+u_4&=v_4.
+\end{split}
+\end{equation*}
+
+Pick $v\in V$, then there exists a unique list of scalars $a_1,a_2,a_3,a_4\in\mathbb{F}$ such that\[
+v=a_1v_1+a_2v_2+a_3v_3+a_4v_4.
+\]
+
+Let us denote \[
+A=\begin{bmatrix}
+1&1&0&0\\
+0&1&1&0\\
+0&0&1&1\\
+0&0&0&1
+\end{bmatrix},
+\]then $A$ is a nonsingular matrix and\[
+A^{-1}=\begin{bmatrix}
+1&-1&1&-1\\
+0&1&-1&1\\
+0&0&1&-1\\
+0&0&0&1
+\end{bmatrix}.
+\]
+
+Using this notation, we have\[
+\begin{bmatrix}
+u_1\\
+u_2\\
+u_3\\
+u_4
+\end{bmatrix}
+=
+A\begin{bmatrix}
+v_1\\
+v_2\\
+v_3\\
+v_4
+\end{bmatrix},
+\] and \[
+A^{-1}
+\begin{bmatrix}
+u_1\\
+u_2\\
+u_3\\
+u_4
+\end{bmatrix}
+=
+\begin{bmatrix}
+v_1\\
+v_2\\
+v_3\\
+v_4
+\end{bmatrix}.
+\]
+
+Therefore
+\begin{equation*}
+\begin{split}
+v&=\begin{bmatrix}a_0&a_1&a_2&a_3\end{bmatrix}
+\begin{bmatrix}
+v_1\\
+v_2\\
+v_3\\
+v_4
+\end{bmatrix}\\
+&=\left(\begin{bmatrix}a_0&a_1&a_2&a_3\end{bmatrix}A^{-1}\right)
+\begin{bmatrix}
+u_1\\
+u_2\\
+u_3\\
+u_4
+\end{bmatrix}.
+\end{split}
+\end{equation*}
+
+The above equation implies that $u_1,u_2,u_3,u_4$ spans $V$.
+
+To show that $u_1,u_2,u_3,u_4$ is linearly independent, suppose $b_1,b_2,b_3,b_4\in\mathbb{F}$ are such that
+\[
+0=\begin{bmatrix}b_1&b_2&b_3&b_4\end{bmatrix}
+\begin{bmatrix}
+u_1\\
+u_2\\
+u_3\\
+u_4
+\end{bmatrix}.
+\]
+
+Then the above equation implies that\[
+0=\left(\begin{bmatrix}b_1&b_2&b_3&b_4\end{bmatrix}
+A\right)\begin{bmatrix}
+v_1\\
+v_2\\
+v_3\\
+v_4
+\end{bmatrix}.
+\]
+
+Since $v_1,v_2,v_3,v_4$ is linearly independent, this implies that\[
+0=\begin{bmatrix}b_1&b_2&b_3&b_4\end{bmatrix}A.
+\]
+
+Since $A$ is nonsingular, this further implies that\[
+0=\begin{bmatrix}b_1&b_2&b_3&b_4\end{bmatrix}.
+\]
+
+Thus $u_1,u_2,u_3,u_4$ is linearly independent and hence is a basis of $V$.
+\end{proof}
+
+
 \backmatter
 \bibliographystyle{amsalpha}
 \bibliography{minqi_s_solutions_to_the_exercises_of_sheldon_axler_2014_linear_algebra_done_right_3rd_edition}
