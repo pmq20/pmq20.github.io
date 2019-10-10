@@ -2,6 +2,7 @@
 
 \usepackage{enumitem}
 \usepackage{amssymb}
+\usepackage{hyperref}
 
 \newtheorem{theorem}{Theorem}[chapter]
 \newtheorem{lemma}[theorem]{Lemma}
@@ -32,6 +33,13 @@
 \setcounter{page}{4}
 
 \tableofcontents
+
+\chapter*{Preface}
+
+Exercises of medium difficulty are:
+\begin{enumerate}
+\item\hyperref[Exercise 2.B.7]{Exercise 2.B.7}.
+\end{enumerate}
 
 \mainmatter
 
@@ -910,6 +918,7 @@ Since $A$ is nonsingular, this further implies that\[
 
 Thus $p_0,p_1,p_2,p_3$ is linearly independent and hence is a basis of $\mathcal{P}_3(\mathbb{F})$.
 \end{proof}
+
 \section{Exercise 2.B.6}
 Suppose $v_1,v_2,v_3,v_4$ is a basis of $V$. Prove that\[
 v_1+v_2,v_2+v_3,v_3+v_4,v_4
@@ -1028,6 +1037,41 @@ Since $A$ is nonsingular, this further implies that\[
 \]
 
 Thus $u_1,u_2,u_3,u_4$ is linearly independent and hence is a basis of $V$.
+\end{proof}
+
+\section{Exercise 2.B.7}\label{Exercise 2.B.7}
+Prove or give a counterexample: If $v_1, v_2, v_3, v_4$ is a basis of $V$ and $U$ is a subspace of $V$ such that $v_1, v_2\in U$ and $v_3\notin U$ and $v_4\notin U$, then $v_1, v_2$ is a basis of $U$.
+\begin{proof}[Counterexample]
+Take $V=\mathbb{R}^4$ and define
+\begin{equation*}
+\begin{split}
+v_1&=(2,0,1,0),\\
+v_2&=(0,0,0,1),\\
+v_3&=(0,3,\frac{1}{2},1),\\
+v_4&=(3,0,1,\frac{1}{2}).
+\end{split}
+\end{equation*}
+
+We claim that $v_1,v_2,v_3,v_4$ is a basis of $V$, which can be shown by the following determinant calculation:\[
+\text{det}\left(
+\begin{matrix}
+2&0&1&0\\
+0&0&0&1\\
+0&3&\frac{1}{2}&1\\
+3&0&1&\frac{1}{2}
+\end{matrix}
+\right)=-3.
+\]
+
+Define\[
+U=\{(2x,y,x,z)\in\mathbb{R}^4:x,y,z\in\mathbb{R}\}.
+\]
+
+We claim that $U$ is a subspace of $V$. To show this, first $0=(2\cdot 0,0,0,0)$ is in $U$. Suppose $u=(2x,y,x,z)\in U$ and $w=(2a,b,a,c)\in U$, we can check that $u+w=(2x+2a,y+b,x+a,z+c)=(2(x+a),y+b,x+a,z+c)$ is in $U$. Suppose $f\in\mathbb{F}$ and $u=(2x,y,x,z)\in U$, we can check that $fu=(2fx,y,fx,z)=(2(fx),y,fx,z)$ is also in $U$.
+
+Further, it is clear that $v_1,v_2\in U, v_3\notin U, v_4\notin U$.
+
+Finally, since $(0,1,0,0)\in U$ cannot be written as a linear combination of $v_1$ and $v_2$, we conclude that $v_1,v_2$ is not a basis of $U$.
 \end{proof}
 
 
