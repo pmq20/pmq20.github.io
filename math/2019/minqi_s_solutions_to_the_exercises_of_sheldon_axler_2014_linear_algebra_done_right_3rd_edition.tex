@@ -1074,6 +1074,26 @@ Further, it is clear that $v_1,v_2\in U, v_3\notin U, v_4\notin U$.
 Finally, since $(0,1,0,0)\in U$ cannot be written as a linear combination of $v_1$ and $v_2$, we conclude that $v_1,v_2$ is not a basis of $U$.
 \end{proof}
 
+\section{Exercise 2.B.8}
+Suppose $U$ and $W$ are subspaces of $V$ such that $V=U\oplus W$. Suppose also that $u_1,\dots,u_m$ is a basis of $U$ and $w_1,\dots,w_n$ is a basis of $W$. Prove that \[
+u_1,\dots,u_m,w_1,\dots,w_n
+\] is a basis of $V$.
+\begin{proof}
+\begin{enumerate}
+\item We first prove that $u_1,\dots,u_m,w_1,\dots,w_n$ spans $V$.
+Pick $v\in V$. By the definition of direct sum, $v$ can be written in the only one way as a sum $u+w$, where $u\in U$ and $w\in W$. By the definition of basis, $u$ can be written as $u=a_1u_1+\dots+a_mu_m$ and $w$ can be written as $w=b_1w_1+\dots+b_nw_n$ where $a_1,\dots,a_m,b_1,\dots,b_n\in\mathbb{F}$. Taken together,\[
+v=a_1u_1+\dots+a_mu_m+b_1w_1+\dots+b_nw_n.
+\]
+\item We then prove that $u_1,\dots,u_m,w_1,\dots,w_n$ is linearly independent.
+Suppose there exist $x_1,\dots,x_m,y_1,\dots,y_n\in\mathbb{F}$ such that\[
+x_1u_1+\dots+x_mu_m+y_1w_1+\dots+y_nw_n=0.
+\] Then\[
+x_1u_1+\dots+x_mu_m=-y_1w_1-\dots-y_nw_n.
+\] Denote $p=x_1u_1+\dots+x_mu_m$ and $q=-y_1w_1-\dots-y_nw_n$, then $p\in U\cap W$ and $q\in U\cap W$. By 1.45 of \cite{axler2014linear}, $p=q=0$.
+
+Further, since $u_1,\dots,u_m$ is linearly independent, $p=0$ implies that all of $x_1,\dots,x_m$ are $0$. Similarly, since $w_1,\dots,w_n$ is linearly independent, $q=0$ implies that all of $y_1,\dots,y_n$ are $0$.
+\end{enumerate}
+\end{proof}
 
 \backmatter
 \bibliographystyle{amsalpha}
