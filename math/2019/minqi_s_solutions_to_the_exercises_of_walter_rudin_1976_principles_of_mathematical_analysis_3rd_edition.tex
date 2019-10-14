@@ -1,5 +1,7 @@
 \documentclass{amsbook}
 
+\usepackage{amssymb}
+
 \newtheorem{theorem}{Theorem}[chapter]
 \newtheorem{lemma}[theorem]{Lemma}
 
@@ -46,7 +48,7 @@ Suppose $\alpha\in\mathbb{Q}$. Then $x=\alpha-r$ is also in $\mathbb{Q}$, becaus
 Suppose $\beta\in\mathbb{Q}$. Then $x=\beta/r$ is also in $\mathbb{Q}$, because $r\ne 0$ and $\mathbb{Q}$ is a field that is closed with respect to multiplicative inverse and multiplication. This contradicts with the presumption that $x\notin\mathbb{Q}$.
 \end{proof}
 
-\section{Exercise 2: $\sqrt{12}\notin\mathbb{Q}$}
+\section{Exercise 2: $\sqrt{12}$ is an Irrational Number}
 
 Prove that there is no rational number whose square is $12$.
 
@@ -106,7 +108,15 @@ Therefore there exists $k\in\mathbb{Z}$ such that $m=2k$, and
 \]
 
 This contradicts with Lemma~\ref{l2}.
+\end{proof}
 
+\chapter{Basic Topology}
+\section{Exercise 1: Empty Set is a Subset of Every Set}
+Prove that the empty set is a subset of every set.
+\begin{proof}
+Given a set $X$. It is true that $x\in\varnothing$ implies any statement about $X$, because $x\in\varnothing$ is always false.
+
+Specifically, $x\in\varnothing$ implies $x\in X$. Thus $\varnothing\subset X$.
 \end{proof}
 
 \end{document}
