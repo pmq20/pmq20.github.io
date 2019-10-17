@@ -159,6 +159,29 @@ We claim that the set of all irrational real numbers is uncountable.
 By the corollary of Theorem 2.13 of \cite{rudin1976principles}, $\mathbb{Q}$ is countable. Note that $\mathbb{R}$ is the union of $\mathbb{Q}$ and the set of all irrational real numbers. If the set of all irrational real numbers was countable, then, by the corollary of Theorem 2.12 of \cite{rudin1976principles}, $\mathbb{R}$ would be countable, which would contradict with Theorem 2.43 of \cite{rudin1976principles}.
 \end{proof}
 
+\section{Exercise 5: A Real Bounded Set with $3$ Limit Points}
+Construct a bounded set of real numbers with exactly three limit points.
+\begin{proof}
+Let\[
+\begin{split}
+E_0&=\left\{\frac{1}{2},\frac{1}{3},\frac{1}{4},\dots\right\},\\
+E_1&=\left\{1+\frac{1}{2},1+\frac{1}{3},1+\frac{1}{4},\dots\right\},\\
+E_2&=\left\{2+\frac{1}{2},2+\frac{1}{3},2+\frac{1}{4},\dots\right\},\\
+E&=E_0\cup E_1\cup E_2.
+\end{split}
+\]
+
+We claim that $E$ is a bounded set of real numbers with exactly three limit points: $0,1,2$.
+
+Set $M=3$ and $q=0$, then $d(p,q)<M$ for all $p\in E$. Thus $E$ is bounded.
+
+Pick $p\in\{0,1,2\}$ and a neighborhood $N_r(p)$ of $p$. Let\[
+q=p+\frac{1}{\lceil \frac{1}{r}\rceil+1},
+\]then $q\ne p$, $q\in N_r(p)$ and $q\in E$.
+
+Pick $p\in \mathbb{R}$ such that $p\not\in\{0,1,2\}$, then there exists a neighborhood of $p$ that contains only finitely many points of $E$. Thus $p$ is not a limit point of $E$ by Theorem 2.20 of \cite{rudin1976principles}.
+\end{proof}
+
 \backmatter
 \bibliographystyle{amsalpha}
 \bibliography{minqi_s_solutions_to_the_exercises_of_sheldon_axler_2014_linear_algebra_done_right_3rd_edition}
