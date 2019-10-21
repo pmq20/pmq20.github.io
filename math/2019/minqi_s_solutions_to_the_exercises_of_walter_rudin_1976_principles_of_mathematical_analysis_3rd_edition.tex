@@ -245,6 +245,32 @@ However, in (1), we have proven that $E''\subset E'$. Hence, in general, $E$ has
 \end{enumerate}
 \end{proof}
 
+\chapter{Numerical Sequences and Series}
+\section{Exercise 1: Convergence of $\{s_n\}$ Implies Convergence of $\{|s_n|\}$}
+Prove that convergence of $\{s_n\}$ implies convergence of $\{|s_n|\}$. Is the converse true?
+\begin{proof}
+Suppose\[
+s_n\to p.
+\]
+
+We claim that\[
+|s_n|\to |p|.
+\]
+
+In order to prove this, pick $\epsilon>0$. Then there exists an integer $N$ such that $n\geqslant N$ implies that $|s_n-p|<\epsilon$. By the reverse triangle inequality,\[
+\left||s_n|-|p|\right|\leqslant \left|s_n-p\right|,
+\]
+
+Hence $n\geqslant N$ also implies that \[
+\left||s_n|-|p|\right|<\epsilon.
+\]
+
+Finally, we claim that the converse is not true. Suppose\[
+s_n=(-1)^n,
+\] then $|s_n|\to 1$ yet $s_n$ diverges.
+\end{proof}
+
+
 \backmatter
 \bibliographystyle{amsalpha}
 \bibliography{minqi_s_solutions_to_the_exercises_of_sheldon_axler_2014_linear_algebra_done_right_3rd_edition}
