@@ -270,6 +270,38 @@ s_n=(-1)^n,
 \] then $|s_n|\to 1$ yet $s_n$ diverges.
 \end{proof}
 
+\section{Exercise 2: $\lim_{n\to\infty} (\sqrt{n^2 + n} - n)$}
+Calculate $\lim_{n\to\infty} (\sqrt{n^2 + n} - n)$.
+\begin{proof}
+We claim that\[
+\lim_{n\to\infty}\left(\sqrt{n^2 + n} - n\right)=2.
+\]
+
+To prove this, define\[
+f(x)=\sqrt{1+x}+1.
+\]
+
+Then \[
+\begin{split}
+\lim_{n\to\infty}\left(\sqrt{n^2 + n} - n\right)&= \lim_{n\to\infty}\left(\frac{\sqrt{n^2 + n} + n}{n}\right)\\
+&= \lim_{n\to\infty}\left(\sqrt{\frac{n^2+n}{n^2}}+1\right)\\
+&= \lim_{n\to\infty}\left(\sqrt{1+\frac{1}{n}}+1\right)\\
+&= \lim_{n\to\infty}f(\frac{1}{n}).
+\end{split}
+\]
+
+By Theorem 3.20 of \cite{rudin1976principles}, \[
+\lim_{n\to\infty}\frac{1}{n}=0.
+\]
+
+Since $f(x)$ is continuous on a neighborhood $N_r(0)$ of $\mathbb{R}$, Theorem 4.6 of \cite{rudin1976principles} implies that \[
+\lim_{x\to 0}f(x)=f(0).
+\]
+
+Finally, by Theorem 4.2 of \cite{rudin1976principles}, \[
+\lim_{n\to\infty}f(\frac{1}{n})=\lim_{x\to 0}f(x)=f(0)=2.
+\]
+\end{proof}
 
 \backmatter
 \bibliographystyle{amsalpha}
