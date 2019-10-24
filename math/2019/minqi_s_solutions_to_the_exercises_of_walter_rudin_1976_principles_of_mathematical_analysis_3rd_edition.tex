@@ -360,6 +360,46 @@ s_{n+1}<s_{n+2}.
 In light of (1) and (2) above, Theorem 3.14 of \cite{rudin1976principles} implies that $\{s_n\}$ converges.
 \end{proof}
 
+\section{Exercise 4: Upper and Lower Limits of an Iterative Sequence}
+Find the upper and lower limits of the sequence $\{s_n\}$ defined by\[
+s_1=0;\quad s_{2m}=\frac{s_{2m-1}}{2};\quad s_{2m+1}=\frac{1}{2}+s_{2m}.
+\]
+\begin{proof}
+We claim that
+\begin{equation}\label{eq3.4}
+s_{2m}=\frac{1}{2}-\frac{1}{2^m}.
+\end{equation}
+
+We prove this by induction. First of all, when $m=1$,\[
+s_{2m}=s_2=\frac{s_{1}}{2}=0
+\] and \[
+\frac{1}{2}-\frac{1}{2^m}=\frac{1}{2}-\frac{1}{2}=0.
+\]Suppose (\ref{eq3.4}) holds for $m\geq1$, then\[
+\begin{split}
+s_{2(m+1)}&=\frac{s_{2m+1}}{2}\\
+&=\frac{\frac{1}{2}+s_{2m}}{2}\\
+&=\frac{1}{4}+\frac{\frac{1}{2}-\frac{1}{2^m}}{2}\\
+&=\frac{1}{2}-\frac{1}{2^{m+1}}.
+\end{split}
+\]
+
+Equation~(\ref{eq3.4}) further implies that
+\begin{equation}\label{eq3.4 2}
+\begin{split}
+s_{2m+1}&=\frac{1}{2}+s_{2m}\\
+&=\frac{1}{2}+\frac{1}{2}-\frac{1}{2^m}\\
+&=1-\frac{1}{2^m}.
+\end{split}
+\end{equation}
+
+Let $E$ be the set of numbers $x$ (in the extended real number system) such that $s_{n_k}\to x$ for some subsequence $\{s_{n_k}\}$. Then it is clear from (\ref{eq3.4}) and (\ref{eq3.4 2}) that\[
+E=\{\frac{1}{2},1\}.
+\]
+
+Therefore\[
+\limsup s_n=1,\quad\liminf s_n=\frac{1}{2}.
+\]
+\end{proof}
 
 \backmatter
 \bibliographystyle{amsalpha}
