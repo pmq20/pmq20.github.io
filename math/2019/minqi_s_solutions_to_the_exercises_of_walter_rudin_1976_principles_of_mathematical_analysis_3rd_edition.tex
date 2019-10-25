@@ -37,7 +37,8 @@
 Remarkable exercises are:
 \begin{enumerate}
 \item\hyperref[Exercise 2.6]{Exercise 2.6: $E$, $E'$ and $\bar E$};
-\item\hyperref[Exercise 3.3]{Exercise 3.3: $s_{n+1}=\sqrt{2+\sqrt{s_n}}$}.
+\item\hyperref[Exercise 3.3]{Exercise 3.3: $s_{n+1}=\sqrt{2+\sqrt{s_n}}$};
+\item\hyperref[Exercise 3.5]{Exercise 3.5: Upper Limits and Algebraic Operations}.
 \end{enumerate}
 
 \medskip
@@ -66,7 +67,7 @@ Suppose $\beta\in\mathbb{Q}$. Then $x=\beta/r$ is also in $\mathbb{Q}$, because 
 
 Prove that there is no rational number whose square is $12$.
 
-\begin{lemma}\label{l1}
+\begin{lemma}\label{lemma1.2}
 $\forall n\in \mathbb{Z}, \forall p\in \{2, 3\}$,
 \[
 n^2\equiv 0 \implies n\equiv 0 \pmod p.
@@ -97,13 +98,13 @@ We now show that the equation
 \begin{equation}\label{e1}
 p^2=3
 \end{equation}
-is not satisfied by any rational $p$. If there was such a $p$, we could write $p=\frac{m}{n}$ where $m\equiv 0 \pmod{3}$ and $n\equiv 0 \pmod{3}$ are not both true. Let us assume this is done. Then \ref{e1} implies
+is not satisfied by any rational $p$. If there was such a $p$, we could write $p=\frac{m}{n}$ where $m\equiv 0 \pmod{3}$ and $n\equiv 0 \pmod{3}$ are not both true. Let us assume this is done. Then (\ref{e1}) implies
 \begin{equation}\label{e2}
 m^2=3n^2,
 \end{equation}
-This shows that $m^2\equiv 0\pmod{3}$ and we have $m\equiv 0 \pmod{3}$ by Lemma~\ref{l1}. So $m^2\equiv 0\pmod{9}$. It follows that the right side of \ref{e2} is divisible by 9, so that $n^2\equiv 0\pmod{3}$, which implies that $n\equiv 0\pmod{3}$ again by Lemma~\ref{l1}.
+This shows that $m^2\equiv 0\pmod{3}$ and we have $m\equiv 0 \pmod{3}$ by Lemma~\ref{lemma1.2}. So $m^2\equiv 0\pmod{9}$. It follows that the right side of (\ref{e2}) is divisible by 9, so that $n^2\equiv 0\pmod{3}$, which implies that $n\equiv 0\pmod{3}$ again by Lemma~\ref{lemma1.2}.
 
-The assumption that \ref{e1} holds thus leads to the conclusion that both $m\equiv 0 \pmod{3}$ and $n\equiv 0 \pmod{3}$ are true, contrary to our choice of $m$ and $n$. Hence \ref{e1} is impossible for rational $p$.
+The assumption that (\ref{e1}) holds thus leads to the conclusion that both $m\equiv 0 \pmod{3}$ and $n\equiv 0 \pmod{3}$ are true, contrary to our choice of $m$ and $n$. Hence (\ref{e1}) is impossible for rational $p$.
 \end{proof}
 
 \begin{proof}[Main Proof]
@@ -111,7 +112,7 @@ Suppose that there existed $p\in\mathbb{Q}$ such that $p^2=12$. Then there exist
 \[
 p=\frac{m}{n} \implies 12=\frac{m^2}{n^2} \implies m^2=2\times 6n^2 \implies m^2\equiv 0 \pmod{2}.
 \]
-So it follows from Lemma~\ref{l1} that
+So it follows from Lemma~\ref{lemma1.2} that
 \[
 m\equiv 0 \pmod{2}.
 \]
@@ -259,12 +260,12 @@ We claim that\[
 |s_n|\to |p|.
 \]
 
-In order to prove this, pick $\epsilon>0$. Then there exists an integer $N$ such that $n\geqslant N$ implies that $|s_n-p|<\epsilon$. By the reverse triangle inequality,\[
+In order to prove this, pick $\varepsilon>0$. Then there exists an integer $N$ such that $n\geqslant N$ implies that $|s_n-p|<\varepsilon$. By the reverse triangle inequality,\[
 \left||s_n|-|p|\right|\leqslant \left|s_n-p\right|,
 \]
 
 Hence $n\geqslant N$ also implies that \[
-\left||s_n|-|p|\right|<\epsilon.
+\left||s_n|-|p|\right|<\varepsilon.
 \]
 
 Finally, we claim that the converse is not true. Suppose\[
@@ -400,6 +401,85 @@ Therefore\[
 \limsup s_n=1,\quad\liminf s_n=\frac{1}{2}.
 \]
 \end{proof}
+
+\section{Exercise 5: Upper Limits and Algebraic Operations}\label{Exercise 3.5}
+For any two real sequences $\{a_n\},\{b_n\}$, prove that\[
+\limsup_{n\to\infty}(a_n+b_n)\leqslant\limsup_{n\to\infty}a_n+\limsup_{n\to\infty}b_n,
+\]provided the sum on the right is not of the form $\infty-\infty$.
+\begin{lemma}\label{lemma3.5}
+For any bounded real sequence $\{a_n\}$,\[
+\limsup_{n\to\infty}a_n=\lim_{k\to\infty}\left(\sup\{a_i:i\geqslant k\}\right).
+\]
+\end{lemma}
+\begin{proof}
+Since $\{a_n\}$ is bounded, the set $\{a_i:i\geqslant k\}$ is also bounded for all $k=1,2,3,\dots$. Hence \[
+\sup\{a_i:i\geqslant k\}
+\]exist for all $k=1,2,3,\dots$ because of the least-upper-bound property of $\mathbb{R}$.
+
+Moreover, $\sup\{a_i:i\geqslant k\}$ is bounded below by $\sup\{a_i:i\geqslant 1\}$ and monotonically decreasing. Theorem 3.14 of \cite{rudin1976principles} thus implies that\[
+\lim_{k\to\infty}\left(\sup\{a_i:i\geqslant k\}\right)
+\]exists, which we denote by $p$.
+
+\begin{enumerate}
+\item Suppose $p<\limsup_{n\to\infty} a_n$, then there exist $x\in\mathbb{R}$ and subsequence $\{a_{n_k}\}$ such that\[
+p<x\leqslant\limsup_{n\to\infty} a_n
+\]and\[
+a_{n_k}\to x.
+\]
+
+Therefore, there exists $K_1$ such that $k>K_1$ implies\[
+\frac{p+x}{2}<a_{n_k}.
+\]
+
+Moreover, there exists $K_2$ such that $k>K_2$ implies\[
+\sup\{a_i:i\geqslant k\} < \frac{p+x}{2}.
+\]
+
+Now pick $k>\max(K_1,K_2)$, then\[
+\frac{p+x}{2}<a_{n_k}\leqslant\sup\{a_i:i\geqslant k\} < \frac{p+x}{2},
+\]which is a contradiction.
+\item Suppose $\limsup_{n\to\infty} a_n<p$. Then we can choose $K_1$ such that $k>K_1$ implies\[
+\sup\{a_i:i\geqslant k\}<p+\frac{1}{2}
+\] and by the definition of supremum, we can choose $k_1>K_1$ such that\[
+a_{k_1}<p+\frac{1}{2}.
+\]
+
+Having chosen $K_1,\dots,K_{i-1}$, we can choose $K_i$ such that $K_i>K_{i-1}$ and $k>K_i$ implies\[
+\sup\{a_i:i\geqslant k\}<p+\frac{1}{i+1}
+\] and by the definition of supremum, we can choose $k_i>\max(K_i,k_{i-1})$ such that\[
+a_{k_i}<p+\frac{1}{i+1}.
+\]
+
+We have thus constructed a subsequence $a_{n_k}$ such that $a_{n_k}\to p$. Hence $p\leqslant \limsup_{n\to\infty} a_n$, which is a contradiction.
+\end{enumerate}
+
+In light of (1) and (2) above, we conclude that $\limsup_{n\to\infty}a_n=p$.
+\end{proof}
+
+\begin{proof}[Main Proof]
+Without loss of generality, suppose $\limsup_{n\to\infty}b_n$ is finite.
+
+\begin{enumerate}
+\item If $\limsup_{n\to\infty}a_n=+\infty$, then\[
++\infty=\limsup_{n\to\infty}(a_n+b_n)=\limsup_{n\to\infty}a_n+\limsup_{n\to\infty}b_n=+\infty.
+\]
+\item If $\limsup_{n\to\infty}a_n=-\infty$, then\[
+-\infty=\limsup_{n\to\infty}(a_n+b_n)=\limsup_{n\to\infty}a_n+\limsup_{n\to\infty}b_n=-\infty.
+\]
+\item If $\limsup_{n\to\infty}a_n$ is finite, then both $a_n$ and $b_n$ are bounded. Thus Theorem~3.6(b) of \cite{rudin1976principles} implies that $a_n+b_n$ has a convergent subsequence. Hence\[
+\limsup_{n\to\infty}(a_n+b_n)
+\]is finite. With the help of Lemma~\ref{lemma3.5}, we conclude that\[
+\begin{split}
+\limsup_{n\to\infty}(a_n+b_n)&=\lim_{k\to\infty}\left(\sup\{a_i+b_i:i\geqslant k\}\right)\\
+&\leqslant\lim_{k\to\infty}\left(\sup\{a_i+b_j:i\geqslant k,j\geqslant k\}\right)\\
+&=\lim_{k\to\infty}\left(\sup\{a_i:i\geqslant k\}+\sup\{b_j:j\geqslant k\}\right)\\
+&=\lim_{k\to\infty}\left(\sup\{a_i:i\geqslant k\}\right) + \lim_{k\to\infty}\left(\sup\{b_j:j\geqslant k\}\right)\\
+&=\limsup_{n\to\infty}a_n+\limsup_{n\to\infty}b_n.
+\end{split}
+\]
+\end{enumerate}
+\end{proof}
+
 
 \backmatter
 \bibliographystyle{amsalpha}
