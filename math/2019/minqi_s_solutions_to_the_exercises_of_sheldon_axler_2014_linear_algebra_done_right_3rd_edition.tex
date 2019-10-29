@@ -1108,6 +1108,18 @@ Suppose $\dim U=\dim V=n$ and $u_1,\dots,u_n$ is a basis of $U$. Since $u_1,\dot
 U=\text{span}(u_1,\dots,u_n)=V.
 \]
 \end{proof}
+\section{Exercise 2.C.2}
+Show that the subspaces of $\mathbb{R}^2$ are precisely $\{0\}$, $\mathbb{R}^2$, and all lines in $\mathbb{R}^2$ through the origin.
+\begin{proof}
+Pick a subspace $U$ of $\mathbb{R}^2$, then $\dim U\in\{0,1,2\}$ by 2.39 of \cite{axler2014linear}.
+\begin{enumerate}
+\item If $\dim U=0$, then $U=\{0\}$.
+\item If $\dim U=1$, then there exists a vector $v=(x,y)\in\mathbb{R}^2$ such that\[
+U=\text{span}(v).
+\]Hence, geometrically, $U$ can be viewed as a line passing through points $(0,0)$ and $(x,y)$.
+\item If $\dim U=2$, then Exercise 2.C.1 implies that $U=\mathbb{R}^2$.
+\end{enumerate}
+\end{proof}
 
 \backmatter
 \bibliographystyle{amsalpha}
