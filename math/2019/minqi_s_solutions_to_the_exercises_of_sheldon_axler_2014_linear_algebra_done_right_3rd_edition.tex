@@ -1108,6 +1108,7 @@ Suppose $\dim U=\dim V=n$ and $u_1,\dots,u_n$ is a basis of $U$. Since $u_1,\dot
 U=\text{span}(u_1,\dots,u_n)=V.
 \]
 \end{proof}
+
 \section{Exercise 2.C.2}
 Show that the subspaces of $\mathbb{R}^2$ are precisely $\{0\}$, $\mathbb{R}^2$, and all lines in $\mathbb{R}^2$ through the origin.
 \begin{proof}
@@ -1116,8 +1117,24 @@ Pick a subspace $U$ of $\mathbb{R}^2$, then $\dim U\in\{0,1,2\}$ by 2.39 of \cit
 \item If $\dim U=0$, then $U=\{0\}$.
 \item If $\dim U=1$, then there exists a vector $v=(x,y)\in\mathbb{R}^2$ such that\[
 U=\text{span}(v).
-\]Hence, geometrically, $U$ can be viewed as a line passing through points $(0,0)$ and $(x,y)$.
+\]Hence, geometrically, $U$ can be viewed as a line in $\mathbb{R}^2$ passing through points $(0,0)$ and $(x,y)$.
 \item If $\dim U=2$, then Exercise 2.C.1 implies that $U=\mathbb{R}^2$.
+\end{enumerate}
+\end{proof}
+
+\section{Exercise 2.C.3}
+Show that the subspaces of $\mathbb{R}^3$ are precisely $\{0\}$, $\mathbb{R}^3$, all lines in $\mathbb{R}^3$ through the origin, and all planes in $\mathbb{R}^3$ through the origin.
+\begin{proof}
+Pick a subspace $U$ of $\mathbb{R}^3$, then $\dim U\in\{0,1,2,3\}$ by 2.39 of \cite{axler2014linear}.
+\begin{enumerate}
+\item If $\dim U=0$, then $U=\{0\}$.
+\item If $\dim U=1$, then there exists a vector $v=(x,y,z)\in\mathbb{R}^3$ such that\[
+U=\text{span}(v).
+\]Hence, geometrically, $U$ can be viewed as a line in $\mathbb{R}^3$ passing through points $(0,0,0)$ and $(x,y,z)$.
+\item If $\dim U=2$, then there exists a vector $v=(v_1,v_2,v_3), w=(w_1,w_2,w_3)$ in $\mathbb{R}^3$ such that\[
+U=\text{span}(v,w).
+\]Geometrically, since the list $v,w$ is linearly independent, $v$ and $w$ are not on the same line in $\mathbb{R}^3$. Hence $U$ is a plane in $\mathbb{R}^3$ that passes the following three points: $(v_1,v_2,v_3), (w_1,w_2,w_3)$ and $(0,0,0)$. 
+\item If $\dim U=3$, then Exercise 2.C.1 implies that $U=\mathbb{R}^3$.
 \end{enumerate}
 \end{proof}
 
