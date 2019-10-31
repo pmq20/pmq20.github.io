@@ -36,6 +36,7 @@
 
 Remarkable exercises are:
 \begin{enumerate}
+\item\hyperref[Exercise 1.C.9]{Exercise 1.C.9: The Set of Periodic Functions from $\mathbb{R}$ to $\mathbb{R}$ is NOT a Subspace of $\mathbb{R}^\mathbb{R}$}.
 \item\hyperref[Exercise 1.C.13]{Exercise 1.C.13: When the Union of 3 Subspaces is a Subspace}.
 \item\hyperref[Exercise 2.B.7]{Exercise 2.B.7}.
 \end{enumerate}
@@ -171,7 +172,7 @@ Therefore $w\in\text{span}(v_1,v_2,v_3,v_4)$.
 The above (1) and (2) imply that $\text{span}(w_1,w_2,w_3,w_4)=\text{span}(v_1,v_2,v_3,v_4)$.
 \end{proof}
 
-\section{Exercise 2.A.2: Examples of Linearly Independent Lists}
+\section{Exercise 2.A.2: Examples of Linearly Independent Lists}\label{Exercise 2.A.2}
 Verify the assertions in Example~2.18.
 \begin{enumerate}[label=(\alph*)]
 \item A list $v$ of one vector $v\in V$ is linearly independent if and only if $v\ne 0$.
@@ -477,7 +478,7 @@ It is obvious that the list $1, z, z^2, z^3, z^4$ spans $\mathcal{P}_4(\mathbb{F
 \section{Exercise 2.A.13: Possible Spans of $\mathcal{P}_4(\mathbb{F})$}
 Explain why no list of four polynomials spans $\mathcal{P}_4(\mathbb{F})$.
 \begin{proof}
-Exercise 2.A.2 (d) has already proved that the list $1, z, z^2, z^3, z^4$ is linearly independent in $\mathcal{P}_4(\mathbb{F})$, which has length $5$. By 2.23 of \cite{axler2014linear}, the length of every spanning list of $\mathcal{P}_4(\mathbb{F})$ is greater than or equal to $5$. Thus no list of $4$ polynomials spans $\mathcal{P}_4(\mathbb{F})$.
+Exercise~\ref{Exercise 2.A.2} (d) has already proved that the list $1, z, z^2, z^3, z^4$ is linearly independent in $\mathcal{P}_4(\mathbb{F})$, which has length $5$. By 2.23 of \cite{axler2014linear}, the length of every spanning list of $\mathcal{P}_4(\mathbb{F})$ is greater than or equal to $5$. Thus no list of $4$ polynomials spans $\mathcal{P}_4(\mathbb{F})$.
 \end{proof}
 
 \section{Exercise 2.A.14: Another Definition of Infinite-Dimensional}
@@ -536,7 +537,7 @@ v_{k+1}(x)&=1\text{ if }x=\frac{k+1}{k+2}\text{; otherwise }0.
 \end{equation*}
 \end{proof}
 
-\section{Exercise 2.A.17: Polynomials that Vanish at the Same Point}
+\section{Exercise 2.A.17: Polynomials that Vanish at the Same Point}\label{Exercise 2.A.17}
 Suppose $p_0, p_1,\dots, p_m$ are polynomials in $\mathcal{P}_m(\mathbb{F})$ such that $p_j(2)=0$ for each $j$. Prove that $p_0, p_1,\dots, p_m$ is not linearly independent in $\mathcal{P}_m(\mathbb{F})$.
 \begin{proof}
 Denote $p_j(z)=a_{j0}+a_{j1}z+a_{j2}z^2+\dots+a_{jm}z^m$ for each $j$ and let\[
@@ -610,7 +611,7 @@ In particular, take $A=2I$. Then\[
 \] which implies that $v=0$. But the list $0$ is not linearly dependent, contradicting with the presumption that $v_1,\dots,v_k$ is a basis.
 \end{proof}
 
-\section{Exercise 2.B.2}
+\section{Exercise 2.B.2}\label{Exercise 2.B.2}
 Verify all the assertions in Example 2.28.
 \begin{enumerate}[label=(\alph*)]
 \item The list $(1,0,\dots,0),(0,1,0,\dots,0),\dots,(0,\dots,0,1)$ is a basis of $\mathbb{F}^n$,
@@ -819,7 +820,7 @@ p_3(z)&=z^3.
 
 To prove this, note that $p_0,p_1,p_2,p_3$ each has degree $3$. Thus it only suffices to show that $p_0,p_1,p_2,p_3$ is a basis of $\mathcal{P}_3(\mathbb{F})$.
 
-Pick $p(z)\in \mathcal{P}_3(\mathbb{F})$. As shown in Exercise 2.B.2, $1,z,z^2,z^3$ is a basis $\mathcal{P}_3(\mathbb{F})$. Thus there exists a unique list of scalars $a_0,a_1,a_2,a_3\in\mathbb{F}$ such that\[
+Pick $p(z)\in \mathcal{P}_3(\mathbb{F})$. As shown in Exercise~\ref{Exercise 2.B.2}, $1,z,z^2,z^3$ is a basis $\mathcal{P}_3(\mathbb{F})$. Thus there exists a unique list of scalars $a_0,a_1,a_2,a_3\in\mathbb{F}$ such that\[
 p(z)=a_0+a_1z+a_2z^2+a_3z^3.
 \]
 
@@ -1101,7 +1102,7 @@ Further, since $u_1,\dots,u_m$ is linearly independent, $p=0$ implies that all o
 \end{proof}
 
 \chapter{Finite-Dimensional Vector Spaces 2.C: Dimension}
-\section{Exercise 2.C.1}
+\section{Exercise 2.C.1}\label{Exercise 2.C.1}
 Suppose $V$ is finite-dimensional and $U$ is a subspace of $V$ such that $\dim U=\dim V$. Prove that $U=V$.
 \begin{proof}
 Suppose $\dim U=\dim V=n$ and $u_1,\dots,u_n$ is a basis of $U$. Since $u_1,\dots,u_n$ is a linearly independent list in $V$ with length $\dim V$, 2.39 of \cite{axler2014linear} implies that $u_1,\dots,u_n$ is a basis of $V$. Hence\[
@@ -1118,7 +1119,7 @@ Pick a subspace $U$ of $\mathbb{R}^2$, then $\dim U\in\{0,1,2\}$ by 2.39 of \cit
 \item If $\dim U=1$, then there exists a vector $v=(x,y)\in\mathbb{R}^2$ such that\[
 U=\text{span}(v).
 \]Hence, geometrically, $U$ can be viewed as a line in $\mathbb{R}^2$ passing through points $(0,0)$ and $(x,y)$.
-\item If $\dim U=2$, then Exercise 2.C.1 implies that $U=\mathbb{R}^2$.
+\item If $\dim U=2$, then Exercise~\ref{Exercise 2.C.1} implies that $U=\mathbb{R}^2$.
 \end{enumerate}
 \end{proof}
 
@@ -1134,7 +1135,67 @@ U=\text{span}(v).
 \item If $\dim U=2$, then there exists a vector $v=(v_1,v_2,v_3), w=(w_1,w_2,w_3)$ in $\mathbb{R}^3$ such that\[
 U=\text{span}(v,w).
 \]Geometrically, since the list $v,w$ is linearly independent, $v$ and $w$ are not on the same line in $\mathbb{R}^3$. Hence $U$ is a plane in $\mathbb{R}^3$ that passes the following three points: $(v_1,v_2,v_3), (w_1,w_2,w_3)$ and $(0,0,0)$. 
-\item If $\dim U=3$, then Exercise 2.C.1 implies that $U=\mathbb{R}^3$.
+\item If $\dim U=3$, then Exercise~\ref{Exercise 2.C.1} implies that $U=\mathbb{R}^3$.
+\end{enumerate}
+\end{proof}
+
+\section{Exercise 2.C.4}
+\begin{enumerate}[label=(\alph*)]
+\item Let $U=\{p\in\mathcal{P}_4(\mathbb{F}):p(6)=0\}$. Find a basis of $U$.
+\item Extend the basis in part (a) to a basis of $\mathcal{P}_4(\mathbb{F})$.
+\item Find a subspace $W$ of $\mathcal{P}_4(\mathbb{F})$ such that $\mathcal{P}_4(\mathbb{F})=U\oplus W$.
+\end{enumerate}
+\begin{proof}
+\begin{enumerate}[label=(\alph*)]
+\item We first verify that $U$ is a subspace of $\mathcal{P}_4$. First $0\in U$ since $0(6)=0$. If $p,q\in U$, then $p+q\in U$ because $(p+q)(6)=p(6)+q(6)=0$. If $a\in\mathbb{F}$ and $p\in U$, then $ap\in U$ because $(ap)(6)=ap(6)=0$.
+
+We claim that the following list is a basis of $U$:\[
+z-6,z^2-6^2,z^3-6^3,z^4-6^4.
+\]
+
+Clearly each of the above polynomials is in $U$. Suppose $a,b,c,d\in\mathbb{F}$ and\[
+a(z-6)+b(z^2-6^2)+c(z^3-6^3)+d(z^4-6^4)=0
+\] for every $z\in\mathbb{F}$. Without explicitly expanding the left side of the equation above, we can see that the left side has a $dz^4$ term. Because the right side has no $z^4$ term, this implies that $d=0$. Because $d=0$, we see that the left side has a $cz^3$ term, which implies that $c=0$. Similarly, $b=a=0$.
+
+Thus the equation above implies that $a=b=c=d=0$. Hence the list is linearly independent in $U$. Thus $\dim U\geqslant4$. Considering $U$ as a subspace of $\mathcal{P}_4(\mathbb{F})$, which has dimension $5$, we conclude that\[
+4\leqslant\dim U\leqslant 5.
+\]
+
+But Exercise~\ref{Exercise 2.A.17} has shown that any list of vectors in $U$ that has length $5$ is not linearly independent, which means that $\dim U\ne 5$. Thus $\dim U=4$ and 2.39 of \cite{axler2014linear} implies that the list is a basis of $U$.
+\item We claim that the following list is a basis of $\mathcal{P}_4(\mathbb{F})$:\[
+1,z-6,z^2-6^2,z^3-6^3,z^4-6^4.
+\]
+
+Clearly each of the above polynomials is in $\mathcal{P}_4(\mathbb{F})$. Suppose\[
+a_0,a_1,a_2,a_3,a_4\in\mathbb{F}
+\]and\[
+a_0+a_1(z-6)+a_2(z^2-6^2)+a_3(z^3-6^3)+a_4(z^4-6^4)=0
+\] for every $z\in\mathbb{F}$. Without explicitly expanding the left side of the equation above, we can see that the left side has a $a_4z^4$ term. Because the right side has no $z^4$ term, this implies that $a_4=0$. Because $a_4=0$, we see that the left side has a $a_3z^3$ term, which implies that $a_3=0$. Similarly, $a_2=a_1=0$. Because $a_4=a_3=a_2=a_1=0$, we can also conclude that $a_0=0$.
+
+Hence the list is linearly independent in $\mathcal{P}_4(\mathbb{F})$. Since $\dim \mathcal{P}_4(\mathbb{F})=5$, 2.39 of \cite{axler2014linear} implies that the list is a basis of $\mathcal{P}_4$.
+\item Define\[
+W\equiv\{a_0:a_0\in\mathbb{F}\}
+\] and we claim that $\mathcal{P}_4(\mathbb{F})=U\oplus W$.
+
+To prove this, by 1.45 of \cite{axler2014linear}, we only need to show that\[
+\mathcal{P}_4(\mathbb{F})=U+W\text{ and }U\cap W=\{0\}.
+\]
+
+To prove the first equation above, suppose $v\in\mathcal{P}_4(\mathbb{F})$. Then, because the list $1,z-6,z^2-6^2,z^3-6^3,z^4-6^4$ spans $\mathcal{P}_4$, there exists $a_0,a_1,a_2,a_3,a_4\in\mathbb{F}$ such that\[
+v=\underbrace{a_0}_w+\underbrace{a_1(z-6)+a_2(z^2-6^2)+a_3(z^3-6^3)+a_4(z^4-6^4)}_u.
+\]
+
+In other words, we have $v=u+w$, where $u\in U$ and $w\in W$ are defined as above. Thus $v\in U+W$, completing the proof that $\mathcal{P}_4(\mathbb{F})=U+W$.
+
+To show that $U\cap W=\{0\}$, suppose $v\in U\cap W$. Then there exist scalars $a_0,a_1,a_2,a_3,a_4\in\mathbb{F}$ such that\[
+v=a_0=a_1(z-6)+a_2(z^2-6^2)+a_3(z^3-6^3)+a_4(z^4-6^4).
+\]
+
+Thus\[
+a_0-a_1(z-6)-a_2(z^2-6^2)-a_3(z^3-6^3)-a_4(z^4-6^4)=0.
+\]
+
+Because because the list $1,z-6,z^2-6^2,z^3-6^3,z^4-6^4$ is linearly independent, this implies that $a_0=a_1=a_2=a_3=a_4=0$. Thus $v=0$, completing the proof that $U\cap W=\{0\}$.
 \end{enumerate}
 \end{proof}
 
