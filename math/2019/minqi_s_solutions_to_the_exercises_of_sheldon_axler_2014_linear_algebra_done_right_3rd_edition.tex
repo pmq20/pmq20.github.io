@@ -39,6 +39,7 @@ Remarkable exercises are:
 \item\hyperref[Exercise 1.C.9]{Exercise 1.C.9: The Set of Periodic Functions from $\mathbb{R}$ to $\mathbb{R}$ is NOT a Subspace of $\mathbb{R}^\mathbb{R}$}.
 \item\hyperref[Exercise 1.C.13]{Exercise 1.C.13: When the Union of 3 Subspaces is a Subspace}.
 \item\hyperref[Exercise 2.B.7]{Exercise 2.B.7}.
+\item\hyperref[Exercise 2.C.9]{Exercise 2.C.9}.
 \end{enumerate}
 
 \medskip
@@ -1197,6 +1198,102 @@ a_0-a_1(z-6)-a_2(z^2-6^2)-a_3(z^3-6^3)-a_4(z^4-6^4)=0.
 
 Because because the list $1,z-6,z^2-6^2,z^3-6^3,z^4-6^4$ is linearly independent, this implies that $a_0=a_1=a_2=a_3=a_4=0$. Thus $v=0$, completing the proof that $U\cap W=\{0\}$.
 \end{enumerate}
+\end{proof}
+
+\section{Exercise 2.C.9}\label{Exercise 2.C.9}
+Suppose $v_1,\dots,v_m$ is linearly independent in $V$ and $w\in V$. Prove that\[
+\dim\text{span}(v_1+w,\dots,v_m+w)\geqslant m-1.
+\]
+\begin{proof}
+Define\[
+\begin{split}
+U&\equiv\text{span}(v_1+w,\dots,v_m+w),\\
+w_1&\equiv(v_1+w)-(v_2+w)=v_1-v_2,\\
+w_2&\equiv(v_2+w)-(v_3+w)=v_2-v_3,\\
+\vdots&\\
+w_{m-1}&\equiv(v_{m-1}+w)-(v_m+w)=v_{m-1}-v_m,\\
+W&\equiv\text{span}(w_1,\dots,w_{m-1}).
+\end{split}
+\]
+
+Then $W$ is a subspace of $U$.
+
+Suppose $a_1,\dots,a_{m-1}\in\mathbb{F}$ and $a_1w_1+\dots+a_{m-1}w_{m-1}=0$, then\[
+\begin{bmatrix}
+a_1&a_2&\dots&a_{m-1}
+\end{bmatrix}
+\begin{bmatrix}
+1 & -1 & 0 & \dots & 0 & 0\\
+0 & 1 & -1 & \dots & 0 & 0\\
+\vdots&\vdots&\vdots&\ddots&\vdots&\vdots\\
+0 & 0 & 0 & \dots & 1 & -1\\
+\end{bmatrix}
+\begin{bmatrix}
+v_1\\
+v_2\\
+\vdots\\
+v_{m-1}\\
+v_m
+\end{bmatrix}
+=0.
+\]
+
+Since $v_1,\dots,v_m$ is linearly independent, the above equation implies\[
+\begin{bmatrix}
+a_1&a_2&\dots&a_{m-1}
+\end{bmatrix}
+\begin{bmatrix}
+1 & -1 & 0 & \dots & 0 & 0\\
+0 & 1 & -1 & \dots & 0 & 0\\
+\vdots&\vdots&\vdots&\ddots&\vdots&\vdots\\
+0 & 0 & 0 & \dots & 1 & -1\\
+\end{bmatrix}
+=0.
+\]
+
+Transposing the above equation gives the following linear system:\[
+\begin{bmatrix}
+1 & 0 & \dots & 0\\
+-1 & 1 & \dots & 0\\
+0 & -1 & \dots & 0\\
+\vdots&\vdots&\ddots&\vdots\\
+0 & 0 & \dots & 1\\
+0 & 0 & \dots & -1\\
+\end{bmatrix}
+\begin{bmatrix}
+a_1\\
+a_2\\
+\vdots\\
+a_{m-1}
+\end{bmatrix}
+=0.
+\]
+
+Denote $E_{i,j}$ as the elementary matrix produced by adding row $i$ of the $m\times m$ identity matrix to row $j$, then left multiplication by $E_{m-1,m}E_{m-2,m-1}\dots E_{2,3}E_{1,2}$ gives\[
+\begin{bmatrix}
+1 & 0 & \dots & 0\\
+0 & 1 & \dots & 0\\
+0 & 0 & \dots & 0\\
+\vdots&\vdots&\ddots&\vdots\\
+0 & 0 & \dots & 1\\
+0 & 0 & \dots & 0\\
+\end{bmatrix}
+\begin{bmatrix}
+a_1\\
+a_2\\
+\vdots\\
+a_{m-1}
+\end{bmatrix}
+=0.
+\]
+
+Hence $a_1=a_2=\dots=a_{m-1}=0$ and $w_1,\dots,w_{m-1}$ is linearly independent. It is clear that $w_1,\dots,w_{m-1}$ spans $W$. Hence $w_1,\dots,w_{m-1}$ is a basis of $W$. Therefore\[
+\dim W=m-1.
+\]
+
+Finally, 2.38 of \cite{axler2014linear} implies\[
+\dim U\geqslant\dim W=m-1.
+\]
 \end{proof}
 
 \backmatter
