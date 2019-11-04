@@ -53,6 +53,53 @@ Minqi Pan\\
 \include{minqi_s_solutions_to_the_exercises_of_sheldon_axler_2014_linear_algebra_done_right_3rd_edition_ch1}
 \include{minqi_s_solutions_to_the_exercises_of_sheldon_axler_2014_linear_algebra_done_right_3rd_edition_ch2}
 
+\chapter{The Vector Space of Linear Maps}
+\section{Exercise 3.A.1}
+Suppose $b,c\in\mathbb{R}$. Define $T:\mathbb{R}^3\to\mathbb{R}^2$ by\[
+T(x,y,z)=(2x-4y+3z+b,6x+cxyz).
+\]Show that $T$ is linear if and only if $b=c=0$.
+\begin{proof}
+\begin{enumerate}
+\item Suppose $b=c=0$, then\[
+T(x,y,z)=(2x-4y+3z,6x).
+\]
+
+Pick $u=(u_1,u_2,u_3),v=(v_1,v_2,v_3)$, then\[
+\begin{split}
+T(u+v)&=(2(u_1+v_1)-4(u_2+v_2)+3(u_3+v_3),6(u_1+v_1))\\
+&=(2u_1+2v_1-4u_2-4v_2+3u_3+3v_3,6u_1+6v_1)
+\end{split}
+\]and\[
+\begin{split}
+Tu+Tv&=(2u_1-4u_2+3u_3,6u_1)+(2v_1-4v_2+3v_3,6v_1)\\
+&=(2u_1-4u_2+3u_3+2v_1-4v_2+3v_3,6u_1+6v_1).
+\end{split}
+\]Hence $T(u+v)=Tu+Tv$.
+
+Pick $\lambda\in\mathbb{F}$, then\[
+\begin{split}
+T(\lambda v)&=T(\lambda u_1,\lambda u_2,\lambda u_3)\\
+&=(2\lambda u_1-4\lambda u_2+3\lambda u_3,6\lambda u_1)
+\end{split}
+\]and\[
+\begin{split}
+\lambda T(v)&=\lambda(2u_1-4u_2+3u_3,6u_1)\\
+&=(2\lambda u_1-4\lambda u_2+3\lambda u_3,6\lambda u_1).
+\end{split}
+\]Hence $T(\lambda v)=\lambda T(v)$.
+
+\item By definition, if $T$ is linear, then $T(u+v)=Tu+Tv$ for all $u,v\in\mathbb{R}^3$. In particular, take $u=(1,1,1),v=(1,1,1)$. Then\[
+\begin{split}
+T(u+v)&=(2\cdot 2-4\cdot 2+3\cdot 2+b,6\cdot 2+c\cdot 2\cdot 2\cdot 2)\\
+&=(2+b,12+8c)\\
+&=Tu+Tv\\
+&=(2-4+3+b+2-4+3+b,6+c+6+c)\\
+&=(2+2b,12+2c)
+\end{split}
+\]Hence $b=2b$ and $8c=2c$, we thus conclude that $b=c=0$.
+\end{enumerate}
+\end{proof}
+
 \backmatter
 \bibliographystyle{amsalpha}
 \bibliography{minqi_s_solutions_to_the_exercises_of_sheldon_axler_2014_linear_algebra_done_right_3rd_edition}
