@@ -54,7 +54,7 @@ Minqi Pan\\
 \include{minqi_s_solutions_to_the_exercises_of_sheldon_axler_2014_linear_algebra_done_right_3rd_edition_ch2}
 
 \chapter{The Vector Space of Linear Maps}
-\section{Exercise 3.A.1}
+\section{Exercise 3.A.1: Conditions for a Mapping to be Linear}
 Suppose $b,c\in\mathbb{R}$. Define $T:\mathbb{R}^3\to\mathbb{R}^2$ by\[
 T(x,y,z)=(2x-4y+3z+b,6x+cxyz).
 \]Show that $T$ is linear if and only if $b=c=0$.
@@ -97,6 +97,28 @@ T(u+v)&=(2\cdot 2-4\cdot 2+3\cdot 2+b,6\cdot 2+c\cdot 2\cdot 2\cdot 2)\\
 &=(2+2b,12+2c)
 \end{split}
 \]Hence $b=2b$ and $8c=2c$, we thus conclude that $b=c=0$.
+\end{enumerate}
+\end{proof}
+\section{Exercise 3.A.5: $\mathcal{L}(V, W)$ is a vector space}
+Prove the assertion in 3.7: $\mathcal{L}(V, W)$ is a vector space.
+\begin{proof}
+Define $\mathbf{0}$ as the linear map in $\mathcal{L}(V,W)$ such that\[\
+\mathbf{0}(v)=0\quad\forall v\in V.
+\]
+
+Pick $R,S,T\in\mathcal{L}(V,W), v\in V$ and $a,b\in\mathbb{F}$.
+
+\begin{enumerate}
+\item Commutativity: The commutativity of vector space $W$ implies $Sv+Tv=Tv+Sv$. Hence $S+T=T+S$.
+\item Associativity: The associativity of vector space $W$ implies\[(Rv+Sv)+Tv=Rv+(Sv+Tv)\]and\[(ab)Sv=a(bSv).\] Hence $(R+S)+T=R+(S+T)$ and $(ab)S=a(bS)$.
+\item Additive identity: It is clear that $T+\mathbf{0}=T$.
+\item Additive inverse: Define $-T$ as the linear map in $\mathcal{L}(V,W)$ such that\[
+-T(v)=-(Tv)\quad\forall v\in V.
+\]
+
+Then $T+(-T)=\mathbf{0}$.
+\item Multiplicative identity: The multiplicative identity of vector space $W$ implies $(1T)(v)=1(Tv)=Tv$. Hence $1T=T$.
+\item Distributive properties: The distributive properties of $W$ implies\[a(Sv+Tv)=aSv+aTv\]and\[(a+b)Sv=aSv+bSv.\]Hence $a(S+T)=aS+aT$ and $(a+b)S=aS+bS$.
 \end{enumerate}
 \end{proof}
 
