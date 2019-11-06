@@ -14,7 +14,7 @@
 \begin{document}
 
 \begin{abstract}
-In this writing, after introducing the general background for the Nao robot and the SLAM(Simultaneous Localization And Mapping) problem, we survey the unique challenges associated with SLAM on Nao, contrasted with different conditions posed by other non-humanoid robots. We survey four papers \cite{lahemer2019adaptive}\cite{piperakis2019}\cite{hornung2014monte}\cite{hornung2014humanoid}, published during 2014 to 2019, that provide solutions to SLAM for the Nao robot. 
+In this writing, after introducing the general background for the Nao robot and the SLAM(Simultaneous Localization And Mapping) problem, we survey the unique challenges associated with SLAM on Nao, contrasted with different conditions posed by other non-humanoid robots. We survey four papers \cite{lahemer2019adaptive}\cite{piperakis2019}\cite{hornung2014monte}\cite{hornung2014humanoid}, published from 2014 to 2019, that provide solutions to SLAM for the Nao robot.
 \end{abstract}
 
 \maketitle
@@ -22,7 +22,12 @@ In this writing, after introducing the general background for the Nao robot and 
 \footnotetext[1]{Website: http://www.minqi-pan.com}
 
 \section{Background}
-Nao is a robot with human-like biped morphology and anthropomorphic motion capabilities first proposed by Maisonnier et al. in 2006 \cite{gouaillier2009mechatronic}. Nao is friendly looking, kind, and compatible with human environments, e.g. homes, offices, schools, and healthcare facilities, taking advantage of the fact that humans generally like to observe and interact with one another and thus are more attuned to robots with human characteristics. The reference book \cite{goswami2019humanoid} has a dedicated chapter introducing Nao in greater details.
+
+Nao is a robot with human-like biped morphology and anthropomorphic motion capabilities first proposed by Maisonnier et al. in 2006 \cite{gouaillier2009mechatronic}. Nao is friendly-looking, kind, and compatible with human environments, e.g. homes, offices, schools, and healthcare facilities, taking advantage of the fact that humans generally like to observe and interact with one another and thus are more attuned to robots with human characteristics. The reference book \cite{goswami2019humanoid} has a dedicated chapter introducing Nao in greater detail.
+
+SLAM stands for Simultaneous Localization And Mapping, which is a general prerequisite for autonomously executing many high-level robot tasks. It consists of two processes that happen simultaneously: mapping, which is to build a globally consistent representation of the environment of a robot, and localization, which is to estimate the state of the robot within the environment. Cadena et al. \cite{cadena2016past} published an excellent review of the 30-year development of SLAM, where the architecture of modern SLAM systems is divided into two parts: the frontend -- which directly takes input from the robot sensors, extract features, perform both short-term feature-tracking and long-term loop-closure data associations, and supply amenable sensor models to the backend -- and the backend -- which performs inference, generates final SLAM estimation results, and provide feedback to the frontend for loop closure detection and verification. SLAM has been a popular research topic since it intersects research fields such as computer vision and signal processing in the frontend, and geometry, graph theory, optimization, and probabilistic estimation in the backend.
+
+The primary applications of Nao happen in indoor building-scale environments, where navigation infrastructures like GPS is not available, hence the need for SLAM for Nao.
 
 \bibliographystyle{ieeetr}
 \bibliography{recently_published_papers_in_slam_for_the_nao_robot}
