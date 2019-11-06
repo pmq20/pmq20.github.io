@@ -6,6 +6,7 @@
 \usepackage{graphicx}
 \usepackage{amssymb}
 \usepackage{epstopdf}
+\usepackage{url}
 \DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
 
 \title{Recently Published Papers in SLAM for the Nao Robot}
@@ -28,6 +29,20 @@ Nao is a robot with human-like biped morphology and anthropomorphic motion capab
 SLAM stands for Simultaneous Localization And Mapping, which is a general prerequisite for autonomously executing many high-level robot tasks. It consists of two processes that happen simultaneously: mapping, which is to build a globally consistent representation of the environment of a robot, and localization, which is to estimate the state of the robot within the environment. Cadena et al. \cite{cadena2016past} published an excellent review of the 30-year development of SLAM, where the architecture of modern SLAM systems is divided into two parts: the frontend -- which directly takes input from the robot sensors, extract features, perform both short-term feature-tracking and long-term loop-closure data associations, and supply amenable sensor models to the backend -- and the backend -- which performs inference, generates final SLAM estimation results, and provide feedback to the frontend for loop closure detection and verification. SLAM has been a popular research topic since it intersects research fields such as computer vision and signal processing in the frontend, and geometry, graph theory, optimization, and probabilistic estimation in the backend.
 
 The primary applications of Nao happen in indoor building-scale environments, where navigation infrastructures like GPS is not available, hence the need for SLAM for Nao.
+
+\section{Challenges of Nao}
+
+While the problem of SLAM is common to all kinds of robots, it amounts to unique challenges when applied to humanoids like Nao. Being a biped robot, the execution of motions of Nao tends to be inaccurate due to its complex kinematic structure to enable a free-floating torso. Consequently, the high number of joints add backlashes up to a non-negligible level. Nao's two legs are not the best equipment to move from one place to another on relatively flat surfaces, which is best accomplished via wheeled vehicles considering the evidence of the vast amount of wheeled transportation infrastructure that human race has built, e.g. freeways, highways, airport runways.
+
+Odometry bias can also be generated via foot slippage, stepping over or onto objects, additional hardware mounted, manufacturing errors, wear and tear of mechanic parts, friction forces generated during motion. While walking, we also need to constantly adjust its pose estimate since inaccuracies in its motion execution might lead to a deviation from the original motion plan. Therefore it is also generally difficult for Nao to accurately follow a specified trajectory.
+
+Moreover, in the case of vision-based SLAM, images acquired by NAO will contain deformation and blurriness, due to its swaying walking style, and motions of its head which carries the cameras.
+
+Also, because Nao walks in a swaying motion and might walk onto rough terrain, objects, or staircases, the state representation of Nao will be more complicated than wheeled robots. More dimensions are needed to describe the pose of its torso. Application might dictate Nao to change its posture in order to lean into something, pull with the weight of its body, or crawl under an obstacle.
+
+Besides, Nao's out-of-factory sensors are not well suited for SLAM, as there are no laser or range cameras, and the visual system of Nao is monocular, making stereo vision systems difficult to implement. To achieve a better performance on SLAM, additional hardware might need to be mounted on Nao, which might harm its pleasing outward appearance and put more challenges on its motion stability. Lastly, being 58cm tall, Nao might be too small to open a door when exploring the environment.
+
+As a comparison, other SLAM papers for non-humanoid robots usually pose different conditions. For example, the ORM-SLAM paper \cite{mur2015orb} uses The NewCollege Dataset to test their solutions, where the data was generated via a wheeled robot platform called on Segway RMP200. The VINS-Mono paper \cite{qin2018vins} conducted experiments on a MatrixVision mvBlueFOX-MLC200w camera with a DJI A3 IMU sensor, which is either performed in a hand-held way or mounted on a flying drone. Both of those SLAM papers experimented with robots with different conditions. Hence SLAM projects for Nao solve unique problems that other SLAM papers might not have a chance to address.
 
 \bibliographystyle{ieeetr}
 \bibliography{recently_published_papers_in_slam_for_the_nao_robot}
