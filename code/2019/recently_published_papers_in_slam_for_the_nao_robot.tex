@@ -44,6 +44,41 @@ Besides, Nao's out-of-factory sensors are not well suited for SLAM, as there are
 
 As a comparison, other SLAM papers for non-humanoid robots usually pose different conditions. For example, the ORM-SLAM paper \cite{mur2015orb} uses The NewCollege Dataset to test their solutions, where the data was generated via a wheeled robot platform called on Segway RMP200. The VINS-Mono paper \cite{qin2018vins} conducted experiments on a MatrixVision mvBlueFOX-MLC200w camera with a DJI A3 IMU sensor, which is either performed in a hand-held way or mounted on a flying drone. Both of those SLAM papers experimented with robots with different conditions. Hence SLAM projects for Nao solve unique problems that other SLAM papers might not have a chance to address.
 
+
+\section{Lahemer et al., 2019}
+
+Lahemer et al. published a paper on SLAM for Nao titled ``An Adaptive Augmented Vision-Based Ellipsoidal SLAM for Indoor Environments'' \cite{lahemer2019adaptive} in 2019. The indoor 2-D SLAM solution was implemented on Nao robots using only its monocular camera. 
+
+However, the project requires landmarks to be placed in the environment. The authors tested both the built-in markers (ALLandMarkDetection) offered by the manufacturer of Nao and general QR codes. 
+
+The main algorithm is based on the Ellipsoidal Set Membership Filter Method for SLAM \cite{scholte2003nonlinear}, which runs on the robot's own middleware NAOqi.
+
+No source code was found on the Internet.
+
+\section{Piperakis et al., 2019}
+
+Also in 2019, Piperakis et al. published a paper on SLAM for Nao titled ``Humanoid Robot Dense RGB-D SLAM for Embedded Devices'' \cite{piperakis2019}. This dense SLAM solution for Nao uses at least 4 sensor data: RGB-D, IMU, kinematics and contact sensors on the foot. The authors try to address the inaccurate-kinematics problem by fusing inputs from multiple sensors.
+
+At least 2 additional hardware are installed. One is an NVIDIA GPU named Jetson, which was embedded in Nao. Another is the Xbox Kinect by Microsoft, which is mounted on the head of Nao. The reason for mounting a GPU is probably dictated by KinectFusion, on which the project depends.
+
+The main algorithm is based on splitting KinectFusion into two parts: visual odometry and mapping. Between those two parts SEROW (State Estimation Robot Walking) is inserted to fuse more sensor data to correct the state estimation of the robot, which runs on ROS.
+
+The source code is available in the \url{https://github.com/tavu/kfusion_ros} code repository.
+
+\section{Hornung et al., 2014}
+
+In 2014, Hornung et al. published a paper on SLAM for Nao titled ``Monte Carlo localization for humanoid robot navigation in complex indoor environments'' \cite{hornung2014monte}. Hornung also published more details of this project in his doctorate thesis titled ``Humanoid Robot Navigation in Complex Indoor Environments'' \cite{hornung2014humanoid} the same year.
+
+This indoor 3-D SLAM solution is implemented on the Nao robot using either (1) an RGB-D camera plus a monocular camera, or (2) a laser scanner plus a monocular camera.
+
+Respectively, either (1) the ASUS XtionPro Live RGB-D camera, or (2) the Hokuyo URG-04LX laser scanner was mounted on the head of Nao.
+
+The remarkable characteristic of Hornung's work is its ability to estimate the 6D torso pose of the Nao robot in a 3D environment. It is able to handle staircases in the environment.
+
+The main algorithm is based on Monte Carlo particle filters combined with Canny edge detectors, which runns on a remote server named octomap\_server.
+
+\url{https://github.com/ROBOTIS-GIT/humanoid_navigation} contains the source code of this project.
+
 \bibliographystyle{ieeetr}
 \bibliography{recently_published_papers_in_slam_for_the_nao_robot}
 
