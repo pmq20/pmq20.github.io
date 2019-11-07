@@ -155,6 +155,19 @@ S(T_1+T_2)=ST_1+ST_2.
 \]
 \end{enumerate}
 \end{proof}
+\section{Exercise 3.A.7: Linear Map on 1D Space is Scalar Multiplication}
+Show that every linear map from a $1$-dimensional vector space to itself is multiplication by some scalar. More precisely, prove that if $\dim V=1$ and $T\in\mathcal{L}(V,V)$, then there exists $\lambda\in\mathbb{F}$ such that $Tv=\lambda v$ for all $v\in V$.
+\begin{proof}
+Since $\dim V=1$, there exists a vector $b$ which is a basis of $V$. Pick any $T\in\mathcal{L}(V,V)$, then, by the definition of basis, there exists $\lambda\in\mathbb{F}$ such that\[
+T(b)=\lambda b.
+\]We claim that $Tv=\lambda v$ for all $v\in V$. To show this, pick any $v\in V$, then there exists $\alpha\in\mathbb{F}$ such that\[
+v=\alpha b.
+\]Hence\[
+T(v)=T(\alpha b)=\alpha T(b)=\alpha \lambda b=\lambda\alpha b=\lambda v.
+\]
+
+
+\end{proof}
 
 \backmatter
 \bibliographystyle{amsalpha}
