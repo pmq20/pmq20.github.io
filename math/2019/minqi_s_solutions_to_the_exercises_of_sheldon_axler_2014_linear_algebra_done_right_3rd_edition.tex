@@ -165,8 +165,58 @@ v=\alpha b.
 \]Hence\[
 T(v)=T(\alpha b)=\alpha T(b)=\alpha \lambda b=\lambda\alpha b=\lambda v.
 \]
+\end{proof}
 
+\section{Exercise 3.A.8: Homogeneity Alone does NOT Imply Linearity}
+Give an example of a function $\varphi:\mathbb{R}^2\to\mathbb{R}$ such that\[
+\varphi(av)=a\varphi(v)
+\]for all $a\in\mathbb{R}$ and all $v\in\mathbb{R}^2$ but $\varphi$ is not linear.
+\begin{proof}
+Let $\varphi(x,y)\equiv(x^3+y^3)^\frac{1}{3}$ where $(x,y)\in\mathbb{R}^2$.
+\begin{enumerate}
+\item Pick any $a\in\mathbb{R}$, then\[
+\begin{split}
+\varphi(ax,ay)&=(a^3x^3+a^3y^3)^\frac{1}{3}\\
+&=(a^3(x^3+y^3))^\frac{1}{3}\\
+&=a(x^3+y^3)^\frac{1}{3}\\
+&=a\phi(x,y).
+\end{split}
+\]
+\item $\varphi$ is not linear because\[
+\begin{split}
+\varphi((1,2)+(3,4))&=(4^3+6^3)^\frac{1}{3}\\
+&=280^\frac{1}{3}\\
+&\ne\varphi(1,2)+\varphi(3,4)\\
+&=9^\frac{1}{3}+91^\frac{1}{3}
+\end{split}
+\]
+\end{enumerate}
+\end{proof}
 
+\section{Exercise 3.A.9: Additivity Alone does NOT Imply Linearity}
+Give an example of a function $\varphi:\mathbb{C}\to\mathbb{C}$ such that\[
+\varphi(w+z)=\varphi(w)+\varphi(z)
+\]for all $w,z\in\mathbb{C}$ but $\varphi$ is not linear.
+\begin{proof}
+Let $\varphi(z)=\Re(z)$ where $z\in\mathbb{C}$.
+\begin{enumerate}
+\item Pick any $w,z\in\mathbb{C}$, then\[
+\begin{split}
+\varphi(w+z)&=\Re(w+z)\\
+&=\Re(w)+\Re(z)\\
+&=\varphi(w)+\varphi(z).
+\end{split}
+\]
+\item $\varphi$ is not linear because\[
+\begin{split}
+i\varphi(i)&=i\Re(i)\\
+&=0\\
+&\ne -1\\
+&=\Re(-1)\\
+&=\varphi(i\cdot i).
+\end{split}
+\]
+\end{enumerate}
 \end{proof}
 
 \backmatter
