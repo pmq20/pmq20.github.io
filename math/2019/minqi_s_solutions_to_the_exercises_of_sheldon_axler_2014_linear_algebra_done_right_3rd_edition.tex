@@ -219,6 +219,21 @@ i\varphi(i)&=i\Re(i)\\
 \end{enumerate}
 \end{proof}
 
+\chapter{Null Spaces and Ranges}
+\section{Exercise 3.B.1: A Linear Map $T$ with $\dim\text{null } T=3,\dim\text{range } T=2$}
+Give an example of a linear map $T$ such that \[
+\dim\text{null } T=3\text{ and }\dim\text{range } T=2.
+\]
+\begin{proof}
+Define $T$ as the linear map in $\mathcal{L}(\mathbb{R}^5,\mathbb{R}^5)$ such that\[
+T(a,b,c,d,e)=(a,b,0,0,0)
+\]for all $(a,b,c,d,e)\in\mathbb{R}^5$.
+
+It is clear that $\text{range }T=2$ and $\dim V=5$. Hence, by the fundamental theorem of linear maps,\[
+\dim\text{null }T=\dim V-\dim\text{range }T=3.
+\]
+\end{proof}
+
 \backmatter
 \bibliographystyle{amsalpha}
 \bibliography{minqi_s_solutions_to_the_exercises_of_sheldon_axler_2014_linear_algebra_done_right_3rd_edition}
