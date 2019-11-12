@@ -3,6 +3,7 @@
 \usepackage{enumitem}
 \usepackage{amssymb}
 \usepackage{hyperref}
+\usepackage{mathtools}
 
 \newtheorem{theorem}{Theorem}[chapter]
 \newtheorem{lemma}[theorem]{Lemma}
@@ -232,6 +233,27 @@ T(a,b,c,d,e)=(a,b,0,0,0)
 It is clear that $\text{range }T=2$ and $\dim V=5$. Hence, by the fundamental theorem of linear maps,\[
 \dim\text{null }T=\dim V-\dim\text{range }T=3.
 \]
+\end{proof}
+\section{Exercise 3.B.2}
+Suppose $V$ is a vector space and $S,T\in\mathcal{L}(V,V)$ are such that\[
+\text{range }S\subset\text{null }T.
+\]Prove that $(ST)^2=0$.
+\begin{proof}
+Pick any $v\in V$, then
+\begin{gather*}
+v\in V\\
+\ArrowBetweenLines[\Downarrow]
+T(v)\in V\\
+\ArrowBetweenLines[\Downarrow]
+S(T(v))\in\text{range } S\\
+\ArrowBetweenLines[\Downarrow]
+S(T(v))\in\text{null }T\\
+\ArrowBetweenLines[\Downarrow]
+T(S(T(v)))=0\\
+\ArrowBetweenLines[\Downarrow]
+S(T(S(T(v))))=0.
+\end{gather*}
+Hence $(ST)^2=0$.
 \end{proof}
 
 \backmatter
