@@ -234,7 +234,7 @@ It is clear that $\text{range }T=2$ and $\dim V=5$. Hence, by the fundamental th
 \dim\text{null }T=\dim V-\dim\text{range }T=3.
 \]
 \end{proof}
-\section{Exercise 3.B.2}
+\section{Exercise 3.B.2: $\text{range }S\subset\text{null }T$ Implies $(ST)^2=0$}
 Suppose $V$ is a vector space and $S,T\in\mathcal{L}(V,V)$ are such that\[
 \text{range }S\subset\text{null }T.
 \]Prove that $(ST)^2=0$.
@@ -254,6 +254,28 @@ T(S(T(v)))=0\\
 S(T(S(T(v))))=0.
 \end{gather*}
 Hence $(ST)^2=0$.
+\end{proof}
+\section{Exercise 3.B.3: Spanning = Surjective; Independent = Injective}
+Suppose $v_1,\dots,v_m$ is a list of vectors in $V$. Define $T\in\mathcal{L}(\mathbb{F}^m,V)$ by\[
+T(z_1,\dots,z_m)=z_1v_1+\dots+z_mv_m.
+\]
+\begin{enumerate}[label=(\alph*)]
+\item What property of $T$ corresponds to $v_1,\dots,v_m$ spanning $V$?
+\item What property of $T$ corresponds to $v_1,\dots,v_m$ being linearly independent?
+\end{enumerate}
+\begin{proof}
+\begin{enumerate}[label=(\alph*)]
+\item We claim that $T$ being surjective corresponds to $v_1,\dots,v_m$ spanning $V$.
+
+If $T$ is surjective, then $\text{range }T=V$. Since $\text{range }T=\text{span}(v_1,\dots,v_m)$, we conclude that $v_1,\dots,v_m$ spans $V$.
+
+If $v_1,\dots,v_m$ spans $V$, then $\text{range }T=V$. Hence $T$ is surjective.
+\item We claim that $T$ being injective corresponds to $v_1,\dots,v_m$ being linearly independent.
+
+If $T$ is injective, then 3.16 of \cite{axler2014linear} implies that $\text{null }T=\{0\}$. Hence $T(z_1,\dots,z_m)=z_1v_1+\dots+z_mv_m=0$ implies $z_1=\dots=z_m=0$. Therefore $v_1,\dots,v_m$ is linearly independent.
+
+If $v_1,\dots,v_m$ is linearly independent, then $z_1v_1+\dots+z_mv_m=0$ implies $z_1=\dots=z_m=0$. Hence $T(z_1,\dots,z_m)=0$ implies $z_1=\dots=z_m=0$. By 3.16 of \cite{axler2014linear}, $T$ is therefore injective.
+\end{enumerate}
 \end{proof}
 
 \backmatter
