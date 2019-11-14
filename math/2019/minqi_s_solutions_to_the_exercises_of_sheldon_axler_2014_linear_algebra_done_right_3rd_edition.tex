@@ -277,6 +277,29 @@ If $T$ is injective, then 3.16 of \cite{axler2014linear} implies that $\text{nul
 If $v_1,\dots,v_m$ is linearly independent, then $z_1v_1+\dots+z_mv_m=0$ implies $z_1=\dots=z_m=0$. Hence $T(z_1,\dots,z_m)=0$ implies $z_1=\dots=z_m=0$. By 3.16 of \cite{axler2014linear}, $T$ is therefore injective.
 \end{enumerate}
 \end{proof}
+\section{Exercise 3.B.4: $\{T\in\mathcal{L}(\mathbb{R}^5,\mathbb{R}^4):\dim\text{null }T>2\}$ is NOT a Subspace}
+Show that\[
+\{T\in\mathcal{L}(\mathbb{R}^5,\mathbb{R}^4):\dim\text{null }T>2\}
+\]
+is not a subspace of $\mathcal{L}(\mathbb{R}^5,\mathbb{R}^4)$.
+\begin{proof}
+Pick $S,T\in\mathcal{L}(\mathbb{R}^5,\mathbb{R}^4)$ such that\[
+S(x_1,x_2,x_3,x_4,x_5)=(x_1,x_2,0,0)
+\]and\[
+T(x_1,x_2,x_3,x_4,x_5)=(x_1,0,x_3,0),
+\]then\[
+(S+T)(x_1,x_2,x_3,x_4,x_5)=(2x_1,x_2,x_3,0)
+\]for all $(x_1,x_2,x_3,x_4,x_5)\in\mathbb{R}^5$. 
+
+Clearly, $\dim\text{range }S=\dim\text{range }T=2$ and $\dim\text{range }(S+T)=3$. Hence the fundamental theorem of linear maps implies\[
+\dim\text{null }S=\dim\text{null }T=5-2=3>2
+\]and\[
+\dim\text{null }(S+T)=5-3=2\not>2.
+\]We have thus shown that\[
+\{T\in\mathcal{L}(\mathbb{R}^5,\mathbb{R}^4):\dim\text{null }T>2\}
+\] is not closed under addition, hence it is not a subspace of $\mathcal{L}(\mathbb{R}^5,\mathbb{R}^4)$.
+\end{proof}
+
 
 \backmatter
 \bibliographystyle{amsalpha}
