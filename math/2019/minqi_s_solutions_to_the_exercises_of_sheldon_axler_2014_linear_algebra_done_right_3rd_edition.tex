@@ -283,11 +283,11 @@ Show that\[
 \]
 is not a subspace of $\mathcal{L}(\mathbb{R}^5,\mathbb{R}^4)$.
 \begin{proof}
-Pick $S,T\in\mathcal{L}(\mathbb{R}^5,\mathbb{R}^4)$ such that\[
+Let $S,T$ be the linear maps in $\mathcal{L}(\mathbb{R}^5,\mathbb{R}^4)$ such that\[
 S(x_1,x_2,x_3,x_4,x_5)=(x_1,x_2,0,0)
 \]and\[
-T(x_1,x_2,x_3,x_4,x_5)=(x_1,0,x_3,0),
-\]then\[
+T(x_1,x_2,x_3,x_4,x_5)=(x_1,0,x_3,0)
+\]for all $(x_1,x_2,x_3,x_4,x_5)\in\mathbb{R}^5$. Then\[
 (S+T)(x_1,x_2,x_3,x_4,x_5)=(2x_1,x_2,x_3,0)
 \]for all $(x_1,x_2,x_3,x_4,x_5)\in\mathbb{R}^5$. 
 
@@ -299,7 +299,21 @@ Clearly, $\dim\text{range }S=\dim\text{range }T=2$ and $\dim\text{range }(S+T)=3
 \{T\in\mathcal{L}(\mathbb{R}^5,\mathbb{R}^4):\dim\text{null }T>2\}
 \] is not closed under addition, hence it is not a subspace of $\mathcal{L}(\mathbb{R}^5,\mathbb{R}^4)$.
 \end{proof}
-
+\section{Exercise 3.B.5: A Linear Map $T$ such that $\text{range }T=\text{null }T$}
+Give an example of a linear map $T:\mathbb{R}^4\to\mathbb{R}^4$ such that\[
+\text{range }T=\text{null }T.
+\]
+\begin{proof}
+Let $T$ be the linear map in $\mathcal{L}(\mathbb{R}^4,\mathbb{R}^4)$ such that\[
+T(x_1,x_2,x_3,x_4)=(0, 0, x_1,x_2)
+\]for all $(x_1,x_2,x_3,x_4)\in\mathbb{R}^4$. Then\[
+\text{range }T=\{(0, 0, x_1,x_2):x_1,x_2\in\mathbb{R}\}
+\]and\[
+\text{null }T=\{(0,0,x_3,x_4):x_3,x_4\in\mathbb{R}\}.
+\]Hence\[
+\text{range }T=\text{null }T.
+\]
+\end{proof}
 
 \backmatter
 \bibliographystyle{amsalpha}
