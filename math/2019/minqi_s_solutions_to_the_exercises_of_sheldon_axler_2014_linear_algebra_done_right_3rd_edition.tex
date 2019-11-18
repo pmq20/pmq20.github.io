@@ -315,6 +315,19 @@ T(x_1,x_2,x_3,x_4)=(0, 0, x_1,x_2)
 \]
 \end{proof}
 
+\chapter{Matrices}
+\section{Exercise 3.C.1: $\mathcal{M}(T)$ Has At Least $\dim\text{range }T$ Nonzero Entries}
+Suppose $V$ and $W$ are finite-dimensional and $T\in\mathcal{L}(V,W)$. Show that with respect to each choice of bases of $V$ and $W$, the matrix of $T$ has at least $\dim\text{range }T$ nonzero entries.
+\begin{proof}
+Choose any basis $v_1,\dots,v_n$ of $V$ and basis $w_1,\dots,w_m$ of $W$, suppose the matrix of $T$  with respect to those bases has $k$ nonzero entries where
+\begin{equation}
+\label{eq3}
+k<\dim\text{range }T.
+\end{equation}
+
+Then the matrix has at most $k$ nonzero columns. Consequently, by the definition of matrix of a linear map, at most $k$ vectors of $Tv_1,\dots,Tv_n$ are nonzero. Hence\[\dim\text{range }T\leqslant k,\]which contradicts with (\ref{eq3}).
+\end{proof}
+
 \backmatter
 \bibliographystyle{amsalpha}
 \bibliography{minqi_s_solutions_to_the_exercises_of_sheldon_axler_2014_linear_algebra_done_right_3rd_edition}
