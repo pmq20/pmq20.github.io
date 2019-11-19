@@ -327,6 +327,32 @@ k<\dim\text{range }T.
 
 Then the matrix has at most $k$ nonzero columns. Consequently, by the definition of matrix of a linear map, at most $k$ vectors of $Tv_1,\dots,Tv_n$ are nonzero. Hence\[\dim\text{range }T\leqslant k,\]which contradicts with (\ref{eq3}).
 \end{proof}
+\section{Exercise 3.C.2: Find Bases of $\mathcal{P}_3(\mathbb{R}),\mathcal{P}_2(\mathbb{R})$ from a Matrix}
+Suppose $D\in\mathcal{L}(\mathcal{P}_3(\mathbb{R}),\mathcal{P}_2(\mathbb{R}))$ is the differentiation map defined by $Dp=p'$. Find a basis of $\mathcal{P}_3(\mathbb{R})$ and a basis of $\mathcal{P}_2(\mathbb{R}))$ such that the matrix of $D$ with respect to these bases is\[
+\begin{bmatrix}
+1&0&0&0\\
+0&1&0&0\\
+0&0&1&0
+\end{bmatrix}.
+\]
+\begin{proof}
+Define\[
+w_1\equiv1, w_2\equiv x, w_3\equiv x^2
+\]and\[
+v_1\equiv x, v_2\equiv\frac{1}{2}x^2, v_3\equiv\frac{1}{3}x^3, v_4\equiv1.
+\]
+
+Clearly, $w_1,w_2,w_3$ is a basis of $\mathcal{P}_2(\mathbb{R})$ and $v_1,v_2,v_3,v_4$ is a basis of $\mathcal{P}_3(\mathbb{R})$. Moreover, \[
+Dv_1=w_1,Dv_2=w_2,Dv_3=w_3,Dv_4=0.
+\]Therefore the matrix of $D$ under these bases is \[
+\begin{bmatrix}
+1&0&0&0\\
+0&1&0&0\\
+0&0&1&0
+\end{bmatrix}.
+\]
+\end{proof}
+
 
 \backmatter
 \bibliographystyle{amsalpha}
