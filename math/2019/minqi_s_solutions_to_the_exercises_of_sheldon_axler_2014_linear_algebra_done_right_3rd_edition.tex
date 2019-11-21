@@ -352,7 +352,7 @@ Dv_1=w_1,Dv_2=w_2,Dv_3=w_3,Dv_4=0.
 \end{bmatrix}.
 \]
 \end{proof}
-\section{Exercise 3.C.3: Find Bases from the Matrix of $T\in\mathcal{L}(V,W)$}
+\section{Exercise 3.C.3: Find Bases for $V, W$ from $\mathcal{M}(T)$ where $T\in\mathcal{L}(V,W)$}
 Suppose $V$ and $W$ are finite-dimensional and $T\in\mathcal{L}(V,W)$. Prove that there exist a basis of $V$ and a basis of $W$ such that with respect to these bases, all entries of $\mathcal{M}(T)$ are $0$ except that the entries in row $j$, column $j$, equal $1$ for $1\leqslant j\leqslant\dim\text{range }T$.
 \begin{proof}
 Let $u_1,\dots,u_m$ be a basis of $\text{null }T$; thus $\dim\text{null }T=m$. By 2.33 of \cite{axler2014linear}, the linearly independent list $u_1,\dots,u_m$ can be extended to a basis
@@ -366,6 +366,13 @@ of $V$. Thus $\dim V=m+n$. It is easy to verify that $Tv_1,\dots,Tv_n$ is a basi
 Tv_1,\dots,Tv_n,s_1,\dots,s_l
 \end{equation}
 of $W$. Thus $\dim W=n+l$. The matrix of $T$ under bases (\ref{eq4}) and (\ref{eq5}) is then of size $(n+l)\times(n+m)$, and all of its entries equal to $0$ except that the entries in row $j$, column $j$, equal $1$ for $1\leqslant j\leqslant n$.
+\end{proof}
+\section{Exercise 3.C.4: Find Bases for $W$ from $\mathcal{M}(T)$ where $T\in\mathcal{L}(V,W)$}
+Suppose $v_1,\dots,v_m$ is a basis of $V$ and $W$ is finite-dimensional. Suppose $T\in\mathcal{L}(V,W)$. Prove that there exists a basis $w_1,\dots,w_n$ of $W$ such that all the entries in the first column of $\mathcal{M}(T)$ (with respect to the bases $v_1,\dots,v_m$ and $w_1,\dots,w_n$) are $0$ except for possibly a $1$ in the first row, first column.
+\begin{proof}
+If $Tv_1=0$, then any basis of $W$ would make all the entries in the first column of $\mathcal{M}(T)$ equal to $0$.
+
+If $Tv_1\ne 0$, then let $w_1\equiv Tv_1$. By 2.33 of \cite{axler2014linear}, the linearly independent list $w_1$ can be extended to a basis $w_1,\dots,w_n$ of $W$. Under this basis, all the entries in the first column of $\mathcal{M}(T)$ are $0$ except for a $1$ in the first row, first column.
 \end{proof}
 
 \backmatter
