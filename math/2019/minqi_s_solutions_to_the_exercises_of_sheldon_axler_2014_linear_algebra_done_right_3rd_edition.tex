@@ -41,6 +41,7 @@ Remarkable exercises are:
 \item\hyperref[Exercise 1.C.13]{Exercise 1.C.13: When the Union of 3 Subspaces is a Subspace}.
 \item\hyperref[Exercise 2.B.7]{Exercise 2.B.7: Constructing a Counterexample}.
 \item\hyperref[Exercise 2.C.9]{Exercise 2.C.9: $\dim\text{span}(v_1+w,\dots,v_m+w)\geqslant m-1$}.
+\item\hyperref[Exercise 3.C.5]{Exercise 3.C.5: Find Bases for $V$ from $\mathcal{M}(T)$ where $T\in\mathcal{L}(V,W)$}.
 \end{enumerate}
 
 \medskip
@@ -374,6 +375,48 @@ If $Tv_1=0$, then any basis of $W$ would make all the entries in the first colum
 
 If $Tv_1\ne 0$, then let $w_1\equiv Tv_1$. By 2.33 of \cite{axler2014linear}, the linearly independent list $w_1$ can be extended to a basis $w_1,\dots,w_n$ of $W$. Under this basis, all the entries in the first column of $\mathcal{M}(T)$ are $0$ except for a $1$ in the first row, first column.
 \end{proof}
+\section{Exercise 3.C.5: Find Bases for $V$ from $\mathcal{M}(T)$ where $T\in\mathcal{L}(V,W)$}
+\label{Exercise 3.C.5}
+Suppose $w_1,\dots,w_n$ is a basis of $W$ and $V$ is finite-dimensional. Suppose $T\in\mathcal{L}(V,W)$. Prove that there exists a basis $v_1,\dots,v_m$ of $V$ such that all the entries in the first row of $\mathcal{M}(T)$ (with respect to the bases $v_1,\dots,v_m$ and $w_1,\dots,w_n$) are $0$ except for possibly a $1$ in the first row, first column.
+\begin{proof}
+Pick any basis\[
+v_1,\dots,v_m
+\]of $V$. Denote $M$ to be the matrix of $T$ under this basis. If all the entries in the first row of $M$ are $0$, then the proof is done.
+
+Otherwise, suppose column $j$ of the first row of $M$ contains a nonzero entry. Let\[
+v_1'\equiv \frac{1}{M_{1,j}}v_j
+\]and\[
+\{v_2',\dots,v_m'\}\equiv\{v_1,\dots,v_{j-1},v_{j+1},\dots,v_m\}.
+\]Then $v_1',\dots,v_m'$ is also a basis of $V$.
+
+Denote $M'$ as the matrix of $T$ under the basis\[
+v_1',\dots,v_m'.
+\]
+
+Further, let\[
+\begin{split}
+v_1''&\equiv v_1',\\
+v_2''&\equiv v_2'-M'_{1,2}v_1',\\
+&\vdots\\
+v_m''&\equiv v_m'-M'_{1,m}v_1'.
+\end{split}
+\]Then $v_1'',\dots,v_m''$ is also a basis of $V$. Moreover,\[
+\begin{split}
+T(v_1'')=T(v_1')&=T(\frac{1}{M_{1,j}}v_j)\\
+&=\frac{1}{M_{1,j}}(M_{1,j}w_1+M_{2,j}w_2+\dots+M_{n,j}w_n)\\
+&=w_1+\frac{M_{2,j}}{M_{1,j}}w_2+\dots+\frac{M_{n,j}}{M_{1,j}}w_n.
+\end{split}
+\]And for any $i=2,\dots,m$,\[
+\begin{split}
+T(v_i'')&=T(v_i'-M'_{1,i}v_1')\\
+&=T(v_i')-M'_{1,i}T(v_1')\\
+&=M'_{1,i}w_1+\dots+M'_{n,i}w_n-M'_{1,i}(w_1+\frac{M_{2,j}}{M_{1,j}}w_2+\dots+\frac{M_{n,j}}{M_{1,j}}w_n)\\
+&=(M'_{2,i}-\frac{M'_{1,i}M_{2,j}}{M_{1,j}})w_2+\dots+(M'_{n,i}-\frac{M'_{1,i}M_{n,j}}{M_{1,j}})w_n.
+\end{split}
+\]Hence all the entries in the first row of $\mathcal{M}(T)$ with respect to the bases $v_1'',\dots,v_m''$ and $w_1,\dots,w_n$ are $0$ except for a $1$ in the first row, first column.
+\end{proof}
+
+
 
 \backmatter
 \bibliographystyle{amsalpha}
