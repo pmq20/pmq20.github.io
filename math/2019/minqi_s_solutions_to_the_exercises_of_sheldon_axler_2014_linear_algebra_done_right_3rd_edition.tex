@@ -416,7 +416,26 @@ T(v_i'')&=T(v_i'-M'_{1,i}v_1')\\
 \]Hence all the entries in the first row of $\mathcal{M}(T)$ with respect to the bases $v_1'',\dots,v_m''$ and $w_1,\dots,w_n$ are $0$ except for a $1$ in the first row, first column.
 \end{proof}
 
+\chapter{Invertibility and Isomorphic Vector Spaces}
+\section{Exercise 3.D.1: $(ST)^{-1}=T^{-1}S^{-1}$}
+Suppose $T\in\mathcal{L}(U,V)$ and $S\in\mathcal{L}(V,W)$ are both invertible linear maps. Prove that $ST\in\mathcal{L}(U,W)$ is invertible and that $(ST)^{-1}=T^{-1}S^{-1}$.
+\begin{proof}
+Since $T$ and $S$ are invertible, 3.56 of \cite{axler2014linear} implies that $T$ and $S$ are injective and surjective.
 
+Suppose $S(T(u_1))=S(T(u_2))$ where $u_1,u_2\in U$, then that $S$ is injective implies $T(u_1)=T(u_2)$, and that $T$ is injective implies $u_1=u_2$. Hence $ST$ is injective.
+
+Pick any $w\in W$. That $S$ is surjective implies the existence of a $v\in V$ such that $S(v)=w$. Further, that $T$ is surjective implies the existence of a $u\in U$ such that $T(u)=v$. Hence $S(T(u))=w$. Thus $ST$ is surjective.
+
+Thus 3.56 of \cite{axler2014linear} implies that $ST$ is invertible.
+
+Finally, since\[
+(T^{-1}S^{-1})(ST)=T^{-1}(S^{-1}S)T=T^{-1}T=I
+\]and\[
+(ST)(T^{-1}S^{-1})=S(TT^{-1})S^{-1}=SS^{-1}=I,
+\]we conclude that\[
+(ST)^{-1}=T^{-1}S^{-1}.
+\]
+\end{proof}
 
 \backmatter
 \bibliographystyle{amsalpha}
