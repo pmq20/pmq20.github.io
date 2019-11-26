@@ -4,6 +4,8 @@
 \usepackage{amssymb}
 \usepackage{hyperref}
 \usepackage{mathtools}
+\usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
+\geometry{a4paper}                   % ... or a4paper or a5paper or ... 
 
 \newtheorem{theorem}{Theorem}[chapter]
 \newtheorem{lemma}[theorem]{Lemma}
@@ -435,6 +437,19 @@ Finally, since\[
 \]we conclude that\[
 (ST)^{-1}=T^{-1}S^{-1}.
 \]
+\end{proof}
+\section{Exercise 3.D.2: Noninvertible Operators on $V$ is NOT a Subspace}
+Suppose $V$ is finite-dimensional and $\dim V>1$. Prove that the set of noninvertible operators on $V$ is not a subspace of $\mathcal{L}(V)$.
+\begin{proof}
+Let $v_1,v_2,\dots,v_n$ be a basis of $V$ where $n\geqslant 2$. Let $S$ be the operator on $V$ defined as\[
+S(a_1v_1+a_2v_2+\dots+a_nv_n)=a_1v_1,
+\] and let $T$ be the operator on $V$ defined as\[
+T(a_1v_1+a_2v_2+\dots+a_nv_n)=a_2v_2+a_3v_3+\dots+a_nv_n.
+\]
+
+Then $S$ is noninvertible because $v_2\in\text{null }S$, and $T$ is noninvertible because $v_1\in\text{null }T$. However, $S+T$ is invertible because $S+T$ equals the identity operator.
+
+We have shown that the set of noninvertible operators on $V$ is not closed under addition, hence it is not a subspace of $\mathcal{L}(V)$.
 \end{proof}
 
 \backmatter
