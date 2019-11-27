@@ -451,6 +451,28 @@ Then $S$ is noninvertible because $v_2\in\text{null }S$, and $T$ is noninvertibl
 
 We have shown that the set of noninvertible operators on $V$ is not closed under addition, hence it is not a subspace of $\mathcal{L}(V)$.
 \end{proof}
+\section{Exercise 3.D.3: Injective Subspace Mappings and Invertible Operators}
+Suppose $V$ is finite-dimensional, $U$ is a subspace of $V$, and $S\in\mathcal{L}(U,V)$. Prove there exists an invertible operator $T\in\mathcal{L}(V)$ such that $Tu=Su$ for every $u\in U$ if and only if $S$ is injective.
+\begin{proof}
+Suppose there exists an invertible operator $T\in\mathcal{L}(V)$ such that $Tu=Su$ for every $u\in U$. It follows that
+\begin{equation}
+\label{eq6}
+T^{-1}(Su)=T^{-1}(Tu)=u
+\end{equation}
+for every $u\in U$. Pick any $u_1,u_2\in U$ such that $Su_1=Su_2$. Then $T^{-1}(Su_1)=T^{-1}(Su_2)$, and (\ref{eq6}) implies that $u_1=u_2$. Hence $S$ is injective.
+
+Suppose $S$ is injective. Pick a basis $u_1,\dots,u_k$ of $U$ and extend it to a basis\[
+u_1,\dots,u_k,v_{k+1},\dots,v_n
+\]of $V$; thus $\dim U = k, \dim V=n$. Since $S$ is injective, $S$ is an isomorphism between $U$ and $\text{range }S$. Hence \[
+Su_1,\dots,Su_k
+\]is a basis of $\text{range }T$ and can be extended to a basis\[
+Su_1,\dots,Su_k,t_{k+1},\dots,t_{n}
+\]of $V$. Define $T$ as the operator on $V$ such that\[
+T(u_i)=Su_i\text{ where }i=1,\dots,k
+\]and\[
+T(v_i)=t_i\text{ where }i=k+1,\dots,n.
+\]Clearly, $T$ is invertible and $Tu=Su$ for every $u\in U$.
+\end{proof}
 
 \backmatter
 \bibliographystyle{amsalpha}
