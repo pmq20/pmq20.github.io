@@ -45,6 +45,7 @@ Remarkable exercises are:
 \item\hyperref[Exercise 2.C.9]{Exercise 2.C.9: $\dim\text{span}(v_1+w,\dots,v_m+w)\geqslant m-1$}.
 \item\hyperref[Exercise 3.C.5]{Exercise 3.C.5: Find Bases for $V$ from $\mathcal{M}(T)$ where $T\in\mathcal{L}(V,W)$}.
 \item\hyperref[Exercise 3.D.4]{Exercise 3.D.4: $\text{null }T_1=\text{null }T_2$ if and only if $T_1=ST_2$}.
+\item\hyperref[Exercise 3.D.5]{Exercise 3.D.5: $\text{range }T_1=\text{range }T_2$ if and only if $T_1=T_2S$}.
 \end{enumerate}
 
 \medskip
@@ -507,16 +508,70 @@ S(w_i)\equiv T_1v_i,\quad\forall i\in\{1,\dots,k\},
 \]and\[
 S(w_i)\equiv w_i',\quad\forall i\in\{k+1,\dots,m\}.
 \]We claim that $T_1=ST_2$. To show this, pick any $v\in V$. Then there exists $v_0\in N$ and $a_1,\dots,a_k\in\mathbb{F}$ such that\[
-v=v_0+a_1v_1+\dots+v_ka_k
+v=v_0+a_1v_1+\dots+a_kv_k
 \]and\[
 \begin{split}
-T_1(v)&=T_1(v_0+a_1v_1+\dots+v_ka_k)\\
+T_1(v)&=T_1(v_0+a_1v_1+\dots+a_kv_k)\\
 &=a_1T_1v_1+\dots+a_kT_1v_k\\
 &=a_1Sw_1+\dots+a_kSw_k\\
 &=S(a_1w_1+\dots+a_kw_k)\\
 &=S(T_2(a_1v_1+\dots+a_kv_k))\\
 &=S(T_2(v_0+a_1v_1+\dots+a_kv_k))\\
 &=ST_2(v).
+\end{split}
+\]
+\end{proof}
+\section{Exercise 3.D.5: $\text{range }T_1=\text{range }T_2$ if and only if $T_1=T_2S$}
+\label{Exercise 3.D.5}
+Suppose $V$ is finite-dimensional and $T_1,T_2\in\mathcal{L}(V,W)$. Prove that $\text{range }T_1=\text{range }T_2$ if and only if there exists an invertible operator $S\in\mathcal{L}(V)$ such that $T_1=T_2S$.
+\begin{proof}
+Suppose there exists an invertible operator $S\in\mathcal{L}(V)$ such that $T_1=T_2S$. Pick any $w\in\text{range }T_1$, then there exists $v_1\in V$ such that $T_1v_1=w$. Hence $T_2Sv_1=w$ and $w\in\text{range }T_2$. Also, pick any $w\in\text{range }T_2$, then there exists $v_2\in V$ such that $T_2v_2=w$. Hence $T_1S^{-1}v_2=w$ and $w\in\text{range }T_1$. Therefore $\text{range }T_1=\text{range }T_2$.
+
+On the other hand, suppose $\text{range }T_1=\text{range }T_2$. Denote\[
+R\equiv\text{range }T_1=\text{range }T_2
+\]and\[
+n\equiv\dim V.
+\]We claim that $R$ is finite-dimensional. To show this, pick a basis $u_1,\dots,u_k$ of $\text{null }T_1$ and extend it to a basis of $V$:\[
+u_1,\dots,u_k,u_{k+1},\dots,u_n.
+\]Then it is easy to verify that\[
+T_1u_{k+1},\dots,T_1u_n
+\]is a basis of $R$; thus\[
+\dim R=n-k.
+\]The fundamental theorem of linear maps then implies\[
+k=\dim\text{null }T_1=\dim V-\dim R=\dim\text{null }T_2.
+\]Moreover, there exist $v_{k+1},\dots,v_n\in V$ such that\[
+T_2v_i=T_1u_i,\quad\forall i\in\{k+1,\dots,n\}.
+\]Pick a basis $v_1,\dots,v_k$ of $\text{null }T_2$. We claim that\[
+v_1,\dots,v_k,v_{k+1},\dots,v_n
+\]is a basis of $V$. By 2.39 of \cite{axler2014linear}, it suffices to show its linear independence. Suppose there exists $a_1,\dots,a_n\in\mathbb{F}$ such that\[
+a_1v_1+\dots+a_nv_n=0.
+\]Then
+\begin{gather*}
+T_2(a_1v_1+\dots+a_nv_n)=0\\
+\ArrowBetweenLines[\Downarrow]
+a_{k+1}T_2v_{k+1}+\dots+a_nT_2v_n=0\\
+\ArrowBetweenLines[\Downarrow]
+a_{k+1}T_1u_{k+1}+\dots+a_nT_1u_n=0\\
+\ArrowBetweenLines[\Downarrow]
+a_{k+1}=\dots=a_n=0\\
+\ArrowBetweenLines[\Downarrow]
+a_1v_1+\dots+a_kv_k=0\\
+\ArrowBetweenLines[\Downarrow]
+a_1=\dots=a_k=0.
+\end{gather*}
+Let $S\in\mathcal{L}(V)$ be defined by\[
+S(u_i)\equiv v_i,\quad\forall i\in\{1,\dots,n\}.
+\]We claim that $T_1=T_2S$. To show this, pick any $v\in V$. Then there exists $a_1,\dots,a_n\in\mathbb{F}$ such that\[
+v=a_1u_1+\dots+a_nu_n.
+\]Then\[
+\begin{split}
+T_1(v)&=T_1(a_1u_1+\dots+a_nu_n)\\
+&=a_{k+1}T_1u_{k+1}+\dots+a_nT_1u_n\\
+&=a_{k+1}T_2v_{k+1}+\dots+a_nT_2v_n\\
+&=T_2(a_{k+1}v_{k+1}+\dots+a_nv_n)\\
+&=T_2(a_{k+1}Su_{k+1}+\dots+a_nSu_n)\\
+&=T_2(S(a_{k+1}u_{k+1}+\dots+a_nu_n))\\
+&=T_2(S(v)).
 \end{split}
 \]
 \end{proof}
