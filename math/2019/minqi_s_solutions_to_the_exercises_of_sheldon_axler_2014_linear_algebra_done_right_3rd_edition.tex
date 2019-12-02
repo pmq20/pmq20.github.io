@@ -576,6 +576,27 @@ T_1(v)&=T_1(a_1u_1+\dots+a_nu_n)\\
 \]
 \end{proof}
 
+\chapter{Products and Quotients of Vector Spaces}
+\section{Exercise 3.E.1: $T$ is a Linear Map iff $\text{graph of }T$ is a Subspace of $V\times W$}
+Suppose $T$ is a function from $V$ to $W$. The graph of $T$ is the subset of $V\times W$ defined by\[
+\text{graph of }T=\{(v,Tv)\in V\times W:v\in V\}.
+\]Prove that $T$ is a linear map if and only if the graph of $T$ is a subspace of $V\times W$.
+\begin{proof}
+Suppose $T$ is a linear map. By 3.11 of \cite{axler2014linear}, $T(0)=0$. Hence\[
+(0,0)\in\text{graph of }T.
+\]Suppose $(u, Tu), (w,Tw)\in\text{graph of }T$. Then $T(u+w)=Tu+Tw\in W$ implies\[
+(u+w,Tu+Tw)\in\text{graph of }T.
+\]Suppose $a\in\mathbb{F}$ and $(u, Tu)\in\text{graph of }T$. Then $T(au)=aTu$ implies\[
+(au,aTu)\in\text{graph of }T.
+\]By 13.4 of \cite{axler2014linear}, we therefore conclude that the graph of $T$ is a subspace of $V\times W$.
+
+On the other hand, suppose the graph of $T$ is a subspace of $V\times W$. Pick any $u,v\in V$ such that $(u,Tu), (v, Tv)\in\text{graph of }T$. Then $(u+v,Tu+Tv)\in\text{graph of }T$. Hence\[
+T(u+v)=Tu+Tv.
+\]Pick any $a\in\mathbb{F}$, then $(au,aTu)\in\text{graph of }T$. Hence\[
+T(au)=aTu.
+\]Therefore, by definition, we conclude that $T$ is a linear map.
+\end{proof}
+
 \backmatter
 \bibliographystyle{amsalpha}
 \bibliography{minqi_s_solutions_to_the_exercises_of_sheldon_axler_2014_linear_algebra_done_right_3rd_edition}
