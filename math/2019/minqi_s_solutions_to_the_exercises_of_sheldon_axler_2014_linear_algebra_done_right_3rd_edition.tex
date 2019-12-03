@@ -596,6 +596,13 @@ T(u+v)=Tu+Tv.
 T(au)=aTu.
 \]Therefore, by definition, we conclude that $T$ is a linear map.
 \end{proof}
+\section{Exercise 3.E.2: $V_j$ is Finite-dimensional if $V_1\times\dots\times V_m$ is Finite-dimensional}
+Suppose $V_1,\dots,V_m$ are vector spaces such that $V_1\times\dots\times V_m$ is finite-dimensional. Prove that $V_j$ is finite-dimensional for each $j=1,\dots,m$.
+\begin{proof}
+Suppose there exists $j\in\{1,\dots,m\}$ such that $V_j$ is infinite-dimensional. Then, by \ref{Exercise 2.A.14}, there is a sequence $v_{j1},v_{j2},\dots$ of vectors in $V_j$ such that $v_{j1},v_{j2},\dots,v_{jk}$ is linearly independent for every positive integer $k$.
+
+Let the sequence $v_1,v_2,\dots$ of vectors in $V_1\times\dots\times V_m$ be defined by: for each positive integer $i$, the vector $v_i$ has its $j$\textsuperscript{th} slot equal to $v_{ji}$ and other slots equal to $0$. Then $v_{1},v_{2},\dots,v_{k}$ is linearly independent for every positive integer $k$. Therefore, again by \ref{Exercise 2.A.14}, $V_1\times\dots\times V_m$ is infinite-dimensional.
+\end{proof}
 
 \backmatter
 \bibliographystyle{amsalpha}
