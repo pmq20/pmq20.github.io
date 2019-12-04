@@ -603,6 +603,33 @@ Suppose there exists $j\in\{1,\dots,m\}$ such that $V_j$ is infinite-dimensional
 
 Let the sequence $v_1,v_2,\dots$ of vectors in $V_1\times\dots\times V_m$ be defined by: for each positive integer $i$, the vector $v_i$ has its $j$\textsuperscript{th} slot equal to $v_{ji}$ and other slots equal to $0$. Then $v_{1},v_{2},\dots,v_{k}$ is linearly independent for every positive integer $k$. Therefore, again by \ref{Exercise 2.A.14}, $V_1\times\dots\times V_m$ is infinite-dimensional.
 \end{proof}
+\section{Exercise 3.E.3: Example of $U_1\times U_2$ Isomorphic to Non-Direct-Sum $U_1+U_2$}
+Give an example of a vector space $V$ and subspaces $U_1,U_2$ of $V$ such that $U_1\times U_2$ is isomorphic to $U_1+U_2$ but $U_1+U_2$ is not a direct sum.
+\begin{proof}
+Let $V\equiv U_1\equiv\mathbb{R}^\infty$. Let\[
+U_2\equiv\{(x,0,0,\dots):x\in\mathbb{R}\}.
+\]Then $V$ is a vector space and $U_1,U_2$ are two subspaces of $V$, and\[
+U_1+U_2=\mathbb{R}^\infty.
+\]Since $U_1\cap U_2=U_2\ne\{0\}$, $U_1+U_2$ is not a direct sum. Let function $T: U_1\times U_2\to U_1+U_2$ be defined by\[
+T((x,0,0,\dots),(y_1,y_2,\dots))=(x,y_1,y_2,\dots).
+\]We claim that $T$ is a linear map. Suppose\[
+u=((u_x,0,0,\dots),(u_{y_1},u_{y_2},\dots))
+\]and\[
+v=((v_x,0,0,\dots),(v_{y_1},v_{y_2},\dots)).
+\]Then\[
+\begin{split}
+T(u+v)&=(u_x+v_x,u_{y_1}+v_{y_1},u_{y_2}+v_{y_2},\dots)\\
+&=(u_x,u_{y_1},u_{y_2},\dots)+(v_x,v_{y_1},v_{y_2},\dots)\\
+&=T(u)+T(v).
+\end{split}
+\]Pick any $a\in\mathbb{F}$,\[
+\begin{split}
+T(au)&=(au_x,au_{y_1},au_{y_2},\dots)\\
+&=a(u_x,u_{y_1},u_{y_2},\dots)\\
+&=aT(u).
+\end{split}
+\]Clearly $T$ is both injective and surjective. Therefore, $U_1\times U_2$ is isomorphic to $U_1+U_2$.
+\end{proof}
 
 \backmatter
 \bibliographystyle{amsalpha}
