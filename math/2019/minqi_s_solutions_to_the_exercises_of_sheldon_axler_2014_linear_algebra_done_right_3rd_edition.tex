@@ -630,6 +630,56 @@ T(au)&=(au_x,au_{y_1},au_{y_2},\dots)\\
 \end{split}
 \]Clearly $T$ is both injective and surjective. Therefore, $U_1\times U_2$ is isomorphic to $U_1+U_2$.
 \end{proof}
+\section{Exercise 3.E.4: $\mathcal{L}(V_1\times\dots\times V_m,W)$ and $\mathcal{L}(V_1, W)\times\dots\times\mathcal{L}(V_m,W)$ are Isomorphic}
+Suppose $V_1,\dots,V_m$ are vector spaces. Prove that $\mathcal{L}(V_1\times\dots\times V_m,W)$ and $\mathcal{L}(V_1, W)\times\dots\times\mathcal{L}(V_m,W)$ are isomorphic vector spaces.
+\begin{proof}
+Let function $T:\mathcal{L}(V_1\times\dots\times V_m,W)\to\mathcal{L}(V_1, W)\times\dots\times\mathcal{L}(V_m,W)$ be defined by\[
+T(P)=(P_1,\dots,P_m)
+\]where\[
+\begin{split}
+P_1(v_1)&=P(v_1,0,\dots,0)\quad\forall v_1\in V_1,\\
+P_2(v_2)&=P(0,v_2,\dots,0)\quad\forall v_2\in V_2,\\
+&\vdots\\
+P_m(v_m)&=P(0,0,\dots,v_m)\quad\forall v_m\in V_m.
+\end{split}
+\]
+
+We claim that $T$ is a linear map. Pick any $P_1,P_2\in\mathcal{L}(V_1\times\dots\times V_m,W)$, then\[
+\begin{split}
+T(P_1+P_2)&=((P_1+P_2)_1,\dots,(P_1+P_2)_m)\\
+&=((P_1)_1+(P_2)_1,\dots,(P_1)_m+(P_2)_m)\\
+&=((P_1)_1,\dots,(P_1)_m) + ((P_2)_1,\dots,(P_2)_m)\\
+&=T(P_1)+T(P_2).
+\end{split}
+\]Pick any $\lambda\in\mathbb{F}, P\in\mathcal{L}(V_1\times\dots\times V_m,W)$, then\[
+\begin{split}
+T(\lambda P)&=((\lambda P)_1,\dots,(\lambda P)_m)\\
+&=\lambda(P_1,\dots,P_m)\\
+&=\lambda T(P).
+\end{split}
+\]
+
+We claim that $T$ is injective. Suppose $T(P)=0$. Then,\[
+\begin{split}
+P(v_1,0,\dots,0)&=0\quad\forall v_1\in V_1,\\
+P(0,v_2,\dots,0)&=0\quad\forall v_2\in V_2,\\
+&\vdots\\
+P(0,0,\dots,v_m)&=0\quad\forall v_m\in V_m.
+\end{split}
+\]Hence, for all $v_1\in V_1, \dots, v_m\in V_m$, \[
+P(v_1,\dots,v_m)=P(v_1,\dots,0)+\dots+P(0,\dots,v_m)=0.
+\]Thus\[
+P=0.
+\]
+
+We claim that $T$ is surjective. Pick any $(P_1,\dots,P_m)\in\mathcal{L}(V_1, W)\times\dots\times\mathcal{L}(V_m,W)$, let $P\in\mathcal{L}(V_1\times\dots\times V_m,W)$ be defined by\[
+P(v_1,\dots,v_m)=P_1(v_1)+\dots+P_m(v_m)\quad\forall v_1\in V_1, \dots, v_m\in V_m.
+\]Then\[
+T(P)=(P_1,\dots,P_m).
+\]
+
+Therefore $T$ is an isomorphism from $\mathcal{L}(V_1\times\dots\times V_m,W)$ to $\mathcal{L}(V_1, W)\times\dots\times\mathcal{L}(V_m,W)$.
+\end{proof}
 
 \backmatter
 \bibliographystyle{amsalpha}
