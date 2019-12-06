@@ -680,6 +680,70 @@ T(P)=(P_1,\dots,P_m).
 
 Therefore $T$ is an isomorphism from $\mathcal{L}(V_1\times\dots\times V_m,W)$ to $\mathcal{L}(V_1, W)\times\dots\times\mathcal{L}(V_m,W)$.
 \end{proof}
+\section{Exercise 3.E.5: $\mathcal{L}(V,W_1\times\dots\times W_m)$ and $\mathcal{L}(V, W_1)\times\dots\times\mathcal{L}(V,W_m)$ are Isomorphic}
+Suppose $W_1,\dots,W_m$ are vector spaces. Prove that $\mathcal{L}(V,W_1\times\dots\times W_m)$ and $\mathcal{L}(V, W_1)\times\dots\times\mathcal{L}(V,W_m)$ are isomorphic vector spaces.
+\begin{proof}
+Let\[
+\begin{split}
+\Pi_1&\in\mathcal{L}(W_1\times\dots\times W_m, W_1),\\
+\Pi_2&\in\mathcal{L}(W_1\times\dots\times W_m, W_2),\\
+&\vdots\\
+\Pi_m&\in\mathcal{L}(W_1\times\dots\times W_m, W_m)
+\end{split}
+\]be defined by\[
+\begin{split}
+\Pi_1(w_1,\dots,w_m)&=w_1,\\
+\Pi_2(w_1,\dots,w_m)&=w_2,\\
+&\vdots\\
+\Pi_m(w_1,\dots,w_m)&=w_m
+\end{split}
+\]for all $(w_1,\dots,w_m)\in W_1\times\dots\times W_m$.
+
+Let function $T:\mathcal{L}(V,W_1\times\dots\times W_m)\to\mathcal{L}(V, W_1)\times\dots\times\mathcal{L}(V,W_m)$ be defined by\[
+T(P)=(P_{\Pi_1},\dots,P_{\Pi_m})
+\]where\[
+\begin{split}
+P_{\Pi_1}(v)&=\Pi_1(P(v)),\\
+P_{\Pi_2}(v)&=\Pi_2(P(v)),\\
+&\vdots\\
+P_{\Pi_m}(v)&=\Pi_m(P(v)).
+\end{split}
+\]for all $v\in V$.
+
+We claim that $T$ is a linear map. Pick any $P_1,P_2\in\mathcal{L}(V,W_1\times\dots\times W_m)$, then\[
+\begin{split}
+T(P_1+P_2)&=((P_1+P_2)_{\Pi_1},\dots,(P_1+P_2)_{\Pi_m})\\
+&=((P_1)_{\Pi_1}+(P_2)_{\Pi_1},\dots,(P_1)_{\Pi_m}+(P_2)_{\Pi_m})\\
+&=((P_1)_{\Pi_1},\dots,(P_1)_{\Pi_m}) + ((P_2)_{\Pi_1},\dots,(P_2)_{\Pi_m})\\
+&=T(P_1)+T(P_2).
+\end{split}
+\]Pick any $\lambda\in\mathbb{F}, P\in\mathcal{L}(V_1\times\dots\times V_m,W)$, then\[
+\begin{split}
+T(\lambda P)&=((\lambda P)_{\Pi_1},\dots,(\lambda P)_{\Pi_m})\\
+&=\lambda(P_{\Pi_1},\dots,P_{\Pi_m})\\
+&=\lambda T(P).
+\end{split}
+\]
+
+We claim that $T$ is injective. Suppose $T(P)=0$. Then,\[
+\begin{split}
+\Pi_1(P(v))&=0,\\
+\Pi_2(P(v))&=0,\\
+&\vdots\\
+\Pi_m(P(v))&=0.
+\end{split}
+\]for all $v\in V$. Hence, $P(v)=0$ for all $v\in V$. Thus\[
+P=0.
+\]
+
+We claim that $T$ is surjective. Pick any $(P_1,\dots,P_m)\in\mathcal{L}(V, W_1)\times\dots\times\mathcal{L}(V,W_m)$, let $P\in\mathcal{L}(V,W_1\times\dots\times W_m)$ be defined by\[
+P(v)=(P_1(v),\dots,P_m(v_m))\quad\forall v\in V.
+\]Then\[
+T(P)=(P_1,\dots,P_m).
+\]
+
+Therefore $T$ is an isomorphism from $\mathcal{L}(V,W_1\times\dots\times W_m)$ to $\mathcal{L}(V, W_1)\times\dots\times\mathcal{L}(V,W_m)$.
+\end{proof}
 
 \backmatter
 \bibliographystyle{amsalpha}
