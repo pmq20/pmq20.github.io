@@ -745,6 +745,28 @@ T(P)=(P_1,\dots,P_m).
 Therefore $T$ is an isomorphism from $\mathcal{L}(V,W_1\times\dots\times W_m)$ to $\mathcal{L}(V, W_1)\times\dots\times\mathcal{L}(V,W_m)$.
 \end{proof}
 
+\chapter{Duality}
+\section{Exercise 3.F.1: Linear Functionals are either Surjective or Zero}
+Explain why every linear functional is either surjective or the zero map.
+\begin{proof}
+Suppose $\phi$ is a linear functional from $V$ to $\mathbb{F}$ and $\phi$ is neither surjective nor the zero map. Then there exists $y_0\in\mathbb{F}$ such that\[
+\phi(v)\ne y_0,\quad\forall v\in V.
+\]Also, there exist $x_0\in\mathbb{F}, v_0\in V$ such that\[
+x_0\ne 0\text{ and }\phi(v_0)=x_0.
+\]
+
+Since $\phi$ is a linear map,\[
+\begin{split}
+\phi(\frac{y_0}{x_0}\cdot v_0)&=\frac{y_0}{x_0}\cdot\phi(v_0)\\
+&=\frac{y_0}{x_0}\cdot x_0\\
+&=y_0,
+\end{split}
+\]which contradicts with\[
+\phi(v)\ne y_0,\quad\forall v\in V.
+\]
+\end{proof}
+
+
 \backmatter
 \bibliographystyle{amsalpha}
 \bibliography{minqi_s_solutions_to_the_exercises_of_sheldon_axler_2014_linear_algebra_done_right_3rd_edition}
