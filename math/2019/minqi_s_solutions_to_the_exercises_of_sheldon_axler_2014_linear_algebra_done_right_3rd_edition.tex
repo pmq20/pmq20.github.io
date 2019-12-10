@@ -185,7 +185,7 @@ Let $\varphi(x,y)\equiv(x^3+y^3)^\frac{1}{3}$ where $(x,y)\in\mathbb{R}^2$.
 \varphi(ax,ay)&=(a^3x^3+a^3y^3)^\frac{1}{3}\\
 &=(a^3(x^3+y^3))^\frac{1}{3}\\
 &=a(x^3+y^3)^\frac{1}{3}\\
-&=a\phi(x,y).
+&=a\varphi(x,y).
 \end{split}
 \]
 \item $\varphi$ is not linear because\[
@@ -749,23 +749,35 @@ Therefore $T$ is an isomorphism from $\mathcal{L}(V,W_1\times\dots\times W_m)$ t
 \section{Exercise 3.F.1: Linear Functionals are either Surjective or Zero}
 Explain why every linear functional is either surjective or the zero map.
 \begin{proof}
-Suppose $\phi$ is a linear functional from $V$ to $\mathbb{F}$ and $\phi$ is neither surjective nor the zero map. Then there exists $y_0\in\mathbb{F}$ such that\[
-\phi(v)\ne y_0,\quad\forall v\in V.
+Suppose $\varphi$ is a linear functional from $V$ to $\mathbb{F}$ and $\varphi$ is neither surjective nor the zero map. Then there exists $y_0\in\mathbb{F}$ such that\[
+\varphi(v)\ne y_0,\quad\forall v\in V.
 \]Also, there exist $x_0\in\mathbb{F}, v_0\in V$ such that\[
-x_0\ne 0\text{ and }\phi(v_0)=x_0.
+x_0\ne 0\text{ and }\varphi(v_0)=x_0.
 \]
 
-Since $\phi$ is a linear map,\[
+Since $\varphi$ is a linear map,\[
 \begin{split}
-\phi(\frac{y_0}{x_0}\cdot v_0)&=\frac{y_0}{x_0}\cdot\phi(v_0)\\
+\varphi(\frac{y_0}{x_0}\cdot v_0)&=\frac{y_0}{x_0}\cdot\varphi(v_0)\\
 &=\frac{y_0}{x_0}\cdot x_0\\
 &=y_0,
 \end{split}
 \]which contradicts with\[
-\phi(v)\ne y_0,\quad\forall v\in V.
+\varphi(v)\ne y_0,\quad\forall v\in V.
 \]
 \end{proof}
+\section{Exercise 3.F.2: Examples of Linear Functionals on $\mathbb{R}^{[0,1]}$}
+Give three distinct examples of linear functionals on $\mathbb{R}^{[0,1]}$.
+\begin{proof}
+Pick any $c\in\mathbb{R}$. Let $\varphi:\mathbb{R}^{[0,1]}\to\mathbb{R}$ be defined by\[
+\varphi(f)=f(c),\quad\forall f(x)\in\mathbb{R}^{[0,1]}.
+\]Then we claim that $\varphi$ is a linear map. To show this, pick any $g(x), f(x)\in\mathbb{R}^{[0,1]}$. Then\[
+\varphi(f+g)=f(c)+g(c)=\varphi(f)+\varphi(g).
+\]Also, pick any $\lambda\in\mathbb{R}$. Then\[
+\varphi(\lambda f)=(\lambda f)(c)=\lambda (f(c))=\lambda\varphi(f).
+\]
 
+Let $c\equiv1,2,3$ respectively, we then obtained three distinct linear functionals on $\mathbb{R}^{[0,1]}$.
+\end{proof}
 
 \backmatter
 \bibliographystyle{amsalpha}
