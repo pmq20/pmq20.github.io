@@ -778,6 +778,26 @@ Pick any $c\in\mathbb{R}$. Let $\varphi:\mathbb{R}^{[0,1]}\to\mathbb{R}$ be defi
 
 Let $c\equiv1,2,3$ respectively, we then obtained three distinct linear functionals on $\mathbb{R}^{[0,1]}$.
 \end{proof}
+\section{Exercise 3.F.3: Existence of $\varphi\in V'$ such that $\varphi(v)=1$}
+Suppose $V$ is finite-dimensional and $v\in V$ with $v\ne 0$. Prove that there exists $\varphi\in V'$ such that $\varphi(v)=1$.
+\begin{proof}
+Pick any basis $v_1,\dots,v_n$ of $V$ and its dual basis $\varphi_1,\dots,\varphi_n$ of $V'$, then there exists $a_1,\dots,a_n\in\mathbb{F}$ such that\[
+v=a_1v_1+\dots+a_nv_n.
+\]Since $v\ne 0$, there exists $k\in\{1,\dots,n\}$ such that\[
+a_k\ne 0.
+\]Let\[
+\varphi\equiv\frac{1}{a_k}\varphi_k,
+\]then $\varphi\in V'$ and \[
+\begin{split}
+\varphi(v)&=\frac{1}{a_k}\varphi_k(a_1v_1+\dots+a_nv_n)\\
+&=\frac{1}{a_k}a_1\varphi_k(v_1)+\dots+\frac{1}{a_k}a_n\varphi_k(v_n)\\
+&=\frac{1}{a_k}a_k\varphi_k(v_k)\\
+&=\frac{1}{a_k}a_k\\
+&=1.
+\end{split}
+\]
+\end{proof}
+
 
 \backmatter
 \bibliographystyle{amsalpha}
