@@ -797,7 +797,26 @@ a_k\ne 0.
 \end{split}
 \]
 \end{proof}
-
+\section{Exercise 3.F.10: The Dual Map Function that Takes $T$ to $T'$ is Linear}
+Prove the first two bullet points in 3.101.
+\begin{enumerate}
+\item $(S+T)'=S'+T'$ for all $S,T\in\mathcal{L}(V,W)$.
+\item $(\lambda T)'=\lambda T'$ for all $\lambda\in\mathbb{F}$ and all $T\in\mathcal{L}(V,W)$.
+\end{enumerate}
+\begin{proof}
+\begin{enumerate}
+\item Pick any $S,T\in\mathcal{L}(V,W),\varphi\in W',v\in V$. By definition, $(S+T)'(\varphi)=\varphi\circ(S+T)$. Since\[
+\varphi\circ(S+T)(v)=\varphi(Sv+Tv)=\varphi(Sv)+\varphi(Tv),
+\]we conclude that\[
+\varphi\circ(S+T)=\varphi\circ S+\varphi\circ T=S'(\varphi)+T'(\varphi).
+\]Therefore $(S+T)'=S'+T'$.
+\item Pick any $\lambda\in\mathbb{F}$, any $T\in\mathcal{L}(V,W)$, any $\varphi\in W'$ and any $v\in V$. By definiton, $(\lambda T)'(\varphi)=\varphi\circ(\lambda T)$. Since\[
+\varphi\circ(\lambda T)(v)=\varphi(\lambda Tv)=\lambda\varphi(Tv)=\lambda(\varphi\circ T)(v),
+\]we conclude that\[
+\varphi\circ(\lambda T)=\lambda(\varphi\circ T)=\lambda(T'(\varphi)).
+\]Therefore $(\lambda T)'=\lambda T'$.
+\end{enumerate}
+\end{proof}
 
 \backmatter
 \bibliographystyle{amsalpha}
