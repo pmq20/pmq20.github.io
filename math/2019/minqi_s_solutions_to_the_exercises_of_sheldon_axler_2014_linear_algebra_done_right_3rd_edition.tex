@@ -74,7 +74,26 @@ Let $m\equiv 2$, and we claim that $A_2$ is not a subspace of $\mathcal{P}(\math
 \deg \left(p(z)+q(z)\right)=\deg \left(2z+2\right)=1\ne 2.
 \]Hence $p(z)+q(z)\notin A_2$.
 \end{proof}
+\section{Exercise 4.A.4: There Exists a $n$-Degree Polynomial with $m$ Zeros}
+Suppose $m$ and $n$ are positive integers with $m\leqslant n$, and suppose $\lambda_1,\dots,\lambda_m\in\mathbb{F}$. Prove that there exists a polynomial $p\in\mathcal{P}(F)$ with $\deg p=n$ such that $0=p(\lambda_1)=\dots=p(\lambda_m)$ and such that $p$ has no other zeros.
+\begin{proof}
+Let\[
+p(z)\equiv(z-\lambda_1)\dots (z-\lambda_m)^{n-m+1}.
+\]Then, by definition, $\deg p=m-1+(n-m+1)=n$ and $0=p(\lambda_1)=\dots=p(\lambda_m)$. Hence it only suffices to show that $p$ has no other zeros.
 
+Suppose $p$ has another zero $\tau$ such that\[
+\tau\ne\lambda_i,\quad\forall i\in\{1,\dots,m\}.
+\]Then\[
+0\ne\tau-\lambda_i,\quad\forall i\in\{1,\dots,m\}
+\]and\[
+0\ne(\tau-\lambda_1)\dots (\tau-\lambda_m)^{n-m+1}.
+\]However,\[
+p(\tau)=(\tau-\lambda_1)\dots (\tau-\lambda_m)^{n-m+1},
+\]which contradicts with\[
+p(\tau)=0.
+\]
+\end{proof}
+		
 \backmatter
 \bibliographystyle{amsalpha}
 \bibliography{minqi_s_solutions_to_the_exercises_of_sheldon_axler_2014_linear_algebra_done_right_3rd_edition}
