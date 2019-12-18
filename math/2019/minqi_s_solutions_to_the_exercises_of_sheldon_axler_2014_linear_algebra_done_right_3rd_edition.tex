@@ -93,7 +93,24 @@ p(\tau)=(\tau-\lambda_1)\dots (\tau-\lambda_m)^{n-m+1},
 p(\tau)=0.
 \]
 \end{proof}
-		
+\section{Exercise 4.A.6: $p$ has Distinct Zeros iff $p$ and $p'$ have NO Common Zeros}
+Suppose $p\in\mathcal{P}(\mathbb{C})$ has degree $m$. Prove that $p$ has $m$ distinct zeros if and only if $p$ and its derivative $p'$ have no zeros in common.
+\begin{proof}
+By 4.14 of \cite{axler2014linear}, $p$ has the following factorization\[
+p(z)=c(z-\lambda_1)\dots(z-\lambda_m),
+\]where $c,\lambda_1,\dots,\lambda_m\in\mathbb{C}$. By the product rule,\[
+p'(z)=c\sum_{i=1}^m\left(\prod_{j\ne i}(z-\lambda_j)\right).
+\]
+
+If $p$ has $m$ distinct zeros, then\[
+p'(\lambda_i)=c\prod_{j\ne i}(\lambda_i-\lambda_j)\ne 0,\quad\forall i\in\{1,\dots,m\}.
+\]Hence $p$ and $p'$ have no zeros in common.
+
+On the other hand, if $\lambda_a=\lambda_b$ where $a,b\in\{1,\dots,m\}$ and $a\ne b$, then\[
+p'(\lambda_a)=c(\lambda_a-\lambda_b)\prod_{j\ne a\text{ and }j\ne b}(\lambda_a-\lambda_j)=0.
+\]Hence $p$ and $p'$ share the zero $\lambda_a$.
+\end{proof}
+
 \backmatter
 \bibliographystyle{amsalpha}
 \bibliography{minqi_s_solutions_to_the_exercises_of_sheldon_axler_2014_linear_algebra_done_right_3rd_edition}
