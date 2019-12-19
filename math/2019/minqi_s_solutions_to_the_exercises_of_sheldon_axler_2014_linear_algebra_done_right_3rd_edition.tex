@@ -46,6 +46,7 @@ Remarkable exercises are:
 \item\hyperref[Exercise 3.C.5]{Exercise 3.C.5: Find Bases for $V$ from $\mathcal{M}(T)$ where $T\in\mathcal{L}(V,W)$}.
 \item\hyperref[Exercise 3.D.4]{Exercise 3.D.4: $\text{null }T_1=\text{null }T_2$ if and only if $T_1=ST_2$}.
 \item\hyperref[Exercise 3.D.5]{Exercise 3.D.5: $\text{range }T_1=\text{range }T_2$ if and only if $T_1=T_2S$}.
+\item\hyperref[Exercise 4.A.7]{Exercise 4.A.7: An Odd-degree, Real-coefficient Polynomial has a Real Zero}.
 \end{enumerate}
 
 \medskip
@@ -110,6 +111,24 @@ On the other hand, if $\lambda_a=\lambda_b$ where $a,b\in\{1,\dots,m\}$ and $a\n
 p'(\lambda_a)=c(\lambda_a-\lambda_b)\prod_{j\ne a\text{ and }j\ne b}(\lambda_a-\lambda_j)=0.
 \]Hence $p$ and $p'$ share the zero $\lambda_a$.
 \end{proof}
+\section{Exercise 4.A.7: An Odd-degree, Real-coefficient Polynomial has a Real Zero}\label{Exercise 4.A.7}
+Prove that every polynomial of odd degree with real coefficients has a real zero.
+\begin{proof}
+Suppose $p\in\mathcal{P}(\mathbb{R})$, and $\deg p=2n+1$ where $n\in\{0,1,2,\dots\}$.
+
+We prove by induction on $n$.
+
+Suppose $n=0$, then $p(z)=az+b$ for some $a,b\in\mathbb{R}$ and $a\ne 0$. Obviously $p$ has a real zero\[
+\frac{-b}{a}.
+\]
+
+Suppose $p\in\mathcal{P}(\mathbb{R})$ has a real zero when $\deg p=2n+1$. Pick any $p\in\mathcal{P}(\mathbb{R})$ with $\deg p=2n+3$. By the Fundamental Theorem of Algebra, $p$ has a zero $\lambda$ in $\mathbb{C}$. If $\lambda$ is real then the proof is done; otherwise 4.15 of \cite{axler2014linear} implies that $\bar\lambda$ is also a zero of $p$ and 4.11 of \cite{axler2014linear} then implies\[
+p(z)=(z-\lambda)(z-\bar\lambda)q(z),
+\]where $\deg q=2n+1$ and the coefficients of $q$ are real because\[
+(z-\lambda)(z-\bar\lambda)=z^2-2(\Re(\lambda))z+\vert\lambda\vert^2,
+\]in which case $q(z)$ has a real zero and consequently $p(z)$ has a real zero.
+\end{proof}
+
 
 \backmatter
 \bibliographystyle{amsalpha}
