@@ -1,0 +1,107 @@
+
+\chapter{Polynomials}
+\section{Exercise 4.2: $\{0\}\cup\{p\in\mathcal{P}(\mathbb{F}):\deg p=m\}$ is NOT a Subspace}
+Suppose $m$ is a positive integer. Is the set\[
+\{0\}\cup\{p\in\mathcal{P}(\mathbb{F}):\deg p=m\}
+\]a subspace of $\mathcal{P}(\mathbb{F})$?
+\begin{proof}
+Denote\[
+A_m\equiv \{0\}\cup\{p\in\mathcal{P}(\mathbb{F}):\deg p=m\}.
+\]
+
+Let $m\equiv 2$, and we claim that $A_2$ is not a subspace of $\mathcal{P}(\mathbb{F})$. To show this, let $p(z)\equiv z^2+z+1, q(z)\equiv -z^2+z+1$. Then both $p(z)$ and $q(z)$ are in $A_2$. However,\[
+\deg \left(p(z)+q(z)\right)=\deg \left(2z+2\right)=1\ne 2.
+\]Hence $p(z)+q(z)\notin A_2$.
+\end{proof}
+\section{Exercise 4.4: There Exists a $n$-Degree Polynomial with $m$ Zeros}
+Suppose $m$ and $n$ are positive integers with $m\leqslant n$, and suppose $\lambda_1,\dots,\lambda_m\in\mathbb{F}$. Prove that there exists a polynomial $p\in\mathcal{P}(F)$ with $\deg p=n$ such that $0=p(\lambda_1)=\dots=p(\lambda_m)$ and such that $p$ has no other zeros.
+\begin{proof}
+Let\[
+p(z)\equiv(z-\lambda_1)\dots (z-\lambda_m)^{n-m+1}.
+\]Then, by definition, $\deg p=m-1+(n-m+1)=n$ and $0=p(\lambda_1)=\dots=p(\lambda_m)$. Hence it only suffices to show that $p$ has no other zeros.
+
+Suppose $p$ has another zero $\tau$ such that\[
+\tau\ne\lambda_i,\quad\forall i\in\{1,\dots,m\}.
+\]Then\[
+0\ne\tau-\lambda_i,\quad\forall i\in\{1,\dots,m\}
+\]and\[
+0\ne(\tau-\lambda_1)\dots (\tau-\lambda_m)^{n-m+1}.
+\]However,\[
+p(\tau)=(\tau-\lambda_1)\dots (\tau-\lambda_m)^{n-m+1},
+\]which contradicts with\[
+p(\tau)=0.
+\]
+\end{proof}
+\section{Exercise 4.6: $p$ has Distinct Zeros iff $p$ and $p'$ have NO Common Zeros}
+Suppose $p\in\mathcal{P}(\mathbb{C})$ has degree $m$. Prove that $p$ has $m$ distinct zeros if and only if $p$ and its derivative $p'$ have no zeros in common.
+\begin{proof}
+By 4.14 of \cite{axler2014linear}, $p$ has the following factorization\[
+p(z)=c(z-\lambda_1)\dots(z-\lambda_m),
+\]where $c,\lambda_1,\dots,\lambda_m\in\mathbb{C}$. By the product rule,\[
+p'(z)=c\sum_{i=1}^m\left(\prod_{j\ne i}(z-\lambda_j)\right).
+\]
+
+If $p$ has $m$ distinct zeros, then\[
+p'(\lambda_i)=c\prod_{j\ne i}(\lambda_i-\lambda_j)\ne 0,\quad\forall i\in\{1,\dots,m\}.
+\]Hence $p$ and $p'$ have no zeros in common.
+
+On the other hand, if $\lambda_a=\lambda_b$ where $a,b\in\{1,\dots,m\}$ and $a\ne b$, then\[
+p'(\lambda_a)=c(\lambda_a-\lambda_b)\prod_{j\ne a\text{ and }j\ne b}(\lambda_a-\lambda_j)=0.
+\]Hence $p$ and $p'$ share the zero $\lambda_a$.
+\end{proof}
+\section{Exercise 4.7: An Odd-degree, Real-coefficient Polynomial has a Real Zero}\label{Exercise 4.A.7}
+Prove that every polynomial of odd degree with real coefficients has a real zero.
+\begin{proof}
+Suppose $p\in\mathcal{P}(\mathbb{R})$, and $\deg p=2n+1$ where $n\in\{0,1,2,\dots\}$.
+
+We prove by induction on $n$.
+
+Suppose $n=0$, then $p(z)=az+b$ for some $a,b\in\mathbb{R}$ and $a\ne 0$. Obviously $p$ has a real zero\[
+\frac{-b}{a}.
+\]
+
+Suppose $p\in\mathcal{P}(\mathbb{R})$ has a real zero when $\deg p=2n+1$. Pick any $p\in\mathcal{P}(\mathbb{R})$ with $\deg p=2n+3$. By the Fundamental Theorem of Algebra, $p$ has a zero $\lambda$ in $\mathbb{C}$. If $\lambda$ is real then the proof is done; otherwise 4.15 of \cite{axler2014linear} implies that $\bar\lambda$ is also a zero of $p$ and 4.11 of \cite{axler2014linear} then implies\[
+p(z)=(z-\lambda)(z-\bar\lambda)q(z),
+\]where $\deg q=2n+1$ and the coefficients of $q$ are real because\[
+(z-\lambda)(z-\bar\lambda)=z^2-2(\Re(\lambda))z+\vert\lambda\vert^2,
+\]in which case $q(z)$ has a real zero and consequently $p(z)$ has a real zero.
+\end{proof}
+
+\section{Exercise 4.8: A Linear Operator on $\mathcal{P}(\mathbb{R})$}
+Define $T:\mathcal{P}(\mathbb{R})\to\mathbb{R}^\mathbb{R}$ by\[
+Tp=\begin{cases} 
+\frac{p-p(3)}{x-3} & \text{if } x\ne3,\\
+p'(3) & \text{if } x=3.
+\end{cases}
+\]Show that $Tp\in\mathcal{P}(\mathbb{R})$ for every polynomial $p\in\mathcal{P}(\mathbb{R})$ and that $T$ is a linear map.
+\begin{proof}
+Let\[
+p(x)=a_0+a_1x+\dots+a_mx^m,
+\]where $a_0,\dots,a_m\in\mathbb{R}$. By Theorem~8.4 of \cite{rudin1976principles},\[
+p(x)=\sum_{n=0}^{m}\frac{p^{(n)}(3)}{n!}(x-3)^n.
+\]Hence, when $x\ne3$,\[
+\frac{p-p(3)}{x-3}=\sum_{n=1}^{m}\frac{p^{(n)}(3)}{n!}(x-3)^{n-1}.
+\]When $x=3$,\[
+\sum_{n=1}^{m}\frac{p^{(n)}(3)}{n!}(3-3)^{n-1}=\frac{p^{(1)}(3)}{1!}\cdot0^0=p'(3)=Tp(3).
+\]Hence\[
+Tp=\sum_{n=1}^{m}\frac{p^{(n)}(3)}{n!}(x-3)^{n-1}.
+\]Since $\frac{p^{(n)}(3)}{n!}\in\mathbb{R}$ for all $n\in\{1,\dots,m\}$, we conclude that $Tp\in\mathcal{P}(\mathbb{R})$.
+
+Pick any\[
+q(x)=b_0+b_1x+\dots+b_lx^l.
+\]Then\[
+\begin{split}
+L(p+q)&=\sum_{n=1}^{\max(m,l)}\frac{(p+q)^{(n)}(3)}{n!}(x-3)^{n-1}\\
+&=\sum_{n=1}^{\max(m,l)}\frac{p^{(n)}(3)}{n!}(x-3)^{n-1} + \sum_{n=1}^{\max(m,l)}\frac{q^{(n)}(3)}{n!}(x-3)^{n-1}\\
+&=\sum_{n=1}^{m)}\frac{p^{(n)}(3)}{n!}(x-3)^{n-1} + \sum_{n=1}^{l)}\frac{q^{(n)}(3)}{n!}(x-3)^{n-1}\\
+&=Lp+Lq.
+\end{split}
+\]Pick any $\lambda\in\mathbb{R}$, then\[
+\begin{split}
+L(\lambda p)&=\sum_{n=1}^{m}\frac{(\lambda p)^{(n)}(3)}{n!}(x-3)^{n-1}\\
+&=\sum_{n=1}^{m}\frac{\lambda p^{(n)}(3)}{n!}(x-3)^{n-1}\\
+&=\lambda\sum_{n=1}^{m}\frac{p^{(n)}(3)}{n!}(x-3)^{n-1}\\
+&=\lambda Lp.
+\end{split}
+\]Therefore $L$ is a linear map.
+\end{proof}
