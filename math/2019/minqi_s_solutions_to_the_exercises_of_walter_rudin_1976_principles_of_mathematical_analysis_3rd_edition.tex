@@ -482,6 +482,40 @@ Without loss of generality, suppose $\limsup_{n\to\infty}b_n$ is finite.
 \end{enumerate}
 \end{proof}
 
+\setcounter{chapter}{10}
+\chapter{The Lebesgue Theory}
+\section{Exercise 1: $\int_E fd\mu=0$ Implies $f=0$ Almost Everywhere}
+If $f\geqslant0$ and $\int_E fd\mu=0$, prove that $f(x)=0$ almost everywhere on $E$.
+\begin{proof}
+Define\[
+E_n\equiv\left\{x\in E|f(x)>\frac{1}{n}\right\},
+\]and\[
+A\equiv\bigcup_{n=1}^\infty E_n.
+\]Since $f\geqslant0$, $A$ is the set of $x\in E$ such that $f(x)\ne0$. To prove that $f(x)=0$ almost everywhere, it only suffices to prove that\[
+\mu(A)=0.
+\]
+
+Pick any $n\in\{1,2,3,\dots\}$. Let $s(x)$ be the simple function defined by\[
+s(x)=\begin{cases} 
+\frac{1}{n} & \text{if } x\in E_n,\\
+0 & \text{otherwise}.
+\end{cases}
+\]Then by the definition of Lebesgue integral,\[
+\frac{1}{n}\mu(E_n)\leqslant\int_E fd\mu=0.
+\]Hence\[
+\mu(E_n)=0.
+\]
+
+Define\[
+F_n\equiv E_n-\bigcup_{i=1}^{n-1}E_i.
+\]Then\[
+F_i\cap F_j=\varnothing,\quad\forall i\ne j.
+\]Hence\[
+\mu(A)=\mu(\bigcup_{n=1}^\infty F_n)=\sum_{n=1}^\infty\mu(F_n)\leqslant\sum_{n=1}^\infty\mu(E_n)=0.
+\]Therefore\[
+\mu(A)=0.
+\]
+\end{proof}
 
 \backmatter
 \bibliographystyle{amsalpha}
