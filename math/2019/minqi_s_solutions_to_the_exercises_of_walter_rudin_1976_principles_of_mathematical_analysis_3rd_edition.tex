@@ -484,7 +484,7 @@ Without loss of generality, suppose $\limsup_{n\to\infty}b_n$ is finite.
 
 \setcounter{chapter}{10}
 \chapter{The Lebesgue Theory}
-\section{Exercise 1: $\int_E fd\mu=0$ Implies $f=0$ Almost Everywhere}
+\section{Exercise 1: $\int_E fd\mu=0$ and $f\geqslant0$ Implies $f=0$ Almost Everywhere}\label{Exercise 11.1}
 If $f\geqslant0$ and $\int_E fd\mu=0$, prove that $f(x)=0$ almost everywhere on $E$.
 \begin{proof}
 Define\[
@@ -516,6 +516,26 @@ F_i\cap F_j=\varnothing,\quad\forall i\ne j.
 \mu(A)=0.
 \]
 \end{proof}
+\section{Exercise 2: $\int_A fd\mu=0$ for all $A$ Implies $f=0$ Almost Everywhere}
+If $\int_Afd\mu=0$ for every measurable subset $A$ of a measurable set $E$, then $f(x)=0$ almost everywhere on $E$.
+\begin{proof}
+Suppose $\int_Afd\mu=0$ for every measurable subset $A$ of a measurable set $E$.
+
+Define\[
+E^+=\{x|f(x)>0\}
+\]and\[
+E^-=\{x|f(x)<0\}.
+\]Then Theorem 11.15 of \cite{rudin1976principles} implies that $E^+$ and $E^-$ are measurable. Hence\[
+\int_{E^+}fd\mu=\int_{E^-}fd\mu=0.
+\]By \hyperref[Exercise 11.1]{Exercise 11.1}, $f(x)=0$ almost everywhere on $E^+$ and $E^-$. Therefore,\[
+\begin{split}
+\mu\left(\left\{x|f(x)\ne0\right\}\right)&=\mu\left(E^+\cup E^-\right)\\
+&=\mu\left(E^+\right)+\mu\left(E^-\right)\\
+&=0.
+\end{split}
+\] I.e., $f(x)=0$ almost everywhere on $E$.
+\end{proof}
+
 
 \backmatter
 \bibliographystyle{amsalpha}
