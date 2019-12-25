@@ -4,6 +4,7 @@
 \usepackage{hyperref}
 \usepackage{mathtools}
 \usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
+\usepackage{mathrsfs}
 \geometry{a4paper}                   % ... or a4paper or a5paper or ... 
 
 \newtheorem{theorem}{Theorem}[chapter]
@@ -525,7 +526,7 @@ Define\[
 E^+=\{x|f(x)>0\}
 \]and\[
 E^-=\{x|f(x)<0\}.
-\]Then Theorem 11.15 of \cite{rudin1976principles} implies that $E^+$ and $E^-$ are measurable. Hence\[
+\]Then Theorem~11.15 of \cite{rudin1976principles} implies that $E^+$ and $E^-$ are measurable. Hence\[
 \int_{E^+}fd\mu=\int_{E^-}fd\mu=0.
 \]By \hyperref[Exercise 11.1]{Exercise 11.1}, $f(x)=0$ almost everywhere on $E^+$ and $E^-$. Therefore,\[
 \begin{split}
@@ -535,7 +536,19 @@ E^-=\{x|f(x)<0\}.
 \end{split}
 \] I.e., $f(x)=0$ almost everywhere on $E$.
 \end{proof}
-
+\section{Exercise 4: $f\in\mathscr{L}(\mu)$ and $g$ is Bounded and Measurable Implies $fg\in\mathscr{L}(\mu)$}
+If $f\in\mathscr{L}(\mu)$ on $E$ and $g$ is bounded and measurable on $E$, then $fg\in\mathscr{L}(\mu)$ on $E$.
+\begin{proof}
+Since $g$ is measurable, by Theorem~11.20 of \cite{rudin1976principles}, there exists a sequence of measurable functions $g_n(x)$ such that\[
+\lim_{n\to\infty}g_n(x)=g(x),\quad\forall x\in E.
+\]By Theorem~11.18 of \cite{rudin1976principles}, $f(x)g_n(x)$ is measurable for all $n$. Note that\[
+\lim_{n\to\infty}f(x)g_n(x)=f(x)g(x),\quad\forall x\in E.
+\]Since $g$ is bounded, there exists $M\geqslant0$ such that\[
+\vert f(x)g_n(x)\vert\leqslant M\vert f(x)\vert.
+\]Lesbegue's dominated convergence theorem then implies\[
+\int_E f(x)g(x)d\mu=\lim_{n\to\infty}\int_E f(x)g_n(x)d\mu\leqslant M\int_E f(x)d\mu.
+\]Since $f\in\mathscr{L}(\mu)$ on $E$, $\int_E f(x)d\mu$ is finite. Thus $\int_E f(x)g(x)d\mu$ is finite. Therefore $fg\in\mathscr{L}(\mu)$ on $E$.
+\end{proof}
 
 \backmatter
 \bibliographystyle{amsalpha}
