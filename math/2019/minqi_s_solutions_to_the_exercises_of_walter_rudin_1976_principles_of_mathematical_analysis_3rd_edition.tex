@@ -536,6 +536,28 @@ E^-=\{x|f(x)<0\}.
 \end{split}
 \] I.e., $f(x)=0$ almost everywhere on $E$.
 \end{proof}
+
+\section{Exercise 3: $\{x:f_n(x)\text{ converges}\}$ is Measurable if All $f_n(x)$ are Measurable}
+If $\{f_n\}$ is a sequence of measurable functions, prove that the set of points $x$ at which $\{f_n(x)\}$ converges is measurable.
+\begin{proof}
+Define\[
+E\equiv\{x:f_n(x)\text{ converges as }n\to\infty\}.
+\]By Theorem~3.11 of \cite{rudin1976principles}, \[
+E=\{x:f_n(x)\text{ is a Cauchy sequence}\}.
+\]For all $a,b,c,N\in\{1,2,3,\dots\}$, define\[
+\begin{split}
+A_{a,b,c}&\equiv\{x:\vert f_b(x)-f_c(x)\vert<\frac{1}{a}\},\\
+B_{a,b,N}&\equiv\bigcap_{c=N}^\infty A_{a,b,c},\\
+C_{a,N}&\equiv\bigcap_{b=N}^\infty B_{a,b,N},\\
+D_{a}&\equiv\bigcup_{N=1}^\infty C_{a,N}.\\
+\end{split}
+\]Then, by the definition of Cauchy sequence, it is obvious that\[
+E=\bigcap_{a=1}^\infty D_a.
+\]We claim that $A_{a,b,c}$ is measurable for all $a,b,c\in\{1,2,3,\dots\}$. To show this, note that\[
+A_{a,b,c}=\{x: f_b(x)<f_c(x)+\frac{1}{a}\}\cap\{x: f_b(x)>f_c(x)-\frac{1}{a}\}.
+\]Since $f_b(x)$ is a measurable function, Theorem~11.15 of \cite{rudin1976principles} implies that both sets above are measurable. Hence $A_{a,b,c}$ is measurable, since the measurable sets form a $\sigma$-ring. Finally, $E$ is measurable, since the measurable sets form a $\sigma$-ring.
+\end{proof}
+
 \section{Exercise 4: $f\in\mathscr{L}(\mu)$ and $g$ is Bounded and Measurable Implies $fg\in\mathscr{L}(\mu)$}
 If $f\in\mathscr{L}(\mu)$ on $E$ and $g$ is bounded and measurable on $E$, then $fg\in\mathscr{L}(\mu)$ on $E$.
 \begin{proof}
