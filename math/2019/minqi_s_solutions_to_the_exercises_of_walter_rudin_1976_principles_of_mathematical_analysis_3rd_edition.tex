@@ -546,7 +546,7 @@ E\equiv\{x:f_n(x)\text{ converges as }n\to\infty\}.
 E=\{x:f_n(x)\text{ is a Cauchy sequence}\}.
 \]For all $a,b,c,N\in\{1,2,3,\dots\}$, define\[
 \begin{split}
-A_{a,b,c}&\equiv\{x:\vert f_b(x)-f_c(x)\vert<\frac{1}{a}\},\\
+A_{a,b,c}&\equiv\{x:\vert f_b(x)-f_c(x)\vert<e^{-a}\},\\
 B_{a,b,N}&\equiv\bigcap_{c=N}^\infty A_{a,b,c},\\
 C_{a,N}&\equiv\bigcap_{b=N}^\infty B_{a,b,N},\\
 D_{a}&\equiv\bigcup_{N=1}^\infty C_{a,N}.\\
@@ -554,7 +554,7 @@ D_{a}&\equiv\bigcup_{N=1}^\infty C_{a,N}.\\
 \]Then, by the definition of Cauchy sequence, it is obvious that\[
 E=\bigcap_{a=1}^\infty D_a.
 \]We claim that $A_{a,b,c}$ is measurable for all $a,b,c\in\{1,2,3,\dots\}$. To show this, note that\[
-A_{a,b,c}=\{x: f_b(x)<f_c(x)+\frac{1}{a}\}\cap\{x: f_b(x)>f_c(x)-\frac{1}{a}\}.
+A_{a,b,c}=\{x: f_b(x)<f_c(x)+e^{-a}\}\cap\{x: f_b(x)>f_c(x)-e^{-a}\}.
 \]Since $f_b(x)$ is a measurable function, Theorem~11.15 of \cite{rudin1976principles} implies that both sets above are measurable. Hence $A_{a,b,c}$ is measurable, since the measurable sets form a $\sigma$-ring. Finally, $E$ is measurable, since the measurable sets form a $\sigma$-ring.
 \end{proof}
 
@@ -571,6 +571,43 @@ Since $g$ is measurable, by Theorem~11.20 of \cite{rudin1976principles}, there e
 \int_E f(x)g(x)d\mu=\lim_{n\to\infty}\int_E f(x)g_n(x)d\mu\leqslant M\int_E f(x)d\mu.
 \]Since $f\in\mathscr{L}(\mu)$ on $E$, $\int_E f(x)d\mu$ is finite. Thus $\int_E f(x)g(x)d\mu$ is finite. Therefore $fg\in\mathscr{L}(\mu)$ on $E$.
 \end{proof}
+
+\section{Exercise 5: An Example of Strict Inequality in Fatou's Theorem}
+Put\[
+\begin{split}
+g(x)&=\begin{cases}
+0\quad(0\leqslant x\leqslant\frac{1}{2}),\\
+1\quad(\frac{1}{2}<x\leqslant1),
+\end{cases}\\
+f_{2k}(x)&=g(x)\quad(0\leqslant x\leqslant1),\\
+f_{2k+1}(x)&=g(1-x)\quad(0\leqslant x\leqslant1).
+\end{split}
+\]Show that\[
+\liminf_{n\to\infty}f_n(x)=0\quad(0\leqslant x\leqslant1),
+\]but\[
+\int_0^1 f_n(x)dx=\frac{1}{2}.
+\]
+\begin{proof}
+\[
+\begin{split}
+\liminf_{n\to\infty}f_n(x)&=\sup\left\{\inf\{f_m(x):m\geqslant n\}:n\geqslant0\right\}\\
+&=\sup\left\{0:n\geqslant0\right\}\\
+&=0.
+\end{split}
+\]
+
+Since\[
+\int_0^1 f_{2k}(x)dx=1\cdot\left(1-\frac{1}{2}\right)=\frac{1}{2}
+\]and\[
+\int_0^1 f_{2k+1}(x)dx=1\cdot\left(\frac{1}{2}-0\right)=\frac{1}{2},
+\]we conclude that\[
+\int_0^1 f_n(x)dx=\frac{1}{2}.
+\]Hence $f_n(x)$ gives an example of strict inequality in Fatou's theorem:\[
+0=\int_0^1\liminf_{n\to\infty}f_n(x)d\mu<\liminf_{n\to\infty}\int_0^1f_n(x)d\mu=\frac{1}{2}.
+\]
+\end{proof}
+
+
 
 \backmatter
 \bibliographystyle{amsalpha}
