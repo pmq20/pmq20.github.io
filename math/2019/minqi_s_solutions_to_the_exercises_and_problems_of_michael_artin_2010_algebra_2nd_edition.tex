@@ -523,5 +523,27 @@ e=ea=a,\quad\forall a\in S.
 \]Hence the set contains exactly one element $e$, i.e.\[
 S=\{e\}.
 \]
+\section{Exercise 2.1.3: The Shift Map has NO Right Inverse but Infinite Left Inverses}
+Let $\mathbb{N}$ denote the set $\{1,2,3,\dots\}$ of natural numbers, and let $s:\mathbb{N}\to\mathbb{N}$ be the shift map, defined by $s(n)=n+1$. Prove that $s$ has no right inverse, but it has infinitely many left inverses.
+\begin{proof}
+Suppose $s$ has a right inverse $t:\mathbb{N}\to\mathbb{N}$, then\[
+s(t(n))=t(n)+1=n,\quad\forall n\in\mathbb{N}.
+\]In particular,\[
+t(1)+1=1.
+\]But\[
+t(1)+1\geqslant1+1=2,
+\]which is a contradiction.
+
+Let $r_k:\mathbb{N}\to\mathbb{N}$ be defined by\[
+r_k(n)\equiv\begin{cases}
+k & \text{if } n=1,\\
+n-1 & \text{otherwise},
+\end{cases}
+\]where $k\in\mathbb{N}$. Pick any $n\in\mathbb{N}$, then\[
+r_k(s(n))=r_k(n+1)=n.
+\]Hence $r_k$ is a left inverse of $s$. Further, since there are infinitely many choices of $k$ in $\mathbb{N}$, $s$ has infinitely many left inverses.
+\end{proof}
+
+
 \end{proof}
 \end{document}
