@@ -523,6 +523,8 @@ e=ea=a,\quad\forall a\in S.
 \]Hence the set contains exactly one element $e$, i.e.\[
 S=\{e\}.
 \]
+\end{proof}
+
 \section{Exercise 2.1.3: The Shift Map has NO Right Inverse but Infinite Left Inverses}
 Let $\mathbb{N}$ denote the set $\{1,2,3,\dots\}$ of natural numbers, and let $s:\mathbb{N}\to\mathbb{N}$ be the shift map, defined by $s(n)=n+1$. Prove that $s$ has no right inverse, but it has infinitely many left inverses.
 \begin{proof}
@@ -544,6 +546,86 @@ r_k(s(n))=r_k(n+1)=n.
 \]Hence $r_k$ is a left inverse of $s$. Further, since there are infinitely many choices of $k$ in $\mathbb{N}$, $s$ has infinitely many left inverses.
 \end{proof}
 
+\section{Exercise 2.2.1: The Multiplication Table of $S_3$}
+Make a multiplication table for the symmetric group $S_3$.
+\begin{proof}[Answer]
+Let $x,y\in S_3$ be defined by\[
+\begin{array}{ccc}
+x(1)=2,&x(2)=3,&x(3)=1;\\
+y(1)=2,&y(2)=1,&y(3)=3.
+\end{array}
+\]Then\[
+\begin{array}{ccc}
+xx(1)=x(2)=3,&xx(2)=x(3)=1,&xx(3)=x(1)=2;\\
+yy(1)=y(2)=1,&yy(2)=y(1)=2,&yy(3)=y(3)=3;\\
+xy(1)=x(2)=3,&xy(2)=x(1)=2,&xy(3)=x(3)=1;\\
+yx(1)=y(2)=1,&yx(2)=y(3)=3,&yx(3)=y(1)=2.\\
+\end{array}
+\]Hence\[
+S_3=\{x,y,xx,yy,xy,yx\}.
+\]
 
+\begin{table}[ht]
+\centering
+\begin{tabular}{c||c|c|c|c|c|c}
+$\cdot$
+& $x$
+& $y$
+& $xx$
+& $yy$
+& $xy$
+& $yx$
+\\\hline
+\hline
+$x$     
+& $xx$
+& $xy$
+& $yy$
+& $x$
+& $yx$
+& $y$
+\\\hline
+$y$ 
+& $yx$
+& $yy$
+& $xy$
+& $y$
+& $xx$
+& $x$
+\\\hline
+$xx$          
+& $yy$
+& $yx$
+& $x$
+& $xx$
+& $y$
+& $xy$
+\\\hline
+$yy$   
+& $x$
+& $y$
+& $xx$
+& $yy$
+& $xy$
+& $yx$
+\\\hline
+$xy$     
+& $y$
+& $x$
+& $yx$
+& $xy$
+& $yy$
+& $xx$
+\\\hline
+$yx$      
+&  $xy$
+&  $xx$
+&  $y$
+&  $yx$
+&  $x$
+&  $yy$
+\end{tabular}
+\end{table}
 \end{proof}
+
 \end{document}
