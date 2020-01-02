@@ -617,15 +617,39 @@ $xy$
 & $yy$
 & $xx$
 \\\hline
-$yx$      
-&  $xy$
-&  $xx$
-&  $y$
-&  $yx$
-&  $x$
-&  $yy$
+$yx$
+& $xy$
+& $xx$
+& $y$
+& $yx$
+& $x$
+& $yy$
 \end{tabular}
 \end{table}
+\end{proof}
+
+\section{Exercise 2.2.2: The Subset of Invertible Elements is a Group}
+Let $S$ be a set with an associative law of composition and with an identity element. Prove that the subset consisting of the invertible elements in $S$ is a group.
+\begin{proof}
+Denote the identity element of $S$ as $e$.
+
+Define\[
+G\equiv\{x\in S: x\text{ is invertible}\}.
+\]
+
+Pick any $x,y\in G$, we claim that $xy\in G$. This can be proven by showing that $y^{-1}x^{-1}$ is the inverse of $xy$:\[
+(y^{-1}x^{-1})(xy)=y^{-1}(x^{-1}x)y=y^{-1}y=e,
+\]\[
+(xy)(y^{-1}x^{-1})=x(yy^{-1})x^{-1}=xx^{-1}=e.
+\]
+
+Next, we claim that $e\in G$. This can be proven by showing that $e$ is the inverse of $e$:\[
+ee=e.
+\]
+
+Finally, we claim that $x^{-1}\in G$ if $x\in G$. This is obvious since $x$ is the inverse of $x^{-1}$.
+
+Therefore, $G$ is a group.
 \end{proof}
 
 \end{document}
