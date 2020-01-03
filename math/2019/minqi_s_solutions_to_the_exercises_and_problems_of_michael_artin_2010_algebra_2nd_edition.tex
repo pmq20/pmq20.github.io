@@ -652,4 +652,36 @@ Finally, we claim that $x^{-1}\in G$ if $x\in G$. This is obvious since $x$ is t
 Therefore, $G$ is a group.
 \end{proof}
 
+\section{Exercise 2.2.4: Examples and Counterexamples of Subgroups}
+In which of the following cases is $H$ a subgroup of $G$?
+\begin{enumerate}
+\item $G=GL_n(\mathbb{C})$ and $H=GL_n(\mathbb{R})$.
+\item $G=\mathbb{R}^\times$ and $H=\{1,-1\}$.
+\item $G=\mathbb{Z}^+$ and $H$ is the set of positive integers.
+\item $G=\mathbb{R}^\times$ and $H$ is the set of positive reals.
+\item $G=GL_2(\mathbb{R})$ and $H$ is the set of matrices $\begin{bmatrix}
+a&0\\
+0&0
+\end{bmatrix}$, with $a\ne 0$.
+\end{enumerate}
+\begin{proof}
+\begin{enumerate}
+\item We claim that $GL_n(\mathbb{R})$ is a subgroup of $G=GL_n(\mathbb{C})$. This can be shown by noticing that $\mathbb{R}$ is a field closed under multiplication and addition; the identity matrix is a real matrix; and the inverse of a real matrix is a real matrix because its determinant and minors are real and\[
+A^{-1}=\frac{1}{\det A}\text{adj}(A).
+\]
+\item We claim that $\{1,-1\}$ is a subgroup of $\mathbb{R}^\times$. To prove this, we first check the closure:\[
+\begin{split}
+1\times1&=1\in H,\\
+1\times(-1)&=-1\in H,\\
+(-1)\times1&=-1\in H,\\
+(-1)\times(-1)&=1\in H.
+\end{split}
+\]Then, note that the identity $1$ is in $H$. Finally, $1^{-1}=1\in H$ and $-1^{-1}=-1\in H$.
+\item We claim that $H$ is not a subgroup of $\mathbb{Z}^+$. Because, say, the inverse of $8$ is not in $H$.
+\item We claim that the set of positive reals is a subgroup of $G=\mathbb{R}^\times$. This can be shown by noticing that the product of two positive reals is a positive real; the identity $1$ is in $H$; and the inverse of a positive real is a positive real.
+\item We claim that $H$ is not a subgroup of $GL_2(\mathbb{R})$, because $H\not\subset GL_2(\mathbb{R})$.
+\end{enumerate}
+\end{proof}
+
+
 \end{document}
