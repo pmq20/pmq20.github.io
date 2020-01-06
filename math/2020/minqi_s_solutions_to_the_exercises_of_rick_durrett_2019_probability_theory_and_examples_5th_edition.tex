@@ -1,0 +1,80 @@
+\documentclass{amsbook}
+
+\usepackage{amssymb}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
+\geometry{a4paper}                   % ... or a4paper or a5paper or ... 
+
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{lemma}[theorem]{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{xca}[theorem]{Exercise}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\numberwithin{section}{chapter}
+\numberwithin{equation}{chapter}
+
+\begin{document}
+
+\frontmatter
+
+\title{Minqi's Solutions to the Exercises of Rick Durrett (2019), Probability: Theory and Examples (5th Edition)}
+
+\author{Minqi Pan\footnote{Website: http://www.minqi-pan.com}}
+
+\date{\today}
+
+\maketitle
+
+\setcounter{page}{4}
+
+\tableofcontents
+
+\mainmatter
+
+\chapter{Measure Theory}
+
+\section{Exercise 1.1.1: An Example of Probability Space}
+Let $\Omega=\mathbb{R},\mathcal{F}=$ all subsets so that $A$ or $A^c$ is countable, $P(A)=0$ in the first case and $=1$ in the second. Show that $(\Omega,\mathcal{F},P)$ is a probability space.
+\begin{proof}
+First, we prove that $\mathcal F$ is a $\sigma-$algebra on $\mathbb{R}$.
+\begin{enumerate}
+\item $\mathcal F$ is nonempty because, say, $\{\sqrt{2}\}$ is in $\mathcal F$.
+\item Suppose $A\in\mathcal F$, then, by definition of $\mathcal F$, $A=(A^c)^c$ or $A^c$ is countable. Hence $A^c\in\mathcal F$.
+\item Suppose $A_1,A_2,\dots\in\mathcal{F}$ is a countable sequence of sets. Define\[
+\begin{split}
+\mathcal{A}&\equiv\{A_1,A_2,\dots\},\\
+\mathcal{B}&\equiv\{A_i\in\mathcal{A}:A_i\text{ is countable}\},\\
+\mathcal{C}&\equiv\mathcal{A}-\mathcal{B}.
+\end{split}
+\]If $\mathcal{C}=\varnothing$, then $\cup_{i=1}^\infty A_i$ is countable because of Theorem~2.12 of \cite{rudin1976principles}. Otherwise, pick any $A_m\in\mathcal{C}$, then $A_m^c$ must be countable, because $A_m\in\mathcal{F}$ and $A_m\notin\mathcal{B}$. Since\[
+\left(\bigcup_{i=1}^\infty A_i\right)^c=\bigcap_{i=1}^\infty A_i^c\subset A_m^c,
+\]Theorem~2.8 of \cite{rudin1976principles} implies that $(\cup_{i=1}^\infty A_i)^c$ is countable. Therefore $\cup_{i=1}^\infty A_i\in\mathcal F$.
+\end{enumerate}
+
+Next, we prove that $P$ is a measure on $(\mathbb{R},\mathcal{F})$.
+\begin{enumerate}
+\item $P$ is nonnegative because $P$ maps to either $0$ or $1$. $P(\varnothing)=0$ because $\varnothing$ is countable.
+\item Suppose $A_1,A_2,\dots\in\mathcal{F}$ is a countable sequence of disjoint sets. Define $\mathcal{A}, \mathcal{B}, \mathcal{C}$ as above. If $\mathcal{C}=\varnothing$, then, as we have shown above, $\cup_{i=1}^\infty A_i$ is countable. Hence\[
+P\left(\bigcup_{i=1}^\infty A_i\right)=0=\sum_{A_i\in\mathcal{B}} P(A_i)=\sum_{i=1}^\infty P(A_i).
+\]Otherwise, we claim that $\mathcal{C}$ cannot have two distinct elements. To show this, suppose $C_1,C_2\in\mathcal{C}$ and $C_1\ne C_2$. Then $C_1^c\cup C_2^c=\mathbb{R}$ because $C_1\cap C_2=\varnothing$. Then Theorem~2.8 of \cite{rudin1976principles} implies that $\mathbb{R}$ is countable, but this contradicts with the corollary of Theorem~2.43 of \cite{rudin1976principles}.Therefore $\mathcal{C}$ contains only one element, say, $A_m$. Hence\[
+P\left(\bigcup_{i=1}^\infty A_i\right)=1=P(A_m)=\sum_{A_i\in\mathcal{B}} P(A_i)+\sum_{A_i\in\mathcal{C}} P(A_i)=\sum_{i=1}^\infty P(A_i).
+\]
+\end{enumerate}
+
+Finally, we prove that $P$ is a probability measure. Note that $\mathbb{R}^c=\varnothing$ is countable. Hence\[
+P(\mathbb{R})=1.
+\]
+\end{proof}
+
+
+\backmatter
+\bibliographystyle{amsalpha}
+\bibliography{minqi_s_solutions_to_the_exercises_of_rick_durrett_2019_probability_theory_and_examples_5th_edition}
+\end{document}
