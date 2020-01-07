@@ -72,6 +72,35 @@ Finally, we prove that $P$ is a probability measure. Note that $\mathbb{R}^c=\va
 P(\mathbb{R})=1.
 \]
 \end{proof}
+\section{Exercise 1.1.4: The Union of Increasing $\sigma-$algebras is NOT a $\sigma-$algebra}
+\begin{enumerate}
+\item Show that if $\mathcal{F}_1\subset\mathcal{F}_2\subset\dots$ are $\sigma-$algebras, then $\cup_i\mathcal{F}_i$ is an algebra.
+\item Give an example to show that $\cup_i\mathcal{F}_i$ need not be a $\sigma-$algebra.
+\end{enumerate}
+\begin{proof}
+\begin{enumerate}
+\item Pick any $F\in\cup_i\mathcal{F}_i$, then there exists $i_0$ such that $F\in\mathcal{F}_{i_0}$. Since $\mathcal{F}_{i_0}$ is an algebra, $F^c\in\mathcal{F}_{i_0}$. Hence $F^c\in\cup_i\mathcal{F}_i$.
+
+Further more, pick any $E,F\in\cup_i\mathcal{F}_i$, then there exists $i_0$ and $j_0$ such that $F\in\mathcal{F}_{i_0}$ and $E\in\mathcal{F}_{j_0}$. Without loss of generality, suppose $i_0\leqslant j_0$. Then $F\in\mathcal{F}_{j_0}$ because $\mathcal{F}_{i_0}\subset\mathcal{F}_{j_0}$. Since $F\in\mathcal{F}_{j_0}$ is an algebra, $E\cup F\in\mathcal{F}_{j_0}$. Therefore $E\cup F\in\cup_i\mathcal{F}_i$.
+\item Let $\Omega\equiv[0,1]$. Define\[
+\begin{split}
+\mathcal{F}_1&\equiv\sigma\left([0.0,0.1],[0.1,1.0]\right),\\
+\mathcal{F}_2&\equiv\sigma\left([0.00,0.01],[0.01,0.10],[0.10,0.11],[0.11,1.00]\right),\\
+&\dots.
+\end{split}
+\]where $0.1$ is the binary representation of $\frac{1}{2}$, etc. Then it is clear that\[
+\mathcal{F}_1\subset\mathcal{F}_2\subset\dots.
+\]Pick an irrational number $x\in(0,1)$, and suppose its binary representation is\[
+0.s_1s_2s_3\dots.
+\]Then\[
+[x,1]=\bigcap_{i=1}^\infty[0.s_1s_2\dots s_{i-1}s_i,1].
+\]To arrive at a contradiction, suppose $\cup_i\mathcal{F}_i$ is a $\sigma-$algebra, then\[
+[x,1]\in\cup_i\mathcal{F}_i
+\]since $[0.s_1s_2\dots s_{i-1}s_i,1]\in\cup_i\mathcal{F}_i$ for all $i$. Then there exists $i_0$ such that\[
+[x,1]\in\mathcal{F}_{i_0},
+\]which is a contradiction, since $\mathcal{F}_{i_0}$ only contains intervals of rational endpoints.
+\end{enumerate}
+\end{proof}
 
 
 \backmatter
