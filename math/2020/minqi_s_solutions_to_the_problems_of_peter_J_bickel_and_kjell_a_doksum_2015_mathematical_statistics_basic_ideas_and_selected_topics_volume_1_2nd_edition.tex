@@ -1,0 +1,111 @@
+\documentclass{amsbook}
+
+\usepackage{amssymb}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
+\geometry{a4paper}                   % ... or a4paper or a5paper or ... 
+
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{lemma}[theorem]{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{xca}[theorem]{Exercise}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\numberwithin{section}{chapter}
+\numberwithin{equation}{chapter}
+
+\begin{document}
+
+\frontmatter
+
+\title{Minqi's Solutions to the Problems of Peter J. Bickel and Kjell A. Doksum (2015), Mathematical Statistics: Basic Ideas and Selected Topics, Volume I (2nd Edition)}
+
+\author{Minqi Pan\footnote{Website: http://www.minqi-pan.com}}
+
+\date{\today}
+
+\maketitle
+
+\setcounter{page}{4}
+
+\tableofcontents
+
+\mainmatter
+
+\chapter{Statistical Models, Goals, and Performance Criteria}
+
+\section{Problem 1.1.1: Examples of Statistical Models}
+Give a formal statement of the following models identifying the probability laws of the data and the parameter space. State whether the model in question is parametric or nonparametric.
+\begin{enumerate}[label=(\alph*)]
+\item A geologist measures the diameters of a large number $n$ of pebbles in an old stream bed.
+Theoretical considerations lead him to believe that the logarithm of pebble diameter is normally distributed with mean $\mu$ and variance $\sigma$.
+He wishes to use his observations to obtain some information about $\mu$ and $\sigma^2$
+but has in advance no knowledge of the magnitudes of the two parameters.
+\item A measuring instrument is being used to obtain $n$ independent determinations of a physical constant $\mu$.
+Suppose that the measuring instrument is known to be biased to the positive side by $0.1$ units.
+Assume that the errors are otherwise identically distributed normal random variables with known variance.
+\item In part (b) suppose that the amount of bias is positive but unknown. Can you perceive any difficulties in making statements about $\mu$ for this model?
+\item The number of eggs laid by an insect follows a Poisson distribution with unknown mean $\lambda$.
+Once laid, each egg has an unknown chance $p$ of hatching and the hatching of one egg is independent of the hatching of the others.
+An entomologist studies a set of $n$ such insects observing both the number of eggs laid and the number of eggs hatching for each nest.
+\end{enumerate}
+\begin{proof}[Answer]
+\begin{enumerate}[label=(\alph*)]
+\item Let sample space $\Omega$ be defined by\[
+\Omega\equiv\{(P_1,\dots,P_n):P_i\text{ is a pebble of the old stream}\}.
+\]Let $\mathbf{X}=(X_1,\dots,X_n):\Omega\to\mathbb{R}^n$ be the random vector on $\Omega$ defined by\[
+\mathbf{X}(P_1,\dots,P_n)\equiv(\log(\text{diameter of }P_i),\dots,\log(\text{diameter of }P_n)).
+\]We assume that $\mathbf{X}\sim P_{\mu,\sigma^2}$, where $P_{\mu,\sigma^2}$ is the probability distributions on $\mathbb{R}^n$ according to which $X_1,\dots,X_n$ are independent and identically distributed with a common $\mathcal{N}(\mu,\sigma^2)$ distribution. Let the parameter space $\Theta$ be defined by\[
+\Theta\equiv\{(\mu,\sigma^2):\mu\in\mathbb{R},\sigma^2>0\}.
+\]Finally, let model $\mathcal{P}$ be defined by\[
+\mathcal{P}\equiv\{P_{\mu,\sigma^2}:(\mu,\sigma^2)\in\Theta\}.
+\]$\mathcal{P}$ is parametric.
+\item Let sample space $\Omega$ be defined by\[
+\Omega\equiv\{(D_1,\dots,D_n)\in\mathbb{R}^n:D_i\text{ is a determination of the physical constant}\}.
+\]Let $\mathbf{X}=(X_1,\dots,X_n):\Omega\to\mathbb{R}^n$ be the random vector on $\Omega$ defined by\[
+\mathbf{X}(D_1,\dots,D_n)\equiv(D_1,\dots,D_n).
+\]Let $\mathbf{Y}=(Y_1,\dots,Y_n):\Omega\to\mathbb{R}^n$ be the random vector on $\Omega$ defined by\[
+\mathbf{Y}=\mathbf{X}-\mu.
+\]We assume that $\mathbf{Y}\sim P_{\sigma^2}$, where $P_{\sigma^2}$ is the probability distributions on $\mathbb{R}^n$ according to which $Y_1,\dots,Y_n$ are independently and identically distributed with a common $\mathcal{N}(+0.1,\sigma^2)$ distribution. Therefore\[
+X_i\sim\mathcal{N}(\mu+0.1,\sigma^2),\quad\forall i=1,\dots,n.
+\]That is to say, $\mathbf{X}\sim P_{\mu+0.1,\sigma^2}$, where $P_{\mu+0.1,\sigma^2}$ is the probability distributions on $\mathbb{R}^n$ according to which $X_1,\dots,X_n$ are independent and identically distributed with a common $\mathcal{N}(\mu+0.1,\sigma^2)$ distribution. Let the parameter space $\Theta$ be defined by\[
+\Theta\equiv\{(\mu+0.1,\sigma^2):\mu+0.1\in\mathbb{R},\sigma^2>0\}.
+\]Finally, let model $\mathcal{P}$ be defined by\[
+\mathcal{P}\equiv\{P_{\mu+0.1,\sigma^2}:(\mu+0.1,\sigma^2)\in\Theta\}.
+\]$\mathcal{P}$ is parametric.
+\item Yes. The difficulty is that we need one more parameter $\mu'$, and the parametrization becomes unidentifiable. Specifically, we need to assume that $\mathbf{Y}\sim P_{\mu',\sigma^2}$, where $P_{\mu',\sigma^2}$ is the probability distributions on $\mathbb{R}^n$ according to which $Y_1,\dots,Y_n$ are independently and identically distributed with a common $\mathcal{N}(\mu',\sigma^2)$ distribution. Therefore\[
+X_i\sim\mathcal{N}(\mu+\mu',\sigma^2),\quad\forall i=1,\dots,n.
+\]That is to say, $\mathbf{X}\sim P_{\mu,\mu',\sigma^2}$, where $P_{\mu,\mu',\sigma^2}$ is the probability distributions on $\mathbb{R}^n$ according to which $X_1,\dots,X_n$ are independent and identically distributed with a common $\mathcal{N}(\mu,\mu',\sigma^2)$ distribution. Let the parameter space $\Theta$ be defined by\[
+\Theta\equiv\{(\mu,\mu',\sigma^2):\mu\in\mathbb{R},\mu'\in\mathbb{R},\sigma^2>0\}.
+\]Finally, let model $\mathcal{P}$ be defined by\[
+\mathcal{P}\equiv\{P_{\mu,\mu',\sigma^2}:(\mu,\mu',\sigma^2)\in\Theta\}.
+\]$\mathcal{P}$ is parametric.
+\item Let sample space $\Omega$ be defined by\[
+\Omega\equiv\{(N_1,\dots,N_n):N_i\text{ is a nest}\}.
+\]Let $\mathbf{X}:\Omega\to\mathbb{R}^n$ be the random vector on $\Omega$ defined by\[
+\begin{split}
+\mathbf{X}&\equiv(X_1,\dots,X_n),\\
+X_i(N_1,\dots,N_n)&\equiv\text{the number of eggs laid in }N_i.
+\end{split}
+\]Let $\mathbf{Y}:\Omega\to\mathbb{R}^n$ be the random vector on $\Omega$ defined by\[
+\begin{split}
+\mathbf{Y}&\equiv(Y_1,\dots,Y_n),\\
+Y_i(N_1,\dots,N_n)&\equiv\text{the number of eggs hatching in }N_i.
+\end{split}
+\]We assume that $(\mathbf{X},\mathbf{Y})\sim P_{\lambda,p}$, where $P_{\lambda,p}$ is the probability distributions on $\mathbb{R}^{2n}$ according to which $(X_1,Y_1),\dots,(X_n,Y_n)$ are independent and identically distributed with a common distribution function $F_{\lambda,p}$, where\[
+F_{\lambda,p}(x,y)=\mathcal{P}(x;\lambda)\cdot\mathcal{B}(y;x,p)
+\]Let the parameter space $\Theta$ be defined by\[
+\Theta\equiv\{(\lambda,p):\lambda>0,p\in[0,1]\}.
+\]Finally, let model $\mathcal{P}$ be defined by\[
+\mathcal{P}\equiv\{P_{\lambda,p}:(\lambda,p)\in\Theta\}.
+\]$\mathcal{P}$ is parametric.
+\end{enumerate}
+\end{proof}
+
+\end{document}
