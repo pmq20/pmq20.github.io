@@ -65,7 +65,7 @@ An entomologist studies a set of $n$ such insects observing both the number of e
 \mathbf{X}&\equiv(X_1,\dots,X_n),\\
 X_i(P_1,\dots,P_n)&\equiv\log(\text{diameter of }P_i).
 \end{split}
-\]We assume that $\mathbf{X}\sim P_{\mu,\sigma^2}$, where $P_{\mu,\sigma^2}$ is the probability distributions on $\mathbb{R}^n$ according to which $X_1,\dots,X_n$ are independent and identically distributed with a common $\mathcal{N}(\mu,\sigma^2)$ distribution. Let the parameter space $\Theta$ be defined by\[
+\]We assume that $\mathbf{X}\sim P_{\mu,\sigma^2}$, where $P_{\mu,\sigma^2}$ is a probability distribution on $\mathbb{R}^n$ according to which $X_1,\dots,X_n$ are independent and identically distributed with a common $\mathcal{N}(\mu,\sigma^2)$ distribution. Let the parameter space $\Theta$ be defined by\[
 \Theta\equiv\{(\mu,\sigma^2):\mu\in\mathbb{R},\sigma^2>0\}.
 \]Finally, let model $\mathcal{P}$ be defined by\[
 \mathcal{P}\equiv\{P_{\mu,\sigma^2}:(\mu,\sigma^2)\in\Theta\}.
@@ -79,16 +79,16 @@ X_i(D_1,\dots,D_n)&\equiv D_i.
 \end{split}
 \]Let $\mathbf{Y}=(Y_1,\dots,Y_n):\Omega\to\mathbb{R}^n$ be the random vector defined by\[
 \mathbf{Y}=\mathbf{X}-\mu.
-\]We assume that $\mathbf{Y}\sim P_{\sigma_0^2}$, where $P_{\sigma_0^2}$ is the probability distributions on $\mathbb{R}^n$ according to which $Y_1,\dots,Y_n$ are independently and identically distributed with a common $\mathcal{N}(+0.1,\sigma_0^2)$ distribution, where $\sigma_0^2$ is the known variance. Therefore\[
+\]We assume that $\mathbf{Y}\sim P_{\sigma_0^2}$, where $P_{\sigma_0^2}$ is a probability distribution on $\mathbb{R}^n$ according to which $Y_1,\dots,Y_n$ are independently and identically distributed with a common $\mathcal{N}(+0.1,\sigma_0^2)$ distribution, where $\sigma_0^2$ is the known variance. Therefore\[
 X_i\sim\mathcal{N}(\mu+0.1,\sigma_0^2),\quad\forall i=1,\dots,n.
-\]That is to say, $\mathbf{X}\sim P_{\mu+0.1}$, where $P_{\mu+0.1}$ is the probability distributions on $\mathbb{R}^n$ according to which $X_1,\dots,X_n$ are independent and identically distributed with a common $\mathcal{N}(\mu+0.1,\sigma_0^2)$ distribution. Let the parameter space $\Theta$ be defined by\[
+\]That is to say, $\mathbf{X}\sim P_{\mu+0.1}$, where $P_{\mu+0.1}$ is a probability distribution on $\mathbb{R}^n$ according to which $X_1,\dots,X_n$ are independent and identically distributed with a common $\mathcal{N}(\mu+0.1,\sigma_0^2)$ distribution. Let the parameter space $\Theta$ be defined by\[
 \Theta\equiv\{\mu+0.1:\mu+0.1\in\mathbb{R}\}.
 \]Finally, let model $\mathcal{P}$ be defined by\[
 \mathcal{P}\equiv\{P_{\mu+0.1}:\mu+0.1\in\Theta\}.
 \]$\mathcal{P}$ is parametric.
-\item Yes. The difficulty is that we need one more parameter $\mu'$, and the parametrization becomes unidentifiable. Specifically, we need to assume that $\mathbf{Y}\sim P_{\mu',\sigma_0^2}$, where $P_{\mu',\sigma_0^2}$ is the probability distributions on $\mathbb{R}^n$ according to which $Y_1,\dots,Y_n$ are independently and identically distributed with a common $\mathcal{N}(\mu',\sigma_0^2)$ distribution. Therefore\[
+\item Yes. The difficulty is that we need one more parameter $\mu'$, and the parametrization becomes unidentifiable. Specifically, we need to assume that $\mathbf{Y}\sim P_{\mu',\sigma_0^2}$, where $P_{\mu',\sigma_0^2}$ is a probability distribution on $\mathbb{R}^n$ according to which $Y_1,\dots,Y_n$ are independently and identically distributed with a common $\mathcal{N}(\mu',\sigma_0^2)$ distribution. Therefore\[
 X_i\sim\mathcal{N}(\mu+\mu',\sigma_0^2),\quad\forall i=1,\dots,n.
-\]That is to say, $\mathbf{X}\sim P_{\mu,\mu'}$, where $P_{\mu,\mu'}$ is the probability distributions on $\mathbb{R}^n$ according to which $X_1,\dots,X_n$ are independent and identically distributed with a common $\mathcal{N}(\mu+\mu',\sigma_0^2)$ distribution. Let the parameter space $\Theta$ be defined by\[
+\]That is to say, $\mathbf{X}\sim P_{\mu,\mu'}$, where $P_{\mu,\mu'}$ is a probability distribution on $\mathbb{R}^n$ according to which $X_1,\dots,X_n$ are independent and identically distributed with a common $\mathcal{N}(\mu+\mu',\sigma_0^2)$ distribution. Let the parameter space $\Theta$ be defined by\[
 \Theta\equiv\{(\mu,\mu'):\mu\in\mathbb{R},\mu'\in\mathbb{R}\}.
 \]Finally, let model $\mathcal{P}$ be defined by\[
 \mathcal{P}\equiv\{P_{\mu,\mu'}:(\mu,\mu')\in\Theta\}.
@@ -105,7 +105,7 @@ X_i(N_1,\dots,N_n)&\equiv\text{the number of eggs laid in }N_i.
 \mathbf{Y}&\equiv(Y_1,\dots,Y_n),\\
 Y_i(N_1,\dots,N_n)&\equiv\text{the number of eggs hatching in }N_i.
 \end{split}
-\]We assume that $(\mathbf{X},\mathbf{Y})\sim P_{\lambda,p}$, where $P_{\lambda,p}$ is the probability distributions on $\mathbb{R}^{2n}$ according to which $(X_1,Y_1),\dots,(X_n,Y_n)$ are independent and identically distributed with a common distribution function $F_{\lambda,p}$, where\[
+\]We assume that $(\mathbf{X},\mathbf{Y})\sim P_{\lambda,p}$, where $P_{\lambda,p}$ is a probability distribution on $\mathbb{R}^{2n}$ according to which $(X_1,Y_1),\dots,(X_n,Y_n)$ are independent and identically distributed with a common distribution function $F_{\lambda,p}$, where\[
 F_{\lambda,p}(x,y)=\mathcal{P}(x;\lambda)\cdot\mathcal{B}(y;x,p)
 \]Let the parameter space $\Theta$ be defined by\[
 \Theta\equiv\{(\lambda,p):\lambda>0,p\in[0,1]\}.
@@ -152,9 +152,9 @@ Y_i(I_1,\dots,I_{n_2})&\equiv\text{the blood pressure of }I_i\text{ measured aft
 \end{split}
 \]
 
-We assume that $\mathbf{X}\sim P_1$, where $P$ is the probability distributions on $\mathbb{R}^{n_1}$ according to which $X_1,\dots,X_{n_1}$ are independent and identically distributed with a common distribution function $F$.
+We assume that $\mathbf{X}\sim P_1$, where $P$ is a probability distribution on $\mathbb{R}^{n_1}$ according to which $X_1,\dots,X_{n_1}$ are independent and identically distributed with a common distribution function $F$.
 
-Also, we assume that $\mathbf{Y}\sim P_2$, where $P$ is the probability distributions on $\mathbb{R}^{n_2}$ according to which $Y_1,\dots,Y_{n_1}$ are independent and identically distributed with a common distribution function $G$.
+Also, we assume that $\mathbf{Y}\sim P_2$, where $P$ is a probability distribution on $\mathbb{R}^{n_2}$ according to which $Y_1,\dots,Y_{n_1}$ are independent and identically distributed with a common distribution function $G$.
 
 Since the drug either has no effect or lowers blood pressure, $F$ is stochastically larger than $G$. Hence, by \cite{strassen1965existence}, there exists a bivariate measure on ordered pairs having marginals equal to $F$ and $G$. Although each individual receives only one treatment, and so either the blood pressures after the drug or the blood pressure after the placebo is observed, the presumption of stochastically ordered marginals allows us to model in terms of a bivariate distribution of blood pressure in the population sampled before and after administration of the drug.
 \end{enumerate}
