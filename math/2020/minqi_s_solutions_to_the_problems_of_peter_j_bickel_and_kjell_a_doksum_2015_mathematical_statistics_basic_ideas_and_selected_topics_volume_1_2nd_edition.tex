@@ -3,6 +3,7 @@
 \usepackage{amssymb}
 \usepackage{hyperref}
 \usepackage{enumitem}
+\usepackage{mathtools}
 \usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
 \geometry{a4paper}                   % ... or a4paper or a5paper or ... 
 
@@ -150,6 +151,51 @@ We assume that $\mathbf{X}\sim P_1$, where $P$ is the probability distributions 
 Also, we assume that $\mathbf{Y}\sim P_2$, where $P$ is the probability distributions on $\mathbb{R}^{n_2}$ according to which $Y_1,\dots,Y_{n_1}$ are independent and identically distributed with a common distribution function $G$.
 
 Since the drug either has no effect or lowers blood pressure, $F$ is stochastically larger than $G$. Hence, by \cite{strassen1965existence}, there exists a bivariate measure on ordered pairs having marginals equal to $F$ and $G$. Although each individual receives only one treatment, and so either the blood pressures after the drug or the blood pressure after the placebo is observed, the presumption of stochastically ordered marginals allows us to model in terms of a bivariate distribution of blood pressure in the population sampled before and after administration of the drug.
+\end{enumerate}
+\end{proof}
+\section{Problem 1.1.7: Symmetric Distributions and their Properties}
+Show that $Y-c$ has the same distribution as $-Y+c$, if and only if, the density or frequency function $p$ of $Y$ satisfies $p(c+t)=p(c-t)$ for all $t$. Both $Y$ and $p$ are said to be symmetric about $c$.
+\begin{proof}
+Let $F_Y, F_{Y-c}$ and $F_{-Y+c}$ be the distribution functions of $Y,Y-c$ and $-Y+c$. Then, by definition and Theorem~1.2.1 of  \cite{durrett2019probability},\[
+\begin{split}
+F_Y(t)&=P(Y\leqslant t),\\
+F_{Y-c}(t)&=P(Y-c\leqslant t)=P(Y\leqslant c+t)=F_Y(c+t),\\
+F_{-Y+c}(t)&=P(-Y+c\leqslant t)=1-P(Y<c-t)=1-F_Y(c-t)+P(Y=c-t).
+\end{split}
+\]
+\begin{enumerate}
+\item If $Y$ has a frequency function $p$, then\[
+F_Y(t)=\sum_{y=-\infty}^tp(y).
+\]Hence
+\begin{gather*}
+F_{Y-c}(t)=F_{-Y+c}(t)\\
+\ArrowBetweenLines
+F_Y(c+t)=1-F_Y(c-t)+P(Y=c-t)\\
+\ArrowBetweenLines
+\sum_{y=-\infty}^{c+t}p(y)=1-\sum_{y=-\infty}^{c-t}p(y)+p(c-t)\\
+\ArrowBetweenLines
+\sum_{y=-\infty}^{c+t}p(y)=\sum_{y=c-t}^{\infty}p(y)\\
+\ArrowBetweenLines
+\sum_{y=-\infty}^{t}p(c+y)=\sum_{y=-\infty}^{t}p(c-y)\\
+\ArrowBetweenLines
+p(c+t)=p(c-t).\\
+\end{gather*}
+\item If $Y$ has a density function $p$, then\[
+F_Y(t)=\int_{-\infty}^tp(y)dy.
+\]Hence
+\begin{gather*}
+F_{Y-c}(t)=F_{-Y+c}(t)\\
+\ArrowBetweenLines
+F_Y(c+t)=1-F_Y(c-t)+P(Y=c-t)\\
+\ArrowBetweenLines
+\int_{-\infty}^{c+t}p(y)dy=1-\int_{-\infty}^{c-t}p(y)dy+0\\
+\ArrowBetweenLines
+\int_{-\infty}^{c+t}p(y)dy=\int_{c-t}^{\infty}p(y)dy\\
+\ArrowBetweenLines
+\int_{-\infty}^{t}p(c+y)dy=\int_{-\infty}^{t}p(c-y)dy\\
+\ArrowBetweenLines
+p(c+t)=p(c-t).\\
+\end{gather*}
 \end{enumerate}
 \end{proof}
 
