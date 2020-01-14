@@ -103,6 +103,25 @@ We have shown above that $\cup_i\mathcal{F}_i$ is closed under complements and p
 \]which contradicts with the obvious fact that $\mathcal{F}_{i_0}$ only contains intervals of rational endpoints.
 \end{enumerate}
 \end{proof}
+
+\section{Exercise 1.2.1: New Random Variable from Two Existing Random Variables}
+Suppose $X$ and $Y$ are random variables on $(\Omega,F,P)$ and let $A\in\mathcal{F}$. Show that if we let $Z(\omega)=X(\omega)$ for $\omega\in A$ and $Z(\omega)=Y(\omega)$ for $\omega\in A^c$, then $Z$ is a random variable.
+\begin{proof}
+Pick any $\omega\in\Omega$, then $\omega\in A$ or $\omega\in A^c$. Hence $Z$ is defined on all $\omega\in\Omega$. Since both of $X$ and $Y$ map into $\mathbb{R}$, $Z$ maps to $\mathbb{R}$. Therefore $Z$ is a well-defined function from $\Omega$ to $\mathbb{R}$.
+
+Next, we show that $Z$ is a measurable map. Pick any $B\in\mathcal{R}$, then\[
+\begin{split}
+Z^{-1}(B)&=\{\omega\in\Omega:Z(\omega)\in B\}\\
+&=\{\omega\in A:Z(\omega)\in B\}\cup\{\omega\in A^c:Z(\omega)\in B\}\\
+&=\{\omega\in A:X(\omega)\in B\}\cup\{\omega\in A^c:Y(\omega)\in B\}\\
+&=(A\cap\{\omega\in\Omega:X(\omega)\in B\})\cup(A^c\cap\{\omega\in\Omega:Y(\omega)\in B\})\\
+&=(A\cap X^{-1}(B))\cup(A^c\cap Y^{-1}(B)).
+\end{split}
+\]Since $X$ and $Y$ are random variables, $X^{-1}(B)\in\mathcal{F}$ and $Y^{-1}(B)\in\mathcal{F}$. Moreover, since $\mathcal{F}$ is an algebra, we conclude that\[
+(A\cap X^{-1}(B))\cup(A^c\cap Y^{-1}(B))\in\mathcal{F}.
+\]
+\end{proof}
+
 \section{Exercise 1.2.3: A Distribution Function has at most Countable Discontinuities}
 Show that a distribution function has at most countably many discontinuities.
 \begin{proof}
