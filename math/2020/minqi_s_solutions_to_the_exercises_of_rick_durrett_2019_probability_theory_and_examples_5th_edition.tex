@@ -122,6 +122,18 @@ Z^{-1}(B)&=\{\omega\in\Omega:Z(\omega)\in B\}\\
 \]
 \end{proof}
 
+\section{Exercise 1.2.2: Bounds of the Standard Normal Distribution Function}
+Let $\chi$ have the standard normal distribution. Use Theorem~1.2.6 to get upper and lower bounds on $P(\chi\geqslant4)$.
+\begin{proof}[Answer]
+Letting $x=4$ in Theorem~1.2.6 of \cite{durrett2019probability} gives\[
+(\frac{1}{4}-\frac{1}{4^3})e^{-8}\leqslant\int_4^\infty\exp(-\frac{y^2}{2})dy\leqslant\frac{1}{4}e^{-8}.
+\]Since\[
+P(\chi\geqslant4)=\frac{1}{\sqrt{2\pi}}\int_4^\infty\exp(-\frac{y^2}{2})dy,
+\]we conclude that\[
+\frac{1}{\sqrt{2\pi}}(\frac{1}{4}-\frac{1}{4^3})e^{-8}\leqslant P(\chi\geqslant4)\leqslant\frac{1}{\sqrt{2\pi}}\cdot\frac{1}{4}\cdot e^{-8}.
+\]
+\end{proof}
+
 \section{Exercise 1.2.3: A Distribution Function has at most Countable Discontinuities}
 Show that a distribution function has at most countably many discontinuities.
 \begin{proof}
