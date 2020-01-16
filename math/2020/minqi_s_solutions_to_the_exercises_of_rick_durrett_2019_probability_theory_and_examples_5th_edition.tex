@@ -3,6 +3,7 @@
 \usepackage{amssymb}
 \usepackage{hyperref}
 \usepackage{enumitem}
+\usepackage{mathtools}
 \usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
 \geometry{a4paper}                   % ... or a4paper or a5paper or ... 
 
@@ -138,6 +139,40 @@ P(\chi\geqslant4)=\frac{1}{\sqrt{2\pi}}\int_4^\infty\exp(-\frac{y^2}{2})dy,
 Show that a distribution function has at most countably many discontinuities.
 \begin{proof}
 Pick any distribution function $F$, then, by Theorem~1.2.1 of \cite{durrett2019probability}, $F$ is monotonically increasing on $\mathbb{R}$. Theorem~4.30 of \cite{rudin1976principles} then implies that the set of points of $\mathbb{R}$ at which $F$ is discontinuous is at most countable.
+\end{proof}
+
+\section{Exercise 1.3.1: $\sigma(\mathcal{A})=\mathcal{S}$ Implies $\sigma(X^{-1}(\mathcal{A}))=\sigma(X)$}
+Show that if $\mathcal{A}$ generates $\mathcal{S}$, then $X^{-1}(\mathcal{A})=\{\{X\in A\}:A\in\mathcal{A}\}$ generates $\sigma(X)=\{\{X\in B\}:B\in\mathcal{S}\}$.
+\begin{proof}
+Note that,
+\begin{gather*}
+\sigma(\mathcal{A})=\mathcal{S}\text{ and }\mathcal{A}\subset\sigma(\mathcal{A})\\
+\ArrowBetweenLines[\Downarrow]
+\mathcal{A}\subset\mathcal{S}\\
+\ArrowBetweenLines[\Downarrow]
+X^{-1}(\mathcal{A})\subset X^{-1}(\mathcal{S})\\
+\ArrowBetweenLines[\Downarrow]
+\sigma(X^{-1}(\mathcal{A}))\subset\sigma(X^{-1}(\mathcal{S})).
+\end{gather*}
+By the definition of $\sigma(X)$, $\sigma(X^{-1}(\mathcal{S}))=\sigma(X)$. Hence we conclude that\[
+\sigma(X^{-1}(\mathcal{A}))\subset\sigma(X).
+\]
+
+Next, we prove that $\sigma(X)\subset\sigma(X^{-1}(\mathcal{A}))$. Define\[
+\mathcal{S}'\equiv\{B\in\mathcal{S}:X^{-1}(B)\in\sigma(X^{-1}(\mathcal{A}))\}.
+\]Then,
+\begin{gather*}
+X^{-1}(\mathcal{A})\subset\sigma(X^{-1}(\mathcal{A}))\\
+\ArrowBetweenLines[\Downarrow]
+\mathcal{A}\subset\mathcal{S}'\\
+\ArrowBetweenLines[\Downarrow]
+\sigma(\mathcal{A})\subset\sigma(\mathcal{S}')\\
+\ArrowBetweenLines[\Downarrow]
+\mathcal{S}\subset\mathcal{S}'.
+\end{gather*}
+Since $\mathcal{S}'\subset\mathcal{S}$, we conclude that $\mathcal{S}=\mathcal{S}'$. Hence, by the definition of $\sigma(X)$, we conclude that\[
+\sigma(X)\subset\sigma(X^{-1}(\mathcal{A})).
+\]
 \end{proof}
 
 \backmatter
