@@ -175,6 +175,19 @@ Since $\mathcal{S}'\subset\mathcal{S}$, we conclude that $\mathcal{S}=\mathcal{S
 \]
 \end{proof}
 
+\section{Exercise 1.3.7: The Smallest Class of Simple Functions Closed under Limits}
+A function $\phi:\Omega\to\mathbb{R}$ is said to be simple if\[
+\phi(\omega)=\sum_{m=1}^nc_m1_{A_m}(\omega)
+\]where $c_m$ are real numbers and $A_m\in\mathcal{F}$. Show that the class of $\mathcal{F}$ measurable functions is the smallest class containing the simple functions and closed under pointwise limits.
+\begin{proof}
+Since $\phi(\omega)$ is $\mathcal{F}$ measurable if and only if the sets $A_1,\dots,A_n$ are $\mathcal{F}$ measurable, it is clear that the class of $\mathcal{F}$ measurable functions contains all simple functions.
+
+Pick any $\mathcal{F}$ measurable function $X$. Then Theorem~11.20 of \cite{rudin1976principles} implies the existence of a sequence $\{s_n\}$ of simple functions such that\[
+\lim_{n\to\infty}s_n(\omega)=f(\omega),\quad\forall\omega\in\Omega.
+\]Hence $X$ is a member of any class containing the simple functions and closed under pointwise limits. Therefore the class of $\mathcal{F}$ measurable functions is a subset of any class containing the simple functions and closed under pointwise limits.
+\end{proof}
+
+
 \backmatter
 \bibliographystyle{amsalpha}
 \bibliography{../../bibliography.bib}
