@@ -5,6 +5,7 @@
 \usepackage{enumitem}
 \usepackage{mathtools}
 \usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
+\usepackage{bm}
 \geometry{a4paper}                   % ... or a4paper or a5paper or ... 
 
 \newtheorem{theorem}{Theorem}[chapter]
@@ -202,6 +203,76 @@ F_Y(c+t)=1-F_Y(c-t)+P(Y=c-t)\\
 \ArrowBetweenLines
 p(c+t)=p(c-t).\\
 \end{gather*}
+\end{enumerate}
+\end{proof}
+
+\section{Problem 1.2.1: Merging Options}
+Consider a parameter space consisting of two points $\theta_1$ and $\theta_2$, and suppose that for given $\theta$, an experiment leads to a random variable $X$ whose frequency function $p(x|\theta)$ is given by\[
+\begin{array}{c|c|c}
+\theta\backslash x&0&1\\\hline
+\theta_1&0.8&0.2\\\hline
+\theta_2&0.4&0.6
+\end{array}
+\]Let $\pi$ be the prior frequency function of $\theta$ defined by $\pi(\theta_1)=\frac{1}{2},\pi(\theta_2)=\frac{1}{2}$.
+\begin{enumerate}[label=(\alph*)]
+\item Find the posterior frequency function $\pi(\theta|x)$.
+\item Suppose $X_1,\dots,X_n$ are independent with frequency functions $p(x|\theta)$. Find the posterior $\pi(\theta|x_1,\dots,x_n)$. Observe that it depends only on $\sum_{i=1}^nx_i$.
+\item Same as (b) except use the prior $\pi_1(\theta_1)=.25,\pi_1(\theta_2)=.75$.
+\item Give the value of $P(\bm{\theta}=\theta_1|\sum_{i=1}^nx_i=.5n)$ for the two priors $\pi$ and $\pi_1$ when $n=2$ and $100$.
+\end{enumerate}
+\begin{proof}
+\begin{enumerate}[label=(\alph*)]
+\item See below.\[
+\begin{split}
+\pi(\theta=\theta_1|X=0)&=\frac{p(X=0|\theta=\theta_1)\pi(\theta=\theta_1)}{p(X=0|\theta=\theta_1)\pi(\theta=\theta_1)+p(X=0|\theta=\theta_2)\pi(\theta=\theta_2)}\\
+&=\frac{0.8\cdot0.5}{0.8\cdot0.5+0.4\cdot0.5}\\
+&=\frac{2}{3},\\
+\pi(\theta=\theta_2|X=0)&=\frac{p(X=0|\theta=\theta_2)\pi(\theta=\theta_2)}{p(X=0|\theta=\theta_1)\pi(\theta=\theta_1)+p(X=0|\theta=\theta_2)\pi(\theta=\theta_2)}\\
+&=\frac{0.4\cdot0.5}{0.8\cdot0.5+0.4\cdot0.5}\\
+&=\frac{1}{3},\\
+\pi(\theta=\theta_1|X=1)&=\frac{p(X=1|\theta=\theta_1)\pi(\theta=\theta_1)}{p(X=1|\theta=\theta_1)\pi(\theta=\theta_1)+p(X=1|\theta=\theta_2)\pi(\theta=\theta_2)}\\
+&=\frac{0.2\cdot0.5}{0.2\cdot0.5+0.6\cdot0.5}\\
+&=\frac{1}{4},\\
+\pi(\theta=\theta_2|X=1)&=\frac{p(X=1|\theta=\theta_2)\pi(\theta=\theta_2)}{p(X=1|\theta=\theta_1)\pi(\theta=\theta_1)+p(X=1|\theta=\theta_2)\pi(\theta=\theta_2)}\\
+&=\frac{0.6\cdot0.5}{0.2\cdot0.5+0.6\cdot0.5}\\
+&=\frac{3}{4}.
+\end{split}
+\]
+\item See below.\[
+\begin{split}
+\pi(\bm{\theta}=\theta_1|x_1,\dots,x_n)&=\frac{p(x_1,\dots,x_n|\theta=\theta_1)\pi(\theta=\theta_1)}{p(x_1,\dots,x_n|\theta=\theta_1)\pi(\theta=\theta_1)+p(x_1,\dots,x_n|\theta=\theta_2)\pi(\theta=\theta_2)}\\
+&=\frac{B(\sum_{i=1}^nx_i;n,0.2)\cdot\frac{1}{2}}{B(\sum_{i=1}^nx_i;n,0.2)\cdot\frac{1}{2} + B(\sum_{i=1}^nx_i;n,0.6)\cdot\frac{1}{2}},\\
+\pi(\bm{\theta}=\theta_2|x_1,\dots,x_n)&=\frac{p(x_1,\dots,x_n|\theta=\theta_2)\pi(\theta=\theta_2)}{p(x_1,\dots,x_n|\theta=\theta_1)\pi(\theta=\theta_1)+p(x_1,\dots,x_n|\theta=\theta_2)\pi(\theta=\theta_2)}\\
+&=\frac{B(\sum_{i=1}^nx_i;n,0.6)\cdot\frac{1}{2}}{B(\sum_{i=1}^nx_i;n,0.2)\cdot\frac{1}{2} + B(\sum_{i=1}^nx_i;n,0.6)\cdot\frac{1}{2}}.\\
+\end{split}
+\]
+\item See below.\[
+\begin{split}
+\pi_1(\bm{\theta}=\theta_1|x_1,\dots,x_n)&=\frac{p(x_1,\dots,x_n|\theta=\theta_1)\pi_1(\theta=\theta_1)}{p(x_1,\dots,x_n|\theta=\theta_1)\pi_1(\theta=\theta_1)+p(x_1,\dots,x_n|\theta=\theta_2)\pi_1(\theta=\theta_2)}\\
+&=\frac{B(\sum_{i=1}^nx_i;n,0.2)\cdot\frac{1}{4}}{B(\sum_{i=1}^nx_i;n,0.2)\cdot\frac{1}{4} + B(\sum_{i=1}^nx_i;n,0.6)\cdot\frac{3}{4}},\\
+\pi_1(\bm{\theta}=\theta_2|x_1,\dots,x_n)&=\frac{p(x_1,\dots,x_n|\theta=\theta_2)\pi_1(\theta=\theta_2)}{p(x_1,\dots,x_n|\theta=\theta_1)\pi_1(\theta=\theta_1)+p(x_1,\dots,x_n|\theta=\theta_2)\pi_1(\theta=\theta_2)}\\
+&=\frac{B(\sum_{i=1}^nx_i;n,0.6)\cdot\frac{3}{4}}{B(\sum_{i=1}^nx_i;n,0.2)\cdot\frac{1}{4} + B(\sum_{i=1}^nx_i;n,0.6)\cdot\frac{3}{4}}.\\
+\end{split}
+\]
+\item When using the prior $\pi$,\[
+\begin{split}
+\pi(\bm{\theta}=\theta_1|\sum_{i=1}^2x_i=1)&=\frac{B(1;2,0.2)\cdot\frac{1}{2}}{B(1;2,0.2)\cdot\frac{1}{2} + B(1;2,0.6)\cdot\frac{1}{2}}\\
+&=\frac{\binom{2}{1}(0.2)^{1}(0.8)^{1}\cdot\frac{1}{2}}{\binom{2}{1}(0.2)^{1}(0.8)^{1}\cdot\frac{1}{2} + \binom{2}{1}(0.6)^{1}(0.4)^{1}\cdot\frac{1}{2}}\\
+&=\frac{2}{5},\\
+\pi(\bm{\theta}=\theta_1|\sum_{i=1}^{100}x_i=50)&=\frac{B(50;100,0.2)\cdot\frac{1}{2}}{B(50;100,0.2)\cdot\frac{1}{2} + B(50;100,0.6)\cdot\frac{1}{2}}\\
+&=\frac{\binom{100}{50}(0.2)^{50}(0.8)^{50}\cdot\frac{1}{2}}{\binom{100}{50}(0.2)^{50}(0.8)^{50}\cdot\frac{1}{2} + \binom{100}{50}(0.6)^{50}(0.4)^{50}\cdot\frac{1}{2}}\\
+&\approx1.57\times10^{-9}.\\
+\end{split}
+\]When using the prior $\pi_1$,\[
+\begin{split}
+\pi_1(\bm{\theta}=\theta_1|\sum_{i=1}^2x_i=1)&=\frac{B(1;2,0.2)\cdot\frac{1}{4}}{B(1;2,0.2)\cdot\frac{1}{4} + B(1;2,0.6)\cdot\frac{3}{4}}\\
+&=\frac{\binom{2}{1}(0.2)^{1}(0.8)^{1}\cdot\frac{1}{4}}{\binom{2}{1}(0.2)^{1}(0.8)^{1}\cdot\frac{1}{4} + \binom{2}{1}(0.6)^{1}(0.4)^{1}\cdot\frac{3}{4}}\\
+&=\frac{2}{11},\\
+\pi_1(\bm{\theta}=\theta_1|\sum_{i=1}^{100}x_i=50)&=\frac{B(50;100,0.2)\cdot\frac{1}{2}}{B(50;100,0.2)\cdot\frac{1}{4} + B(50;100,0.6)\cdot\frac{1}{4}}\\
+&=\frac{\binom{100}{50}(0.2)^{50}(0.8)^{50}\cdot\frac{1}{4}}{\binom{100}{50}(0.2)^{50}(0.8)^{50}\cdot\frac{1}{4} + \binom{100}{50}(0.6)^{50}(0.4)^{50}\cdot\frac{3}{4}}\\
+&\approx5.23\times10^{-10}.\\
+\end{split}
+\]
 \end{enumerate}
 \end{proof}
 
