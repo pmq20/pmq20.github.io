@@ -353,6 +353,65 @@ R(\theta_2,\delta_9)&=2(0)+1(1)=1.
 \end{enumerate}
 \end{proof}
 
+\section{Problem 1.4.1: Best Predictor, Best Linear Predictor, Best Zero Intercept LP}
+An urn contains four red and four black balls. Four balls are drawn at random without replacement. Let $Z$ be the number of red balls obtained in the first two draws and $Y$ the total number of red balls drawn.
+\begin{enumerate}[label=(\alph*)]
+\item Find the best predictor of $Y$ given $Z$, the best linear predictor, and the best zero intercept linear predictor.
+\item Compute the MSPEs of the predictors in (a).
+\end{enumerate}
+\begin{proof}[Answer]
+\begin{enumerate}[label=(\alph*)]
+\item Let $p(z,y)=P(Z = z,Y = y)$ be the joint probability mass function of $Z$ and $Y$, which is given by the following table.\[
+\begin{array}{c|c|c|c|c|c}
+z\backslash y&0&1&2&3&4\\\hline
+0&1/16&2/16&1/16&0/16&0/16\\\hline
+1&0/16&2/16&4/16&2/16&0/16\\\hline
+2&0/16&0/16&1/16&2/16&1/16
+\end{array}
+\]We find\[
+\begin{split}
+E(Y|Z=0)&=\frac{16}{4}(1\cdot\frac{2}{16}+2\cdot\frac{1}{16}+3\cdot\frac{0}{16}+4\cdot\frac{0}{16})=1,\\
+E(Y|Z=1)&=\frac{16}{8}(1\cdot\frac{2}{16}+2\cdot\frac{4}{16}+3\cdot\frac{2}{16}+4\cdot\frac{0}{16})=2,\\
+E(Y|Z=2)&=\frac{16}{4}(1\cdot\frac{0}{16}+2\cdot\frac{1}{16}+3\cdot\frac{2}{16}+4\cdot\frac{1}{16})=3,\\
+E(Z^2)&=1\cdot\frac{8}{16}+4\cdot\frac{4}{16}=\frac{24}{16},\\
+E(Y^2)&=1\cdot\frac{4}{16}+4\cdot\frac{6}{16}+9\cdot\frac{4}{16}+16\cdot\frac{1}{16}=\frac{80}{16},\\
+E(ZY)&=1\cdot\frac{2}{16}+2\cdot\frac{4}{16}+3\cdot\frac{2}{16}+4\cdot\frac{1}{16}+6\cdot\frac{2}{16}+8\cdot\frac{1}{16}=\frac{40}{16},\\
+E(Z)&=1\cdot\frac{8}{16}+2\cdot\frac{4}{16}=\frac{16}{16},\\
+E(Y)&=1\cdot\frac{4}{16}+2\cdot\frac{6}{16}+3\cdot\frac{4}{16}+4\cdot\frac{1}{16}=\frac{32}{16},\\
+\text{Cov}(Z,Y)&=E(ZY)-E(Z)E(Y)=\frac{40}{16}-\frac{16}{16}\cdot\frac{32}{16}=\frac{1}{2},\\
+\text{Var }Z&=E(Z^2)-(E(Z))^2=\frac{24}{16}-(\frac{16}{16})^2=\frac{1}{2}.
+\end{split}
+\]By Theorem~1.4.1 of \cite{bickel2015mathematical}, the following function $\mu_1$ is the best predictor:\[
+\mu_1(z)\equiv E(Y|Z=z).
+\]By Theorem~1.4.3 of \cite{bickel2015mathematical}, the following functions $\mu_2,\mu_3$ are the best linear predictor and the best zero intercept linear predictor, respectively:\[
+\begin{split}
+\mu_2(z)&\equiv a_1+b_1z,\\
+\mu_3(z)&\equiv b_0z,
+\end{split}
+\]where\[
+\begin{split}
+b_0&\equiv\frac{E(ZY)}{E(Z^2)}=\frac{5}{3},\\
+b_1&\equiv\frac{\text{Cov}(Z,Y)}{\text{Var }Z}=1,\\
+a_1&\equiv E(Y)-b_1E(Z)=1.
+\end{split}
+\]
+\item See below.\[
+\begin{split}
+E[\mu_1(Z)-Y]^2&=1\cdot\frac{1}{16}+1\cdot\frac{1}{16}+1\cdot\frac{2}{16}+1\cdot\frac{2}{16}+1\cdot\frac{1}{16}+1\cdot\frac{1}{16}\\
+&=\frac{1}{2}=0.5,\\
+E[\mu_2(Z)-Y]^2&=E[\mu_1(Z)-Y]^2\\
+&=\frac{1}{2}=0.5,\\
+E[\mu_3(Z)-Y]^2&=\left(0-0\right)^2\cdot\frac{1}{16}+\left(1-0\right)^2\cdot\frac{2}{16}+\left(2-0\right)^2\cdot\frac{1}{16}\\
+&+\left(1-\frac{5}{3}\right)^2\cdot\frac{2}{16}+\left(2-\frac{5}{3}\right)^2\cdot\frac{4}{16}+\left(3-\frac{5}{3}\right)^2\cdot\frac{2}{16}\\
+&+\left(2-\frac{10}{3}\right)^2\cdot\frac{1}{16}+\left(3-\frac{10}{3}\right)^2\cdot\frac{2}{16}+\left(4-\frac{10}{3}\right)^2\cdot\frac{1}{16}\\
+&= \frac{43}{48}\approx 0.90.
+\end{split}
+\]
+\end{enumerate}
+\end{proof}
+
+
+
 \backmatter
 \bibliographystyle{amsalpha}
 \bibliography{../../bibliography.bib}
