@@ -410,7 +410,41 @@ E[\mu_3(Z)-Y]^2&=\left(0-0\right)^2\cdot\frac{1}{16}+\left(1-0\right)^2\cdot\fra
 \end{enumerate}
 \end{proof}
 
-
+\section{Problem 1.5.1: Prove Sufficiency Directly and by the Factorization Theorem}
+Let $X_1,\dots,X_n$ be a sample from a Poisson, $\mathcal{P}(\theta)$, population where $\theta>0$.
+\begin{enumerate}[label=(\alph*)]
+\item Show directly that $\sum_{i=1}^nX_i$ is sufficient for $\theta$.
+\item Establish the same result using the factorization theorem.
+\end{enumerate}
+\begin{proof}
+\begin{enumerate}[label=(\alph*)]
+\item Define\[
+\begin{split}
+\mathbf{X}&\equiv(X_1,\dots,X_n)\\
+T(\mathbf{X})&\equiv\sum_{i=1}^nX_i
+\end{split}
+\]Then\[
+\begin{split}
+P(\mathbf{X}=(x_1,\dots,x_n)|T(\mathbf{X})=t)&=\frac{P(\mathbf{X}=(x_1,\dots,x_n),T(\mathbf{X})=t)}{P(T(\mathbf{X})=t)}\\
+&=\frac{\frac{\theta^{x_1}e^{-\theta}}{x_1!}\cdot\dots\cdot\frac{\theta^{x_n}e^{-\theta}}{x_n!}}{\frac{(n\theta)^te^{-n\theta}}{t!}}\\
+&=\frac{\theta^te^{-n\theta}}{x_1!\cdot\dots\cdot x_n!}\cdot\frac{t!}{(n\theta)^te^{-n\theta}}\\
+&=\frac{1}{x_1!\cdot\dots\cdot x_n!}\cdot\frac{t!}{n^t}\\
+\end{split}
+\]We have shown that $P(\mathbf{X}=(x_1,\dots,x_n)|T(\mathbf{X})=t)$ does not involve $\theta$. Hence, by definition, $T(\mathbf{X})$ is sufficient for $\theta$.
+\item Define\[
+\begin{split}
+g(T(x_1,\dots,x_n),\theta)&\equiv\theta^{T(x_1,\dots,x_n)}e^{-n\theta},\\
+h(x_1,\dots,x_n)&\equiv\frac{1}{x_1!\dots x_n!}.
+\end{split}
+\]Then\[
+\begin{split}
+P(\mathbf{X}=(x_1,\dots,x_n))&=\frac{\theta^{x_1}e^{-\theta}}{x_1!}\cdot\dots\cdot\frac{\theta^{x_n}e^{-\theta}}{x_n!}\\
+&=\frac{\theta^te^{-n\theta}}{x_1!\cdot\dots\cdot x_n!}\\
+&=g(T(x_1,\dots,x_n),\theta)\cdot h(x_1,\dots,x_n).
+\end{split}
+\]Theorem~1.5.1 of \cite{bickel2015mathematical} then implies that $T(\mathbf{X})$ is sufficient for $\theta$.
+\end{enumerate}
+\end{proof}
 
 \backmatter
 \bibliographystyle{amsalpha}
