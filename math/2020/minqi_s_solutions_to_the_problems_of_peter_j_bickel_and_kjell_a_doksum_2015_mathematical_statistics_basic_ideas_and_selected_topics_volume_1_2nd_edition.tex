@@ -446,6 +446,59 @@ P(\mathbf{X}=(x_1,\dots,x_n))&=\frac{\theta^{x_1}e^{-\theta}}{x_1!}\cdot\dots\cd
 \end{enumerate}
 \end{proof}
 
+\section{Problem 1.6.1: $\mathcal{N}(\mu,\sigma^2),\Gamma(p,\lambda),\beta(r,s)$ Form $1$-parameter Exponential Families}
+Prove the assertions of Table~1.6.1 of \cite{bickel2015mathematical}.
+\begin{proof}
+\begin{enumerate}
+\item Suppose $p(x,\theta)$ is the density function of $\mathcal{N}(\theta,\sigma^2)$ where $\sigma^2$ is fixed, then\[
+\begin{split}
+p(x,\theta)&=\frac{1}{\theta\sqrt{2\pi}}\exp\left(-\frac{1}{2}\left(\frac{x-\theta}{\sigma}\right)^2\right)\\
+&=\exp\left(\log\left(\frac{1}{\theta\sqrt{2\pi}}\right)\right)\exp\left(-\frac{1}{2}\left(\frac{x^2-2x\theta+\theta^2}{\sigma^2}\right)\right)\\
+&=\exp\left(-\log(\theta\sqrt{2\pi})-\frac{x^2}{2\sigma^2}+\frac{x\theta}{\sigma^2}-\frac{\theta^2}{2\sigma^2}\right)\\
+&=\exp\left(-\frac{x^2}{2\sigma^2}\right)\exp\left(-\log(\theta\sqrt{2\pi})+\frac{x\theta}{\sigma^2}-\frac{\theta^2}{2\sigma^2}\right).
+\end{split}
+\]Hence $\mathcal{N}(\theta,\sigma^2)$ form a one-parameter exponential family with\[
+q=1,\eta(\theta)=\frac{\theta}{\sigma^2},B(\theta)=\log(\theta\sqrt{2\pi})+\frac{\theta^2}{2\sigma^2},T(x)=x,h(x)=\exp\left(-\frac{x^2}{2\sigma^2}\right).
+\]Instead, suppose $p(x,\theta)$ is the density function of $\mathcal{N}(\mu,\theta^2)$ where $\mu$ is fixed, then\[
+p(x,\theta)=\frac{1}{\mu\sqrt{2\pi}}\exp\left(-\frac{1}{2}\left(\frac{x-\mu}{\theta}\right)^2\right).
+\]Hence $\mathcal{N}(\mu,\theta^2)$ form a one-parameter exponential family with\[
+q=1,\eta(\theta)=-\frac{1}{2\theta^2},B(\theta)=0,T(x)=(x-\mu)^2,h(x)=\frac{1}{\mu\sqrt{2\pi}}.
+\]
+\item Suppose $p(x,\theta)$ is the density function of $\Gamma(p,\theta)$ where $p$ is fixed, then\[
+\begin{split}
+p(x,\theta)&=\frac{\theta^px^{p-1}e^{-\theta x}}{\Gamma(p)}\\
+&=\frac{x^{p-1}}{\Gamma(p)}\exp(\log(\theta^p)-\theta x)\\
+\end{split}
+\]Hence $\Gamma(p,\theta)$ form a one-parameter exponential family with\[
+q=1,\eta(\theta)=-\theta,B(\theta)=-\log(\theta^p),T(x)=x,h(x)=\frac{x^{p-1}}{\Gamma(p)}.
+\]Instead, suppose $p(x,\theta)$ is the density function of $\Gamma(\theta,\lambda)$ where $\lambda$ is fixed, then\[
+\begin{split}
+p(x,\theta)&=\frac{\lambda^\theta x^{\theta-1}}{\Gamma(p)}\\
+&=\frac{e^{-\lambda x}}{\Gamma(p)}\exp(\log(\lambda^\theta)+(\theta-1)\log(x))\\
+\end{split}
+\]Hence $\Gamma(\theta,\lambda)$ form a one-parameter exponential family with\[
+q=1,\eta(\theta)=\theta-1,B(\theta)=-\log(\lambda^\theta),T(x)=\log(x),h(x)=\frac{e^{-\lambda x}}{\Gamma(p)}.
+\]
+\item Suppose $p(x,\theta)$ is the density function of $\beta(r,\theta)$ where $r$ is fixed, then\[
+\begin{split}
+p(x,\theta)&=\frac{\Gamma(r+\theta)x^{r-1}(1-x)^{\theta-1}}{\Gamma(r)\Gamma(\theta)}\\
+&=\frac{x^{r-1}}{\Gamma(r)}\cdot\frac{\Gamma(r+\theta)(1-x)^{\theta-1}}{\Gamma(\theta)}\\
+&=\frac{x^{r-1}}{\Gamma(r)}\cdot\exp(\log(\Gamma(r+\theta))+(\theta-1)\log(1-x)-\log(\Gamma(\theta)))
+\end{split}
+\]Hence $\beta(r,\theta)$ form a one-parameter exponential family with\[
+q=1,\eta(\theta)=\theta-1,B(\theta)=\log(\Gamma(\theta))-\log(\Gamma(r+\theta)),T(x)=\log(1-x),h(x)=\frac{x^{r-1}}{\Gamma(r)}.
+\]Instead, suppose $p(x,\theta)$ is the density function of $\beta(\theta,s)$ where $s$ is fixed, then\[
+\begin{split}
+p(x,\theta)&=\frac{\Gamma({\theta+s})x^{\theta-1}(1-x)^{s-1}}{\Gamma(\theta)\Gamma(s)}\\
+&=\frac{(1-x)^{s-1}}{\Gamma(s)}\cdot\frac{\Gamma({\theta+s})x^{\theta-1}}{\Gamma(\theta)}\\
+&=\frac{(1-x)^{s-1}}{\Gamma(s)}\cdot\exp(\log(\Gamma(\theta+s))+(\theta-1)\log(x)-\log(\Gamma(\theta)))
+\end{split}
+\]Hence $\beta(\theta,s)$ form a one-parameter exponential family with\[
+q=1,\eta(\theta)=\theta-1,B(\theta)=\log(\Gamma(\theta))-\log(\Gamma(\theta+s)),T(x)=\log(x),h(x)=\frac{(1-x)^{s-1}}{\Gamma(s)}.
+\]
+\end{enumerate}
+\end{proof}
+
 \backmatter
 \bibliographystyle{amsalpha}
 \bibliography{../../bibliography.bib}
