@@ -1,0 +1,67 @@
+\documentclass{amsbook}
+
+\usepackage{enumitem}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\usepackage{mathtools}
+\usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
+\geometry{a4paper}                   % ... or a4paper or a5paper or ... 
+
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{lemma}[theorem]{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{xca}[theorem]{Exercise}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\numberwithin{section}{chapter}
+\numberwithin{equation}{chapter}
+
+\begin{document}
+
+\frontmatter
+
+\title{Minqi's Solutions to the Exercises of Sheldon Axler (2014), Linear Algebra Done Right (3rd Edition)}
+
+\author{Minqi Pan\footnote{Website: \href{http://www.minqi-pan.com}{http://www.minqi-pan.com}}}
+
+\maketitle
+
+\setcounter{page}{4}
+
+\tableofcontents
+
+\chapter*{Preface}
+
+Remarkable exercises are:
+\begin{enumerate}
+\item\hyperref[Exercise 1.C.9]{Exercise 1.C.9: Periodic Functions is NOT a Subspace of $\mathbb{R}^\mathbb{R}$}.
+\item\hyperref[Exercise 1.C.13]{Exercise 1.C.13: When the Union of 3 Subspaces is a Subspace}.
+\item\hyperref[Exercise 2.B.7]{Exercise 2.B.7: Constructing a Counterexample}.
+\item\hyperref[Exercise 2.C.9]{Exercise 2.C.9: $\dim\text{span}(v_1+w,\dots,v_m+w)\geqslant m-1$}.
+\item\hyperref[Exercise 3.C.5]{Exercise 3.C.5: Find Bases for $V$ from $\mathcal{M}(T)$ where $T\in\mathcal{L}(V,W)$}.
+\item\hyperref[Exercise 3.D.4]{Exercise 3.D.4: $\text{null }T_1=\text{null }T_2$ if and only if $T_1=ST_2$}.
+\item\hyperref[Exercise 3.D.5]{Exercise 3.D.5: $\text{range }T_1=\text{range }T_2$ if and only if $T_1=T_2S$}.
+\item\hyperref[Exercise 4.A.7]{Exercise 4.A.7: An Odd-degree, Real-coefficient Polynomial has a Real Zero}.
+\end{enumerate}
+
+\medskip
+\begin{flushright}
+Minqi Pan\\
+\today
+\end{flushright}
+
+\mainmatter
+\include{minqi_s_solutions_to_the_exercises_of_sheldon_axler_2014_linear_algebra_done_right_3rd_edition_ch1}
+\include{minqi_s_solutions_to_the_exercises_of_sheldon_axler_2014_linear_algebra_done_right_3rd_edition_ch2}
+\include{minqi_s_solutions_to_the_exercises_of_sheldon_axler_2014_linear_algebra_done_right_3rd_edition_ch3}
+\include{minqi_s_solutions_to_the_exercises_of_sheldon_axler_2014_linear_algebra_done_right_3rd_edition_ch4}
+
+\backmatter
+\bibliographystyle{amsalpha}
+\bibliography{../../bibliography.bib}
+\end{document}

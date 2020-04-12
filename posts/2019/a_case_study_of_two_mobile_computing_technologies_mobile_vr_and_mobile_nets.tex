@@ -1,0 +1,107 @@
+\documentclass[11pt]{amsart}
+\usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                   % ... or a4paper or a5paper or ... 
+%\geometry{landscape}                % Activate for for rotated page geometry
+%\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{epstopdf}
+\usepackage{hyperref}
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+
+\title{A Case Study of Two Mobile Computing Technologies: Mobile VR and MobileNets}
+\author{Minqi Pan\textsuperscript{1}}
+
+\begin{document}
+\maketitle
+
+\footnotetext[1]{Website: \href{http://www.minqi-pan.com}{http://www.minqi-pan.com}}
+
+\section{Introduction}
+Mobile computing refers to a specific style of computing where the computer is expected to be transported during normal usage. The computer device involved is called a mobile device, which usually runs on battery, sending and receiving data via wireless communication. 
+
+Computing remotely on mobile devices rely on a set of principles in order to perform effectively. For example, the device should be portable and easy to move while being continuously connected with minimal amount of downtime or lag (QoS). The software should cater to the physical limitations of mobile devices, requiring as little computation resources as possible to save battery life.
+
+In this report, we study two mobile computing technologies case by case. They both share the principles stated above.
+
+\section{Mobile VR}
+Mobile VR usually means virtual reality that is based on a smart phone. Mobile headsets that mount a phone inside help millions of people easily try out VR. To view it simply, mobile VR headsets are just boxes with lenses to quickly enable a VR experience by mounting a cellphone inside.
+
+For example, Daydream, which was announced in 2016 by Google following up on its even simpler Cardboard headset. Both Cardboard and Daydream had made simple VR accessible, both being cheap and affordable products. Users are able to use the smartphones they carry everywhere to power on an immersive on-the-go experience.
+
+\subsection{Problems of Mobile VR}
+However, Mobile VR is not without its own problems. After experimenting with the market since 2016 when Daydream was announced, Google found out that people didn't like losing access to their phones since Daydream effectively required launching into a separate app ecosystem.
+
+Moreover, immersive 3D apps drained battery very fast. And the headset and its controller was annoying to set up, because users have to pop their phones out of their phone cases and dock them in headsets.
+
+Last but not least, Mobile VR is never a full-fledged VR platform. There are many restrictions that researches have to workaround. The particular case, VR-STEP, that we study here is one of such examples.
+
+\subsection{VR-STEP}
+VR-STEP \cite{Tregillus:2016:VWU:2858036.2858084} is a method to achieve hands free navigation in Mobile VR environments. Since human-machine interaction mechanisms in Mobile VR environments are limited, this method cleverly leverages the capabilities inertial sensors of the smart phone to achieve navigation.
+
+In particular, the method expects the user to walk in place. In non-mobile environments, there would be an external camera that helps implement the virtual locomotion. But this is not available in mobile environments. In order to workaround this, the author has to refrain from using any additional instrumentation outside of what has already been provided by the smartphone.
+
+\subsection{Inspiration}
+VR-STEP was inspired by a hardware pedometer design \cite{zhao2010full}. In the original hardware design, the author uses acceleration to detect the walking motion. Among the three components of motion for an individual -- roll, yaw, pitch -- this method detects the most salient one, i.e. the one that have relatively large periodic changes.
+
+Then digital filters are used to smooth the signals. Since different user walk differently, the method dynamically adjusts its threshold. The system continously updates the maximum and minimum values of the 3-axis acceleration every $50$ samples, and get the dynamic threshold level $L$ by\[
+L\equiv\frac{\max\{\text{50 samples}\}+\min\{\text{50 samples}\}}{2}.
+\]$L$ is then used to decide whether an effective step has been taken. A step is defined as happening if there is a negative slope of the acceleration plot when the acceleration curve crosses below $L$.
+
+The hardware algorithm of \cite{zhao2010full} has the virtue of being real-time with little computational overhead, which is important for Mobile VR since the smartphone needs to maintain a high frame rate on the basis of a mobile device that is limited in computational resources.
+
+Similar to \cite{zhao2010full}, VR-STEP averages every $5$ samples to smooth the acceleration signal, which minimizes noise while still yielding a near real-time response. A step is detected if the accelerometer values pass a dynamic threshold that changes every $50$ samples from the accelerometer to account for different step intensities, both across different people and across different walking styles of the same person.
+
+\subsection{Virtual Locomotion}
+Ultimately, walking in the real world leads to the calculation of the velocity of the avatar in the virtual environment, which is given by\[
+v(t)=\frac{ds(t)}{dt}.
+\]The above algorithm detects the the time between steps $\delta(t)$, but not $s(t)$. In fact, this is never possible to gauge considering the limitations of mobile VR. Hence we need to rely on other methods. VR-STEP did not try to calculate $s(t)$, but chose to establish a mapping from $\delta(t)$ to $v(t)$.
+
+First, it assumes that $\delta(t)$ is within a constant interval $[\delta_0,\delta_1]$, and $v(t)$ is within a constant interval $[v_0,v_1]$. Since a large $\delta(t)$ indicates that the user is walking slowly, and a small $\delta(t)$ implies that the user is walking fast, we can use an interpolated $1$-degree polynomial $p$ to map $\delta(t)$ to $v(t)$, where\[
+p(\delta_0)=v_1
+\]and\[
+p(\delta_1)=v_0.
+\]
+
+In conclusion, despite the limitations of the mobile VR environment, the VR-STEP method managed to implement a virtual locomotion by letting the user walk in place.
+
+\section{MobileNets}
+MobileNets is a class of mobile neural network models first proposed by Google Inc. in 2017 \cite{DBLP:journals/corr/HowardZCKWWAA17}. Its design goal is to trade off between latency and accuracy to fit the constraints of mobile computing environments, bringing neural network applications like object detection. fine-grain classification, face attributes and large scale geo-localization to mobile devices.
+
+\subsection{Mobile AI}
+One remarkable news is that a family of MobileNets are now customized for Google's Edge TPU (TensorFlow Processing Unit) as well. Google's TPU is a programmable AI accelerator designed to provide high throughput of low-precision arithmetic (e.g., 8-bit), and oriented toward using or running models rather than training them. Edge TPU is Google’s purpose-built application-specific integrated circuit chip designed to run TensorFlow Lite machine learning (ML) models on small client computing devices such as smartphones known as edge computing. 
+
+Edge TPU's are accelerators found in Google Pixel 4 phones released in 2019. This highlights the new trend of Edge AI, which enables mobile phones to process data autonomously and perform machine learning for advanced autonomous applications. Since mobile phones are connected to the cloud almost all the time, the cloud can be integrated with the mobile phones where data are first stored, processed, filtered in real-time and then sent to the cloud for additional analytics.
+
+\subsection{Simplifying the Convolutional Layer}
+The key design of MobileNets is to simplify the convolution layer. Convolution layers are both the key layers of convolutional neural networks and the most expensive layers to compute. MobileNets splits one convolution layer into two simpler layers -- one depth-wise convolution layer that filters the input, one $1\times1$ point-wise convolution layer that combines these filtered values to create new features.
+
+The depth-wise and point-wise convolutions form a so-called ``depthwise separable con- volution'', which is much faster than the original convolution.
+
+\subsection{The Depth-wise Convolution}
+Suppose we have a standard convolutional layer which is parameterized by convolution kernel $K$ of size\[
+D_K\times D_K\times M\times N
+\]where $D_K$ is the spatial dimension of the kernel assumed to be square and $M$ is the number of input channels and $N$ is the number of output channels.
+
+The purpose of the depth-wise convolution is to only filter the input channels, but it does not combine the input channels. It only performs convolution on each channel separately. For example, if an image has 3 channels, a depth-wise convolution creates an output image that also has 3 channels.
+
+The original standard convolutional layer gives a depthwise convolutional kernel of size\[
+D_K\times D_K\times M
+\]where the number of output channels becomes $1$.
+
+\subsection{The Point-wise Convolution}
+The point-wise convolution is a special convolution layer which has a $1\times1$ kernel. This means that it simply adds up all the channels as a weighted sum. The purpose of this point-wise convolution is to combine the output channels of the depth-wise convolution to create new features.
+
+\subsection{Hyper-parameters to Make the Network Smaller}
+MobileNets also introduces two simple global hyper-parameters that offer trade-off between latency and accuracy. These hyper-parameters allow the model builder to choose the right sized model for their application based on the constraints of the mobile device.
+
+One hyper-parameter is width multiplier, which shrinks the number of channels. If the width multiplier is 1, the network starts off with $32$ channels and ends up with $1024$. Setting this to $0.5$ will halve the number of channels used in each layer, which cuts down the number of computations by a factor of $4$ and the number of learnable parameters by a factor $3$.
+
+The other hyper-parameter is resolution multiplier, which is to reduce representation. This multiplier is applied to the input image and the internal representation of every layer to have their resolutions reduced.
+
+In conclusion, MobileNets makes neural networks faster and smaller in order to fit the limitations of mobile devices, at the cost of becoming less accurate.
+
+\bibliographystyle{amsalpha}
+\bibliography{../../bibliography.bib}
+
+\end{document}  
