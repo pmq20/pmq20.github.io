@@ -1,0 +1,351 @@
+% !TEX TS-program = pdflatex
+% !TEX encoding = UTF-8 Unicode
+
+\documentclass{beamer}
+\usepackage{tikz}
+\usepackage[USenglish]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{xcolor}
+\usepackage{algpseudocode}
+\usepackage{ulem}
+\DeclareMathOperator{\sign}{sign}
+\usefonttheme[onlymath]{serif}
+\mode<presentation>
+{
+  \usetheme{Warsaw}
+}
+\newcommand*{\Z}{\makebox[1.5ex]{\textbf{$\cdot$}}}
+
+\title{Xu et al. 2019: How Powerful are Graph Neural Networks?}
+
+\author{Minqi Pan}
+
+\date{\today}
+
+\AtBeginSubsection[]
+{
+  \begin{frame}<beamer>{Outline}
+    \tableofcontents[currentsection,currentsubsection]
+  \end{frame}
+}
+
+\makeatletter
+\newenvironment<>{proofs}[1][\proofname]{%
+    \par
+    \def\insertproofname{#1\@addpunct{.}}%
+    \usebeamertemplate{proof begin}#2}
+  {\usebeamertemplate{proof end}}
+\makeatother
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{How Powerful are Graph Neural Networks?}
+\begin{itemize}
+\item ICLR 2019 Oral, Ernest N. Morial Convention Center, New Orleans, May 7th, 2019
+\item Keyulu Xu, Weihua Hu, Jure Leskovec, Stefanie Jegelka
+\item MIT, Stanford University
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Outline}
+  \tableofcontents
+\end{frame}
+
+\section{Building Powerful Graph Neural Networks}
+\subsection{Preliminaries}
+\begin{frame}{Two Tasks}
+\begin{itemize}
+\item Given $G=(V,E)$ with $X_v$ for $v\in V$
+\item Task 1: Node Classification
+\begin{itemize}
+\item Denote $y_v$ as the label for $v\in V$
+\item Learn a representation vector $h_v$ of $v$ such that $v$'s label can be predicted as\[
+y_v=f(h_v)
+\]
+\end{itemize}
+\item Task 2: Graph Classification
+\begin{itemize}
+\item Given a set of graphs $\{G_1,\dots,G_N\}\subset\mathcal{G}$ and their lables $\{y_1,\dots,y_N\}\subset\mathcal{Y}$
+\item Learn a representation vector $h_G$ that helps predict the label of an entire graph:\[
+y_G=g(h_G)
+\]
+\end{itemize}
+\end{itemize}
+\end{frame}
+\begin{frame}{Graph Neural Networks}
+\begin{itemize}
+\item The $k$-th layer of a GNN is\[
+\begin{split}
+a_v^{(k)}&=\text{AGGREGTE}^{(k)}\big(\big\{h_u^{(k-1)}:u\in\mathcal{N}(v)\big\}\big)\\
+h_v^{(k)}&=\text{COMBINE}^{(k)}\big(h_v^{k-1},a_v^{(k)}\big)
+\end{split}
+\]
+\item $h_v^{(k)}$: the feature vector of node $v$ at the $k$-th interation/layer
+\item $h_v^{(0)}=X_v$
+\item $\mathcal{N}(v)$: a set of nodes adjacent to $v$
+\item The choice of $\text{AGGREGATE}^{(k)}(\cdot)$ and $\text{COMBINE}^{(k)}(\cdot)$ in GNNs is crucial
+\end{itemize}
+\end{frame}
+\begin{frame}{GraphSAGE (Hamilton et al. 2017)}
+\[
+\begin{split}
+a_v^{(k)}&=\text{MAX}\big(\big\{\text{ReLU}\big(W\cdot h_u^{(k-1)}\big),\forall u\in\mathcal{N}(v)\big\}\big)\\
+h_v^{(k)}&=\text{COMBINE}^{(k)}\big(h_v^{(k-1)},a_v^{(k)}\big)
+\end{split}
+\]
+\begin{itemize}
+\item The COMBINE step could be a concatenation followed by a linear mapping\[
+W\cdot\big[h_v^{(k-1)},a_v^{(k)}\big]
+\]
+\end{itemize}
+\end{frame}
+
+\begin{frame}{GCN (Kipf \& Welling 2017)}
+\[
+a_v^{(k)}=\text{ReLU}\big(W\cdot\text{MEAN}\big\{h_u^{(k-1)},\forall u\in\mathcal{N}(v)\cup\{v\}\big\}\big)
+\]
+\begin{itemize}
+\item the AGGREGATE and COMBINE steps are integrated
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Finally}
+\begin{itemize}
+\item For node classfication
+\begin{itemize}
+\item the $h_v^{(K)}$ of the final iteration is used for prediction
+\end{itemize}
+\item For graph classification
+\begin{itemize}
+\item the READOUT function aggregates node features from the final iteration to obtain the entire graph's representation $h_G$:\[
+h_G=\text{READOUT}\big(\big\{h_v^{(K)}:v\in G\big\}\big)
+\]
+\item READOUT can be a simple permutation invariant function such as summation or a more sophisticated graph-level pooling function
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Weisfeiler-Lehman Test (1)}
+\begin{itemize}
+\item NO polynomial-time algorithm is known for the graph isomorphism problem yet
+\item Apart from some corner cases, the WL test is an effective and computationally efficient test that DISTINGUISHES a broad class of graphs
+\item Its 1-dimensional form, ``naive vertex refinement'', is analogous to neighbor aggregation in GNNs
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Weisfeiler-Lehman Test (2)}
+\begin{enumerate}
+\item Aggregates the labels of nodes and their neighborhoods
+\item Hashes the aggregated labels into unique new labels
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Weisfeiler-Lehman Test (3)}
+\begin{itemize}
+\item The algorithm decides that two graphs are NON-isomorphic if at some iteration the labels of the nodes between the two graphs differ
+\item Shervashidze et al 2011 proposed the WL subtree kernel that measures the SIMILARITY between graphs
+\begin{itemize}
+\item The kernel uses the counts of node labels at different iterations of the WL test as the feature vector of a graph
+\item A node's label at the $k$-th iteration of WL test represents a subtree structure of height $k$ rooted at the node (Fig. 1)
+\item The graph features considered by the WL subtree kernel are essentially counts of different rooted subtrees in the graph
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\subsection{Theoretical Framework: Overview}
+\begin{frame}
+\begin{definition}[1]
+A multiset is a generalized concept of a set that allows multiple instances for its elements. More formally, a multiset is a $2$-tuple $X=(S,m)$ where $S$ is the underlying set of $X$ that is formed from its distinct elements, and $m:S\to\mathbb{N}_{\geqslant1}$ gives the multiplicity of the elements.
+\end{definition}
+\end{frame}
+\subsection{Graph Isomorphism Network (GIN)}
+\begin{frame}
+\begin{lemma}[2]
+Let $G_1$ and $G_2$ be any two non-isomorphic graphs. If a graph neural network $\mathcal{A}:\mathcal{G}\to\mathbb{R}^d$ maps $G_1$ and $G_2$ to DIFFERENT embeddings, the Weisfeiler-Lehman graph isomorphism test also decides $G_1$ and $G_2$ are NOT isomorphic.
+\end{lemma}
+\end{frame}
+
+\begin{frame}
+\begin{proofs}
+\begin{itemize}
+\item Suppose after $k$ iterations, a GNN $\mathcal{A}$ has $\mathcal{A}(G_1)\ne\mathcal{A}(G_2)$ but the WL test cannot decide $G_1$ and $G_2$ are NON-isomorphic
+\item It follows that from iteration $0$ to $k$ in the WL test, $G_1$ and $G_2$ always have the same collection of node labels
+\item In particular, because $G_1$ and $G_2$ have the same WL node labels for iteration $i$ and $i+1$ for any $i=0,\dots,k-1$, $G_1$ and $G_2$ have the same collection, i.e. multiset, of WL node labels $\big\{l_v^{(i)}\big\}$ as well as the same collection of node neighborhood\[
+\big\{\big(l_v^{(i)},\big\{l_u^{(i)}:u\in\mathcal{N}(v)\big\}\big)\big\}
+\]Otherwise, the WL test would have obtained different collections of node labels at iteration $i+1$ for $G_1$ and $G_2$ as different multisets get unique new labels
+\end{itemize}
+\end{proofs}
+\end{frame}
+
+\begin{frame}
+\begin{proofs}[\proofname\ (Cont.)]
+\begin{itemize}
+\item The WL test always relabels different multisets of neighboring nodes into different new labels
+\item We show that on the same graph $G=G_1$ or $G_2$, if WL node labels $l_v^{(i)}=l_u^{(i)}$, we always have GNN node features $h_v^{(i)}=h_u^{(i)}$ for any iteration $i$
+\begin{itemize}
+\item This apparently holds for $i=0$ because WL and GNN starts with the same node features
+\item Suppose this holds for iteration $j$, if for any $u,v,l_v^{(j+1)}=l_u^{(j+1)}$, then it must be the case that\[
+\big(l_v^{(j)},\big\{l_w^{(j)}:w\in\mathcal{N}(v)\big\}\big)=\big(l_u^{(j)},\{l_w^{(j)}:w\in\mathcal{N}(u)\big\}\big)
+\]
+\end{itemize}
+\end{itemize}
+\end{proofs}
+\end{frame}
+
+\begin{frame}
+\begin{proofs}[\proofname\ (Cont.)]
+\begin{itemize}
+\item We show that on the same graph $G=G_1$ or $G_2$, if WL node labels $l_v^{(i)}=l_u^{(i)}$, we always have GNN node features $h_v^{(i)}=h_u^{(i)}$ for any iteration $i$
+\begin{itemize}
+\item By our assumption on iteration $j$, we must have\[
+\big(h_v^{(j)},\big\{h_w^{(j)}:w\in\mathcal{N}(v)\big\}\big)=\big(h_u^{(j)},\big\{h_w^{(j)}:w\in\mathcal{N}(u)\big\}\big)
+\]
+\item In the aggregation process of the GNN, the same AGGREGATE and COMBINE are applied
+\item The same input, i.e. neighborhood features, generates the same output
+\item Thus $h_v^{(j+1)}=h_u^{(j+1)}$
+\item By induction, if WL node labels $l_v^{(i)}=l_u^{(i)}$, we always have GNN node features $h_v^{(i)}=h_u^{(i)}$ for any iteration $i$
+\end{itemize}
+\end{itemize}
+\end{proofs}
+\end{frame}
+
+\begin{frame}
+\begin{proofs}[\proofname\ (Cont.)]
+\begin{itemize}
+\item This creates a valid mapping $\phi$ such that $h_v^{(i)}=\phi(l_v^{(i)})$ for any $v\in G$
+\item It follows from $G_1$ and $G_2$ have the same multiset of WL neightborhood labels that $G_1$ and $G_2$ also have the same collection of GNN neighborhood features\[
+\begin{split}
+&\big\{\big(h_v^{(i)},\big\{h_u^{(i)}:u\in\mathcal{N}(v)\big\}\big)\big\}=\\
+&\big\{\big(\phi(l_v^{(i)}),\big\{\phi(l_u^{(i)}):u\in\mathcal{N}(v)\big\}\big)\big\}
+\end{split}
+\]
+\item Thus $\big\{h_v^{(i+1)}\big\}$ are the same
+\end{itemize}
+\end{proofs}
+\end{frame}
+
+
+\begin{frame}
+\begin{proof}[\proofname\ (Cont.)]
+\begin{itemize}
+\item In particular, we have the same collection of GNN node features\[
+h_v^{(k)}
+\]for $G_1$ and $G_2$
+\item Because the graph level readout function is permutation invariant with respect to the collection of node features,\[
+\mathcal{A}(G_1)=\mathcal{A}(G_2)
+\]
+\item Hence we have reached a contradiction
+\end{itemize}
+\end{proof}
+\end{frame}
+
+\begin{frame}
+\begin{theorem}[3]
+Let $\mathcal{A}:\mathcal{G}\to\mathbb{R}^d$ be a GNN. With a sufficient number of GNN layers, $\mathcal{A}$ maps any graphs $G_1$ and $G_2$ that the Weisfeiler-Lehman test of isomorphism decides as non-isomorphic, to different embeddings if the following conditions hold:\begin{enumerate}
+\item $\mathcal{A}$ aggregates and updates node features iteratively with\[
+h_v^{(k)}=\phi\big(h_v^{(k-1)},f\big(\big\{h_u^{(k-1)}:u\in\mathcal{N}(v)\big\}\big)\big),
+\]where the function $f$, which operates on multisets, and $\phi$ are injective.
+\item $\mathcal A$'s graph-level readout, which operates on the multiset of node features $\big\{h_v^{(k)}\big\}$, is injective.
+\end{enumerate}
+\end{theorem}
+\end{frame}
+
+\begin{frame}
+\begin{proofs}
+\begin{itemize}
+\item Let $\mathcal{A}$ be a GNN where the condition holds
+\item Let $G_1,G_2$ be any graphs which the WL test decides as non-isomorphic at iteration $K$
+\item Because the graph-level readout function is injective, i.e., it maps distinct multiset of node features into unique embeddings, it sufficies to show that $\mathcal{A}$'s neighborhood aggregation process, with sufficient iterations, embeds $G_1$ and $G_2$ into different multisets of node features
+\end{itemize}
+\end{proofs}
+\end{frame}
+
+\begin{frame}
+\begin{proofs}[\proofname\ (Cont.)]
+\begin{itemize}
+\item Let us assume $\mathcal A$ updates node representations as\[
+h_v^{(k)}=\phi\big(h_v^{(k-1)},f\big(\big\{h_u^{(k-1)}:u\in\mathcal{N}(v)\big\}\big)\big)
+\]with injective functions $f$ and $\phi$
+\item The WL test applies a predetermined injective hash function $g$ to update the WL node labels $l_v^{(k)}$:\[
+l_v^{(k)}=g\big(l_v^{(k-1)},\big\{l_u^{(k-1)}:u\in\mathcal{N}(v)\big\}\big)
+\]
+\end{itemize}
+\end{proofs}
+\end{frame}
+
+\begin{frame}
+\begin{proofs}[\proofname\ (Cont.)]
+\begin{itemize}
+\item We will show, by induction, that for any iteration $k$, there always exists an injective function $\varphi$ such that $h_v^{(k)}=\varphi\big(l_v^{(k)}\big)$
+\begin{itemize}
+\item This apparently holds for $k=0$ because the initial node features are the same for WL and GNN $l_v^{(0)}=h_v^{(0)}$ for all $v\in G_1,G_2$; so $\varphi$ could be the identity function for $k=0$
+\item Suppose this holds for iteration $k-1$, we show that it also holds for $k$
+\item Substituting $h_v^{(k-1)}$ with $\varphi\big(l_v^{(k-1)}\big)$ gives us\[
+h_v^{(k)}=\phi(\varphi\big(l_v^{(k-1)}\big),f\big(\big\{\varphi\big(l_u^{(k-1)}\big):u\in\mathcal{N}(v)\big\}\big)\big)
+\]
+\item Since the composition of injective functions is injective, there exists some injective function $\psi$ so that\[
+h_v^{(k)}=\psi\big(l_v^{(k-1)},\big\{l_u^{(k-1)}:u\in\mathcal{N}(v)\big\}\big)
+\]
+\end{itemize}
+\end{itemize}
+\end{proofs}
+\end{frame}
+
+\begin{frame}
+\begin{proofs}[\proofname\ (Cont.)]
+\begin{itemize}
+\item We will show, by induction, that for any iteration $k$, there always exists an injective function $\varphi$ such that $h_v^{(k)}=\varphi\big(l_v^{(k)}\big)$
+\begin{itemize}
+\item Then we have\[
+h_v^{(k)}=\psi\circ g^{-1}g\big(l_v^{(k-1)},\big\{l_u^{(k-1)}:u\in\mathcal{N}(v)\big\}\big)=\psi\circ g^{-1}\big(l_v^{(k)}\big)
+\]
+\item $\varphi=\psi\circ g^{-1}$ is injective because the composition of injective functions is injective
+\item Hence for any iteration $k$, there always exists an injective function $\varphi$ such that\[
+h_v^{(k)}=\varphi\big(l_v^{(k)}\big)
+\]
+\end{itemize}
+\end{itemize}
+\end{proofs}
+\end{frame}
+
+\begin{frame}
+\begin{proof}[\proofname\ (Cont.)]
+\begin{itemize}
+\item At the $K$-th iteration, the WL test decides that $G_1$ and $G_2$ are non-isomorphic, that is the multisets $\big\{l_v^{(k)}\big\}$ are different for $G_1$ and $G_2$
+\item The GNN $\mathcal A$'s node embeddings\[
+\big\{h_v^{(K)}\big\}=\big\{\varphi\big(l_v^{(K)}\big)\big\}
+\]must also be different for $G_1$ and $G_2$ because of the injectivity of $\varphi$
+\end{itemize}
+\end{proof}
+\end{frame}
+
+\begin{frame}
+\begin{lemma}[4]
+Assume the input feature space $\mathcal X$ is countable. Let $g^{(k)}$ be the function parameterized by a GNN's $k$-th layer for $k=1,\dots,L$, where $g^{(1)}$ is defined on multisets $X\subset\mathcal X$ of bounded size. The range of $g^{(k)}$, i.e., the space of node hidden features $h_v^{(k)}$, is also countable for all $k=1,\dots,L$.
+\end{lemma}
+\end{frame}
+
+\begin{frame}
+\begin{proof}
+Theorem~2.13 of Baby Rudin.
+\end{proof}
+\end{frame}
+
+\subsection{Graph-level Readout of GIN}
+\section{Less Powerful but Still Interesting GNNs}
+\subsection{1-layer Perceptrons are not Sufficient}
+\subsection{Structures that Confuse Mean and Max-pooling}
+\subsection{Mean Learns Distributions}
+\subsection{Max-pooling Learns Sets with Distinct Elements}
+\subsection{Remarks on Other Aggregators}
+\section{Experiments}
+\subsection{Dateset, Models \& Configurations, Baselines}
+\subsection{Results}
+
+\end{document}
