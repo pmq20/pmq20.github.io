@@ -1,0 +1,56 @@
+% !TEX TS-program = xelatex
+% !TEX encoding = UTF-8
+
+\documentclass[11pt]{article}
+
+\usepackage{fontspec}
+\usepackage{xunicode}
+\usepackage{xltxtra}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{xeCJK}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{mathtools}
+\usepackage{zhnumber}
+\usepackage{hyperref}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\setCJKmainfont{Microsoft YaHei}
+\geometry{a4paper}
+\linespread{1.2}
+
+\title{评论 Xu 等人 2019 年的《图神经网络有多强大？》}
+\author{潘旻琦}
+\date{\zhtoday}
+
+\begin{document}
+\maketitle
+
+\begin{enumerate}
+
+\item \cite{xu2018how}的标题发问了：图形神经网络有多强大？那么什么叫``强大''呢？作者的思路非常精彩，那就是把对图同构的判别能力作为图神经网络的强大的标准；可能是因为目前仍没有多项式时间的算法去判别图同构，要求图神经网络判别图同构似乎太过严苛，又因为\cite{xu2018how}的引理~2从理论上证明了图神经网络在判别图同构的能力上最多与Weisfeiler-Lehman同构测试一样强大，\cite{xu2018how}于是又降低了评价标准，把达到Weisfeiler-Lehman同构测试能力作为评价图神经网络的表示能力的标准；Weisfeiler-Lehman同构测试算法可以追溯到1968年\cite{weisfeiler1968reduction}；要当心WL测试只能给出``不同构''的结论，不能给出``同构''的结论，即WH测试无法提供确凿的证据证明两个图是同构的
+\item \cite{xu2018how}的理论假定了图节点的输入特征向量$X$是一个可数空间$\mathcal{X}$的多重子集，但是随着最近微分方程与神经网络的结合，这个可数的大前提显得很富有局限性；可以想象在不可数集合上做理论分析的难度更大，例如需要一个测度来刻画函数值域中的点的紧密程度；最近的后续工作 \cite{corso2020principal}似乎对此进行了拓展，允许连续的特征空间
+\item 这个可数性假设用在作者关于\cite{xu2018how}的引理~4的证明中用得非常繁琐，我认为此处只要引用小鲁丁\cite{rudin1976principles}的定理~2.13就可以说明引理~4是显然成立的，因为大小有界的多重集的全体可以看作$\mathcal{X}^n$空间，其中\[
+n\equiv\max_{X\subset\mathcal{X}}|X|
+\]即全体多重集的大小的上界；此时GNN所有中间层函数都可以看做$\mathcal{X}^n$空间上的一个算子；因为\cite{rudin1976principles}的定理~2.13蕴含了$\mathcal{X}^n$空间本身是可数的，所以GNN所有隐藏层特征空间显然是可数的
+\item \cite{xu2018how}的理论化策略是值得借鉴的，他们把图神经网络（的第$k$层）高度抽象为：\[
+\begin{split}
+a_v^{(k)}&=\text{AGGREGTE}^{(k)}\big(\big\{h_u^{(k-1)}:u\in\mathcal{N}(v)\big\}\big)\\
+h_v^{(k)}&=\text{COMBINE}^{(k)}\big(h_v^{k-1},a_v^{(k)}\big)
+\end{split}
+\]我认为他们的理论化策略的关键是把$\text{AGGREGTE}^{(k)}$和$\text{COMBINE}^{(k)}$两个被神经网络参数化了的函数包装成了黑盒，不去碰各种具体GNN变种的这两者内部的结构，于是实现了更高层次的理论上的分析的可能性；如果打开AGGREGATE和COMBINE这两个黑盒，鉴于各种GNN变体的神经网络参数化的复杂性，我想可能很难做理论上的分析
+\item 从\cite{xu2018how}的整体成果来看，基于邻域聚合（或消息传递）的GNN的图同构测试方面的能力是有限的，因为\cite{xu2018how}已经构造了``能力最强''的GNN，而且这个构造里面根本都没有使用图拉普拉斯算子，说明在表达能力方面图拉普拉斯算子这个设计（这个设计可能主要是为了把计算机视觉的傅里叶变换移植到图上）不是必须的，以下这个式子总结了他们的核心构造：\[
+h_v^{(k)}=\text{MLP}^{(k)}\big((1+\epsilon^{(k)})\cdot h_v^{(k-1)}+\sum_{u\in\mathcal{N}(v)}h_u^{(k-1)}\big)
+\]看来未来工作如果想在图同构判别能力方面突破这个能力上限，必须设计能超越邻域聚合（或消息传递）的新架构
+\item 虽然\cite{xu2018how}的引理~2貌似把GNN的同构判别能力贬低到WL测试之下，但作者也指出GNN一个优于WL测试的地方，即可以捕获图结构的相似性；WL测试中的节点特征向量本质上是独热编码，因此无法捕获子树之间的相似性；相反，同等判别能力的GNN通过学习将子树嵌入到低维空间中可以弥补WL测试的这个不足；这使得GNN不仅可以区分不同的结构，而且还可以学习将相似的图结构映射到相似的嵌入，获得捕获图的结构相似性的能力
+\item 因此，最后也必须意识到，判别同构能力并不是我们唯一关心的问题，在很多GNN应用中我们并不追求图形同构测试方面的性能；例如上述GNN捕获图的结构相似性的能力也很重要；所以对该文的结论也不必过于悲观
+\end{enumerate}
+
+\renewcommand\refname{参考文献}
+\bibliographystyle{apalike}
+\bibliography{../../bibliography.bib}
+
+\end{document}

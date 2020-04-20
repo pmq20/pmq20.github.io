@@ -329,23 +329,330 @@ h_v^{(k)}=\varphi\big(l_v^{(k)}\big)
 \begin{lemma}[4]
 Assume the input feature space $\mathcal X$ is countable. Let $g^{(k)}$ be the function parameterized by a GNN's $k$-th layer for $k=1,\dots,L$, where $g^{(1)}$ is defined on multisets $X\subset\mathcal X$ of bounded size. The range of $g^{(k)}$, i.e., the space of node hidden features $h_v^{(k)}$, is also countable for all $k=1,\dots,L$.
 \end{lemma}
-\end{frame}
-
-\begin{frame}
 \begin{proof}
 Theorem~2.13 of Baby Rudin.
 \end{proof}
 \end{frame}
 
+\begin{frame}
+\begin{lemma}[5]
+Assume $\mathcal X$ is countable. There exists a function $f:\mathcal{X}\to\mathbb{R}^n$ so that $h(X)=\sum_{x\in X}f(x)$ is unique for each multiset $X\subset\mathcal X$ of bounded size.
+
+Moreover, any multiset function $g$ can be decomposed as $g(X)=\phi\big(\sum_{x\in X}f(x)\big)$ for some function $\phi$.
+\end{lemma}
+\end{frame}
+
+\begin{frame}
+\begin{proofs}
+\begin{itemize}
+\item We first prove that there exists a mapping $f$ so that $\sum_{x\in X}f(x)$ is unique for each multiset $X$ of bounded size
+\item Because $\mathcal{X}$ is countable, there exists a mapping $Z:\mathcal{X}\to\mathbb{N}$ from $x\in\mathcal X$ to natural numbers
+\item Because the cardinality of multiset $X$ is bounded, there exists a number $N\in\mathbb N$ so that $|X|<N$ for all $X$
+\item Then an example of such $f$ is\[
+f(x)=N^{-Z(x)}
+\] which can be viewed as a more compressed form of an one-hot vector or $N$-digit presentation
+\item Thus $h(X)=\sum_{x\in X}f(x)$ is an injective function of multisets
+\end{itemize}
+\end{proofs}
+\end{frame}
+
+\begin{frame}
+\begin{proof}[\proofname\ (Cont.)]
+\begin{itemize}
+\item $\phi\big(\sum_{x\in X}f(x)\big)$ is permutation invariant so it is a well-defined multiset function. For any multiset function $g$, we can construct such $\phi$ by letting\[
+\phi\big(\sum_{x\in X}f(x)\big)=g(X)
+\]
+\item Note that such $\phi$ is well-defined because $h(X)=\sum_{x\in X}f(x)$ is injective
+\end{itemize}
+\end{proof}
+\end{frame}
+
+\begin{frame}
+\begin{corollary}[6]
+Assume $\mathcal X$ is countable. There exists a function $f:\mathcal X\to\mathbb{R}^n$ so that for infinitely many choices of $\epsilon$, including all irrational numbers,\[
+h(c,X)=(1+\epsilon)\cdot f(c)+\sum_{x\in X}f(x)
+\]is unique for each pair $(c,X)$, where $c\in\mathcal X$ and $X\subset\mathcal X$ is a multiset of bounded size.
+
+Moreover, any function $g$ over such pairs can be decomposed as\[
+g(c,X)=\varphi\big((1+\epsilon)\cdot f(c)+\sum_{x\in X}f(x)\big)
+\]for some function $\varphi$.
+\end{corollary}
+\end{frame}
+
+\begin{frame}
+\begin{proofs}
+\begin{itemize}
+\item We consider\[
+f(x)=N^{-Z(x)}
+\]where $|X|<N$ for all $X$ and $Z:\mathcal{X}\to\mathbb{N}$ maps from $x\in\mathcal X$ to natural numbers
+\item Let\[
+h(c,X)\equiv(1+\epsilon)\cdot f(c)+\sum_{x\in X}f(x)
+\]
+\item Claim: if $\epsilon$ is an irrational number, for any $(c',X')\ne(c,X)$ with $c,c'\in\mathcal X$ and $X,X'\subset\mathcal X$\[
+h(c,X)\ne h(c',X')
+\]holds
+\end{itemize}
+\end{proofs}
+\end{frame}
+
+\begin{frame}
+\begin{proof}[\proofname\ (Cont.)]
+\begin{itemize}
+\item We prove by contradiction
+\item For any $(c,X)$, suppose there exists $(c',X')$ such that $(c',X')\ne(c,X)$ but\[
+h(c,X)=h(c',X')
+\]holds
+\item Let us consider the following two cases
+\begin{enumerate}
+\item $c'=c$ but $X'\ne X$
+\item $c'\ne c$
+\end{enumerate}
+\end{itemize}
+\end{proof}
+\end{frame}
+
+\begin{frame}
+\begin{proof}[\proofname\ (Cont.)]
+\begin{itemize}
+\item For the first case: $c'=c$ but $X'\ne X$
+\begin{itemize}
+\item $h(c,X)=h(c,X')$ implies\[
+\sum_{x\in X}f(x)=\sum_{x\in X'}f(x)
+\]
+\item It follows from Lemma 5 that the euqality will not hold, because with $f(x)=N^{-Z(x)}$,\[
+X'\ne X\implies\sum_{x\in X}f(x)\ne\sum_{x\in X'}f(x)
+\]
+\item Thus, we reach a contradiction
+\end{itemize}
+\end{itemize}
+\end{proof}
+\end{frame}
+
+\begin{frame}
+\begin{proof}[\proofname\ (Cont.)]
+\begin{itemize}
+\item For the second case: $c'\ne c$
+\begin{itemize}
+\item We can similarly rewrite $h(c,X)=h(c',X')$ as\[
+\epsilon\cdot(f(c)-f(c'))=\big(f(c')+\sum_{x\in X'}f(x)\big)-\big(f(c)+\sum_{x\in X}f(x)\big)
+\]
+\item Because $\epsilon$ is an irrational number and $f(c)-f(c')$ is a non-zero rational number, L.H.S. is irrational
+\item R.H.S. is rational because the sum of a finite number of rational numbers
+\item Thus, we reach a contradiction
+\end{itemize}
+\end{itemize}
+\end{proof}
+\end{frame}
+
+\begin{frame}
+\begin{proof}[\proofname\ (Cont.)]
+\begin{itemize}
+\item For any function $g$ over the pairs $(c,X)$, we can construct such $\varphi$ for the desired decomposition by letting\[
+\varphi\big((1+\epsilon)\cdot f(c)+\sum_{x\in X}f(x)\big)=g(c,X)
+\]
+\item Note that such $\varphi$ is well-defined because\[
+h(c,X)=(1+\epsilon)\cdot f(c)+\sum_{x\in X}f(x)
+\]is injective
+\end{itemize}
+\end{proof}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item GIN uses MLP to learn $f$ and $\varphi$
+\item In practice, we model\[
+f^{(k+1)}\circ\varphi^{(k)}
+\]with a single MLP:\[
+h_v^{(k)}=\text{MLP}^{(k)}\big((1+\epsilon^{(k)})\cdot h_v^{(k-1)}+\sum_{u\in\mathcal{N}(v)}h_u^{(k-1)}\big)
+\]
+\end{itemize}
+\end{frame}
+
 \subsection{Graph-level Readout of GIN}
+\begin{frame}
+\begin{itemize}
+\item An important aspect of the graph-level readout is that node representations, corresponding to subtree structures, get more refined and global as the number of iterations increases
+\item A sufficient number of iterations is key to achieving good discriminative power
+\item Yet, features from earlier iterations may sometimes generalize better
+\item To consider all structural information, we use information from all depths/iterations of the model, concatenating graph representations across all iterations/layers of GIN:\[
+h_G=\text{CONCAT}\big(\text{READOUT}\big(\big\{h_v^{(k)}|v\in G\big\}\big)|k=0,1,\dots,K\big)
+\]
+\end{itemize}
+\end{frame}
+
 \section{Less Powerful but Still Interesting GNNs}
 \subsection{1-layer Perceptrons are not Sufficient}
+\begin{frame}
+\begin{itemize}
+\item The function $f$ in Lemma~5 helps map distinct multisets to unique embeddings
+\item $f$ can be parameterized by an MLP by the universal approximation theorem
+\item Nonetheless, many existing GNNs instead use a 1-layer perceptron\[
+\sigma\circ W,
+\]a linear mapping followed by a non-linear activation function such as a ReLU
+\item Such 1-layer mappings are examples of Generalized Linear Models
+\item Therefore, we are interested in understanding whether 1-layer perceptrons are enough for graph learning
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{lemma}[7]
+There exists finite multisets $X_1\ne X_2$ so that for any linear mappings $W$,\[
+\sum_{x\in X_1}\text{ReLU}(Wx)=\sum_{x\in X_2}\text{ReLU}(Wx).
+\]
+\end{lemma}
+\end{frame}
+
+\begin{frame}
+\begin{proofs}
+\begin{itemize}
+\item Let us consider the example\[
+\begin{split}
+X_1&=\{1,1,1,1,1\},\\
+X_2&=\{2,3\},
+\end{split}
+\]i.e. two different multisets of positive numbers that sum up to the same value
+\item We will be using the homogeneity of ReLU
+\end{itemize}
+\end{proofs}
+\end{frame}
+
+\begin{frame}
+\begin{proofs}[Proof (Cont.)]
+\begin{itemize}
+\item Let $W$ be an arbitrary linear transform that maps $x\in X_1,X_2$ into $\mathbb{R}^n$
+\item It is clear that, at the same coordinates, $Wx$ are either positive or negative for all $x$ because all $x$ in $X_1$ and $X_2$ are positive
+\item It follows that $\text{ReLU}(Wx)$ are either positive or $0$ at the same coordinate for all x in $X_1,X_2$
+\item For the coordinates where $\text{ReLU}(Wx)$ are $0$, we have\[
+\sum_{x\in X_1}\text{ReLU}(Wx)=\sum_{x\in X_2}\text{ReLU}(Wx)
+\]
+\end{itemize}
+\end{proofs}
+\end{frame}
+
+\begin{frame}
+\begin{proof}[Proof (Cont.)]
+\begin{itemize}
+\item For the coordinates where $Wx$ are positive, linearity still holds. It follows from linearity that\[
+\sum_{x\in X}\text{ReLU}(Wx)=\text{ReLU}\big(W\sum_{x\in X}x\big)
+\]where $X$ could be $X_2$ or $X_1$
+\item Because $\sum_{x\in X_1}x=\sum_{x\in X_2}x$, we have the following as desired\[
+\sum_{x\in X_1}\text{ReLU}(Wx)=\sum_{x\in X_2}\text{ReLU}(Wx)
+\]
+\end{itemize}
+\end{proof}
+\end{frame}
+
 \subsection{Structures that Confuse Mean and Max-pooling}
+\begin{frame}
+\begin{itemize}
+\item What happens if we replace the sum in\[
+h(X)=\sum_{x\in X}f(x)
+\]with mean or max-pooling as in GCN and GraphSAGE?
+\item Mean and max-pooling aggregators are still well-defined multiset functions because they are permutation invariant
+\item But they are NOT injective
+\item Fig. 2
+\item Fig. 3
+\end{itemize}
+\end{frame}
+
 \subsection{Mean Learns Distributions}
+\begin{frame}
+\begin{itemize}
+\item To characterize the class of multisets that the mean aggregator can distinguish, consider the exmaple\[
+\begin{split}
+X_1&=(S,m)\\
+X_2&=(S,k\cdot m)
+\end{split}
+\]where $X_1$ and $X_2$ have the same set of distinct elements, but $X_2$ contains $k$ copies of  each element of $X_1$
+\item Any mean aggregator maps $X_1$ and $X_2$ to the same embedding, because it simply takes averages over individual element features
+\item Thus the mean captures the distribution (porportions) of elements in a multiset, but not the exact multisets
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{corollary}[8]
+Assume $\mathcal X$ is countable. There exists a function $f:\mathcal{X}\to\mathbb{R}^n$ so that for $h(X)=\frac{1}{|X|}\sum_{x\in X}f(x)$,\[
+h(X_1)=h(X_2)\Leftrightarrow X_1,X_2\text{ have the same distribution}.
+\]
+
+That is, assuming $|X_2|\geqslant|X_1|$, we have $X_1=(S,m)$ and $X_2=(S,k\cdot m)$ for some $k\in\mathbb{N}_{\geqslant1}$.
+\end{corollary}
+\end{frame}
+
+\begin{frame}
+\begin{proofs}
+\begin{itemize}
+\item Suppose multisets $X_1$ and $X_2$ have the same distribution, without loss of generality, let us assume $X_1=(S,m)$ and $X_2=(S,k\cdot m)$ for some $k\in\mathbb{N}_{\geqslant1}$, i.e.  $X_1$ and $X_2$ have the same underlying set and the multiplicity of each element in $X_2$ is $k$ times of that in $X_1$
+\item Then we have\[
+\begin{split}
+|X_2|&=k|X_1|\\
+\sum_{x\in X_2}f(x)&=k\cdot\sum_{x\in X_1}f(x)\\
+\frac{1}{|X_2|}\sum_{x\in X_2}f(x)&=\frac{1}{k\cdot |X_1|}\cdot k\cdot \sum_{x\in X_1}f(x)
+\end{split}
+\]
+\end{itemize}
+\end{proofs}
+\end{frame}
+
+\begin{frame}
+\begin{proof}[Proof (Cont.)]
+\begin{itemize}
+\item Now we show that there exists a function $f$ so that $\frac{1}{|X|}\sum_{x\in X}f(x)$ is unique for distributionally equivalent $X$
+\item Because $\mathcal X$ is countable, there exists a mapping $Z:\mathcal{X}\to\mathbb N$ from $x\in\mathcal X$ to natural numbers
+\item Because the cardinality of multisets $X$ is bounded, there exists a number $N\in\mathbb N$ such that $|X|<N$ for all $X$
+\item Then an example of such $f$ is\[
+f(x)=N^{-2Z(x)}
+\]
+\end{itemize}
+\end{proof}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item The mean aggregator may perform well if, for the task, the statistical and distributional information in the graph is more important than the exact structure
+\item Moreover, when node features are diverse and rarely repeat, the mean aggregator is as powerful as the sum aggregator
+\item This may explain why GNNs with mean aggregators are effective for node classfication tasks, such as classifying article subjects and community detection, where node features are rich and the distribution of the neighborhood features provides a strong signal for the task
+\end{itemize}
+\end{frame}
+
 \subsection{Max-pooling Learns Sets with Distinct Elements}
+\begin{frame}
+\begin{itemize}
+\item Max-pooling considers multiple nodes with the same feature as only one node (i.e., treats a multiset as a set)
+\item Max-pooling captures neither the exact structure nor the distribution
+\item However, it may be suitable for tasks where it is important to identify representative elements or the ``skeleton'', rather than to distinguish the exact structure or distribution
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{corollary}[9]
+Assume $\mathcal X$ is countable. Then there exists a function $f:\mathcal{X}\to\mathbb{R}^\infty$ so that for $h(X)=\max_{x\in X}f(x)$,\[
+h(X_1)=h(X_2)\Leftrightarrow X_1,X_2\text{ have the same underlying set}
+\]
+\end{corollary}
+\end{frame}
+\begin{frame}
+\begin{proof}
+\begin{itemize}
+\item Suppose multisets $X_1$ and $X_2$ have the same underlying set $S$, then we have\[
+\max_{x\in X_1}f(x)=\max_{x\in S}f(x)=\max_{x\in X_2}f(x)
+\]
+\item Now we show that there exists a mapping $f$ so that $\max_{x\in X}f(x)$ is unique for $X$'s with the same underlying set
+\item Because $\mathcal{X}$ is countable, there exists a mapping $Z:\mathcal{X}\to\mathbb N$
+\item Then an example of such $f:\mathcal{X}\to\mathbb{R}^\infty$ is defined as $f_i(x)=1$ for $i=Z(x)$ and $f_i(x)=0$ otherwise, where $f_i(x)$ is the $i$-th coordinate of $f(x)$; such an $f$ essentially maps a multiset to its one-hot embedding
+\end{itemize}
+\end{proof}
+\end{frame}
+
 \subsection{Remarks on Other Aggregators}
-\section{Experiments}
-\subsection{Dateset, Models \& Configurations, Baselines}
-\subsection{Results}
+\begin{frame}
+\begin{itemize}
+\item There are other non-standard neighbor aggregation schemes that we do no cover
+\item E.g. weighted average via attention
+\item E.g. LSTM pooling
+\item We emphasize that our theoretical framework is general enough to characterize the representational power ofo any aggregation-based GNNs
+\item In the future, it would be interesting to apply our framework to analyze and understand other aggregation schemes
+\end{itemize}
+\end{frame}
 
 \end{document}
