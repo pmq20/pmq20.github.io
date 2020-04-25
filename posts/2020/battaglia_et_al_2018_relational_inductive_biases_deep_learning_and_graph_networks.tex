@@ -266,7 +266,7 @@ u'&=\phi^u(\bar{e}',\bar{v}',u)
 \end{split}
 \]
 \begin{itemize}
-\item $\rho$ MUST be invariant to permutations of their inputs, and should take variable number of arguments (e.g. elementwise summation, mean, maximum, etc.)
+\item $\rho$ MUST be invariant to permutations of their inputs, and should take variable number of arguments
 \end{itemize}
 \end{frame}
 
@@ -357,7 +357,7 @@ V'=\{v_i'\}_{i=1:N^v}.
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Alg.~1: Steps of Computation in a Full GN Block}
+\begin{frame}
 \begin{algorithmic}
 \Function{GraphNetwork}{$E,V,u$}
 \For{$k\in\{1,\dots,N^e\}$}
@@ -380,23 +380,91 @@ V'=\{v_i'\}_{i=1:N^v}.
 
 \section{Design principles for graph network architectures}
 \subsection{Flexible representations}
-\begin{frame}
+\begin{frame}{Flexible Attribute Representations}
 \begin{itemize}
-\item
+\item The global, node and edge attributes of a GN block can use arbitrary representational formats
+\item In deep learning implementations, real-valued vectors and tensors are most common
+\item Other data structures such as sequences, sets, or even graphs could be also be used
 \end{itemize}
 \end{frame}
+\begin{frame}{Flexible Attribute Representations}
+\begin{itemize}
+\item The requirements of the problem will often determine what representations should be used for the attributes
+\item E.g. when the input data is an image, the attributes might be represented as tensors of image patches
+\item When the input data is a text document, the attributes might be sequences of words corresponding to sentences
+\end{itemize}
+\end{frame}
+\begin{frame}{Flexible Attribute Representations}
+\begin{itemize}
+\item For each GN block within a broader architecture
+\item The edge and node outputs typically correspond to lists of vectors or tensors, one per edge or node
+\item The global outputs correspond to a single vector or tensor
+\item This allows a GN's output to be passed to other deep learning building blocks such as MLPs, CNNs, and RNNs
+\end{itemize}
+\end{frame}
+\begin{frame}{Flexible Attribute Representations}
+\begin{itemize}
+\item The output of a GN block can also be tailored to the demands of the task. In particular,
+\begin{itemize}
+\item An ``edge-focused'' GN uses the edges as output, for example to make decisions about interactions among entities
+\item A ``node-focused'' GN uses the nodes as ouput, for example to reason about physical systems
+\item A ``graph-focused'' GN uses the globals as output, for example to predict the potential energy of a physical system, the properties of a molecule, or answers to questions about a visual scene
+\end{itemize}
+\item The nodes, edges and global outputs can also be mixed-and-matched depending on the task
+\item E.g. use both the ouput edge and global attributes to compute a policy over actions
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Flexible Graph Structures}
+\begin{itemize}
+\item When defining how the input data will be represented as a graph, there are generally 2 scenarios
+\item First, the input explicitly specifies the relational structure
+\item Second, the relational structure must be inferred or assumed
+\item There are not hard distinctions, but extremes along a continuum
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Flexible Graph Structures}
+\begin{itemize}
+\item Examples of data with more explicitly specified entities and relations include Knowledge Graphs, Social Networks, Parse Trees, Optimization Problems, Chemical Graphs, Road Networks, and Physical Systems w/ known interactions
+\item Examples of data where the relational structure is not made explicit, and must be inferred or assumed, include Visual Scenes, Text Corpora, Programming Language Source Code, and Multi-agent Systems
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Flexible Graph Structures}
+\begin{itemize}
+\item In these types of settings, the data may be formatted as a set of entities without relations, or even just a vector or tensor (e.g., an image)
+\item If the entities are not specified explicitly, they might be assumed, for instance, by treating each word in a sentence or each local feature vector in a CNN's output feature map, as a node. Or, it might be possible to use a separate learned mechanism to infer entities from a unstructured signal
+\item If relations are not available, the simplest approach is to instantiate all possible directed edges between entities. This can be prohibitive for large number of entities, however, because the number of possible edges grows quadratically with the number of nodes
+\end{itemize}
+\end{frame}
+
+
 \subsection{Configurable within-block structure}
 \begin{frame}
 \begin{itemize}
+\item The structure and functions within a GN block can be configured in different ways
+\item This offers flexibility in what information is made available as inputs to its functions, as well as how output edge, node, and global updates are produced
+\item In particular, each $\phi$ must be implemented with some function $f$, where $f$'s argument signature determines what information it requires as input
+\item $\phi$ can be implemented via neural networks, e.g. MLP (for vector attributes) or CNN (for image features)
+\item $\rho$ can be implemented using elementwise summation, but averages and max/min could also be used
+\item The $\phi$ functions can also use RNNs, which requires an additional hidden state as input and ouput
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
 \item
 \end{itemize}
 \end{frame}
+
 \subsection{Composable multi-block architectures}
 \begin{frame}
 \begin{itemize}
 \item
 \end{itemize}
 \end{frame}
+
 \subsection{Implementing graph networks in code}
 \begin{frame}
 \begin{itemize}
