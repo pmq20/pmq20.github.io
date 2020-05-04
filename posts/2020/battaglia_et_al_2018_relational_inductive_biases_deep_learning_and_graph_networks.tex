@@ -449,26 +449,90 @@ V'=\{v_i'\}_{i=1:N^v}.
 \item $\phi$ can be implemented via neural networks, e.g. MLP (for vector attributes) or CNN (for image features)
 \item $\rho$ can be implemented using elementwise summation, but averages and max/min could also be used
 \item The $\phi$ functions can also use RNNs, which requires an additional hidden state as input and ouput
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-\begin{itemize}
-\item
+\item Figure 4
 \end{itemize}
 \end{frame}
 
 \subsection{Composable multi-block architectures}
 \begin{frame}
 \begin{itemize}
-\item
+\item A key design principle of GN is constructing complex architectures by composing GN blocks
+\item We defined a GN block as always taking a graph comprised of edge, node, and global elements as input, and returning a graph with the same constituent
+\item Simply pass through the input elements to the output when those elements are not explicitly updated
+\item This graph2graph IO interface ensures that the output of one GN block can be passed as input to another, even if their internal configurations are different
+\item Similar to the tensor-to-tensor interface of the standard deep learning toolkit
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item Arbitrary number of GN blocks can be composed
+\item Figure 6
+\item The blocks can be unshared (different functions and/or parameters, analogous to layers of a CNN) or shared (reused functions and parameters, analogous to an unrolled RNN)
+\item Shared configurations are analogous to MsgPassing, where the same local update procedure is applied iteratively to propagate information across the structure
+\item Figure 7
+\end{itemize}
+\end{frame}
+\begin{frame}
+\begin{itemize}
+\item If we exclude the global $u$ (which aggregates info from across the nodes and edges), the info that a node has access to after $m$ steps of propagation is determined by the set of nodes and edges that are at most $m$ hops away
+\item This can be interpreted as breaking down a complex computation into smaller elmentary steps
+\item The steps can also be used to capture sequentiality in time
+\item E.g. if each propagation step predicts the physical dynamics over one time step of duration $\Delta t$, then the $M$ propogation steps result in a total simulation of $M\cdot\Delta t$
+\end{itemize}
+\end{frame}
+\begin{frame}
+\begin{itemize}
+\item A common architecture design is what we call the ``encode-process-decode'' configuration
+\begin{itemize}
+\item An input graph is transformed into a latent representation $G_0$ by an encoder
+\item A shared core block is applied $M$ times to return $G_M$
+\item Finally an output graph is decoded
+\end{itemize}
+\item E.g. the encoder might compute the initial forces annd interaction energies between the balls, the core might apply an elementary dynamics update, and the decoder might read out the final positions from the updated graph states
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Recurrent GN}
+\begin{itemize}
+\item Similar to the encode-process-decode design, recurrent GN-based architectures can be built by maintaining a hidden graph, taking as input an observed graph and returning an output graph on each step
+\item This type of architecture can be particularly useful for predicting sequences of graphs, such as predicting the trajectory of a dynamical system over time
+\item The ``encoded graph'' must have the same structure as the ``hidden graph'' and they can be easily combined by concatenating their corresponding $e_k,v_i,u$ vectors before being passed to the core
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Recurrent GN}
+\begin{itemize}
+\item For the output, the hidden graph is copied and decoded
+\item This design reuses GN blocks in several ways: enc, dec and core blocks are shared across each step, $t$; and within each step, the core may perform multiple shared sub-steps
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item Various other techniques for designing GN-based architectures can be useful
+\item Graph skip connections would concatenate a GN block's input graph $G_m$ with its output graph $G_{m+1}$ before proceeding to further computations
+\item Merging and smoothing input and hidden graph information can use LSTM- or GRU- style gating schemes, instead oof simple concatenation
+\item Or distinct, recurrent GN blocks can be composed before and/or after other GN blocks to improve stability in the representations over multiple propogation steps
 \end{itemize}
 \end{frame}
 
 \subsection{Implementing graph networks in code}
 \begin{frame}
 \begin{itemize}
-\item
+\item Similar to CNNs, which are naturally parallelizable (e.g. on GPUs), GNs have a natural parallel structure
+\item Since the $\phi^e$ and $\phi^v$ functions are shared over the edges and nodes respectively
+\item They can be computed in parallel
+\item In practice, this means that w.r.t. $\phi^e$ and $\phi^v$, the nodes and edges can be treated like batch dimension in typical mini-batch training regimes
+\item Moreover, several graphs can be naturally batched together by treating them as disjoint components of a larger graph
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item Reusing $\phi^e$ and $\phi^v$ also improves GNs' sample efficiency
+\item Again, analogous to a convolutional kernel, the number of samples which are used to optimize a GN's $\phi^e$ and $\phi^v$ functions is the number of edges and nodes, respectively, across all training graphs
+\item E.g. a scene with $4$ balls which are all connected by springs will provide $12$ examples of the contact interaction between them
 \end{itemize}
 \end{frame}
 
