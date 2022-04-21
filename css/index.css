@@ -1,0 +1,110 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  padding: 0 4px;
+}
+
+body {
+  overflow: hidden;
+  font-family: "Bitstream Charter","URW Palladio L",Palatino,"Palatino Linotype","Hoefler Text",Georgia,"Book Antiqua",Times,"Times New Roman",serif;
+}
+
+h1 {
+  font-size: 26px;
+  text-align: center;
+}
+
+p {
+  font-size: 16px;
+}
+
+@media only screen and (min-height: 610px) {
+  body {
+    background-image: url(../img/indexbg.gif);
+  }
+
+  img {
+    border: 0;
+  }
+
+  h1 {
+    color: #444;
+    position: absolute;
+    display: block;
+    width: 746px;
+  }
+  
+  h1.ja {
+    margin-top: 0;
+  }
+
+  div {
+    height: 610px;
+    width: 746px;
+    margin: -305px 0 0 -373px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+  }
+
+  p {
+    margin-top: -48px;
+    text-align: center;
+  }
+
+  a {
+    color: #444;
+    text-decoration: none;
+  }
+
+  span {
+     color: #999;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+}
+
+@media only screen and (max-height: 610px) {  
+  html {
+    height: 100%;
+    width: 100%;
+    display: table;
+  }
+  
+  body {
+    margin: 2em auto;
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+  }
+  
+  img {
+    display: none;
+  }
+  
+  div {
+    margin: 0 auto;
+  }
+
+  h1 {
+    margin: 0;
+    line-height: 58px;
+  }
+  
+  p {
+    text-align: center;
+  }
+
+  a {
+    color: #888;
+  }
+  
+  span {
+    color: #CCC;
+  }
+}

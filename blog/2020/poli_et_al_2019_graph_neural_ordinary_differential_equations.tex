@@ -1,0 +1,380 @@
+% !TEX TS-program = pdflatex
+% !TEX encoding = UTF-8 Unicode
+
+\documentclass{beamer}
+\usepackage{tikz}
+\usepackage[USenglish]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{xcolor}
+\usepackage{algpseudocode}
+\usepackage{ulem}
+\DeclareMathOperator{\sign}{sign}
+\usefonttheme[onlymath]{serif}
+\mode<presentation>
+{
+  \usetheme{Warsaw}
+}
+\newcommand*{\Z}{\makebox[1.5ex]{\textbf{$\cdot$}}}
+
+\title{Poli et al. 2019: Graph Neural Ordinary Differential Equations}
+
+\author{Minqi Pan}
+
+\date{\today}
+
+\AtBeginSubsection[]
+{
+  \begin{frame}<beamer>{Outline}
+    \tableofcontents[currentsection,currentsubsection]
+  \end{frame}
+}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{Graph Neural Ordinary Differential Equations}
+\begin{itemize}
+\item AAAI 2020, ``The 1st International Workshop on Deep Learning on Graphs: Methodologies and Applications'', Feb 8th, 2020
+\item Michael Poli, Stefano Massaroli, Junyoung Park, Atsushi Yamashita, Hajime Asama, Jinkyoo Park
+\item Korea Advanced Institute of Science and Technology, University of Tokyo
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Outline}
+  \tableofcontents
+\end{frame}
+
+\section{Background}
+\subsection{Notation, GNN, Neural ODE and a Motivating Example}
+\begin{frame}{Notation}
+\begin{itemize}
+\item $\mathcal G=(\mathcal V,\mathcal E)$
+\item $|\mathcal V|=n$
+\item Adjacency matrix $A\in\mathbb{R}^{n\times n}$
+\item Feature vector $x_v(t)\in\mathbb{R}^d\quad\forall v\in\mathcal V$
+\item Feature matrix $X(t)\in\mathbb{R}^{n\times d}$
+\item $x_v(t),X(t)$ exhibits temporal dependencies
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Neural ODE}
+Since Lu et al. 2018 (ICML 2018) and Chen et al. 2018 (NIPS 2018):
+\begin{gather*}
+h_{s+1}=h_s+f(h_s,\theta),\quad s\in\mathbb{N}\\
+\ArrowBetweenLines[\Downarrow]
+\frac{dh_s}{ds}=f(s,h_s,\theta),\quad s\in\mathcal{S}\subset\mathbb{R}
+\end{gather*}
+\end{frame}
+
+\begin{frame}{GNN+ODE}
+\begin{itemize}
+\item Sanchez-Gonzalez et al. 2019: ``Hamiltonian Graph Networks with ODE Integrators'', combining graph networks with a differentiable ordinary differential equation integrator as a mechanism for predicting future states, and a Hamiltonian (the Hamiltonian in a physical/dynamical context) as an internal representation.
+\item Deng et al. 2019: ``Continuous Graph Flow'', a continuous normalizing flow model for graph generation
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Static GNN}
+\begin{itemize}
+\item Main variants:
+\begin{enumerate}
+\item GCN (Kipf et al. 2016)
+\item DGC (Atwood et al. 2016)
+\item GAT (Veli\v{c}kovi\'{c} et al. 2017)
+\end{enumerate}
+\item Recurrent:
+\begin{enumerate}
+\item GCRNN (Cui et al. 2018)
+\item GCGRU (Zhao et al. 2018)
+\end{enumerate}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{A Motivating Example}
+\begin{itemize}
+\item Multi–agent systems permeate science in a variety of fields
+\item Classical dynamical network theory since 2000s: nonlinear dynamical systems + graphs
+\item Often, closed–form analytic formulations are not available
+and forecasting or decision making tasks have to rely
+on noisy, irregularly sampled observations
+\item The primary purpose
+of ``Graph Neural Ordinary Differential Equations'' is to offer a data–driven approach to the modeling
+of dynamical networks, particularly when the governing
+equations are highly nonlinear and therefore challenging
+to approach with classical or analytical methods
+\end{itemize}
+\end{frame}
+
+\section{Graph Neural Ordinary Differential Equations}
+\subsection{Static Models}
+\begin{frame}{Inter–layer Dynamics of a GNN Node Feature Matrix}
+\[
+\begin{cases}
+H_{s+1}=H_s+F(s,H_s,\Theta_s)\\
+H_0=X
+\end{cases},\quad s\in\mathbb{N}
+\]\begin{itemize}
+\item $F$: a matrix-valued nonlinear function conditioned on graph $\mathcal G$
+\item $\Theta_s$: the tensor of trainable parameters of the $s$-th layer
+\item The explicit dependence on $s$ of the dynamics is justified in DGC (Atwood et al. 2016)
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Graph Neural Differential Ordinary Equation (GDE)}
+\[
+\begin{cases}
+\dot{H_s}=F(s,H_s,\Theta)\\
+H_0=X
+\end{cases},\quad s\in S\subset\mathbb{R}
+\]\begin{itemize}
+\item A Cauchy problem
+\item $F: \mathcal{S}\times\mathbb{R}^{n\times d}\times\mathbb{R}^p\to\mathbb{R}^{n\times d}$ is a depth-varying vector field defined on graph $\mathcal{G}$
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Well-posedness}
+\begin{itemize}
+\item Let $\mathcal S\equiv[0,1]$
+\item Under Lipschitz continuity of $F$ w.r.t. $H_s$, and uniform continuity w.r.t. $s$
+\item The ODE admits a unique solution $H_s$ defined in the whole $\mathcal{S}$
+\item There is a mapping $\Psi$ from $\mathbb{R}^{n\times d}$ to the space of absolutely continuous functions $\mathcal{S}\to\mathbf{R}^{n\times d}$ such that $H\equiv\Psi(X)$ satisfies the ODE
+\item The output of the GDE:\[
+\Psi(X)=X+\int_{\mathcal{S}}F(\tau,H_\tau,\Theta)d\tau
+\]
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Integration Domain}
+\begin{itemize}
+\item We restrict the integration interval to $\mathcal S\equiv[0,1]$
+\item Any other integration time can be considered a rescaled version of $\mathcal{S}$
+\item In the forecasting with irregular timestamps application, where $\mathcal S$ acquires a specific meaning, the integration domain can be approriately tuned to evolve GDE dynamics between arrival times without assumptions on underlying vector field (Rubanova et al. 2019)
+\end{itemize}
+\end{frame}
+
+\begin{frame}{GDE Training}
+\begin{itemize}
+\item GDE can be trained with a variety of methods
+\begin{enumerate}
+\item Standard backpropagation through the computational graph
+\item Adjoint methods for $O(1)$ memory efficiency
+\item Backpropagation through a relaxed spectral elements discretization (Quaglino et al. 2019)
+\end{enumerate}
+\item Numerical instability in the form of accumulating errors on the adjoint ODE during the backward pass of NODEs has been abserved (Gholami et al. 2019)
+\begin{itemize}
+\item A proposed solution is a hybrid checkpointing-adjoint scheme
+\item the adjoint trajectory is reset at predetermined points in order to control the error dynamics
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Incorporating Governing Differential Equations Priors}
+\begin{itemize}
+\item GDEs belong to the toolbox of scientific deep learning along with Neural ODEs and other continuous depth models
+\item Scientific deep learning is concerned with merging prior, incomplete knowledge about governing equations with data-driven predictions
+\item GDEs can be extended to settings involving dynamical networks evolving according to different classes of differential equations
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Stochastic Differential Equations}
+\[
+\begin{cases}
+dH_{s}=F(s,H_s)dt+G(s,H_s)dW_t\\
+H_0=X
+\end{cases},\quad s\in\mathbb{\mathcal{S}}
+\]
+\begin{itemize}
+\item $F,G$: GDEs that can be replaced by analytic terms when available
+\item $W$: a standard multidimensional Wiener process
+\item This extension enables a practical method to link dynamical network theory and deep learning with the objective of obtaining sample efficient, interpretable models
+\end{itemize}
+\end{frame}
+
+\begin{frame}{GCN: Graph Convolution Networks}
+\begin{gather*}
+H_{s+1}=\sigma(\tilde{D}^{-\frac{1}{2}}\tilde{A}\tilde{D}^{-\frac{1}{2}}H_sW_s)\\
+\ArrowBetweenLines[\Downarrow]
+H_{s+1}=H_s+\sigma(\tilde{D}^{-\frac{1}{2}}\tilde{A}\tilde{D}^{-\frac{1}{2}}H_sW_s)\\
+\ArrowBetweenLines[\Downarrow]
+\frac{dH}{ds}=F_\text{GCN}(H,\Theta)\equiv\sigma(\tilde{D}^{-\frac{1}{2}}\tilde{A}\tilde{D}^{-\frac{1}{2}}H_sW_s)
+\end{gather*}
+\begin{itemize}
+\item A skip connection is added
+\end{itemize}
+\end{frame}
+
+\begin{frame}{DGN: Diffusion Graph Networks}
+\begin{gather*}
+H_{s+1}=H_s+\sigma(P^sXW_s)\\
+\ArrowBetweenLines[\Downarrow]
+\frac{dH}{ds}=F_\text{DGC}(s,X,\Theta)\equiv\sigma(P^sX\Theta)
+\end{gather*}
+\begin{itemize}
+\item $P\equiv D^{-1}A$: a probability transition matrix in $\mathbb{R}^{n\times n}$
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Even Deeper}
+\begin{itemize}
+\item While the definition of GDE models is given with $F$ made up by a single layer
+\item In practice multi-layer architectures can also be used without any loss of generality
+\item In these models, the vector field defined by $F$ is computed by considering wider neighborhoods of each node
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Even More}
+\begin{itemize}
+\item Message passing neural networks
+\item Graph Attention Networks
+\end{itemize}
+\end{frame}
+
+\subsection{Spatio-Temporal Continuous Graph Architectures}
+\begin{frame}{$s\equiv t$}
+\begin{itemize}
+\item For settings involving a temporal component, the depth domain of GDEs conincides with the time domain and can be adapted depending on the requirements
+\item For example, given a time window $\Delta t$, the prediction performed by a GDE assumes the form\[
+H_{t+\Delta t}=H_t+\int_t^{t+\Delta t}F(\tau,H_\tau,\Theta)d\tau
+\]regardless of the specific GDE architecture employed
+\item Here, GDEs represent a natural model class for autoregressive modeling of sequences of graphs $\{\mathcal G_t\}$ and directly fit into dynamical network theory
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Hybrid Dynamical Systems}
+\begin{itemize}
+\item Extending classical spatio-temporal architectures
+\item Hybrid Dynamical Systems: systems characterized by interacting continous and discrete-time dynamics
+\item Let $(\mathcal{K},>), (\mathcal{T},>)$ be linearly ordered sets
+\item $\mathcal{K}\subset\mathbb{N}$
+\item $\mathcal{T}\equiv\{t_k\}_{k\in\mathcal K}$ is a set of time instances
+\item We suppose to be given a state-graph data stream which is a sequence in the form\[
+\{(X_t,\mathcal{G}_t)\}_{t\in\mathcal{T}}
+\]
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Hybrid Time Domain and Hybrid Arc}
+\begin{itemize}
+\item Given $\{(X_t,\mathcal{G}_t)\}_{t\in\mathcal{T}}$
+\item Our aim is to build a continuous model predicting, at each $t_k\in\mathcal{T}$, the value of $X_{t_{k+1}}$
+\item Define a hybrid time domain:\[
+\mathcal{I}\equiv\cup_{k\in\mathcal{K}}([t_k,t_{k+1}],k)
+\]
+\item Define a hybrid arc on $\mathcal{I}$ as a function $\Phi$ such that for each $k\in\mathcal K$, $t\mapsto\Phi(t,k)$ is absolutely continuous in $\{t:(t,j)\in\text{dom}\Phi\}$.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{The Core Idea}
+\begin{itemize}
+\item The core idea is to have a GDE smoothly steering the latent node features between two time instants
+\item And then apply some discrete operator, resulting in a ``jump'' of $H$
+\item $H$ is then processed by an output layer
+\item Therefore solutions of the proposed continuous spatio-temporal model are hybrid arcs
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Autoregressive GDEs (1)}
+\[
+\begin{cases}
+\dot{H_s}=F(H_s,\Theta),\quad s\in[t_k,t_{k+1}]\\
+H_s^+=G(H_s,X_{t_k}),\quad s=t_{k+1},k\in\mathcal{K}\\
+Y_{t_{k+1}}=K(H_s)
+\end{cases}
+\]
+\begin{itemize}
+\item $F,G,K$: GNN-like operators or general neural network layers
+\item $H^+$: the value of $H$ after the discrete transition
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Autoregressive GDEs (2)}
+\[
+\begin{cases}
+\dot{H_s}=F(H_s,\Theta),\quad s\in[t_k,t_{k+1}]\\
+H_s^+=G(H_s,X_{t_k}),\quad s=t_{k+1},k\in\mathcal{K}\\
+Y_{t_{k+1}}=K(H_s)
+\end{cases}
+\]
+\begin{itemize}
+\item Compared to standard recurrent models which are only equipped with discrete jumps, this system incorporates a continuous flow of latent node features $H$ between jumps
+\item This feature of autoregressive GDEs allows them to track dynamical systems from irregular observations
+\item Different combinations of $F,G,K$ can yield continuous variants of most common spatio-tempopral GNN models
+\item $F,G,K$ can themselves have multi-layer structure
+\end{itemize}
+\end{frame}
+
+\begin{frame}{E.g. Graph Differential Convolutional GRU}
+\[
+\begin{cases}
+\dot{H_s}=F_\text{GCN}(H_t),\quad s\in[t_k,t_{k+1}]\\
+H_s^+=\text{GCGRU}(H_s,X_{t_k}),\quad s=t_{k+1},k\in\mathcal{K}\\
+Y_{t_{k+1}}=\sigma(WH_s+b)
+\end{cases}
+\]
+\begin{itemize}
+\item $W$: a learnable weight matrix
+\end{itemize}
+\end{frame}
+
+
+\section{Experiments}
+\subsection{Transductive Node Classification}
+\begin{frame}{Experimental Setup}
+\begin{itemize}
+\item Static graphs (Cora, PubMed, CiteSeer)
+\item Semi-supervised
+\item Transductive
+\item Node classification
+\item Goal: show the usefulness of GDEs as general GNNs variants even when the data is NOT generated by continuous dynamical systems
+\end{itemize}
+\end{frame}
+\begin{frame}{Discussion}
+\begin{itemize}
+\item Mean and standard deviation across 100 training runs are reported
+\item GCDE–rk4 outperform GCNs across all datasets
+\item Accuracy and training stability improved
+\item GCDEs do not require more parameters than their discrete counterparts
+\item NEW ``depth'': the number of function evaluations (NFE) of the ODE function
+\item 108-depth GCDE-dpr5 is slightly worse compared to 4-depth GCDE–rk4, since deeper models are penalized on these datasets by a lack of sufficient regularization
+\end{itemize}
+\end{frame}
+
+\subsection{Forecasting}
+\begin{frame}{Experimental Setup}
+\begin{itemize}
+\item Dataset: PeMS7(M), a subsampled version of PeMS obtained via selection of 228 sensor stations and aggregation of their historical speed data into regular 5 minute frequency time series
+\item With missing data and irregular timestamps:  undersample the time series by performing independent Bernoulli trials on each data point with probability $0.7$ of removal
+\item Comparison: in order to measure performance gains obtained by GDEs in settings with data generated by continuous time systems, we employ a GCDE–GRU as well as its discrete counterpart GCGRU (Zhao, Chen, and Cho 2018)
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Discussion (1)}
+\begin{itemize}
+\item The delta time scale $t_{k+1}-t_k$ of required predictions used to adjust the ODE integration domain of GCDE-GRU varies greatly during the task
+\item Non-constant differences between timestamps result in a challenging forecasting task for a single model since the average prediction horizon changes drastically over the course of training and testing
+\item For a fair comparison between models we include delta timestamps information as an additional node feature for GCGNs and GRUs
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Discussion (2)}
+\begin{itemize}
+\item The main objective of these expriments is to measure the performance gain of GDEs when exploiting a correct assumption about the underlying data generating process
+\item Traffic systems are intrinsically dynamic and continuous and therefore a model able to track continuous underlying dynamics is expected to offer improved performance
+\item Since GCDE-GRUs and GCGRUs are designed to match exactly in structure and number of parameters we can measure this performance increase
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Discussion (3)}
+\begin{itemize}
+\item GDEs offer an average improvement of $3\%$ in normalized RMSE and $7\%$ in mean absolute percentage error
+\item A variety of other application areas with continuous dynamics and irregular datasets could similarly benefit from adopting GDEs as modeling tools: medicine, finance or distributed control systems, to name a few.
+\end{itemize}
+\end{frame}
+
+\end{document}

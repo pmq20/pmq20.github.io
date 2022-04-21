@@ -1,0 +1,146 @@
+% !TEX TS-program = pdflatex
+% !TEX encoding = UTF-8 Unicode
+
+\documentclass{beamer}
+\usepackage{tikz}
+\usepackage[USenglish]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{xcolor}
+\usepackage{algpseudocode}
+\usepackage{ulem}
+\DeclareMathOperator{\sign}{sign}
+\usefonttheme[onlymath]{serif}
+\mode<presentation>
+{
+  \usetheme{Warsaw}
+}
+\newcommand*{\Z}{\makebox[1.5ex]{\textbf{$\cdot$}}}
+
+\title{Dwivedi et al. 2020: Benchmarking Graph Neural Networks}
+
+\author{Minqi Pan}
+
+\date{\today}
+
+\AtBeginSubsection[]
+{
+  \begin{frame}<beamer>{Outline}
+    \tableofcontents[currentsection,currentsubsection]
+  \end{frame}
+}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{Graph Neural Ordinary Differential Equations}
+\begin{itemize}
+\item arXiv:2003.00982, Mar 2nd, 2020
+\item Vijay Prakash Dwivedi, Chaitanya K. Joshi, Thomas Laurent, Yoshua Bengio, Xavier Bresson
+\item Nanyang Technological University, Loyola Marymount University, Montreal Institute for Learning Algorithms, Université de Montréal, CIFAR
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Outline}
+  \tableofcontents
+\end{frame}
+
+\section{Background}
+\subsection{Isotropic, Anisotropic and Hierarchical Models}
+\begin{frame}{``Isotropic'' Models}
+\begin{center}
+\huge Each neighbor contributes equally to the update of the central node, treating every ``edge direction'' equally.
+\end{center}
+\end{frame}
+\begin{frame}{GCN: Iteratively Updating Node Representations}
+\[
+\hat{h}_i^{\ell+1}=\frac{1}{\text{deg}_i}\sum_{j\in\mathcal{N}_i}h_j^\ell,\quad h_i^{\ell+1}=\sigma(U^\ell\hat{h}_i^{\ell+1})
+\]
+\begin{itemize}
+\item Sukhbaatar et al. 2016, Kif and Welling 2017
+\item $h_i^\ell$: the $d$-dimensional embedding representation of node $i$ at layer $\ell+1$
+\item $\mathcal{N}_i$: the set of nodes connected to node $i$ on the graph
+\item $\text{deg}_i=|\mathcal{N}_i|$: the degree of node $i$
+\item $\sigma$: a nonlinearity
+\item $U^\ell\in\mathbb{R}^{d\times d}$: a learnable parameter
+\end{itemize}
+\end{frame}
+\begin{frame}{GraphSage: Variations of Averaging Mechanism}
+\[
+\hat{h}_i^{\ell+1}=\text{Concat}\big(h_i^\ell,\frac{1}{\text{deg}_i}\sum_{j\in\mathcal{N}_i}h_j^\ell\big)
+\]
+\begin{itemize}
+\item Hamilton et al. 2017
+\item The embeddings vectors are projected onto the unit ball before being passed to the next layer
+\end{itemize}
+\end{frame}
+\begin{frame}{Graph-Isomorphism-Network: Another Variation}
+\[
+\begin{split}
+\hat{h}_i^{\ell+1}&=(1+\epsilon)h_i^\ell+\sum_{j\in\mathcal{N}_i}h_j^\ell,\\
+h_i^{\ell+1}&=\sigma\big(U^\ell\sigma(\text{BN}(V^\ell\hat{h}_i^\ell+1))\big)
+\end{split}
+\]
+\begin{itemize}
+\item Xu et al. 2019
+\item $\epsilon,U^\ell,V^\ell$: learnable parameters
+\item BN: Batch Normalization
+\item GIN uses the features at all intermediate layers for the final prediction
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{``Anisotropic'' Models}
+\[
+\hat{h}_i^{\ell+1}=w_i^\ell h_i^\ell+\sum_{j\in\mathcal{N}_i}w_{ij}^\ell h_j^\ell
+\]
+\begin{itemize}
+\item $w_i^\ell,w_{ij}^\ell$: weights that are computed using attention or gating mechanisms
+\item MoNet: Gaussian Mixture Model Networks (Monti et al. 2017)
+\item GatedGCN: Graph Convolutional Networks (Bresson \& Laurent, 2017)
+\item GAT: Graph Attention Networks (Veli\v{c}kovi\'{c} et al. 2018)
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{``Hierarchical'' Models}
+\begin{itemize}
+\item Ying et al. 2018
+\item DiffPool: Differentiable Pooling, using the GraphSage formulation at each stage of the hierarchy and for the pooling
+\end{itemize}
+\end{frame}
+
+
+\section{Proposals}
+\subsection{Proposed Benchmarking Framework}
+\begin{frame}{Proposed Benchmark Datasets}
+\begin{itemize}
+\item Computer Vision: graphs constructed with super-pixels
+\begin{enumerate}
+\item MNIST: 70k graphs w/ 40-75 nodes
+\item CIFAR10: 60k graphs w/ 85-150 nodes
+\end{enumerate}
+\item Chemistry: real-world molecular graphs
+\begin{enumerate}
+\item ZINC: 12k graphs w/ 9-37 nodes
+\end{enumerate}
+\item Artificial: graphs generated from stochastic block model or from uniform distribution
+\begin{enumerate}
+\item PATTERN: 14k graphs w/ 50-180 nodes
+\item CLUSTER: 12k graphs w/ 40-190 nodes
+\item TSP: 12k graphs w/ 50-500 nodes
+\end{enumerate}
+\end{itemize}
+\end{frame}
+
+
+\section{Discoveries}
+\subsection{Issues with CORA and TU Datasets}
+\subsection{Numerical Experiments}
+\subsection{What did we learn?}
+
+\end{document}
