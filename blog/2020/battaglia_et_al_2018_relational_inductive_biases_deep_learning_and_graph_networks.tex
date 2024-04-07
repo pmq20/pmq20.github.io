@@ -1,0 +1,539 @@
+% !TEX TS-program = pdflatex
+% !TEX encoding = UTF-8 Unicode
+
+\documentclass{beamer}
+\usepackage{tikz}
+\usepackage[USenglish]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{xcolor}
+\usepackage{algpseudocode}
+\usepackage{ulem}
+\DeclareMathOperator{\sign}{sign}
+\usefonttheme[onlymath]{serif}
+\mode<presentation>
+{
+  \usetheme{Warsaw}
+}
+\newcommand*{\Z}{\makebox[1.5ex]{\textbf{$\cdot$}}}
+
+\title[Battaglia et al. 2018: Relational inductive biases, DL, and GN]{Battaglia et al. 2018: Relational inductive biases, deep learning, and graph networks}
+
+\author{Minqi Pan}
+
+\date{\today}
+
+\AtBeginSubsection[]
+{
+  \begin{frame}<beamer>{Outline}
+    \tableofcontents[currentsection,currentsubsection]
+  \end{frame}
+}
+
+\makeatletter
+\newenvironment<>{proofs}[1][\proofname]{%
+    \par
+    \def\insertproofname{#1\@addpunct{.}}%
+    \usebeamertemplate{proof begin}#2}
+  {\usebeamertemplate{proof end}}
+\makeatother
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{Relational inductive biases, deep learning, and graph networks}
+\begin{itemize}
+\item arXiv:1806.01261 (Submitted on 4 Jun 2018, last revised 17 Oct 2018)
+\item Peter W. Battaglia, Jessica B. Hamrick, Victor Bapst,
+Alvaro Sanchez-Gonzalez, Vinicius Zambaldi, Mateusz Malinowski,
+Andrea Tacchetti, David Raposo, Adam Santoro, Ryan Faulkner,
+Caglar Gulcehre, Francis Song, Andrew Ballard, Justin Gilmer,
+George Dahl, Ashish Vaswani, Kelsey Allen, Charles Nash,
+Victoria Langston, Chris Dyer, Nicolas Heess,
+Daan Wierstra, Pushmeet Kohli, Matt Botvinick,
+Oriol Vinyals, Yujia Li, Razvan Pascanu
+\item DeepMind, Google Brain, MIT, University of Edinburgh
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Outline}
+  \tableofcontents
+\end{frame}
+
+\section{Graph networks}
+\subsection{Background}
+\begin{frame}{GNN Usage (1)}
+\begin{itemize}
+\item Scene understanding
+\item Few-shot learning
+\item Learning the dynamicis of physical systems and multi-agent systems
+\item Reasoning about knowledge graphs
+\item Predicting the chemical properties of molecules
+\item Predicting traffic on roads
+\item Classifying and segmenting images and videos, 3D meshes and point clouds
+\end{itemize}
+\end{frame}
+
+\begin{frame}{GNN Usage (2)}
+\begin{itemize}
+\item Classifying regions in images
+\item Performing semi-supervised text classfication
+\item Machine translation
+\item Model-free continous control
+\item Model-based continuous control
+\item Model-free reinforcement learning
+\item More classical approaches to planning
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{GNN Usage in Traditional CS Problems}
+\begin{itemize}
+\item Combinatorial optimization
+\item Boolean satisfiabiliity
+\item Program representation and verification
+\item Modeling cellular automata and Turing machines
+\item Performing inference in graphical models
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Recent Work}
+\begin{itemize}
+\item Building generative models of graphs
+\item Unsupervised learning of graph embeddings
+\end{itemize}
+\end{frame}
+
+\subsection{Graph network (GN) block}
+\begin{frame}{The GN framework}
+\begin{itemize}
+\item The GN framework defines a class of functions for relational reasoning over graph-structured representations
+\item The GN framework generalizes and extends various GNN, MsgPassingNN and NonLocalNN approaches, and supports constructing complex architectures from simple building blocks
+\item Term ``neural'' dropped to reflect that they can be implemented with functions other than NN, though here our focus is on NN implementations
+\end{itemize}
+\end{frame}
+
+\begin{frame}{GN Block}
+\begin{itemize}
+\item GN Block is a ``graph2graph'' module which takes a graph as input, performs computations over the structure, and returns a graph as output
+\item GN Block emphasizes customizability and synthesizing new architectures which express desired relational inductive biases
+\item Key design principles are:
+\begin{itemize}
+\item Flexible Representations
+\item Configurable within-block structure
+\item Composable multi-block architectures
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{The Definition of ``graph''}
+\begin{itemize}
+\item ``Graph'' $G$ is a directed, attributed multi-graph (there can be more than $1$ edge between vertices, including self-edges) with a global attribute (graph-level properties that can be encoded as a vector, set, or even another graph):\[
+\begin{split}
+G&=(u,V,E)\\
+V&=\{v_i\}_{i=1:N^v}\\
+E&=\{(e_k,r_k,s_k)\}_{k=1:N^e}
+\end{split}
+\]
+\item $u$: the global attributes
+\item $v_i$: a node
+\item $e_k$: an edge
+\item $s_k,r_k$: the sender, receiver nodes of $e_k$
+\item Fig.~2
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{An example}
+\begin{itemize}
+\item Consider predicting the movements a set of rubber balls in an arbitrary gravitational eld
+\item Instead of bouncing against one another, each have one or more springs which connect them to some (or all) of the others
+\item $u$: the gravitational field
+\item $V$: each ball with attributes for position, velocity and mass
+\item $E$: the presence of springs between different balls and their corresponding spring constants
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Internal Structure of a GN Block}
+\[
+\begin{split}
+e_k'&=\phi^e(e_k,v_{r_k},v_{s_k},u)\\
+E'_i&=\{(e_k',r_k,s_k)\}_{r_k=i,k=1:N^e}\\
+\bar{e}_i'&=\rho^{e\to v}(E_i')\\
+v_i'&=\phi^v(\bar{e}_i',v_i,u)\\
+E'&=\cup_iE_i'=\{(e_k',r_k,s_k)\}_{k=1:N^e}\\
+\bar{e}'&=\rho^{e\to u}(E')\\
+V'&=\{v_i'\}_{i=1:N^v}\\
+\bar{v}'&=\rho^{v\to u}(V')\\
+u'&=\phi^u(\bar{e}',\bar{v}',u)
+\end{split}
+\]
+\begin{itemize}
+\item A GN block contains three ``update'' functions, $\phi$, and three ``aggregation'' functions, $\rho$
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Internal Structure of a GN Block}
+\[
+\begin{split}
+e_k'&=\phi^e(e_k,v_{r_k},v_{s_k},u)\\
+E'_i&=\{(e_k',r_k,s_k)\}_{r_k=i,k=1:N^e}\\
+\bar{e}_i'&=\rho^{e\to v}(E_i')\\
+v_i'&=\phi^v(\bar{e}_i',v_i,u)\\
+E'&=\cup_iE_i'=\{(e_k',r_k,s_k)\}_{k=1:N^e}\\
+\bar{e}'&=\rho^{e\to u}(E')\\
+V'&=\{v_i'\}_{i=1:N^v}\\
+\bar{v}'&=\rho^{v\to u}(V')\\
+u'&=\phi^u(\bar{e}',\bar{v}',u)
+\end{split}
+\]
+\begin{itemize}
+\item $\phi^e$: being mapped across all edges to compute per-edge updates
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Internal Structure of a GN Block}
+\[
+\begin{split}
+e_k'&=\phi^e(e_k,v_{r_k},v_{s_k},u)\\
+E'_i&=\{(e_k',r_k,s_k)\}_{r_k=i,k=1:N^e}\\
+\bar{e}_i'&=\rho^{e\to v}(E_i')\\
+v_i'&=\phi^v(\bar{e}_i',v_i,u)\\
+E'&=\cup_iE_i'=\{(e_k',r_k,s_k)\}_{k=1:N^e}\\
+\bar{e}'&=\rho^{e\to u}(E')\\
+V'&=\{v_i'\}_{i=1:N^v}\\
+\bar{v}'&=\rho^{v\to u}(V')\\
+u'&=\phi^u(\bar{e}',\bar{v}',u)
+\end{split}
+\]
+\begin{itemize}
+\item $\phi^v$: being mapped across all nodes to compute per-node updates
+\end{itemize}
+\end{frame}
+\begin{frame}{Internal Structure of a GN Block}
+\[
+\begin{split}
+e_k'&=\phi^e(e_k,v_{r_k},v_{s_k},u)\\
+E'_i&=\{(e_k',r_k,s_k)\}_{r_k=i,k=1:N^e}\\
+\bar{e}_i'&=\rho^{e\to v}(E_i')\\
+v_i'&=\phi^v(\bar{e}_i',v_i,u)\\
+E'&=\cup_iE_i'=\{(e_k',r_k,s_k)\}_{k=1:N^e}\\
+\bar{e}'&=\rho^{e\to u}(E')\\
+V'&=\{v_i'\}_{i=1:N^v}\\
+\bar{v}'&=\rho^{v\to u}(V')\\
+u'&=\phi^u(\bar{e}',\bar{v}',u)
+\end{split}
+\]
+\begin{itemize}
+\item $\phi^u$: being applied once as the global update
+\end{itemize}
+\end{frame}
+\begin{frame}{Internal Structure of a GN Block}
+\[
+\begin{split}
+e_k'&=\phi^e(e_k,v_{r_k},v_{s_k},u)\\
+E'_i&=\{(e_k',r_k,s_k)\}_{r_k=i,k=1:N^e}\\
+\bar{e}_i'&=\rho^{e\to v}(E_i')\\
+v_i'&=\phi^v(\bar{e}_i',v_i,u)\\
+E'&=\cup_iE_i'=\{(e_k',r_k,s_k)\}_{k=1:N^e}\\
+\bar{e}'&=\rho^{e\to u}(E')\\
+V'&=\{v_i'\}_{i=1:N^v}\\
+\bar{v}'&=\rho^{v\to u}(V')\\
+u'&=\phi^u(\bar{e}',\bar{v}',u)
+\end{split}
+\]
+\begin{itemize}
+\item $\rho$: taking a set as input and reducing it to a single element which represents the aggregated information
+\end{itemize}
+\end{frame}
+\begin{frame}{Internal Structure of a GN Block}
+\[
+\begin{split}
+e_k'&=\phi^e(e_k,v_{r_k},v_{s_k},u)\\
+E'_i&=\{(e_k',r_k,s_k)\}_{r_k=i,k=1:N^e}\\
+\bar{e}_i'&=\rho^{e\to v}(E_i')\\
+v_i'&=\phi^v(\bar{e}_i',v_i,u)\\
+E'&=\cup_iE_i'=\{(e_k',r_k,s_k)\}_{k=1:N^e}\\
+\bar{e}'&=\rho^{e\to u}(E')\\
+V'&=\{v_i'\}_{i=1:N^v}\\
+\bar{v}'&=\rho^{v\to u}(V')\\
+u'&=\phi^u(\bar{e}',\bar{v}',u)
+\end{split}
+\]
+\begin{itemize}
+\item $\rho$ MUST be invariant to permutations of their inputs, and should take variable number of arguments
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Internal Structure of a GN Block}
+\[
+\begin{split}
+e_k'&=\phi^e(e_k,v_{r_k},v_{s_k},u)\\
+E'_i&=\{(e_k',r_k,s_k)\}_{r_k=i,k=1:N^e}\\
+\bar{e}_i'&=\rho^{e\to v}(E_i')\\
+v_i'&=\phi^v(\bar{e}_i',v_i,u)\\
+E'&=\cup_iE_i'=\{(e_k',r_k,s_k)\}_{k=1:N^e}\\
+\bar{e}'&=\rho^{e\to u}(E')\\
+V'&=\{v_i'\}_{i=1:N^v}\\
+\bar{v}'&=\rho^{v\to u}(V')\\
+u'&=\phi^u(\bar{e}',\bar{v}',u)
+\end{split}
+\]
+\begin{itemize}
+\item $\rho$: e.g. element-wise summation, mean, maximum, etc.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Computational Steps within a GN Block}
+\begin{itemize}
+\item When a graph $G$ is provided as input to a GN block, the computations...
+\begin{itemize}
+\item proceed from the edges
+\item to the node
+\item to the global level
+\end{itemize}
+\item Figure~3
+\item Figure~4
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Computational Steps within a GN Block (1)}
+\begin{itemize}
+\item $\phi^e$ is applied per edge, with arguments $(e_k,v_{r_k},v_{s_k},u)$, and returns $e_k'$
+\item E.g. this mighht correspond to the forces or potential energies between two connected balls
+\item The set of resulting per-edge outputs for each node $i$ is $E_i=\{(e_k',r_k,s_k)\}_{r_k=i,k=1:N^e}$
+\item $E'=\cup_iE_i'$ is the set of all per-edge outputs
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Computational Steps within a GN Block (2)}
+\begin{itemize}
+\item $\rho^{e\to v}$ is applied to $E_i'$, and aggregates the edge updates for edges that project to vertex $i$, into $\bar e_i'$, which will be used in th next step's node update
+\item E.g. summing all the forces or potential energies acting on the $i$-th ball
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Computational Steps within a GN Block (3)}
+\begin{itemize}
+\item $\phi^v$ is applied to each node $i$, to compute an updated node attribute, $v_i'$
+\item E.g. the updated position, velocity, and kinetic energy of each ball
+\item The set of resulting per-node output is\[
+V'=\{v_i'\}_{i=1:N^v}.
+\]
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Computational Steps within a GN Block (4)}
+\begin{itemize}
+\item $\phi^{e\to u}$ is applied to $E'$, and aggregates all edge updates, into $\bar e'$, which will then be used in the next step's global update
+\item E.g. $\rho^{e\to u}$ may be compute the summed forces (which should be zero, in this case, due to Newton's 3rd law) and the springs' potential energies
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Computational Steps within a GN Block (5)}
+\begin{itemize}
+\item $\rho^{v\to u}$ is applied to $V'$
+\item And aggregates all node updates into $\bar v'$
+\item This will then be used in thhe next step's global update
+\item E.g. compute the total kinetic energy of the system
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Computational Steps within a GN Block (6)}
+\begin{itemize}
+\item $\phi^u$ is applied once per graph
+\item And computes an update for the global attribute $u'$
+\item E.g. compute something analogous to the net forces and total energy of the physical system
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{algorithmic}
+\Function{GraphNetwork}{$E,V,u$}
+\For{$k\in\{1,\dots,N^e\}$}
+\State $e_k'\leftarrow\phi^e(e_k,v_{r_k},v_{s_k},u)$
+\EndFor
+\For{$i\in\{1,\dots,N^n\}$}
+\State Let $E_i'=\{(e_k',r_k,s_k)\}_{r_k=i,k=1:N^e}$
+\State $\bar e_i'\leftarrow\rho^{e\to v}(E_i')$
+\State $v_i'\leftarrow\phi^v(\bar{e}_i',v_i,u)$
+\EndFor
+\State Let $V'=\{v'\}_{i=1:N^v}$
+\State Let $E'=\{(e_k',r_k,s_k)\}_{k=1:N^e}$
+\State $\bar{e}'\leftarrow\rho^{e\to u}(E')$
+\State $\bar{v}'\leftarrow\rho^{v\to u}(V')$
+\State $u'\leftarrow\phi^u(\bar{e}',\bar{v}',u)$
+\Return $(E',V',u')$
+\EndFunction
+\end{algorithmic}
+\end{frame}
+
+\section{Design principles for graph network architectures}
+\subsection{Flexible representations}
+\begin{frame}{Flexible Attribute Representations}
+\begin{itemize}
+\item The global, node and edge attributes of a GN block can use arbitrary representational formats
+\item In deep learning implementations, real-valued vectors and tensors are most common
+\item Other data structures such as sequences, sets, or even graphs could be also be used
+\end{itemize}
+\end{frame}
+\begin{frame}{Flexible Attribute Representations}
+\begin{itemize}
+\item The requirements of the problem will often determine what representations should be used for the attributes
+\item E.g. when the input data is an image, the attributes might be represented as tensors of image patches
+\item When the input data is a text document, the attributes might be sequences of words corresponding to sentences
+\end{itemize}
+\end{frame}
+\begin{frame}{Flexible Attribute Representations}
+\begin{itemize}
+\item For each GN block within a broader architecture
+\item The edge and node outputs typically correspond to lists of vectors or tensors, one per edge or node
+\item The global outputs correspond to a single vector or tensor
+\item This allows a GN's output to be passed to other deep learning building blocks such as MLPs, CNNs, and RNNs
+\end{itemize}
+\end{frame}
+\begin{frame}{Flexible Attribute Representations}
+\begin{itemize}
+\item The output of a GN block can also be tailored to the demands of the task. In particular,
+\begin{itemize}
+\item An ``edge-focused'' GN uses the edges as output, for example to make decisions about interactions among entities
+\item A ``node-focused'' GN uses the nodes as ouput, for example to reason about physical systems
+\item A ``graph-focused'' GN uses the globals as output, for example to predict the potential energy of a physical system, the properties of a molecule, or answers to questions about a visual scene
+\end{itemize}
+\item The nodes, edges and global outputs can also be mixed-and-matched depending on the task
+\item E.g. use both the ouput edge and global attributes to compute a policy over actions
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Flexible Graph Structures}
+\begin{itemize}
+\item When defining how the input data will be represented as a graph, there are generally 2 scenarios
+\item First, the input explicitly specifies the relational structure
+\item Second, the relational structure must be inferred or assumed
+\item There are not hard distinctions, but extremes along a continuum
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Flexible Graph Structures}
+\begin{itemize}
+\item Examples of data with more explicitly specified entities and relations include Knowledge Graphs, Social Networks, Parse Trees, Optimization Problems, Chemical Graphs, Road Networks, and Physical Systems w/ known interactions
+\item Examples of data where the relational structure is not made explicit, and must be inferred or assumed, include Visual Scenes, Text Corpora, Programming Language Source Code, and Multi-agent Systems
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Flexible Graph Structures}
+\begin{itemize}
+\item In these types of settings, the data may be formatted as a set of entities without relations, or even just a vector or tensor (e.g., an image)
+\item If the entities are not specified explicitly, they might be assumed, for instance, by treating each word in a sentence or each local feature vector in a CNN's output feature map, as a node. Or, it might be possible to use a separate learned mechanism to infer entities from a unstructured signal
+\item If relations are not available, the simplest approach is to instantiate all possible directed edges between entities. This can be prohibitive for large number of entities, however, because the number of possible edges grows quadratically with the number of nodes
+\end{itemize}
+\end{frame}
+
+
+\subsection{Configurable within-block structure}
+\begin{frame}
+\begin{itemize}
+\item The structure and functions within a GN block can be configured in different ways
+\item This offers flexibility in what information is made available as inputs to its functions, as well as how output edge, node, and global updates are produced
+\item In particular, each $\phi$ must be implemented with some function $f$, where $f$'s argument signature determines what information it requires as input
+\item $\phi$ can be implemented via neural networks, e.g. MLP (for vector attributes) or CNN (for image features)
+\item $\rho$ can be implemented using elementwise summation, but averages and max/min could also be used
+\item The $\phi$ functions can also use RNNs, which requires an additional hidden state as input and ouput
+\item Figure 4
+\end{itemize}
+\end{frame}
+
+\subsection{Composable multi-block architectures}
+\begin{frame}
+\begin{itemize}
+\item A key design principle of GN is constructing complex architectures by composing GN blocks
+\item We defined a GN block as always taking a graph comprised of edge, node, and global elements as input, and returning a graph with the same constituent
+\item Simply pass through the input elements to the output when those elements are not explicitly updated
+\item This graph2graph IO interface ensures that the output of one GN block can be passed as input to another, even if their internal configurations are different
+\item Similar to the tensor-to-tensor interface of the standard deep learning toolkit
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item Arbitrary number of GN blocks can be composed
+\item Figure 6
+\item The blocks can be unshared (different functions and/or parameters, analogous to layers of a CNN) or shared (reused functions and parameters, analogous to an unrolled RNN)
+\item Shared configurations are analogous to MsgPassing, where the same local update procedure is applied iteratively to propagate information across the structure
+\item Figure 7
+\end{itemize}
+\end{frame}
+\begin{frame}
+\begin{itemize}
+\item If we exclude the global $u$ (which aggregates info from across the nodes and edges), the info that a node has access to after $m$ steps of propagation is determined by the set of nodes and edges that are at most $m$ hops away
+\item This can be interpreted as breaking down a complex computation into smaller elmentary steps
+\item The steps can also be used to capture sequentiality in time
+\item E.g. if each propagation step predicts the physical dynamics over one time step of duration $\Delta t$, then the $M$ propogation steps result in a total simulation of $M\cdot\Delta t$
+\end{itemize}
+\end{frame}
+\begin{frame}
+\begin{itemize}
+\item A common architecture design is what we call the ``encode-process-decode'' configuration
+\begin{itemize}
+\item An input graph is transformed into a latent representation $G_0$ by an encoder
+\item A shared core block is applied $M$ times to return $G_M$
+\item Finally an output graph is decoded
+\end{itemize}
+\item E.g. the encoder might compute the initial forces annd interaction energies between the balls, the core might apply an elementary dynamics update, and the decoder might read out the final positions from the updated graph states
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Recurrent GN}
+\begin{itemize}
+\item Similar to the encode-process-decode design, recurrent GN-based architectures can be built by maintaining a hidden graph, taking as input an observed graph and returning an output graph on each step
+\item This type of architecture can be particularly useful for predicting sequences of graphs, such as predicting the trajectory of a dynamical system over time
+\item The ``encoded graph'' must have the same structure as the ``hidden graph'' and they can be easily combined by concatenating their corresponding $e_k,v_i,u$ vectors before being passed to the core
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Recurrent GN}
+\begin{itemize}
+\item For the output, the hidden graph is copied and decoded
+\item This design reuses GN blocks in several ways: enc, dec and core blocks are shared across each step, $t$; and within each step, the core may perform multiple shared sub-steps
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item Various other techniques for designing GN-based architectures can be useful
+\item Graph skip connections would concatenate a GN block's input graph $G_m$ with its output graph $G_{m+1}$ before proceeding to further computations
+\item Merging and smoothing input and hidden graph information can use LSTM- or GRU- style gating schemes, instead oof simple concatenation
+\item Or distinct, recurrent GN blocks can be composed before and/or after other GN blocks to improve stability in the representations over multiple propogation steps
+\end{itemize}
+\end{frame}
+
+\subsection{Implementing graph networks in code}
+\begin{frame}
+\begin{itemize}
+\item Similar to CNNs, which are naturally parallelizable (e.g. on GPUs), GNs have a natural parallel structure
+\item Since the $\phi^e$ and $\phi^v$ functions are shared over the edges and nodes respectively
+\item They can be computed in parallel
+\item In practice, this means that w.r.t. $\phi^e$ and $\phi^v$, the nodes and edges can be treated like batch dimension in typical mini-batch training regimes
+\item Moreover, several graphs can be naturally batched together by treating them as disjoint components of a larger graph
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item Reusing $\phi^e$ and $\phi^v$ also improves GNs' sample efficiency
+\item Again, analogous to a convolutional kernel, the number of samples which are used to optimize a GN's $\phi^e$ and $\phi^v$ functions is the number of edges and nodes, respectively, across all training graphs
+\item E.g. a scene with $4$ balls which are all connected by springs will provide $12$ examples of the contact interaction between them
+\end{itemize}
+\end{frame}
+
+\end{document}

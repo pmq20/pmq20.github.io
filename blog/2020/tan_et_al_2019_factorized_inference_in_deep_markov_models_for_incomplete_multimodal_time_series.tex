@@ -1,0 +1,623 @@
+% !TEX TS-program = pdflatex
+% !TEX encoding = UTF-8 Unicode
+
+\documentclass{beamer}
+\usepackage{tikz}
+\usepackage[USenglish]{babel}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{algpseudocode}
+\usepackage{ulem}
+\DeclareMathOperator{\sign}{sign}
+\usefonttheme[onlymath]{serif}
+\mode<presentation>
+{
+  \usetheme{Warsaw}
+}
+\newcommand*{\Z}{\makebox[1.5ex]{\textbf{$\cdot$}}}
+
+\title[Tan et al. 2019: Factorized Inference in DMM for IMTS]{Tan et al. 2019: Factorized Inference in Deep Markov Models for Incomplete Multimodal Time Series}
+
+\author{Minqi Pan}
+
+\date{\today}
+
+\AtBeginSubsection[]
+{
+  \begin{frame}<beamer>{Outline}
+    \tableofcontents[currentsection,currentsubsection]
+  \end{frame}
+}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{Factorized Inference in Deep Markov Models for Incomplete Multimodal Time Series}
+\begin{itemize}
+\item AAAI 2020 ``ML: Probabilistic Methods II'', Feb 12nd, 2020
+\item Tan Zhi-Xuan, Harold Soh, Desmond C. Ong
+\item A*STAR, MIT, National University of Singapore
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Outline}
+  \tableofcontents
+\end{frame}
+
+\section{Methods}
+\subsection{Factorized Posterior Distributions}
+\begin{frame}{Multimodal Deep Markov Models (MDMMs)}
+\begin{itemize}
+\item $z_t$: vector valued latent state
+\item $x_t^m$: vector valued observation for modality $m$ at time $t$
+\item Define an MDMM with $M$ modalities by
+\begin{itemize}
+\item Transition distributions are assumed to be a multivariate Guassian with means and covariances which are differentiable functions of the previous latent state\[
+z_t\sim\mathcal{N}(\mu_\theta(z_{t-1}),\Sigma_\theta(z_{t-1}))
+\]
+\item Emission distributions\[
+x_t^m\sim\Pi(\kappa_\theta^m(z_t))
+\]E.g. if the data is binary, $\Pi=$independent Bernoulli parameterized by $\kappa_\theta^m(z_t)$
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Subsuming Linear Gaussian State Space Models}
+\begin{itemize}
+\item $z_t\sim\mathcal{N}(\mu_\theta(z_{t-1}),\Sigma_\theta(z_{t-1}))$
+\item $x_t^m\sim\Pi(\kappa_\theta^m(z_t))$
+\item Kalman filters
+\begin{itemize}
+\item $\mu_\theta(z_{t-1})=G_tz_{t-1}+B_tu_t$ where $G_t, B_t$ are a matrices
+\item $\Sigma_\theta(z_{t-1})=K_t$ where $K_t$ is a matrix
+\item $\kappa_\theta^m(z_t)=F_tz_t$ where $F_t$ is a matrix
+\item $\Pi=\mathcal{N}$
+\item We can do inference analytically!
+\end{itemize}
+\item Deep nonlinear models 
+\begin{itemize}
+\item $\mu_\theta(z_{t-1})$ is a neural network parameterized by $\theta$
+\item $\Sigma_\theta(z_{t-1})$ is a neural network parameterized by $\theta$
+\item $\kappa_\theta^m(z_t)$ is a neural network parameterized by $\theta$
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Jointly Learning $\theta$ (Generative) and $\phi$ (Inference)}
+\begin{itemize}
+\item $\theta$ of the generative model $p_\theta(z_{1:T},x_{1:T})$
+\begin{itemize}
+\item ASSUMPTION: we consider learning in a Bayesian network whose joint distribution (generatively) factorizes as\[
+p_\theta(z_{1:T},x_{1:T})=p_\theta(x_{1:T}|z_{1:T})p_\theta(z_{1:T})
+\]
+\item Note that the marginal data likelihood is intractable:\[
+p_\theta(x_{1:T})=\textcolor{red}{\int} p_\theta(z_{1:T})p_\theta(x_{1:T}|z_{1:T})\textcolor{red}{dz}
+\]
+\end{itemize}
+\item $\phi$ of the variational posterior $q_\phi(z_{1:T}|x_{1:T})$
+\begin{itemize}
+\item $q_\phi(z_{1:T}|x_{1:T})$ approximates the true posterior $p_\theta(z_{1:T}|x_{1:T})$
+\item $p_\theta(z_{1:T}|x_{1:T})=\frac{p_\theta(x_{1:T}|z_{1:T})p_\theta(z_{1:T})}{\textcolor{red}{p_\theta(x_{1:T})}}$ is intractable
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Evidence Lower Bound (ELBO)}
+\[\begin{split}
+L(x;\theta,\phi)=&\mathbb{E}_{q_\phi(z_{1:T}|x_{1:T})}[\log p_\theta(x_{1:T}|z_{1:T})]\\
+&-\mathbb{E}_{q_\phi(z_{1:T}|x_{1:T})}[\text{KL}(q_\phi(z_{1:T}|x_{1:T})\Vert p_\theta(z_{1:T}))]
+\end{split}\]
+\begin{itemize}
+\item Jensen's inequality: $L$ is a lower bound of the log marginal likelihood $L(x;\theta,\phi)\leqslant p_\theta(x_{1:T})$
+\item ML Learning $\Rightarrow$ Let's maximize $L$ (via gradient ascent with stochastic backpropagation, sampling from $q_\phi$)
+\item The expectation wrt $q_\phi(z_{1:T}|x_{1:T})$ implicitly depends on the network parameters $\phi$. When using a Gaussian variational approximation $q_\phi(z_{1:T}|x_{1:T})\sim\mathcal{N}(\mu_\phi(x_{1:T}),\Sigma_\phi(x_{1:T}))$, $\mu_\phi,\Sigma_\phi$ are parameteric functions of the observation
+\end{itemize}
+\end{frame}
+
+\begin{frame}{MDMMs can do 3 Kinds of Inferences}
+\begin{enumerate}
+\item Filtering: given PAST, infer\[
+p(z_t|x_{1:t})\text{ for some }z_t
+\]
+\item Smoothing: given PAST and FUTURE, infer\[
+p(z_t|x_{1:T})\text{ for some }z_t
+\]
+\item Sequencing: given PAST and FUTURE, infer\[
+p(z_{1:T}|x_{1:T})
+\]
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Factorization over Time}
+\[
+\begin{split}
+p(z_{1:T}|x_{1:T})&=p(z_1|x_{1:T})p(z_2|z_1,x_{1:T})p(z_3|z_2,x_{1:T})\dots\\
+&=p(z_1|x_{1:T})p(z_2|z_1,x_{2:T})p(z_3|z_2,x_{3:T})\dots\\
+&=p(z_1|x_{1:T})\prod_{t=2}^Tp(z_t|z_{t-1},x_{t:T})
+\end{split}
+\]
+\begin{itemize}
+\item Each latent state $z_t$ depends only on
+\begin{itemize}
+\item the previous latent state $z_{t-1}$
+\item all current and future observations $x_{t:T}$
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{``Conditional Smoothing Posterior''}
+\[
+p(z_t|z_{t-1},x_{t:T})
+\]
+\begin{itemize}
+\item it is the posterior that corresponds to the
+conditional prior $p(z_t|z_{t-1})$, hence we call it conditional ``posterior''
+\item it combines information from both
+PAST and FUTURE, hence we call it ``smoothing''
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Factorizing the Conditional Smoothing Posterior (1)}
+\begin{itemize}
+\item $x_{t:T}^{1:M}\perp\!\!\!\perp z_{t-1}|z_{t}$ (by d-seperation)
+\end{itemize}
+\[
+\begin{split}
+\Rightarrow p(z_t|z_{t-1},x_{t:T}^{1:M})&=\frac{p(z_{t-1},z_{t},x_{t:T}^{1:M})}{p(z_{t-1},x_{t:T}^{1:M})}\\
+&=\frac{p(x_{t:T}^{1:M}|z_{t-1},z_{t})p(z_{t-1},z_{t})}{p(z_{t-1},x_{t:T}^{1:M})}\\
+&=\frac{p(z_{t-1})p(z_t|z_{t-1})p(x_{t:T}^{1:M}|z_t)}{p(x_{t:T}^{1:M}|z_{t-1})p(z_{t-1})}\\
+\end{split}
+\]
+\end{frame}
+
+\begin{frame}{Factorizing the Conditional Smoothing Posterior (2)}
+\begin{itemize}
+\item $x_t\perp\!\!\!\perp x_{t+1:T}|z_t$ (by Local Markov Property)
+\end{itemize}
+\[
+\begin{split}
+\Rightarrow p(z_t|z_{t-1},x_{t:T}^{1:M})&=\frac{p(z_{t-1})p(z_t|z_{t-1})p(x_{t:T}^{1:M}|z_t)}{p(x_{t:T}^{1:M}|z_{t-1})p(z_{t-1})}\\
+&=\frac{p(z_{t-1})p(z_t|z_{t-1})p(x_t^{1:M}|z_t)p(x_{t+1:T}^{1:M}|z_t)}{p(x_{t:T}^{1:M}|z_{t-1})p(z_{t-1})}\\
+&=\frac{p(z_t|z_{t-1})p(x_t^{1:M}|z_t)p(x_{t+1:T}^{1:M}|z_t)}{p(x_{t:T}^{1:M}|z_{t-1})}\\
+&=p(x_{t+1:T}^{1:M}|z_t)p(x_t^{1:M}|z_t)\frac{p(z_t|z_{t-1})}{p(x_{t:T}^{1:M}|z_{t-1})}
+\end{split}
+\]
+\end{frame}
+
+
+\begin{frame}{Factorizing the Conditional Smoothing Posterior (3)}
+\begin{itemize}
+\item Dropping $\frac{1}{p(x_{t:T}^{1:M}|z_{t-1})}$
+\item Assuming $p(x_t^{1:M}|z_t)=\prod_{m=1}^M p(x_t^m|z_t)$
+\end{itemize}
+\[
+\begin{split}
+\Rightarrow p(z_t|z_{t-1},x_{t:T}^{1:M})&=p(x_{t+1:T}^{1:M}|z_t)p(x_t^{1:M}|z_t)\frac{p(z_t|z_{t-1})}{p(x_{t:T}^{1:M}|z_{t-1})}\\
+&\propto p(x_{t+1:T}^{1:M}|z_t)p(x_t^{1:M}|z_t)p(z_t|z_{t-1})\\
+&= p(x_{t+1:T}^{1:M}|z_t)\left[
+\prod_{m=1}^M p(x_t^m|z_t)
+\right]
+p(z_t|z_{t-1})
+\end{split}
+\]
+\end{frame}
+
+\begin{frame}{Factorizing the Conditional Smoothing Posterior (4)}
+\begin{itemize}
+\item Dropping $p(x_{t+1:T}^{1:M})\prod_{m=1}^M p(x_t^m)=p(x_{t:T}^{1:M})$
+\end{itemize}
+\[
+\begin{split}
+\Rightarrow p&(z_t|z_{t-1},x_{t:T}^{1:M})\\
+&\propto p(x_{t+1:T}^{1:M}|z_t)\left[
+\prod_{m=1}^M p(x_t^m|z_t)
+\right]
+p(z_t|z_{t-1})\\
+&=\frac{p(z_t|x_{t+1:T}^{1:M})p(x_{t+1:T}^{1:M})}{p(z_t)}\left[
+\prod_{m=1}^M \frac{p(z_t|x_t^m)p(x_t^m)}{p(z_t)}
+\right]
+p(z_t|z_{t-1})\\
+&\propto
+p(z_t|x_{t+1:T}^{1:M})\left[
+\prod_{m=1}^M \frac{p(z_t|x_t^m)}{p(z_t)}
+\right]
+\frac{p(z_t|z_{t-1})}{p(z_t)}
+\end{split}
+\]
+\end{frame}
+
+\begin{frame}{Future$\times$Present$\times$Past (1)}
+\begin{itemize}
+\item Backward Filtering\[
+p(z_t|x_{t:T})\propto p(z_t|x_{t+1:T})\left[\prod_m\frac{p(z_t|x_t^m)}{p(z_t)}\right]
+\]
+\item Forward Smoothing\[
+p(z_t|x_{1:T})\propto p(z_t|x_{t+1:T})\left[\prod_m\frac{p(z_t|x_t^m)}{p(z_t)}\right]\frac{p(z_t|x_{1:t-1})}{p(z_t)}
+\]
+\item Conditional Smoothing Posterior\[
+p(z_t|z_{t-1},x_{t:T})\propto p(z_t|x_{t+1:T})\left[\prod_m \frac{p(z_t|x_t^m)}{p(z_t)}\right]\frac{p(z_t|z_{t-1})}{p(z_t)}
+\]
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Future$\times$Present$\times$Past (2)}
+Each distribution is decomposed into
+\begin{enumerate}
+\item Its dependence on future observations\[
+p(z_t|x_{t+1:T})
+\]
+\item Its dependence on each modality $m$ in the present\[
+p(z_t|x_t^m)
+\]
+\item Its dependence on the past\[
+p(z_t|z_{t-1})\text{ or }p(z_t|x_{1:t-1})
+\]
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Insights of the Factorizations}
+\begin{itemize}
+\item Any missing modalities $\bar m\in[1,M]$ at time $t$ can simply be left out of the product over modalities, leaving us with distributions that correctly condition on only the modalities $[1,M]\backslash\{\bar m\}$ that are present
+\item We can compute all three distributions if we can approximate the dependence on the future\[
+q(z_t|x_{t+1:T})\simeq p(z_t|x_{t+1:T}),
+\]learn approximate posteriors\[
+q(z_t|x_t^m)\simeq p(z_t|x_t^m)
+\]for each modality $m$, and know the model dynamics\[
+p(z_t),p(z_t|z_{t-1})
+\]
+\end{itemize}
+\end{frame}
+
+\subsection{Multimodal Fusion via Product of Gaussians}
+\begin{frame}{Gaussian Assumption}
+\begin{itemize}
+\item It is not tractable to compute the product of generic probability distributions
+\item So assume that each term in the factorization is Gaussian
+\item If each distribution is Gaussian, then their products or quotients are also Guassian, and their products or quotients can be computed in closed form
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Uncertainty Awareness}
+\begin{itemize}
+\item The output distribution of Product-of-Gaussians is dominated by the input Gaussian term with lower variance (higher precision), thereby fusing information in a way that gives more weight to higher-certainty inputs
+\item Automatically balances the information provided by each modality $m$, depending on:
+\begin{itemize}
+\item whether $p(z_t|x_t^m)$ is high or low certainty
+\item the information provided from the past and future through $p(z_t|z_{t-1})$ and $p(z_t|x_{t+1:T})$
+\end{itemize}
+\item Thereby performing multimodal temporal fusion in a manner that is uncertainty-aware
+\end{itemize}
+\end{frame}
+
+\subsection{Approximate Filtering with Missing Data}
+\begin{frame}{Missing Observations in the Future}
+\begin{itemize}
+\item $p(z_t|x_{t+1:T})$ does not admit further factorization, hence does not readily handle missing data among those future observations
+\item $z_t\perp\!\!\!\perp x_{t+1:T}|z_{t+1}$ (by d-seperation)
+\end{itemize}
+\[
+\begin{split}
+\Rightarrow p(z_t|x_{t+1:T})&=\int_{z_{t+1}}p(z_t,z_{t+1}|x_{t+1:T})dz_{t+1}\\
+&=\int_{z_{t+1}}p(z_t|z_{t+1},x_{t+1:T})p(z_{t+1}|x_{t+1:T})dz_{t+1}\\
+&=\int_{z_{t+1}}p(z_t|z_{t+1})p(z_{t+1}|x_{t+1:T})dz_{t+1}\\
+&=\mathbb{E}_{p(z_{t+1}|x_{t+1:T})}[p(z_t|z_{t+1})]
+\end{split}
+\]
+\end{frame}
+
+\begin{frame}{Approximating $p(z_t|x_{t+1:T})=\mathbb{E}_{p(z_{t+1}|x_{t+1:T})}[p(z_t|z_{t+1})]$}
+\begin{itemize}
+\item Tractable approximation via Huber et al. 2011
+\item Assume $p(z_t|x_{t+1:T})\sim \mathcal{N}(\boldsymbol\mu,\,\boldsymbol\Sigma)$ with diagonal $\boldsymbol\Sigma$
+\item Assume $p(z_t|z_{t+1})\sim \mathcal{N}(\boldsymbol\mu,\,\boldsymbol\Sigma)$ with diagonal $\boldsymbol\Sigma$
+\item Draw $(\mu_1,\Sigma_2),\dots,(\mu_K,\Sigma_K)$ of $p(z_t|z_{t+1})$ under $p(z_{t+1}|x_{t+1:T})$, then
+\begin{itemize}
+\item Approximate $\hat\mu$ of $p(z_t|x_{t+1:T})$ via moment-matching as\[
+\frac{1}{K}\sum_{k=1}^K\mu_k
+\]
+\item Approximate $\hat\Sigma$ of $p(z_t|x_{t+1:T})$ via moment-matching as\[
+\frac{1}{K}\sum_{k=1}^K(\Sigma_k+\mu_k^2)-\hat{\mu}^2
+\]
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Insights of $p(z_t|x_{t+1:T})=\mathbb{E}_{p(z_{t+1}|x_{t+1:T})}[p(z_t|z_{t+1})]$ (1)}
+\begin{itemize}
+\item The backward filtering distribution\[
+p(z_t|x_{t:T})\propto p(z_t|x_{t+1:T})\left[\prod_m\frac{p(z_t|x_t^m)}{p(z_t)}\right]
+\]becomes\[
+p(z_t|x_{t:T})\propto\mathbb{E}_{p(z_{t+1}|x_{t+1:T})}[p(z_t|z_{t+1})]\left[\prod_{m=1}^M\frac{p(z_t|x_t^m)}{p(z_t)}\right]
+\]
+\item By sampling under the filtering distribution for time $t+1$, $p(z_{t+1}|x_{t+1:T})$, we can compute the filtering distribution for time $t$, $p(z_t|x_{t:T})$
+\item We can recursively compute $p(z_t|x_{t:T})$ backwards in time, starting from $t=T$:\[
+p(z_{T}|x_{T:T})\to p(z_{T-1}|x_{T:T})\to p(z_{T-1}|x_{T-1:T})\to\dots\to p(z_1|x_{1:T})
+\]
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Insights of $p(z_t|x_{t+1:T})=\mathbb{E}_{p(z_{t+1}|x_{t+1:T})}[p(z_t|z_{t+1})]$ (2)}
+\begin{itemize}
+\item Once we can perform \[
+p(z_t|x_{t:T})\propto\mathbb{E}_{p(z_{t+1}|x_{t+1:T})}[p(z_t|z_{t+1})]\left[\prod_{m=1}^M\frac{p(z_t|x_t^m)}{p(z_t)}\right]
+\]filtering backwards in time, we can use this to approximate $p(z_t|x_{t+1:T})$ in the smoothing distribution\[
+p(z_t|x_{1:T})\propto p(z_t|x_{t+1:T})\left[\prod_m\frac{p(z_t|x_t^m)}{p(z_t)}\right]\frac{p(z_t|x_{1:t-1})}{p(z_t)}
+\]and the conditional smoothing posterior\[
+p(z_t|z_{t-1},x_{t:T})\propto p(z_t|x_{t+1:T})\left[\prod_m \frac{p(z_t|x_t^m)}{p(z_t)}\right]\frac{p(z_t|z_{t-1})}{p(z_t)}
+\]
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Insights of $p(z_t|x_{t+1:T})=\mathbb{E}_{p(z_{t+1}|x_{t+1:T})}[p(z_t|z_{t+1})]$ (3)}
+\begin{itemize}
+\item This approach removes the explicit dependence on all future observations $x_{t+1:T}$, allowing us to handle missing data
+\item Suppose the data points\[
+X_{\nexists}=\{x_{t_i}^{m_i}\}
+\]are missing, rather than directly compute the dependence on an incomplete set of future observations\[
+p(z_t|x_{t+1:T}\backslash X_{\nexists})
+\]we can instead sample $z_{t+1}$ under the filtering distribution conditioned on incomplete observations\[
+p(z_{t+1}|x_{t+1:T}\backslash X_{\nexists})
+\]and then compute $p(z_t|z_{t+1})$ given the sampled $z_{t+1}$, thereby approximating $p(z_t|x_{t+1:T}\backslash X_{\nexists})$
+\end{itemize}
+\end{frame}
+
+\subsection{Backward-Forward Variational Inference}
+\begin{frame}{Factorized Variational Approximations (1)}
+\begin{itemize}
+\item Define the variational posterior approximation $q$:\[
+q(z_t|x_t^m)\equiv\tilde{q}(z_t|x_t^m)p(z_t)
+\]
+\item $\tilde{q}(z_t|x_t^m)$ is parameterized by a time-invariant neural network for each modality $m$
+\item We learn the Gaussian quotients $\tilde{q}(z_t|x_t^m)$ directly, so as to avoid the constraint required for ensuring a quotient of Gaussians is well-defined:\[
+\tilde{q}(z_t|x_t^m)=\frac{q(z_t|x_t^m)}{p(z_t)}
+\]
+\item We also parameterize the transition dynamics $p(z_t|z_{t-1})$ and $p(z_t|z_{t+1})$ using neural networks for the quotient distributions
+\end{itemize}
+\end{frame}
+\begin{frame}{Factorized Variational Approximations (2)}
+\begin{itemize}
+\item Denote $\mathbb{E}_\leftarrow$ as a shorthand for the expectation under the approximate backward filtering distribution $q(z_{t+1}|x_{t+1:T})$:\[
+p(z_t|x_{t+1:T})=\mathbb{E}_{p(z_{t+1}|x_{t+1:T})}[p(z_t|z_{t+1})]=\mathbb{E}_\leftarrow[p(z_t|z_{t+1})]
+\]
+\item Denote $\mathbb{E}_\to$ as the expectation under the forward smoothing distribution $q(z_{t-1}|x_{1:T})$:\[
+p(z_t|x_{1:t-1})=\mathbb{E}_{q(z_{t-1}|x_{1:T})}[p(z_t|z_{t-1})]=\mathbb{E}_\to[p(z_t|z_{t-1})]
+\]
+\end{itemize}
+\end{frame}
+\begin{frame}{Factorized Variational Approximations (3)}
+\begin{enumerate}
+\item Backward Filtering (Variational Backward Algorithm)\[
+q(z_t|x_{t:T})\propto\mathbb{E}_\leftarrow[p(z_t|z_{t+1})]\prod_m\tilde{q}(z_t|x_t^m)
+\]
+\item Forward Smoothing (Variational Backward-Forward Algorithm)\[
+q(z_t|x_{1:T})\propto\mathbb{E}_\leftarrow[p(z_t|z_{t+1})]\prod_m\tilde{q}(z_t|x_t^m)\frac{\mathbb{E}_\to[p(z_t|z_{t-1})]}{p(z_t)}
+\]
+\item Conditional Smoothing Posterior\[
+q(z_t|z_{t-1},x_{t:T})\propto\mathbb{E}_\leftarrow[p(z_t|z_{t+1})]\prod_m\tilde{q}(z_t|x_t^m)\frac{p(z_t|z_{t-1})}{p(z_t)}
+\]
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Variational Backward Algorithm}
+\begin{algorithmic}
+\Function{BackwardFilter}{$x_{1:T},K$}
+\State Initialize $q(z_t|x_{T+1:T})\leftarrow p(z_T)$
+\For{$t=T$ to $1$}
+\State Let $\mathcal{M}\subset[1,M]$ be the observed modailities at $t$
+\State $q(z_t|x_{t:T})\leftarrow q(z_t|x_{t+1:T})\prod_\mathcal{M} \tilde{q}(z_t|x_t^m)$
+\State Sample $K$ particles $z_t^k\sim q(z_t|x_{t:T})$ for $k\in[1,K]$
+\State Compute $p(z_{t-1}|z_t^k)$ for each particle $z_t^k$
+\State $q(z_{t-1}|x_{t:T})\leftarrow\frac{1}{K}\sum_{k=1}^K p(z_{t-1}|z_t^k)$
+\EndFor
+\State\Return$\{q(z_t|x_{t:T}),q(z_t|x_{t+1:T})\text{ for }t\in[1,T]\}$
+\EndFunction
+\end{algorithmic}
+\end{frame}
+
+
+\begin{frame}{Variational Backward Algorithm (Remarks)}
+\begin{itemize}
+\item By reversing time:
+\begin{itemize}
+\item The algorithm gives us a variational forward algorithm that computes the forward filtering distribution\[
+q(z_t|x_{1:t})
+\]
+\end{itemize}
+\item By setting the number of particles $K=1$:
+\begin{itemize}
+\item The algorithm effectively computes the conditional filtering posterior\[
+q(z_t|z_{t+1},x_{t})
+\]and conditional prior \[
+p(z_t|z_{t+1})
+\] for a randomly sampled latent sequence $z_{1:T}$
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Variational Backward-Forward Algorithm}
+\begin{algorithmic}
+\Function{ForwardSmooth}{$x_{1:T},K_b,K_f$}
+\State Initialize $\tilde{p}(z_t|x_{1:0})\leftarrow 1$
+\State Collect $q(z_t|x_{t+1:T})$ from \Call{BackwardFilter}{$x_{1:T},K_b$}
+\For{$t=1$ to $T$}
+\State Let $\mathcal{M}\subset[1,M]$ be the observed modalities at $t$
+\State $q(z_t|x_{1:T})\leftarrow q(z_t|x_{t+1:T})\prod_\mathcal{M}[\tilde{q}(z_t|x_t^m)]\frac{q(z_t|x_{1:t-1})}{p(z_t)}$
+\State Sample $K_f$ particles $z_t\sim q(z_t|x_{1:T})$ for $k\in[1,K_f]$
+\State Compute $p(z_{t+1}|z_t^k)$ for each particle $z_t^k$
+\State $q(z_{t+1}|x_{1:t})\leftarrow\frac{1}{K_f}\sum_{k=1}^{K_f}p(z_{t+1}|z_t^k)$
+\EndFor
+\State \Return$\{q(z_t|x_{1:T}),q(z_t|x_{1:t-1})\text{ for }t\in[1,T]\}$
+\EndFunction
+\end{algorithmic}
+\end{frame}
+
+\begin{frame}{Variational Backward-Forward Algorithm (Remarks)}
+\begin{itemize}
+\item By setting the number of particles $K_f=1$:
+\begin{itemize}
+\item The algorithm effectively computes the conditional smoothing posterior\[
+q(z_t|z_{t-1},x_{t:T})
+\]and conditional prior \[
+p(z_t|z_{t-1})
+\] for a randomly sampled latent sequence $z_{1:T}$
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Knowing $p(z_t)$ of Each $t$}
+\begin{itemize}
+\item Variational Backward-Forward Algorithm requires knowing $p(z_t)$ for each $t$
+\item \sout{Sampling $p(z_t)$ in the forward pass}
+\item We avoid the instability of sampling $T$ successive latents with no observations by instead assuming $p(z_t)$ is constant with time, i.e. the MDMM is stationary when nothing is observed
+\item During training, we add\[
+\text{KL}\left(p(z_t)\Vert\mathbb{E}_{z_{t-1}}p(z_t|z_{t-1})\right)+\text{KL}\left(p(z_t)\Vert\mathbb{E}_{z_{t+1}}p(z_t|z_{t+1})\right)
+\]to the loss to ensure that the transition dynamics obey this assumption
+\end{itemize}
+\end{frame}
+
+\begin{frame}{ELBO for Backward Filtering}
+\begin{itemize}
+\item The filtering ELBO:\[
+\begin{split}
+L_\text{filter}=\sum_{t=1}^T[&\mathbb{E}_{q(z_t|x_{t:T})}\log p(x_t|z_t)-\\
+&\mathbb{E}_{q(z_{t+1}|x_{t+1:T})}\text{KL}(q(z_t|z_{t+1},x_t)\Vert p(z_t|z_{t+1}))]
+\end{split}
+\]
+\item It corresponds to a ``backward filtering'' variational posterior\[
+q(z_{1:T}|x_{1:T})=\prod_t q(z_t|z_{z+1},x_t)
+\]where each $z_t$ is only inferred using the current observation $x_t$ and the future latent state $z_{t+1}$
+\end{itemize}
+\end{frame}
+
+\begin{frame}{ELBO for Forward Smoothing}
+\begin{itemize}
+\item The smoothing ELBO:\[
+\begin{split}
+L_\text{smooth}=\sum_{t=1}^T[&\mathbb{E}_{q(z_t|x_{1:T})}\log p(x_t|z_t)-\\
+&\mathbb{E}_{q(z_{t-1}|x_{1:T})}\text{KL}(z_t|z_{t-1},x_{t:T})\Vert p(z_t|z_{t-1}))]
+\end{split}
+\]
+\item It corresponds to the correct factorization of the posterior\[
+p(z_{1:T}|x_{1:T})=p(z_1|x_{1:T})\prod_{t=2}^T p(z_t|z_{t-1},x_{t:T})
+\]where each term combines information from both past and future
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Backward-Forward Variational Inference (BFVI)}
+\begin{itemize}
+\item Since $L_\text{smooth}$ corresponds to the correct factorization, it should theoretically be enough to minimize $L_\text{smooth}$ to learn good MDMM parameters $\theta,\phi$
+\item However, in order to compute $L_\text{smooth}$, we must perform a backward pass which requires sampling under the backward filtering
+\item Hence, to accurately approximatee $L_\text{smooth}$, the backward filtering distribution has to be reasonably accurate as well
+\item This motivates learning the parameters $\theta,\phi$ by jointly maximizing the filtering and smoothing ELBOs as a weighted sum
+\item We call this paradigm BFVI due to its use of variational posteriors for both backward filtering and forward smoothing
+\end{itemize}
+\end{frame}
+
+\section{Experiments}
+\subsection{Datasets}
+
+\begin{frame}{MTS Dataset I: Noisy Spirals}
+\begin{itemize}
+\item $R\in2^{\mathcal{U}_{[-1,1)}}$
+\item $\mathbf{x}(t):\{0,1,2\dots99\}\to\mathbb{R}^2$:\[
+\mathbf{x}(t)\equiv\begin{bmatrix}
+\sqrt{R}\cdot r(t)\cos\theta(t)+0.1\cdot\mathcal{N}\\
+\frac{1}{\sqrt{R}}\cdot r(t)\sin\theta(t)+0.1\cdot\mathcal{N}
+\end{bmatrix}
+\]
+\item $r(0)\dots r(99),\theta(0)\dots\theta(99)$:\[
+\begin{split}
+r(0)&\equiv0.25+\mathcal{U}_{[0,0.5)}\dots r(99)\equiv2.25+\mathcal{U}_{[0,0.5)}\\
+\theta(0)&\equiv\mathcal{U}_{[0,\pi)}\dots\theta(99)\equiv\mathcal{U}_{[4\pi,5\pi)}\\
+&\text{or}\\
+\theta(0)&\equiv\mathcal{U}_{[0,-\pi)}\dots\theta(99)\equiv\mathcal{U}_{[-4\pi,-5\pi)}
+\end{split}
+\]
+\item $5$ latent dimensions
+\item $2$ perceptron layers for encoding $q(z_t|x_t^m)$ and decoding $p(x_t^m|z_t)$
+\end{itemize}
+\end{frame}
+
+\begin{frame}{MTS Dataset II: Weizmann Human Actions}
+\begin{itemize}
+\item 90 videos of 9 people each performing 10 actions
+\item We converted it to a trimodal time series dataset by treating silhouette masks and an additional modality, and treating actions as per-frame labels
+\item We selected one person's videos as the test set, and the other 80 videos as the training set, allowing us to test action label prediction on an unseen person
+\item $256$ latent dimensions
+\item Convolutional / Deconvolutional neural networks for encoding and decoding
+\end{itemize}
+\end{frame}
+
+
+\subsection{Inference Tasks}
+
+\begin{frame}{Temporal Inference Tasks}
+\begin{enumerate}
+\item Reconstruction: reconstruction given complete observations
+\item Drop Half: reconstruction after half of the inputs are randomly deleted
+\item Forward Extrapolation: predicting the last 25\% of a sequence when the reset is given
+\item Backward Extrapolation: inferring the first 25\% of a sequence when the reset is given
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Weizmann Human Actions}
+\begin{itemize}
+\item Multimodal training
+\item Unimodal testing: we provided only video frames as input
+\begin{itemize}
+\item NO silhouette masks
+\item NO action labels
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Cross-Modal Inference Tasks}
+\begin{enumerate}
+\item Conditional Generation for Spirals: given $x$ coordinates and initial 25\% of $y$ coordinates, generate reset of spirals
+\item Conditional Generation for Weizmann: given the video frames, generate the silhouette masks
+\item Label Prediction for Weizmann: infer action labels given only video frames
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{BFVI vs RNN-based Methods}
+\begin{itemize}
+\item F-Mask and F-Skip
+\begin{itemize}
+\item Use forward RNNs, one per modality
+\item Use zero-masking and update skipping respectively
+\end{itemize}
+\item B-Mask and B-Skip
+\begin{itemize}
+\item Use backward RNNs
+\item With masking and skipping respectively
+\end{itemize}
+\item BFVI achieves high performance on all tasks, whereas RNN-based methods only perform well on a few; in particular, all methods besides BFVI do poorly on the conditional generation task
+\item RNN lack a principled approach to multimodal fusion, and hence fail to learn a latent space which captures the mutual information between action labels and images
+\item BFVI learns to both predict one modality from another, and to propagate informatiokn across time
+\end{itemize}
+\end{frame}
+
+\subsection{Weakly Supervised Learning}
+
+\begin{frame}{Two Forms of Weakly Supervised Learning}
+\begin{itemize}
+\item Learning with data missing uniformly at random
+\begin{itemize}
+\item Noisy sensors
+\item Asynchronous sensors
+\end{itemize}
+\item Learning with missing modalities
+\begin{itemize}
+\item Semi-supervised learning
+\item The dataset is partially unlabelled by annotators
+\item A fraction of the sequences in the dataset only has a single modality present
+\item Sensor break-down
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\end{document}
