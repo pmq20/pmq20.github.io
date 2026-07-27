@@ -1,0 +1,658 @@
+% !TEX TS-program = pdflatex
+% !TEX encoding = UTF-8 Unicode
+
+\documentclass{beamer}
+\usepackage{tikz}
+\usepackage[USenglish]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{xcolor}
+\usepackage{algpseudocode}
+\usepackage{ulem}
+\DeclareMathOperator{\sign}{sign}
+\usefonttheme[onlymath]{serif}
+\mode<presentation>
+{
+  \usetheme{Warsaw}
+}
+\newcommand*{\Z}{\makebox[1.5ex]{\textbf{$\cdot$}}}
+
+\title{Xu et al. 2019: How Powerful are Graph Neural Networks?}
+
+\author{Minqi Pan}
+
+\date{\today}
+
+\AtBeginSubsection[]
+{
+  \begin{frame}<beamer>{Outline}
+    \tableofcontents[currentsection,currentsubsection]
+  \end{frame}
+}
+
+\makeatletter
+\newenvironment<>{proofs}[1][\proofname]{%
+    \par
+    \def\insertproofname{#1\@addpunct{.}}%
+    \usebeamertemplate{proof begin}#2}
+  {\usebeamertemplate{proof end}}
+\makeatother
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{How Powerful are Graph Neural Networks?}
+\begin{itemize}
+\item ICLR 2019 Oral, Ernest N. Morial Convention Center, New Orleans, May 7th, 2019
+\item Keyulu Xu, Weihua Hu, Jure Leskovec, Stefanie Jegelka
+\item MIT, Stanford University
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Outline}
+  \tableofcontents
+\end{frame}
+
+\section{Building Powerful Graph Neural Networks}
+\subsection{Preliminaries}
+\begin{frame}{Two Tasks}
+\begin{itemize}
+\item Given $G=(V,E)$ with $X_v$ for $v\in V$
+\item Task 1: Node Classification
+\begin{itemize}
+\item Denote $y_v$ as the label for $v\in V$
+\item Learn a representation vector $h_v$ of $v$ such that $v$'s label can be predicted as\[
+y_v=f(h_v)
+\]
+\end{itemize}
+\item Task 2: Graph Classification
+\begin{itemize}
+\item Given a set of graphs $\{G_1,\dots,G_N\}\subset\mathcal{G}$ and their lables $\{y_1,\dots,y_N\}\subset\mathcal{Y}$
+\item Learn a representation vector $h_G$ that helps predict the label of an entire graph:\[
+y_G=g(h_G)
+\]
+\end{itemize}
+\end{itemize}
+\end{frame}
+\begin{frame}{Graph Neural Networks}
+\begin{itemize}
+\item The $k$-th layer of a GNN is\[
+\begin{split}
+a_v^{(k)}&=\text{AGGREGTE}^{(k)}\big(\big\{h_u^{(k-1)}:u\in\mathcal{N}(v)\big\}\big)\\
+h_v^{(k)}&=\text{COMBINE}^{(k)}\big(h_v^{k-1},a_v^{(k)}\big)
+\end{split}
+\]
+\item $h_v^{(k)}$: the feature vector of node $v$ at the $k$-th interation/layer
+\item $h_v^{(0)}=X_v$
+\item $\mathcal{N}(v)$: a set of nodes adjacent to $v$
+\item The choice of $\text{AGGREGATE}^{(k)}(\cdot)$ and $\text{COMBINE}^{(k)}(\cdot)$ in GNNs is crucial
+\end{itemize}
+\end{frame}
+\begin{frame}{GraphSAGE (Hamilton et al. 2017)}
+\[
+\begin{split}
+a_v^{(k)}&=\text{MAX}\big(\big\{\text{ReLU}\big(W\cdot h_u^{(k-1)}\big),\forall u\in\mathcal{N}(v)\big\}\big)\\
+h_v^{(k)}&=\text{COMBINE}^{(k)}\big(h_v^{(k-1)},a_v^{(k)}\big)
+\end{split}
+\]
+\begin{itemize}
+\item The COMBINE step could be a concatenation followed by a linear mapping\[
+W\cdot\big[h_v^{(k-1)},a_v^{(k)}\big]
+\]
+\end{itemize}
+\end{frame}
+
+\begin{frame}{GCN (Kipf \& Welling 2017)}
+\[
+a_v^{(k)}=\text{ReLU}\big(W\cdot\text{MEAN}\big\{h_u^{(k-1)},\forall u\in\mathcal{N}(v)\cup\{v\}\big\}\big)
+\]
+\begin{itemize}
+\item the AGGREGATE and COMBINE steps are integrated
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Finally}
+\begin{itemize}
+\item For node classfication
+\begin{itemize}
+\item the $h_v^{(K)}$ of the final iteration is used for prediction
+\end{itemize}
+\item For graph classification
+\begin{itemize}
+\item the READOUT function aggregates node features from the final iteration to obtain the entire graph's representation $h_G$:\[
+h_G=\text{READOUT}\big(\big\{h_v^{(K)}:v\in G\big\}\big)
+\]
+\item READOUT can be a simple permutation invariant function such as summation or a more sophisticated graph-level pooling function
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Weisfeiler-Lehman Test (1)}
+\begin{itemize}
+\item NO polynomial-time algorithm is known for the graph isomorphism problem yet
+\item Apart from some corner cases, the WL test is an effective and computationally efficient test that DISTINGUISHES a broad class of graphs
+\item Its 1-dimensional form, ``naive vertex refinement'', is analogous to neighbor aggregation in GNNs
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Weisfeiler-Lehman Test (2)}
+\begin{enumerate}
+\item Aggregates the labels of nodes and their neighborhoods
+\item Hashes the aggregated labels into unique new labels
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Weisfeiler-Lehman Test (3)}
+\begin{itemize}
+\item The algorithm decides that two graphs are NON-isomorphic if at some iteration the labels of the nodes between the two graphs differ
+\item Shervashidze et al 2011 proposed the WL subtree kernel that measures the SIMILARITY between graphs
+\begin{itemize}
+\item The kernel uses the counts of node labels at different iterations of the WL test as the feature vector of a graph
+\item A node's label at the $k$-th iteration of WL test represents a subtree structure of height $k$ rooted at the node (Fig. 1)
+\item The graph features considered by the WL subtree kernel are essentially counts of different rooted subtrees in the graph
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\subsection{Theoretical Framework: Overview}
+\begin{frame}
+\begin{definition}[1]
+A multiset is a generalized concept of a set that allows multiple instances for its elements. More formally, a multiset is a $2$-tuple $X=(S,m)$ where $S$ is the underlying set of $X$ that is formed from its distinct elements, and $m:S\to\mathbb{N}_{\geqslant1}$ gives the multiplicity of the elements.
+\end{definition}
+\end{frame}
+\subsection{Graph Isomorphism Network (GIN)}
+\begin{frame}
+\begin{lemma}[2]
+Let $G_1$ and $G_2$ be any two non-isomorphic graphs. If a graph neural network $\mathcal{A}:\mathcal{G}\to\mathbb{R}^d$ maps $G_1$ and $G_2$ to DIFFERENT embeddings, the Weisfeiler-Lehman graph isomorphism test also decides $G_1$ and $G_2$ are NOT isomorphic.
+\end{lemma}
+\end{frame}
+
+\begin{frame}
+\begin{proofs}
+\begin{itemize}
+\item Suppose after $k$ iterations, a GNN $\mathcal{A}$ has $\mathcal{A}(G_1)\ne\mathcal{A}(G_2)$ but the WL test cannot decide $G_1$ and $G_2$ are NON-isomorphic
+\item It follows that from iteration $0$ to $k$ in the WL test, $G_1$ and $G_2$ always have the same collection of node labels
+\item In particular, because $G_1$ and $G_2$ have the same WL node labels for iteration $i$ and $i+1$ for any $i=0,\dots,k-1$, $G_1$ and $G_2$ have the same collection, i.e. multiset, of WL node labels $\big\{l_v^{(i)}\big\}$ as well as the same collection of node neighborhood\[
+\big\{\big(l_v^{(i)},\big\{l_u^{(i)}:u\in\mathcal{N}(v)\big\}\big)\big\}
+\]Otherwise, the WL test would have obtained different collections of node labels at iteration $i+1$ for $G_1$ and $G_2$ as different multisets get unique new labels
+\end{itemize}
+\end{proofs}
+\end{frame}
+
+\begin{frame}
+\begin{proofs}[\proofname\ (Cont.)]
+\begin{itemize}
+\item The WL test always relabels different multisets of neighboring nodes into different new labels
+\item We show that on the same graph $G=G_1$ or $G_2$, if WL node labels $l_v^{(i)}=l_u^{(i)}$, we always have GNN node features $h_v^{(i)}=h_u^{(i)}$ for any iteration $i$
+\begin{itemize}
+\item This apparently holds for $i=0$ because WL and GNN starts with the same node features
+\item Suppose this holds for iteration $j$, if for any $u,v,l_v^{(j+1)}=l_u^{(j+1)}$, then it must be the case that\[
+\big(l_v^{(j)},\big\{l_w^{(j)}:w\in\mathcal{N}(v)\big\}\big)=\big(l_u^{(j)},\{l_w^{(j)}:w\in\mathcal{N}(u)\big\}\big)
+\]
+\end{itemize}
+\end{itemize}
+\end{proofs}
+\end{frame}
+
+\begin{frame}
+\begin{proofs}[\proofname\ (Cont.)]
+\begin{itemize}
+\item We show that on the same graph $G=G_1$ or $G_2$, if WL node labels $l_v^{(i)}=l_u^{(i)}$, we always have GNN node features $h_v^{(i)}=h_u^{(i)}$ for any iteration $i$
+\begin{itemize}
+\item By our assumption on iteration $j$, we must have\[
+\big(h_v^{(j)},\big\{h_w^{(j)}:w\in\mathcal{N}(v)\big\}\big)=\big(h_u^{(j)},\big\{h_w^{(j)}:w\in\mathcal{N}(u)\big\}\big)
+\]
+\item In the aggregation process of the GNN, the same AGGREGATE and COMBINE are applied
+\item The same input, i.e. neighborhood features, generates the same output
+\item Thus $h_v^{(j+1)}=h_u^{(j+1)}$
+\item By induction, if WL node labels $l_v^{(i)}=l_u^{(i)}$, we always have GNN node features $h_v^{(i)}=h_u^{(i)}$ for any iteration $i$
+\end{itemize}
+\end{itemize}
+\end{proofs}
+\end{frame}
+
+\begin{frame}
+\begin{proofs}[\proofname\ (Cont.)]
+\begin{itemize}
+\item This creates a valid mapping $\phi$ such that $h_v^{(i)}=\phi(l_v^{(i)})$ for any $v\in G$
+\item It follows from $G_1$ and $G_2$ have the same multiset of WL neightborhood labels that $G_1$ and $G_2$ also have the same collection of GNN neighborhood features\[
+\begin{split}
+&\big\{\big(h_v^{(i)},\big\{h_u^{(i)}:u\in\mathcal{N}(v)\big\}\big)\big\}=\\
+&\big\{\big(\phi(l_v^{(i)}),\big\{\phi(l_u^{(i)}):u\in\mathcal{N}(v)\big\}\big)\big\}
+\end{split}
+\]
+\item Thus $\big\{h_v^{(i+1)}\big\}$ are the same
+\end{itemize}
+\end{proofs}
+\end{frame}
+
+
+\begin{frame}
+\begin{proof}[\proofname\ (Cont.)]
+\begin{itemize}
+\item In particular, we have the same collection of GNN node features\[
+h_v^{(k)}
+\]for $G_1$ and $G_2$
+\item Because the graph level readout function is permutation invariant with respect to the collection of node features,\[
+\mathcal{A}(G_1)=\mathcal{A}(G_2)
+\]
+\item Hence we have reached a contradiction
+\end{itemize}
+\end{proof}
+\end{frame}
+
+\begin{frame}
+\begin{theorem}[3]
+Let $\mathcal{A}:\mathcal{G}\to\mathbb{R}^d$ be a GNN. With a sufficient number of GNN layers, $\mathcal{A}$ maps any graphs $G_1$ and $G_2$ that the Weisfeiler-Lehman test of isomorphism decides as non-isomorphic, to different embeddings if the following conditions hold:\begin{enumerate}
+\item $\mathcal{A}$ aggregates and updates node features iteratively with\[
+h_v^{(k)}=\phi\big(h_v^{(k-1)},f\big(\big\{h_u^{(k-1)}:u\in\mathcal{N}(v)\big\}\big)\big),
+\]where the function $f$, which operates on multisets, and $\phi$ are injective.
+\item $\mathcal A$'s graph-level readout, which operates on the multiset of node features $\big\{h_v^{(k)}\big\}$, is injective.
+\end{enumerate}
+\end{theorem}
+\end{frame}
+
+\begin{frame}
+\begin{proofs}
+\begin{itemize}
+\item Let $\mathcal{A}$ be a GNN where the condition holds
+\item Let $G_1,G_2$ be any graphs which the WL test decides as non-isomorphic at iteration $K$
+\item Because the graph-level readout function is injective, i.e., it maps distinct multiset of node features into unique embeddings, it sufficies to show that $\mathcal{A}$'s neighborhood aggregation process, with sufficient iterations, embeds $G_1$ and $G_2$ into different multisets of node features
+\end{itemize}
+\end{proofs}
+\end{frame}
+
+\begin{frame}
+\begin{proofs}[\proofname\ (Cont.)]
+\begin{itemize}
+\item Let us assume $\mathcal A$ updates node representations as\[
+h_v^{(k)}=\phi\big(h_v^{(k-1)},f\big(\big\{h_u^{(k-1)}:u\in\mathcal{N}(v)\big\}\big)\big)
+\]with injective functions $f$ and $\phi$
+\item The WL test applies a predetermined injective hash function $g$ to update the WL node labels $l_v^{(k)}$:\[
+l_v^{(k)}=g\big(l_v^{(k-1)},\big\{l_u^{(k-1)}:u\in\mathcal{N}(v)\big\}\big)
+\]
+\end{itemize}
+\end{proofs}
+\end{frame}
+
+\begin{frame}
+\begin{proofs}[\proofname\ (Cont.)]
+\begin{itemize}
+\item We will show, by induction, that for any iteration $k$, there always exists an injective function $\varphi$ such that $h_v^{(k)}=\varphi\big(l_v^{(k)}\big)$
+\begin{itemize}
+\item This apparently holds for $k=0$ because the initial node features are the same for WL and GNN $l_v^{(0)}=h_v^{(0)}$ for all $v\in G_1,G_2$; so $\varphi$ could be the identity function for $k=0$
+\item Suppose this holds for iteration $k-1$, we show that it also holds for $k$
+\item Substituting $h_v^{(k-1)}$ with $\varphi\big(l_v^{(k-1)}\big)$ gives us\[
+h_v^{(k)}=\phi(\varphi\big(l_v^{(k-1)}\big),f\big(\big\{\varphi\big(l_u^{(k-1)}\big):u\in\mathcal{N}(v)\big\}\big)\big)
+\]
+\item Since the composition of injective functions is injective, there exists some injective function $\psi$ so that\[
+h_v^{(k)}=\psi\big(l_v^{(k-1)},\big\{l_u^{(k-1)}:u\in\mathcal{N}(v)\big\}\big)
+\]
+\end{itemize}
+\end{itemize}
+\end{proofs}
+\end{frame}
+
+\begin{frame}
+\begin{proofs}[\proofname\ (Cont.)]
+\begin{itemize}
+\item We will show, by induction, that for any iteration $k$, there always exists an injective function $\varphi$ such that $h_v^{(k)}=\varphi\big(l_v^{(k)}\big)$
+\begin{itemize}
+\item Then we have\[
+h_v^{(k)}=\psi\circ g^{-1}g\big(l_v^{(k-1)},\big\{l_u^{(k-1)}:u\in\mathcal{N}(v)\big\}\big)=\psi\circ g^{-1}\big(l_v^{(k)}\big)
+\]
+\item $\varphi=\psi\circ g^{-1}$ is injective because the composition of injective functions is injective
+\item Hence for any iteration $k$, there always exists an injective function $\varphi$ such that\[
+h_v^{(k)}=\varphi\big(l_v^{(k)}\big)
+\]
+\end{itemize}
+\end{itemize}
+\end{proofs}
+\end{frame}
+
+\begin{frame}
+\begin{proof}[\proofname\ (Cont.)]
+\begin{itemize}
+\item At the $K$-th iteration, the WL test decides that $G_1$ and $G_2$ are non-isomorphic, that is the multisets $\big\{l_v^{(k)}\big\}$ are different for $G_1$ and $G_2$
+\item The GNN $\mathcal A$'s node embeddings\[
+\big\{h_v^{(K)}\big\}=\big\{\varphi\big(l_v^{(K)}\big)\big\}
+\]must also be different for $G_1$ and $G_2$ because of the injectivity of $\varphi$
+\end{itemize}
+\end{proof}
+\end{frame}
+
+\begin{frame}
+\begin{lemma}[4]
+Assume the input feature space $\mathcal X$ is countable. Let $g^{(k)}$ be the function parameterized by a GNN's $k$-th layer for $k=1,\dots,L$, where $g^{(1)}$ is defined on multisets $X\subset\mathcal X$ of bounded size. The range of $g^{(k)}$, i.e., the space of node hidden features $h_v^{(k)}$, is also countable for all $k=1,\dots,L$.
+\end{lemma}
+\begin{proof}
+Theorem~2.13 of Baby Rudin.
+\end{proof}
+\end{frame}
+
+\begin{frame}
+\begin{lemma}[5]
+Assume $\mathcal X$ is countable. There exists a function $f:\mathcal{X}\to\mathbb{R}^n$ so that $h(X)=\sum_{x\in X}f(x)$ is unique for each multiset $X\subset\mathcal X$ of bounded size.
+
+Moreover, any multiset function $g$ can be decomposed as $g(X)=\phi\big(\sum_{x\in X}f(x)\big)$ for some function $\phi$.
+\end{lemma}
+\end{frame}
+
+\begin{frame}
+\begin{proofs}
+\begin{itemize}
+\item We first prove that there exists a mapping $f$ so that $\sum_{x\in X}f(x)$ is unique for each multiset $X$ of bounded size
+\item Because $\mathcal{X}$ is countable, there exists a mapping $Z:\mathcal{X}\to\mathbb{N}$ from $x\in\mathcal X$ to natural numbers
+\item Because the cardinality of multiset $X$ is bounded, there exists a number $N\in\mathbb N$ so that $|X|<N$ for all $X$
+\item Then an example of such $f$ is\[
+f(x)=N^{-Z(x)}
+\] which can be viewed as a more compressed form of an one-hot vector or $N$-digit presentation
+\item Thus $h(X)=\sum_{x\in X}f(x)$ is an injective function of multisets
+\end{itemize}
+\end{proofs}
+\end{frame}
+
+\begin{frame}
+\begin{proof}[\proofname\ (Cont.)]
+\begin{itemize}
+\item $\phi\big(\sum_{x\in X}f(x)\big)$ is permutation invariant so it is a well-defined multiset function. For any multiset function $g$, we can construct such $\phi$ by letting\[
+\phi\big(\sum_{x\in X}f(x)\big)=g(X)
+\]
+\item Note that such $\phi$ is well-defined because $h(X)=\sum_{x\in X}f(x)$ is injective
+\end{itemize}
+\end{proof}
+\end{frame}
+
+\begin{frame}
+\begin{corollary}[6]
+Assume $\mathcal X$ is countable. There exists a function $f:\mathcal X\to\mathbb{R}^n$ so that for infinitely many choices of $\epsilon$, including all irrational numbers,\[
+h(c,X)=(1+\epsilon)\cdot f(c)+\sum_{x\in X}f(x)
+\]is unique for each pair $(c,X)$, where $c\in\mathcal X$ and $X\subset\mathcal X$ is a multiset of bounded size.
+
+Moreover, any function $g$ over such pairs can be decomposed as\[
+g(c,X)=\varphi\big((1+\epsilon)\cdot f(c)+\sum_{x\in X}f(x)\big)
+\]for some function $\varphi$.
+\end{corollary}
+\end{frame}
+
+\begin{frame}
+\begin{proofs}
+\begin{itemize}
+\item We consider\[
+f(x)=N^{-Z(x)}
+\]where $|X|<N$ for all $X$ and $Z:\mathcal{X}\to\mathbb{N}$ maps from $x\in\mathcal X$ to natural numbers
+\item Let\[
+h(c,X)\equiv(1+\epsilon)\cdot f(c)+\sum_{x\in X}f(x)
+\]
+\item Claim: if $\epsilon$ is an irrational number, for any $(c',X')\ne(c,X)$ with $c,c'\in\mathcal X$ and $X,X'\subset\mathcal X$\[
+h(c,X)\ne h(c',X')
+\]holds
+\end{itemize}
+\end{proofs}
+\end{frame}
+
+\begin{frame}
+\begin{proof}[\proofname\ (Cont.)]
+\begin{itemize}
+\item We prove by contradiction
+\item For any $(c,X)$, suppose there exists $(c',X')$ such that $(c',X')\ne(c,X)$ but\[
+h(c,X)=h(c',X')
+\]holds
+\item Let us consider the following two cases
+\begin{enumerate}
+\item $c'=c$ but $X'\ne X$
+\item $c'\ne c$
+\end{enumerate}
+\end{itemize}
+\end{proof}
+\end{frame}
+
+\begin{frame}
+\begin{proof}[\proofname\ (Cont.)]
+\begin{itemize}
+\item For the first case: $c'=c$ but $X'\ne X$
+\begin{itemize}
+\item $h(c,X)=h(c,X')$ implies\[
+\sum_{x\in X}f(x)=\sum_{x\in X'}f(x)
+\]
+\item It follows from Lemma 5 that the euqality will not hold, because with $f(x)=N^{-Z(x)}$,\[
+X'\ne X\implies\sum_{x\in X}f(x)\ne\sum_{x\in X'}f(x)
+\]
+\item Thus, we reach a contradiction
+\end{itemize}
+\end{itemize}
+\end{proof}
+\end{frame}
+
+\begin{frame}
+\begin{proof}[\proofname\ (Cont.)]
+\begin{itemize}
+\item For the second case: $c'\ne c$
+\begin{itemize}
+\item We can similarly rewrite $h(c,X)=h(c',X')$ as\[
+\epsilon\cdot(f(c)-f(c'))=\big(f(c')+\sum_{x\in X'}f(x)\big)-\big(f(c)+\sum_{x\in X}f(x)\big)
+\]
+\item Because $\epsilon$ is an irrational number and $f(c)-f(c')$ is a non-zero rational number, L.H.S. is irrational
+\item R.H.S. is rational because the sum of a finite number of rational numbers
+\item Thus, we reach a contradiction
+\end{itemize}
+\end{itemize}
+\end{proof}
+\end{frame}
+
+\begin{frame}
+\begin{proof}[\proofname\ (Cont.)]
+\begin{itemize}
+\item For any function $g$ over the pairs $(c,X)$, we can construct such $\varphi$ for the desired decomposition by letting\[
+\varphi\big((1+\epsilon)\cdot f(c)+\sum_{x\in X}f(x)\big)=g(c,X)
+\]
+\item Note that such $\varphi$ is well-defined because\[
+h(c,X)=(1+\epsilon)\cdot f(c)+\sum_{x\in X}f(x)
+\]is injective
+\end{itemize}
+\end{proof}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item GIN uses MLP to learn $f$ and $\varphi$
+\item In practice, we model\[
+f^{(k+1)}\circ\varphi^{(k)}
+\]with a single MLP:\[
+h_v^{(k)}=\text{MLP}^{(k)}\big((1+\epsilon^{(k)})\cdot h_v^{(k-1)}+\sum_{u\in\mathcal{N}(v)}h_u^{(k-1)}\big)
+\]
+\end{itemize}
+\end{frame}
+
+\subsection{Graph-level Readout of GIN}
+\begin{frame}
+\begin{itemize}
+\item An important aspect of the graph-level readout is that node representations, corresponding to subtree structures, get more refined and global as the number of iterations increases
+\item A sufficient number of iterations is key to achieving good discriminative power
+\item Yet, features from earlier iterations may sometimes generalize better
+\item To consider all structural information, we use information from all depths/iterations of the model, concatenating graph representations across all iterations/layers of GIN:\[
+h_G=\text{CONCAT}\big(\text{READOUT}\big(\big\{h_v^{(k)}|v\in G\big\}\big)|k=0,1,\dots,K\big)
+\]
+\end{itemize}
+\end{frame}
+
+\section{Less Powerful but Still Interesting GNNs}
+\subsection{1-layer Perceptrons are not Sufficient}
+\begin{frame}
+\begin{itemize}
+\item The function $f$ in Lemma~5 helps map distinct multisets to unique embeddings
+\item $f$ can be parameterized by an MLP by the universal approximation theorem
+\item Nonetheless, many existing GNNs instead use a 1-layer perceptron\[
+\sigma\circ W,
+\]a linear mapping followed by a non-linear activation function such as a ReLU
+\item Such 1-layer mappings are examples of Generalized Linear Models
+\item Therefore, we are interested in understanding whether 1-layer perceptrons are enough for graph learning
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{lemma}[7]
+There exists finite multisets $X_1\ne X_2$ so that for any linear mappings $W$,\[
+\sum_{x\in X_1}\text{ReLU}(Wx)=\sum_{x\in X_2}\text{ReLU}(Wx).
+\]
+\end{lemma}
+\end{frame}
+
+\begin{frame}
+\begin{proofs}
+\begin{itemize}
+\item Let us consider the example\[
+\begin{split}
+X_1&=\{1,1,1,1,1\},\\
+X_2&=\{2,3\},
+\end{split}
+\]i.e. two different multisets of positive numbers that sum up to the same value
+\item We will be using the homogeneity of ReLU
+\end{itemize}
+\end{proofs}
+\end{frame}
+
+\begin{frame}
+\begin{proofs}[Proof (Cont.)]
+\begin{itemize}
+\item Let $W$ be an arbitrary linear transform that maps $x\in X_1,X_2$ into $\mathbb{R}^n$
+\item It is clear that, at the same coordinates, $Wx$ are either positive or negative for all $x$ because all $x$ in $X_1$ and $X_2$ are positive
+\item It follows that $\text{ReLU}(Wx)$ are either positive or $0$ at the same coordinate for all x in $X_1,X_2$
+\item For the coordinates where $\text{ReLU}(Wx)$ are $0$, we have\[
+\sum_{x\in X_1}\text{ReLU}(Wx)=\sum_{x\in X_2}\text{ReLU}(Wx)
+\]
+\end{itemize}
+\end{proofs}
+\end{frame}
+
+\begin{frame}
+\begin{proof}[Proof (Cont.)]
+\begin{itemize}
+\item For the coordinates where $Wx$ are positive, linearity still holds. It follows from linearity that\[
+\sum_{x\in X}\text{ReLU}(Wx)=\text{ReLU}\big(W\sum_{x\in X}x\big)
+\]where $X$ could be $X_2$ or $X_1$
+\item Because $\sum_{x\in X_1}x=\sum_{x\in X_2}x$, we have the following as desired\[
+\sum_{x\in X_1}\text{ReLU}(Wx)=\sum_{x\in X_2}\text{ReLU}(Wx)
+\]
+\end{itemize}
+\end{proof}
+\end{frame}
+
+\subsection{Structures that Confuse Mean and Max-pooling}
+\begin{frame}
+\begin{itemize}
+\item What happens if we replace the sum in\[
+h(X)=\sum_{x\in X}f(x)
+\]with mean or max-pooling as in GCN and GraphSAGE?
+\item Mean and max-pooling aggregators are still well-defined multiset functions because they are permutation invariant
+\item But they are NOT injective
+\item Fig. 2
+\item Fig. 3
+\end{itemize}
+\end{frame}
+
+\subsection{Mean Learns Distributions}
+\begin{frame}
+\begin{itemize}
+\item To characterize the class of multisets that the mean aggregator can distinguish, consider the exmaple\[
+\begin{split}
+X_1&=(S,m)\\
+X_2&=(S,k\cdot m)
+\end{split}
+\]where $X_1$ and $X_2$ have the same set of distinct elements, but $X_2$ contains $k$ copies of  each element of $X_1$
+\item Any mean aggregator maps $X_1$ and $X_2$ to the same embedding, because it simply takes averages over individual element features
+\item Thus the mean captures the distribution (porportions) of elements in a multiset, but not the exact multisets
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{corollary}[8]
+Assume $\mathcal X$ is countable. There exists a function $f:\mathcal{X}\to\mathbb{R}^n$ so that for $h(X)=\frac{1}{|X|}\sum_{x\in X}f(x)$,\[
+h(X_1)=h(X_2)\Leftrightarrow X_1,X_2\text{ have the same distribution}.
+\]
+
+That is, assuming $|X_2|\geqslant|X_1|$, we have $X_1=(S,m)$ and $X_2=(S,k\cdot m)$ for some $k\in\mathbb{N}_{\geqslant1}$.
+\end{corollary}
+\end{frame}
+
+\begin{frame}
+\begin{proofs}
+\begin{itemize}
+\item Suppose multisets $X_1$ and $X_2$ have the same distribution, without loss of generality, let us assume $X_1=(S,m)$ and $X_2=(S,k\cdot m)$ for some $k\in\mathbb{N}_{\geqslant1}$, i.e.  $X_1$ and $X_2$ have the same underlying set and the multiplicity of each element in $X_2$ is $k$ times of that in $X_1$
+\item Then we have\[
+\begin{split}
+|X_2|&=k|X_1|\\
+\sum_{x\in X_2}f(x)&=k\cdot\sum_{x\in X_1}f(x)\\
+\frac{1}{|X_2|}\sum_{x\in X_2}f(x)&=\frac{1}{k\cdot |X_1|}\cdot k\cdot \sum_{x\in X_1}f(x)
+\end{split}
+\]
+\end{itemize}
+\end{proofs}
+\end{frame}
+
+\begin{frame}
+\begin{proof}[Proof (Cont.)]
+\begin{itemize}
+\item Now we show that there exists a function $f$ so that $\frac{1}{|X|}\sum_{x\in X}f(x)$ is unique for distributionally equivalent $X$
+\item Because $\mathcal X$ is countable, there exists a mapping $Z:\mathcal{X}\to\mathbb N$ from $x\in\mathcal X$ to natural numbers
+\item Because the cardinality of multisets $X$ is bounded, there exists a number $N\in\mathbb N$ such that $|X|<N$ for all $X$
+\item Then an example of such $f$ is\[
+f(x)=N^{-2Z(x)}
+\]
+\end{itemize}
+\end{proof}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item The mean aggregator may perform well if, for the task, the statistical and distributional information in the graph is more important than the exact structure
+\item Moreover, when node features are diverse and rarely repeat, the mean aggregator is as powerful as the sum aggregator
+\item This may explain why GNNs with mean aggregators are effective for node classfication tasks, such as classifying article subjects and community detection, where node features are rich and the distribution of the neighborhood features provides a strong signal for the task
+\end{itemize}
+\end{frame}
+
+\subsection{Max-pooling Learns Sets with Distinct Elements}
+\begin{frame}
+\begin{itemize}
+\item Max-pooling considers multiple nodes with the same feature as only one node (i.e., treats a multiset as a set)
+\item Max-pooling captures neither the exact structure nor the distribution
+\item However, it may be suitable for tasks where it is important to identify representative elements or the ``skeleton'', rather than to distinguish the exact structure or distribution
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{corollary}[9]
+Assume $\mathcal X$ is countable. Then there exists a function $f:\mathcal{X}\to\mathbb{R}^\infty$ so that for $h(X)=\max_{x\in X}f(x)$,\[
+h(X_1)=h(X_2)\Leftrightarrow X_1,X_2\text{ have the same underlying set}
+\]
+\end{corollary}
+\end{frame}
+\begin{frame}
+\begin{proof}
+\begin{itemize}
+\item Suppose multisets $X_1$ and $X_2$ have the same underlying set $S$, then we have\[
+\max_{x\in X_1}f(x)=\max_{x\in S}f(x)=\max_{x\in X_2}f(x)
+\]
+\item Now we show that there exists a mapping $f$ so that $\max_{x\in X}f(x)$ is unique for $X$'s with the same underlying set
+\item Because $\mathcal{X}$ is countable, there exists a mapping $Z:\mathcal{X}\to\mathbb N$
+\item Then an example of such $f:\mathcal{X}\to\mathbb{R}^\infty$ is defined as $f_i(x)=1$ for $i=Z(x)$ and $f_i(x)=0$ otherwise, where $f_i(x)$ is the $i$-th coordinate of $f(x)$; such an $f$ essentially maps a multiset to its one-hot embedding
+\end{itemize}
+\end{proof}
+\end{frame}
+
+\subsection{Remarks on Other Aggregators}
+\begin{frame}
+\begin{itemize}
+\item There are other non-standard neighbor aggregation schemes that we do no cover
+\item E.g. weighted average via attention
+\item E.g. LSTM pooling
+\item We emphasize that our theoretical framework is general enough to characterize the representational power ofo any aggregation-based GNNs
+\item In the future, it would be interesting to apply our framework to analyze and understand other aggregation schemes
+\end{itemize}
+\end{frame}
+
+\end{document}

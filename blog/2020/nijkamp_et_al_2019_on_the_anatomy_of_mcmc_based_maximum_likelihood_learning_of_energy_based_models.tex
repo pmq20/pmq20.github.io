@@ -1,0 +1,496 @@
+% !TEX TS-program = pdflatex
+% !TEX encoding = UTF-8 Unicode
+
+\documentclass{beamer}
+\usepackage{tikz}
+\usepackage[USenglish]{babel}
+\usepackage{amsmath}
+\DeclareMathOperator{\sign}{sign}
+\usefonttheme[onlymath]{serif}
+\mode<presentation>
+{
+  \usetheme{Warsaw}
+}
+\newcommand*{\Z}{\makebox[1.5ex]{\textbf{$\cdot$}}}
+
+\title[Nijkamp et al. 2019: Anatomy of MCMC-based MLL of EBM]{Nijkamp et al. 2019: On the Anatomy of MCMC-Based Maximum Likelihood Learning of Energy-Based Models}
+
+\author{Minqi Pan}
+
+\date{\today}
+
+\AtBeginSubsection[]
+{
+  \begin{frame}<beamer>{Outline}
+    \tableofcontents[currentsection,currentsubsection]
+  \end{frame}
+}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{On the Anatomy of MCMC-Based Maximum Likelihood Learning of Energy-Based Models}
+\begin{itemize}
+\item AAAI 2020 ``ML: Probabilistic Methods II'', Feb 12nd, 2020
+\item Erik Nijkamp, Mitch Hill, Tian Han, Song-Chun Zhu, Ying Nian Wu
+\item UCLA Department of Statistics
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Outline}
+  \tableofcontents
+\end{frame}
+
+\section{Learning Energy-Based Models}
+\subsection{Maximum Likelihood Estimation}
+\begin{frame}{Gibbs-Boltzmann Density}
+\begin{itemize}
+\item $p_i\propto\exp\{-\frac{\varepsilon_i}{kT}\}$
+\begin{itemize}
+\item E.g. softmax $\sigma(z_1,\dots,z_K)=(\dots,\frac{\exp\{z_i\}}{\sum_j\exp{z_j}}$,\dots)
+\end{itemize}
+\item $p_\theta(x)=\frac{1}{Z(\theta)}\exp\{-U(x;\theta)\}$
+\begin{itemize}
+\item $x\in\mathcal{X}\subset\mathbb{R}^N$
+\item $U(x;\theta)\subset\mathcal{U}=\{U(\Z;\theta):\theta\in\Theta\}$
+\item $Z(\theta)=\int_\mathcal{X}\exp\{-U(x;\theta)\}dx$
+\end{itemize}
+\item $U(x;\theta)=F(x;\theta)$
+\begin{itemize}
+\item $F$ is a ConvNet: $\mathbb{R}^N\to\mathbb{R}$
+\item $\theta\in\mathbb{R}^D$
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{ML Learning via Kullback-Leibler Divergence}
+\begin{itemize}
+\item $\arg\min_\theta\mathcal{L}(\theta)=\arg\min_\theta D_\text{KL}(q||p_\theta)$
+\item $\arg\min_\theta\mathcal{L}(\theta)=\arg\min_\theta \int_{-\infty}^\infty q(x)\log(\frac{q(x)}{p_\theta(x)})dx$
+\item $\arg\min_\theta\mathcal{L}(\theta)=\arg\min_\theta \{\log Z(\theta)+E_q[U(X;\theta)]\}$
+\item $\frac{d}{d\theta}\mathcal{L}(\theta)=\frac{d}{d\theta}\log Z(\theta)+\frac{d}{d\theta}E_q[U(X;\theta)]$\begin{itemize}
+\item $\frac{d}{d\theta}\log Z(\theta)=-E_{p_\theta}[\frac{\partial}{\partial\theta}U(X;\theta)]$\end{itemize}
+\item $\frac{d}{d\theta}\mathcal{L}(\theta)=\frac{d}{d\theta}E_q[U(X;\theta)]-E_{p_\theta}[\frac{\partial}{\partial\theta}U(X;\theta)]$
+\item $X^+\sim q$, $X^-\sim p_\theta$\begin{itemize}
+\item $\frac{d}{d\theta}\mathcal{L}(\theta)\approx\frac{\partial}{\partial\theta}(\frac{1}{n}\sum_{i=1}^n U(X_i^+;\theta)-\frac{1}{m}\sum_{i=1}^m U(X_i^-;\theta))$\end{itemize}
+\end{itemize}
+\end{frame}
+\begin{frame}{Sampling}
+\begin{itemize}
+\item $X_1^+,\dots,X_n^+\sim q$, iid
+\begin{itemize}
+\item $\{X_i^+\}_{i=1}^n$ are a batch of training images
+\end{itemize}
+\item $X_1^-,\dots,X_m^-\sim p_\theta$, iid
+\begin{itemize}
+\item Samping from current learned distribution $p_\theta$ is computationally intensive (must be performed for each update of $\theta$)
+\item Gibbs of Metropolis–Hastings MCMC updates each dimension (one pixel of the image) sequentially, hence is computationally infeasible when training an energy for standard image sizes
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\subsection{MCMC Sampling with Langevin Dynamics}
+\begin{frame}{Langevin Dynamics}
+\begin{itemize}
+\item Stokes' law: $M{\ddot {X}}=-6\pi\eta R\dot{X}$
+\item Langevin equation: $M{\ddot {X}}=-\nabla U(X)-\gamma {\dot {X}}+{\sqrt {2\gamma k_{B}T}}R(t)$
+\begin{itemize}
+\item $\langle R(t)\rangle=0$
+\item $\langle R(t)R(t')\rangle=\delta(t-t')$
+\end{itemize}
+\item Itô diffusion: $\dot X=\frac{1}{2}\nabla\log\pi(X)+\dot W$
+\begin{itemize}
+\item $X(t)\sim\rho(t)$
+\item $\lim_{t\to\infty}\rho(t)=\pi$
+\end{itemize}
+\item $X_{l+1}=X_l-\frac{\varepsilon^2}{2}\frac{\partial}{\partial x}U(X_l;\theta)+\varepsilon Z_l$
+\begin{itemize}
+\item $Z_l\sim N(0,I_N)$
+\item $\varepsilon>0$
+\item $X$ has stationary distribution $p_\theta$
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\subsection{MCMC Initialization}
+\begin{frame}{Two Branches}
+\begin{itemize}
+\item Informative initialization
+\begin{itemize}
+\item Data-based initialization. E.g. Contrastive Divergence (CD)
+\item Persistent initialization. E.g. Persistent Contrastive Divergence (PCD)
+\end{itemize}
+\item Noninformative initialization
+\begin{itemize}
+\item Noise initialization. E.g. uniform, Gaussian
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\section{Two Axes of ML Learning}
+\subsection{First Axis: Expansion or Contraction}
+\begin{frame}{Inspection of $\frac{d}{d\theta}\mathcal{L}(\theta)$}
+\begin{itemize}
+\item cf. $\frac{d}{d\theta}\mathcal{L}(\theta)=\frac{d}{d\theta}E_q[U(X;\theta)]-E_{p_\theta}[\frac{\partial}{\partial\theta}U(X;\theta)]$
+\item Inspection of the gradient $\frac{d}{d\theta}\mathcal{L}(\theta)$ reveals the central role of the difference of the average energy of negative and positive samples
+\item Given the finite-step MCMC sampler and initialization used\begin{itemize}
+\item Let $s_t$ denote the distribution of negative samples at training step $t$: $X^-\sim s_t$
+\item Let $d_{s_t}(\theta)$ denote the difference of the average energy of negative and positive samples
+\item $d_{s_t}(\theta)\equiv E_q[U(X;\theta)]-E_{s_t}[U(X;\theta)]$
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{$d_{s_t}(\theta)=E_q[U(X;\theta)]-E_{s_t}[U(X;\theta)]$}
+\begin{itemize}
+\item cf. $\frac{d}{d\theta}\mathcal{L}(\theta)\approx\frac{\partial}{\partial\theta}(\frac{1}{n}\sum_{i=1}^n U(X_i^+;\theta)-\frac{1}{m}\sum_{i=1}^m U(X_i^-;\theta))$
+\item $d_{s_t}$ measures whether the positive samples from the data distribution $q$ or the negative samples from $s_t$ are more likely under the model $p_\theta$
+\begin{itemize}
+\item Perfect Learning \& Exact MCMC Convergence: $p_\theta=q\land p_\theta=s_t\Rightarrow d_{s_t}(\theta)=0$
+\item $|d_{s_t}|>0\Rightarrow$ Divergent Learning or Divergent Sampling
+\end{itemize}
+\item However\begin{itemize}
+\item $d_{s_t}(\theta)=0\not\Rightarrow$ Perfect Learning \& Exact MCMC Convergence
+\item Divergent Learning: $p_\theta\ne q\not\Rightarrow |d_{s_t}|>0$
+\item Divergent Sampling: $p_\theta\ne s_t\not\Rightarrow |d_{s_t}|>0$
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{$d_{s_t}(\theta)=E_q[U(X;\theta)]-E_{s_t}[U(X;\theta)]$}
+\begin{itemize}
+\item For each update $t$ on the parameter path $\{\theta_t\}^{T+1}_{t=1}$
+\begin{itemize}
+\item 1st Axis: $\sign(d_{s_t})$
+\begin{itemize}
+\item "Contraction", "vanishing gradients": $d_{s_t}(\theta_t)>0\Rightarrow E_q[U(X;\theta)]>E_{s_t}[U(X;\theta)]$
+\item "Expansion", "exploding gradients": $d_{s_t}(\theta_t)<0\Rightarrow E_q[U(X;\theta)]<E_{s_t}[U(X;\theta)]$
+\end{itemize}
+\item 2nd Axis: $s_t$ and $p_{\theta_t}$
+\begin{itemize}
+\item Convergent MCMC: $s_t\approx p_{\theta_t}$
+\item Divergent MCMC: $s_t\not\approx p_{\theta_t}$
+\end{itemize}
+\end{itemize}
+\item cf. $\frac{d}{d\theta}\mathcal{L}(\theta)\approx\frac{\partial}{\partial\theta}(\frac{1}{n}\sum_{i=1}^n U(X_i^+;\theta)-\frac{1}{m}\sum_{i=1}^m U(X_i^-;\theta))$
+\item cf. $X_{l+1}=X_l-\frac{\varepsilon^2}{2}\frac{\partial}{\partial x}U(X_l;\theta)+\varepsilon Z_l$
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Discoveries}
+\begin{itemize}
+\item Only the 1st axis governs the stability and synthesis results
+\begin{itemize}
+\item Stable ML Learning: Oscillation of expansion and contraction updates
+\end{itemize}
+\item Behavior along the 2nd axis determines the realism of steady-state samples from the final learned energy
+\begin{itemize}
+\item Samples from $p_{\theta_t}$ is realistics $\Leftrightarrow$ $s_t\approx p_{\theta_t}$
+\item We define "convergent ML" $\equiv$ implementations s.t. $s_t\approx p_{\theta_t}$
+\end{itemize}
+\item All prior ConvNet potentials are learned
+with non-convergent ML
+\item Without proper tuning of the sampling phase, the learning
+heavily gravitates towards non-convergent ML
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Average Image Gradient Magnitude $v_t$}
+\begin{itemize}
+\item cf. $d_{s_t}(\theta)\equiv E_q[U(X;\theta)]-E_{s_t}[U(X;\theta)]$
+\item Suppose Langevin chain $(Y_t^{(0)},\dots,Y_t^{(L)})\sim w_t$ and $Y_t^{(L)}\sim s_t$\begin{itemize}
+\item $v_t\equiv E_{w_t}[\frac{1}{L+1}\sum_{l=0}^L\Vert\frac{\partial}{\partial y}U(Y_t^{(l)};\theta_t)\Vert_2]$\end{itemize}
+\item If $v_t$ is very large, gradients will overwhelm the noise, and the resulting dynamics are similar to gradient descent
+\item If $v_t$ is very small, sampling becomes an isotropic random walk
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{$v_t$ and $d_{s_t}$}
+\begin{itemize}
+\item Gradient magnitude $v_t$ and computational loss $d_{s_t}$ are highly correlated at the current iteration, and exhibit significant negative
+correlation at a short-range lag
+\item $v_t$ and $d_{s_t}$ both have significant
+negative autocorrelation for short-range lag
+\item Expansion and contraction updates tend to have opposite effects on $v_t$
+\item Expansion updates tend to increase \textbf{gradient strength} in the near future and vice-versa
+\item Expansion updates tend to follow \textbf{contraction updates} and vice-versa
+\item The natural oscillation between expansion and contraction updates underlies the stability of ML
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Unstable Learning}
+\begin{itemize}
+\item Consecutive updates in the expansion phase will increase $v_t$ so that the gradient can better overcome noise and samples can more
+quickly reach low-energy regions. But learning can become unstable when $U$ is updated in the expansion phase for many consecutive iterations if $v_t\to\infty,U(X^+)\to-\infty,U(X^-)\to\infty$
+\item many consecutive contraction updates can cause $v_t$ to shrink to $0$,  leading to the solution $U(x) = c$ for some constant $c$
+\item In proper ML learning, the expansion updates that follow contraction updates prevent the model from collapsing to a flat solution and force $U$ to learn meaningful features of the data
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Discoveries}
+\begin{itemize}
+\item Network can
+easily learn to balance the energy of the positive and negative
+samples so that $d_{s_t}(\theta_t)\approx 0$ after only a few model
+updates
+\item ML Learning can adjust $v_t$ so that the gradient is strong enough to balance $d_{s_t}$ and obtain high-quality
+samples from virtually any initial distribution in a
+small number of MCMC steps
+\item The natural oscillation
+of ML learning is the foundation of the robust synthesis
+capabilities of ConvNet potentials
+\end{itemize}
+\end{frame}
+
+\subsection{Second Axis: MCMC Convergence or Non-Convergence}
+\begin{frame}{Discoveries}
+\begin{itemize}
+\item High-quality synthesis is possible, and actually easier to
+learn, when there is a drastic difference between the finite-step
+MCMC distribution $s_t$ and true steady-state samples of $p_\theta$
+\item In prior arts, running the MCMC
+sampler for significantly longer than the number of training
+steps results in samples with significantly lower energy
+and unrealistic appearance
+\item Oscillation of expansion and contraction updates occurs
+for both convergent and non-convergent ML learning, but
+for very different reasons
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Average Image Space Displacement $r_t$}
+\begin{itemize}
+\item Define average image space displacement $r_t\equiv \frac{\varepsilon^2}{2}v_t$
+\item cf. $d_{s_t}(\theta)=E_q[U(X;\theta)]-E_{s_t}[U(X;\theta)]$
+\item cf. $X_{l+1}=X_l-\frac{\varepsilon^2}{2}\frac{\partial}{\partial x}U(X_l;\theta)+\varepsilon Z_l$
+\item cf. average image gradient magnitude $v_t\equiv E_{w_t}[\frac{1}{L+1}\sum_{l=0}^L\Vert\frac{\partial}{\partial y}U(Y_t^{(l)};\theta_t)\Vert_2]$
+\item In convergent ML, we expect $v_t$ to converge to a constant that is balanced with the noise magnitude $\varepsilon$ at a value that reflects temperature of the data density $q$
+\item ConvNet can circumvent this desireed behavior by tunning $v_t$ w.r.t. the burn-in energy landscape rather than noise $\varepsilon$
+\end{itemize}
+\end{frame}
+
+\begin{frame}{The Case of Noise Initialization w/ Low $\varepsilon$}
+\begin{itemize}
+\item Define $R\equiv$ the average distance between an
+image from the noise initialization distribution and an image
+from the data distribution
+\item The model adjusts $v_t$ so that $r_tL\approx R$
+\item The MCMC paths are nearly linear from the starting point to the ending point
+\item $L$ increases $\Rightarrow$ $r_t$ shrinks $\Rightarrow$ mixing does not improve
+\item The model tunes $v_t$ to control how far along the burn-in path the negative samples travel $\Rightarrow$ oscillation of expansion and contraction updates occurs
+\end{itemize}
+\end{frame}
+
+\begin{frame}{The Case of Data \& Persistent Initialization w/ Low $\varepsilon$}
+\begin{itemize}
+\item $U(x)\to c$ as $v_t,r_t\to 0$ because contraction
+updates dominate the learning dynamics
+\item Low $\varepsilon\Rightarrow$ sampling reduces to gradient descent $\Rightarrow$ samples
+initialized from the data will easily have lower energy
+than the data
+\item \textbf{Data-based initialization}: the energy can easily collapse to a trivial flat
+solution $\Rightarrow$ No authors trained ConvNet energy with CD
+\item \textbf{Persistent initialization}: the model learns to synthesize
+meaningful features early in learning and then contracts
+in gradient strength once it becomes easy to find negative
+samples with lower energy than the data
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Convergence is Possible}
+\begin{itemize}
+\item For all three initialization types, convergence becomes possible when $\varepsilon$ is large enough
+\item The MCMC samples
+complete burn-in and begin to mix for large $L$, and increasing
+$L$ will indeed lead to improved MCMC convergence as
+usual
+\item For noise initialization:
+\begin{itemize}
+\item When $L$ is small, it behaves similarly for high and low $\varepsilon$
+\item When $L$ is large, high $\varepsilon\Rightarrow$ the model tunes $v_t$ to balance with $\varepsilon$ rather than $R/L$
+\end{itemize}
+\item For data-based and persistent initialization:
+\begin{itemize}
+\item $v_t$ adjusts to balance with $\varepsilon$ instead of contracting to $0$
+\item Because the noise added during Langevin sampling forces
+$U$ to learn meaningful features
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\subsection{Learning Algorithm}
+\begin{frame}{Noise and Step Size for Non-Convergent ML}
+\begin{itemize}
+\item The tuning of noise $\tau$ and stepsize $\varepsilon$
+have little effect on training stability
+\item $d_{s_t}$ is controlled by the depth of samples along the burnin
+path $\Rightarrow$ noise is not needed for oscillation
+\item Including low noise appears to improve synthesis
+quality
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Noise and Step Size for Convergent ML}
+\begin{itemize}
+\item It is essential to include noise with
+$\tau=1$ and precisely tune $\varepsilon$ so that the network learns
+true mixing dynamics through the gradient strength
+\item The
+step size $\varepsilon$ should approximately match the local standard
+deviation of the data along the most constrained direction
+\begin{itemize}
+\item An effective $\varepsilon$ for $32\times32$ images with pixel values in $[-1,1]$ appears to lie around $0.015$.
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Number of Steps}
+\begin{itemize}
+\item When $\tau=0$ or $\tau=1$ and $\varepsilon$ is very small
+\begin{itemize}
+\item Learning leads to similar non-convergent ML outcomes for any $L\geq100$
+\end{itemize}
+\item When $\tau=1$ and $\varepsilon$ is correctly tuned
+\begin{itemize}
+\item Sufficiently high values of $L$ lead to convergent ML
+\item Lower values of $L$ lead to non-convergent ML
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Informative Initialization}
+\begin{itemize}
+\item For non-convergent ML even with as few as $L=100$ Langevin updates
+\begin{itemize}
+\item Informative MCMC initialization is NOT needed
+\item The model can naturally learn fast pathways to realistic negative samples from an arbitrary initial distribution
+\end{itemize}
+\item For convergent ML
+\begin{itemize}
+\item Informative initialization can greatly reduce the magnitude of $L$ needed
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Network structure}
+\begin{itemize}
+\item For the 1st convolutional layer
+\begin{itemize}
+\item A $3\times3$ convolution with stride $1$ helps to avoid checkerboard patterns or other artifacts
+\end{itemize}
+\item For convergent ML
+\begin{itemize}
+\item Use of non-local layers appears to improve synthesis realism
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Regularization and Normalization}
+\begin{itemize}
+\item NOT NEEDED!
+\begin{itemize}
+\item Prior distributions (e.g. Gaussian)
+\item Weight regularization
+\item Batch normalization
+\item Layer normalization
+\item Spectral normalization
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Optimizer and Learning Rate}
+\begin{itemize}
+\item For non-convergent ML
+\begin{itemize}
+\item Adam improves training speed and image quality
+\end{itemize}
+\item For convergent ML
+\begin{itemize}
+\item Adam appears to interfere with learning a realistic steady-state
+\begin{itemize}
+\item When $\tau=1$ and properly tuned $\varepsilon$ and $L$, higher values of learning rate $\gamma$ lead to non-convergent ML
+\item When $\tau=1$ and properly tuned $\varepsilon$ and $L$, sufficiently low values of learning rate $\gamma$ lead to convergent ML
+\end{itemize}
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\section{Experiments}
+\subsection{Low-Dimensional Toy Experiments}
+\begin{frame}{Convergence and Non-convergence}
+\begin{itemize}
+\item Both have a standard deviation of $0.15$ along the most constrained direction -- the ideal step size $\varepsilon$ for Langevin dynamics is close to $0.15$
+\item Non-convergence
+\begin{itemize}
+\item Noise MCMC initialization used
+\item $L=500$
+\item $\varepsilon=0.125$
+\item Short-run samples reflect the ground-truth densities
+\item Learned densities are sharply concentrated and different from the ground-truths
+\end{itemize}
+\item Convergence
+\begin{itemize}
+\item Can be learned with sufficient Langevin noise
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\subsection{Synthesis from Noise with Non-Convergent ML Learning}
+
+\begin{frame}{Sampling from Scratch}
+\begin{itemize}
+\item Informative MCMC intialization is NOT NEEDED for successful synthesis
+\item High-fidelity and diverse images generated FROM NOISE for MNIST, Oxford Flowers 102, CelebA, CIFAR-10
+\begin{itemize}
+\item Langevin starts from uniform noise for each update of $\theta$
+\item Langevin steps $L=100$
+\item $\tau=0$
+\item $\varepsilon=1$
+\item Adam used
+\item Learning rate $\gamma=0.0001$
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\subsection{Convergent ML Learning}
+
+\begin{frame}{Convergence w/ Correct Langevin Noise}
+\begin{itemize}
+\item Noise initialization
+\begin{itemize}
+\item $L\approx 20000$
+\end{itemize}
+\item Persistent initialization
+\begin{itemize}
+\item SGD,$\gamma=0.0005,\tau=1,\varepsilon=0.015$
+\item For each batch, initialize $10,000$ persistent images from noise and update $100$ images
+\item $L$ reduces to $500$
+\end{itemize}
+\item MCMC samples mix in the steady-state energy spectrum throughout training
+\item MCMC samples approximately converge for each parameter update $t$ (beyond burn-in)
+\item The model eventually learns a realistic steady-state
+\end{itemize}
+\end{frame}
+
+\subsection{Mapping the Image Space}
+\begin{frame}{The Structure of a Convergent Energy}
+\begin{itemize}
+\item A well-formed energy function partitions the image space
+into meaningful Hopfield basins of attraction.
+\item First identify many
+metastable MCMC samples
+\item Then sort the metastable
+samples from lowest energy to highest energy and sequentially
+group images if travel between samples is possible in a
+magnetized energy landscape
+\item Continue until
+all minima have been clustered
+\item Basin structure of learned $U(x)$ for the Oxford Flowers 102 dataset visualized
+\end{itemize}
+\end{frame}
+\end{document}

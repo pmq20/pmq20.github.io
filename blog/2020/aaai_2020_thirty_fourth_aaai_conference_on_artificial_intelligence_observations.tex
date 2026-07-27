@@ -1,0 +1,117 @@
+% !TEX TS-program = xelatex
+% !TEX encoding = UTF-8
+
+\documentclass[11pt]{article}
+
+\usepackage{fontspec}
+\usepackage{xunicode}
+\usepackage{xltxtra}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{xeCJK}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{mathtools}
+\usepackage{zhnumber}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\setCJKmainfont{Microsoft YaHei}
+\geometry{a4paper}
+\linespread{1.2}
+\title{AAAI 2020（第三十四届 AAAI 人工智能大会）见闻}
+\author{潘旻琦}
+\date{}
+\begin{document}
+\maketitle
+
+\begin{enumerate}
+\item AAAI 2020 第一天参加了图网络 Tutorial、微分深度学习 Tutorial，总结如下：
+\begin{enumerate}
+\item 图网络有三种滤波：谱滤波 ChebNet \cite{DBLP:conf/nips/DefferrardBV16}、GraphSage \cite{NIPS2017_6703}、GAT \cite{velivckovic2017graph}、MPNN\\\cite{DBLP:journals/corr/GilmerSRVD17}，空域滤波 ，以及两者兼备的 GCN\\\cite{DBLP:journals/corr/KipfW16}
+\item 基于 RNN 思想的图网络有： GNN \cite{scarselli2008graph}、GGS-NN\\\cite{li2015gated}
+\item 图网络的池化层有：gPool \cite{DBLP:journals/corr/abs-1905-05178}、DiffPool \cite{NIPS2018_7729}、Eigenpooling \cite{ea10620ddd4f49d98891463c432789ff}
+\item 攻击图网络的方法有很多，例如先开采干净的图再通过迁移学习元学习攻击 GNN 的 PA-GNN \cite{tang2019robust}
+\item 图网络的应用：药物相互作用预测 \cite{ma2019genn}、药物推荐\\\cite{shang2019pre}
+\item Graph2Seq \cite{xu2018graph2seq} 把 Seq2Seq 推广到了图的嵌入，该课题的后续工作出现了新课题（询问生成 \cite{chen2019reinforcement}）和新模型（Graph2Graph \cite{mohammadshahi2019graph}和图匹配\cite{li2019graph}）
+\item ResNet \cite{10.1007/978-3-319-46493-0_38} 可进化到 ODE-Net \cite{DBLP:journals/corr/abs-1806-07366}、RNN 可进化到微分方程 RNN \cite{410363}、Normalizing Flows\\ \cite{rezende2015variational} 可进化到微分方程 Flow\\\cite{DBLP:journals/corr/abs-1806-07366}、NICE \cite{dinh2014nice} 可进化到微分 NICE\\\cite{DBLP:journals/corr/DinhSB16}
+\item 把 Flow 用在 GNN 上生成新图的方法有：NICE \cite{dinh2014nice}、Real NVP \cite{DBLP:journals/corr/DinhSB16}、GraphNVP\cite{madhawa2019graphnvp}、Glow\\\cite{NIPS2018_8224}
+\item 复杂图上的神经动力学 NDCN \cite{zang2019neural} 统一了连续时间网络动态预测问题、结构化序列预测问题、半监督节点回归/分类问题这三个问题
+\item 臧承熙等人发现了一个构造样本数据背后的概率分布的用微分方程描述的动态系统的定理 \cite{10.1145/3292500.3330842}
+\end{enumerate}
+\item AAAI 2020 第二天参加了 XAI Tutorial、首届图深度学习 Workshop，总结如下：
+\begin{enumerate}
+
+\item 基于注意力机制的 XAI \cite{choi2016retain}
+\item 基于原型层的 XAI \cite{li2018deep}
+\item XAI 图像识别网络 ProtoPNet \cite{DBLP:journals/corr/abs-1806-10574}
+\item 几个归因 XAI \cite{guidotti2018survey} 方法：积分梯度\\\cite{sundararajan2017axiomatic} \cite{DBLP:journals/corr/SundararajanTY17}、切除法\\\cite{baehrens2010explain}、Score 反向传播 LRP \cite{JMLR:v17:15-618} Guided BackProp \cite{springenberg2014striving} DeepLift \cite{shrikumar2017learning}
+\item 几个计算机视觉领域的 XAI：网络解剖可解释单元 \cite{netdissect2017}、视觉说明 \cite{hendricks2016generating}、不确定性图\cite{kendall2017uncertainties}、显著性图\cite{adebayo2018sanity}
+\item 基于夏普利值 \cite{shapley1953value} \cite{aumann2015values} 的 XAI：\\\cite{merrick2019explanation} \cite{lundberg2017unified} \cite{chen2018shapley}\\\cite{7546525} \cite{kononenko2010efficient} \cite{chalkiadakis2011computational}
+\item 基于因果推断的 XAI \cite{kononenko2010efficient} \cite{datta2016algorithmic}
+\item 机器人方面的 XAI \cite{rosenthal2016verbalization} \cite{brooks2010towards} \cite{sheh2017did}
+\item 基于知识库的迁移学习 XAI \cite{chen2018knowledge} \cite{lecue2019augmenting}
+\item 其他个体预测解释 XAI 方法： \cite{ribeiro2016model} \cite{ribeiro2018anchors} \cite{koh2017understanding} \cite{kim2016examples}
+\item 臧承熙等人昨天介绍的把层数看作连续时间用稠密层数神经网络实现端到端的微分方程组学习的对复杂图的连续时间非线性动态的研究获得该 Workshop 最佳论文 \cite{zang2019neural}
+\item 东京大学又提出一个稠密层数图网络 GDE \cite{poli2019graph}
+\end{enumerate}
+\item AAAI 2020 第三天参加了 ML Interpretability、Fair Allocation I、ML Causal Learning and Bayers Nets、Robotics and Planning 四个分会场，总结如下：
+\begin{enumerate}
+\item Jilles Vreeken 和他的学生提出一种可解释的数据分解\\\cite{dalleiger2020explainable}，用以发现数据集的组成部分
+\item 可视化深层网络 \cite{qi2019visualizing}用到了昨天 XAI Tutorial 提到的积分梯度
+\item \cite{tomsett2019sanity} 用到了昨天 XAI Tutorial 提到的显著性图，他们提出了显著性指标的健康健全性检查， 研究各种各样的显著性图到底哪一个好
+\item Exploration-Exploitation 考虑的是在线情况下的期望奖励最大化，而\\ \cite{faury2019distributionally} 考虑的是离线的情况下评价历史政策并提出改进，他们使用分布鲁棒性优化（DRO）解决反事实风险最小化（CRM）问题
+\item CO 矿业学院的 Peng Gao 团队在做 SLAM 的闭环检测问题，方法是用图表示地标与背景视觉信息及其之间的距离，然后做图匹配
+\item Hinton 团队提出了2019版堆叠式胶囊自动编码机 \cite{NIPS2019_9684} 用来解决 CNN 不面向对象、无坐标系标架、不能处理旋转、缩放等视角变换等问题，而且用到了 Set TransTrilingual in Chinese, Japanese, and English. Former \cite{DBLP:journals/corr/abs-1810-00825}
+\item 杨立昆提出了深度学习三大挑战——自监督学习、学习推理、规划复杂的行动序列；自监督学习在计算机视觉领域的图片完形填空上效果不太好 \cite{Pathak_2016_CVPR}，视频完形填空尝试过对抗训练 \cite{mathieu2015deep}，他认为应该用潜变量 EBM 实现自监督学习，而且自监督学习是深度学习的未来；他认为第二个挑战可以把逻辑推理用向量、连续函数来表示，然后用潜变量 EBM 能量最小化来解决；第三个挑战他也没有想到办法
+\item Bengio 研究了如何实现第二系统认知，与杨立昆提出的第二挑战类似；反观现状，深度学习已经可以一层一层提高认知能力 \cite{pascanu2013construct} \cite{NIPS2014_5422}，但是深度学习要达到更高的智能必须实现分布外（Out of Distribution）泛化与迁移 \cite{DBLP:journals/corr/abs-1711-00350}，目前的研究在这方面不太成功\cite{DBLP:journals/corr/abs-1811-12889}；他认为注意力机制是解决问题的关键\cite{bahdanau2014neural}，并且还要发现因果结构并加以利用\cite{scholkopf2012causal} \cite{bengio2019meta}\cite{Ke2019LearningNC}\cite{Goyal2019RecurrentIM}
+\end{enumerate}
+\item AAAI 2020 第四天参加了 Vision Object Detection II、Logic and KR Inference and Reasoning II、ML Unsupervised and Semi-Supervised Learning Clustering III、ML Domain Adaptation Adversarial Learning Transfer Learning Semi-Supervised Learning、Vision Deep Learning Methods 五个分会场，总结如下：
+\begin{enumerate}
+\item 瑞士洛桑的 Aude G. Billard 团队让机器人手臂学习接住空中抛物，提到了手臂可行姿势的概率分布 \cite{6631018}、学习手臂稳定姿势的流形 \cite{6907861}，后来有学生实现了两个手臂一起接物 \cite{MirrazaviSalehian:218480}，ICRA 2020 将展示他们的两只手抓物体的同时保持身体平衡的工作
+\item \cite{Zhang2019DeepOC} 以空间语义网络调制改进联合分割
+\item F$^3$Net 考察了图像不同区域的显著物体检测学习的难度不一样的问题 \cite{Wei2019F3NetFF}
+\item 哈佛的刘小沣等人考察了机器人视觉的语义分割的交叉熵损失函数不能区分物体类别重要性的问题
+\item HyGNN \cite{Luo2020HybridGN} 用 GNN 做人群计数
+\item 复旦的 Zhaolong Zhang 等人用 GCN 做零样本学习图像检索
+\item \cite{chen2020multi} 以更细粒度的加权改进多视图聚类
+\item 西安交大的 Xiaoyu Tao 等人研究了两目标持续学习，学新的不能忘旧的
+\item HoMM \cite{chen2019homm} 提出无监督域适配的高阶统计对齐
+\item \cite{DBLP:journals/corr/abs-1902-10191} 用 RNN 实现 GCN 动态化，动态进化 GCN 的参数
+\item \cite{DBLP:journals/corr/abs-1905-10671} 让不同的网络层共享一个注意力模块
+\item Henry Kautz 与昨天杨立昆、Bengio的研究兴趣类似，谈了融合符号推理与神经网络的几种构想：符号到网络到符号、网络嵌入符号、网络$\cup$编译了的符号、网络$\to$符号、符号嵌入网络
+\end{enumerate}
+
+\item AAAI 2020 第五天参加了 Vision Object Detection III、ML Neural Nets Theory Models and Algorithms IV 两个分会场和海报展会，总结如下：
+\begin{enumerate}
+\item \cite{0e49f574cae742398e600b1ce7eb36a4} 以互信息最大化估计特征之间的关系来改进显著性检测
+\item \cite{kim2019spiking} 号称第一次用脉冲神经网络做目标检测
+\item TX 农工的 Hongyang Gao 提出了新的 ReLU 激活函数解决神经元死亡问题
+\item VA 理工的 Zhou Zhou、Klan Hamedani 分享了两个 Reservoir Computing 方面的课题
+\item GraLSP \cite{jin2019gralsp} 通过随机 Anonymous Walk 将局部结构模式显式地纳入 GNN 邻域聚合中
+\item 浙大的 Zhou Sheng 的 DGE 在做图嵌入的时候把通用性和个性化这两个概念提出来研究
+\item 中科院的迟程一次性分享了两篇论文，一篇是在现有基于区域的检测网络之上引入遮挡处理能力的在拥挤的场景中检测行人的 PedHunter \cite{chi2019pedhunter} ，另一篇 JointDet \cite{chi2019relational} 探索了头部检测和人体检测两个问题的固有相关性 
+\item 微观经济学家 Susan Athey 介绍了消费者购物时的选择与反事实推断
+\item SONY 的北野宏明介绍 RoboCup 竞赛时提到 Hector SLAM——ROS 社区中使用最广泛的开源 SLAM
+\item \cite{wang2019multi} 用图网络做协同过滤，但其实是个二分图，没用到太多的图网络
+\item Graph-Hist \cite{magelinski2019graph} 用可微的软直方图层把 GCN 和 CNN 连起来
+\item 东北大学的王莅尘分享了半监督多标签之间相关性的融合，他说 Label Correlation Graph 百试不爽
+\end{enumerate}
+
+\item AAAI 2020 第六天参加了 ML Probabilistic Methods II、NLP Semantics and Summarization IV、NLP Relational Learning III 三个分会场，总结如下：
+\begin{enumerate}
+\item UCLA 的 \cite{nijkamp2019anatomy} 发现用 CNN 做能量函数的 EBM 的最大似然学习用 MCMC 跑，跑太久会出现过饱和，前人的工作虽然图漂亮但没有收敛到真正的分布
+\item MIT 的 \cite{Tan2019FactorizedII} 提出一种深度马尔可夫模型的分解推理方法做多模态时间序列完形填空
+\item 曼海姆的 Anne Lauscher 认为词向量嵌入的性别和种族偏向有隐性偏向和显性偏向之分 \cite{Lauscher2019AGF}，提出了可以针对两种偏向的新的去偏向框架，他的实验还尝试了德西意俄克土六种语言之间的迁移学习，非常酷
+\item 甲骨文的 Daniel Peterson 等人研究了怎么对动词进行聚类和词义归纳，前人的做法是纯无监督的聚类，他们的做法是对一小部分样本进行人工监督加标签，这一点小改动居然导致结果出现十几个百分点的提升
+\item 清华的 \cite{Qi2019TowardsBA} 预测BabelNet中的那些不同语言中的同义词集的义原，构造一个跨语言的义原知识库
+\item 腾讯的 \cite{jinrelation} 提出了完全依存森林数据结构；前人的工作只用了树，他们的工作则更进一步用了森林，这个森林包含了全部可能的词与词的依存关系、全部的句法分析的信息，他们再把这个森林编码成三维的 tensor，再拿 CNN 从这些 tensor 上获取特征，最后接了一个逻辑回归上实现关系抽取
+\end{enumerate}
+\end{enumerate}
+
+\renewcommand\refname{参考文献}
+\bibliographystyle{apalike}
+\bibliography{../../bibliography.bib}
+
+\end{document}
