@@ -1,0 +1,598 @@
+/*
+ * minqi-pan.com: one stylesheet for every page.
+ *
+ * Kept from the original design (2011 onwards): Moholy-Nagy's painting on
+ * the grey paper texture as the home page, the Palatino serif for the name,
+ * and three languages on every page.
+ *
+ * Everything else follows one system:
+ *   type     one sans for all reading text (system UI; Hiragino Sans and
+ *            PingFang SC for Japanese and Chinese); serif for the name only;
+ *            five sizes: 13 / 14 / 16 / 17 / 26 px
+ *   colour   tokens only, hierarchy by colour and weight; inner pages also
+ *            have a dark scheme, the home page stays on light paper
+ *   space    one 4/8 scale: 4 8 12 16 24 32 40 48 64 96 px
+ *   links    titles are links in ink, underlined on hover; secondary links
+ *            are muted and underlined on hover; links in running text keep a
+ *            light underline; every link has a visible focus ring
+ *   rules    1 px hairlines only
+ */
+
+/* Japanese and Chinese punctuation (the em dash, quotes, the ellipsis and
+   the middle dot) is taken from the CJK face, not the Latin one. */
+@font-face { font-family: "CJK Punct ZH"; src: local("PingFangSC-Regular"); unicode-range: U+00B7, U+2014-2015, U+2018-2019, U+201C-201D, U+2026; }
+@font-face { font-family: "CJK Punct ZH"; font-weight: 500 700; src: local("PingFangSC-Medium"); unicode-range: U+00B7, U+2014-2015, U+2018-2019, U+201C-201D, U+2026; }
+@font-face { font-family: "CJK Punct JA"; src: local("HiraginoSans-W3"); unicode-range: U+00B7, U+2014-2015, U+2018-2019, U+201C-201D, U+2026; }
+@font-face { font-family: "CJK Punct JA"; font-weight: 500 700; src: local("HiraginoSans-W5"), local("HiraginoSans-W6"); unicode-range: U+00B7, U+2014-2015, U+2018-2019, U+201C-201D, U+2026; }
+
+:root {
+  /* colour (contrast on the light surface) */
+  --ink: #111;          /* titles, current item, links: 18.9:1 */
+  --text: #3d3d3d;      /* reading text: 10.8:1 */
+  --muted: #6f6f6f;     /* secondary text and navigation: 5.0:1 */
+  --faint: #a8a8a8;     /* decorative only: separators */
+  --rule: #e6e6e6;      /* hairlines */
+  --underline: #cbcbcb; /* resting underline of links in running text */
+  --surface: #fff;
+  --paper: #e9e9e9;     /* home background under the texture tile */
+  --paper-name: #1e1e1e; /* the name on the paper: 10.3:1 against its darkest grain */
+  --paper-ink: #444;    /* on the paper texture: 5.9:1 against its darkest grain */
+  --paper-muted: #555;  /* on the paper texture: 4.6:1 against its darkest grain */
+  --paper-light: rgba(255, 255, 255, 0.55); /* letterpress highlight under the name */
+  --canvas-shadow: rgba(0, 0, 0, 0.30);
+  --focus: #1a5fb4;
+  --selection: #dbe7f7;
+
+  /* type */
+  --t1: 13px;
+  --t2: 14px;
+  --t3: 16px;
+  --t4: 17px;
+  --t5: 26px;
+
+  /* space */
+  --s1: 4px;  --s2: 8px;  --s3: 12px; --s4: 16px; --s5: 24px;
+  --s6: 32px; --s7: 40px; --s8: 48px; --s9: 64px; --s10: 96px;
+
+  --measure: 600px;
+  --gutter: 24px;
+  --ease: 150ms ease;
+
+  /* faces */
+  --serif: Palatino, "Palatino Linotype", "Book Antiqua", "URW Palladio L",
+    "TeX Gyre Pagella", Georgia, serif;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  --title-weight: 500;
+  --leading: 1.6;
+}
+:root:lang(ja) {
+  --serif: Palatino, "Palatino Linotype", "Hiragino Mincho ProN", "Yu Mincho", YuMincho,
+    "Noto Serif JP", "Noto Serif CJK JP", serif;
+  --sans: "CJK Punct JA", -apple-system, BlinkMacSystemFont, "Hiragino Sans",
+    "Hiragino Kaku Gothic ProN", "Yu Gothic", YuGothic, "Noto Sans JP", Meiryo, sans-serif;
+  --leading: 1.75;
+}
+:root:lang(zh) {
+  --serif: Palatino, "Palatino Linotype", "Songti SC", STSong, "Noto Serif SC",
+    "Noto Serif CJK SC", SimSun, serif;
+  --sans: "CJK Punct ZH", -apple-system, BlinkMacSystemFont, "PingFang SC",
+    "Hiragino Sans GB", "Noto Sans SC", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif;
+  --leading: 1.75;
+}
+
+/* ---------- base ---------- */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--surface);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: var(--t3);
+  line-height: var(--leading);
+  font-kerning: normal;
+  -webkit-font-smoothing: antialiased;
+}
+:lang(ja) body, :lang(zh) body,
+body:lang(ja), body:lang(zh) {
+  line-break: strict;
+  text-spacing-trim: trim-start;
+}
+
+h1, h2 { margin: 0; font-weight: var(--title-weight); }
+
+a { color: inherit; text-decoration: none; }
+a:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+img, svg { display: block; }
+
+::selection { background: var(--selection); }
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0; border: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+code { font-family: var(--mono); font-size: 0.875em; white-space: nowrap; }
+
+/* ---------- language control: globe and the three languages ---------- */
+
+.lang {
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+  font-size: var(--t1);
+  line-height: 1.4;
+  color: var(--muted);
+}
+.lang .globe { width: 13px; height: 13px; flex: none; }
+.lang ul { display: flex; gap: var(--s2); margin: 0; padding: 0; list-style: none; }
+.lang [aria-current] { color: var(--ink); }
+.lang a { color: var(--muted); padding-block: var(--s2); transition: color var(--ease); }
+.lang a:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+
+/* ---------- home ----------
+   The painting as the work, the name as its wall label.
+   The painting fills the width up to 760 px but never more than the window
+   height allows (300 px are kept for the caption and margins), so the
+   caption is always above the fold. Below it, aligned to the canvas edges:
+   the name on the left; on the right the menu, with the languages under it.
+   Home type: name 40 px (34 px Mincho/Song), menu 15 px capitals
+   (17 px Mincho/Song, untracked), languages 14 px. */
+
+body.home {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--s7) 0 clamp(var(--s7), 6vh, 72px);   /* lifted slightly above centre */
+  background: var(--paper) url(../img/paper.png);
+  color: var(--paper-ink);
+  font-family: var(--serif);
+}
+.home main {
+  width: min(760px, calc((100svh - 300px) * 618 / 480));
+  min-width: min(540px, calc(100% - 2 * var(--s5)));   /* room for the name and the menu side by side */
+  max-width: calc(100% - 2 * var(--s5));
+}
+.home picture { display: block; }
+.home .painting {
+  display: block;
+  width: 100%;
+  height: auto;
+  box-shadow: 0 0 48px 22px var(--canvas-shadow);
+}
+
+.home .caption {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: baseline;          /* the name and the menu share a baseline */
+  column-gap: var(--s5);
+  margin-top: var(--s8);
+}
+.home h1 {
+  font-family: var(--serif);
+  font-size: 40px;
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  color: var(--paper-name);
+  text-shadow: 0 1px 0 var(--paper-light);
+}
+:lang(ja) .home h1 { font-family: "Hiragino Mincho ProN", "Yu Mincho", YuMincho, "Noto Serif JP", serif; }
+:lang(zh) .home h1 { font-family: "Songti SC", STSong, "Noto Serif SC", serif; }
+:lang(ja) .home h1, :lang(zh) .home h1 { font-size: 34px; letter-spacing: 0.02em; }
+
+.home .menu {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--s6);
+  margin: 0 -0.14em 0 0;          /* the tracking after the last letter sits outside the canvas edge */
+  padding: 0;
+  list-style: none;
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  line-height: 1.4;
+}
+:lang(ja) .home .menu { font-family: "Hiragino Mincho ProN", "Yu Mincho", serif; }
+:lang(zh) .home .menu { font-family: "Songti SC", STSong, serif; }
+:lang(ja) .home .menu, :lang(zh) .home .menu {
+  gap: 28px;
+  margin-right: 0;
+  font-size: var(--t4);
+  text-transform: none;
+  letter-spacing: 0.04em;
+}
+.home .menu a {
+  color: var(--paper-ink);
+  padding-block: var(--s2);
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 5px;
+  transition: color var(--ease), text-decoration-color var(--ease);
+}
+.home .menu a:hover, .home .menu a:focus-visible { color: var(--ink); text-decoration-color: currentColor; }
+
+.home .lang {
+  justify-content: flex-end;
+  gap: var(--s2);
+  margin-top: var(--s2);
+  font-family: var(--serif);
+  font-size: var(--t2);
+  color: var(--paper-muted);
+}
+.home .lang ul { gap: var(--s3); }
+.home .lang .globe { width: 13px; height: 13px; }
+.home .lang a { color: var(--paper-muted); }
+.home .lang [aria-current], .home .lang a:hover { color: var(--ink); }
+
+/* short windows: tighter margins keep the caption above the fold */
+@media (max-height: 680px) and (min-width: 641px) {
+  body.home { padding: var(--s5) 0; }
+  .home .caption { margin-top: var(--s6); }
+}
+
+/* phones and narrow windows: the caption stacks under the painting */
+@media (max-width: 640px) {
+  .home .painting { box-shadow: 0 0 26px 12px var(--canvas-shadow); }
+  .home .caption { display: block; margin-top: var(--s6); }
+  .home h1 { font-size: 36px; }
+  :lang(ja) .home h1, :lang(zh) .home h1 { font-size: 30px; }
+  .home .menu { justify-content: flex-start; gap: var(--s5); margin: var(--s2) 0 0; }
+  /* 44 px tap targets */
+  .home .menu a { display: inline-block; padding: var(--s3) 0; }
+  .home .lang { justify-content: flex-start; margin-top: 0; }
+  .home .lang a, .home .lang [aria-current] { display: inline-block; padding-block: var(--s3); }
+}
+
+/* ---------- inner pages: header ---------- */
+
+.site-header,
+.page main,
+.footer-inner {
+  width: 100%;
+  max-width: calc(var(--measure) + 2 * var(--gutter));
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--gutter);
+  padding-right: var(--gutter);
+}
+
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s5);
+  padding-top: var(--s6);
+}
+.home-link {
+  font-family: var(--serif);
+  font-size: 19px;
+  font-weight: 400;
+  letter-spacing: -0.005em;
+  line-height: 1.4;
+  color: var(--ink);
+  white-space: nowrap;
+}
+.header-right { display: flex; align-items: center; gap: var(--s5); }
+.site-nav {
+  display: flex;
+  gap: var(--s5);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--t2);
+  line-height: 1.4;
+}
+.site-nav a { color: var(--muted); padding-block: var(--s2); transition: color var(--ease); }
+.site-nav a:hover, .site-nav a[aria-current] { color: var(--ink); }
+.lang-footer { display: none; }
+
+/* ---------- inner pages: content ---------- */
+
+.page main { padding-top: var(--s9); }
+
+.page p { margin: 0 0 var(--s4); text-wrap: pretty; }
+.page p.pull { color: var(--ink); }
+/* keep words whole in the one-line objective and the 404 note */
+:lang(ja) .page p.pull, .nf [lang="ja"] p { word-break: auto-phrase; }
+:lang(zh) .page p.pull { word-break: keep-all; }
+
+/* links in running text */
+.page main p:not(.older) a, .desc a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--underline);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: text-decoration-color var(--ease);
+}
+.page main p:not(.older) a:hover, .desc a:hover { text-decoration-color: currentColor; }
+
+/* years: a quiet row of tabs */
+.years {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s1) var(--s4);
+  margin: 0 0 var(--s7);
+  padding: 0;
+  list-style: none;
+  font-size: var(--t2);
+  line-height: 1.4;
+  font-variant-numeric: tabular-nums;
+}
+.years a { color: var(--muted); padding-block: var(--s2); white-space: nowrap; transition: color var(--ease); }
+.years a:hover { color: var(--ink); }
+.years a[aria-current] { color: var(--ink); font-weight: 500; }
+
+/* section label ("Talks and writing") */
+.page h2.label {
+  margin: var(--s8) 0 var(--s4);
+  font-size: var(--t2);
+  font-weight: 400;
+  letter-spacing: 0;
+  color: var(--muted);
+}
+
+/* entries */
+.entries { margin: 0; padding: 0; list-style: none; }
+.entries > li { margin: 0 0 var(--s5); }
+.entries > li:has(.desc) { margin-bottom: var(--s6); }
+.entries > li:last-child { margin-bottom: 0; }
+
+.entry-title {
+  display: block;
+  font-size: var(--t3);
+  font-weight: var(--title-weight);
+  line-height: 1.5;
+  color: var(--ink);
+  text-wrap: pretty;
+}
+.entry-title a { color: var(--ink); text-underline-offset: 3px; text-decoration-thickness: 1px; }
+.entry-title a:hover { text-decoration: underline; text-decoration-color: var(--underline); }
+:lang(ja) .entry-title { word-break: auto-phrase; }
+/* titles of talks, notes and projects: even lines; commit titles stay as they are */
+.entries:not(.commits) .entry-title, .dated .entry-title { text-wrap: balance; }
+/* Chinese has no spaces between words: balance at spaces and punctuation, never inside a word */
+:lang(zh) .entries:not(.commits) .entry-title, :lang(zh) .dated .entry-title { word-break: keep-all; overflow-wrap: anywhere; }
+:lang(ja) .commits .entry-title { word-break: normal; }
+.tag { font-size: var(--t1); font-weight: 400; color: var(--muted); }
+
+.meta, .desc, .fix { display: block; }
+.meta {
+  margin-top: 2px;
+  font-size: var(--t2);
+  line-height: 1.5;
+  color: var(--muted);
+}
+.meta a { color: var(--muted); text-underline-offset: 3px; transition: color var(--ease); }
+.meta a:hover { color: var(--ink); text-decoration: underline; }
+.meta i { white-space: nowrap; }
+.desc { margin-top: var(--s2); text-wrap: pretty; }
+.sep { color: var(--faint); }
+.nb { white-space: nowrap; }
+
+.fix {
+  margin-top: var(--s3);
+  padding-left: var(--s3);
+  border-left: 1px solid var(--rule);
+  font-size: var(--t1);
+  line-height: 1.55;
+  color: var(--muted);
+}
+.fix-label { font-style: italic; color: var(--ink); }
+:lang(ja) .fix-label, :lang(zh) .fix-label { font-style: normal; font-weight: 500; }
+
+/* commit years: project | title | short hash */
+.entries.commits > li {
+  display: grid;
+  grid-template-columns: 152px 1fr auto;
+  column-gap: var(--s4);
+  align-items: baseline;
+  margin: 0;
+  padding: 6px 0;
+}
+.entries.commits > li.first:not(:first-child) { margin-top: var(--s4); }
+.commits .proj { font-size: var(--t2); color: var(--muted); line-height: 1.5; }
+.commits .proj .tag { font-size: var(--t2); }
+.commits .entry-title { font-weight: 400; }
+.commits .hash {
+  font-family: var(--mono);
+  font-size: var(--t1);
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  transition: color var(--ease);
+}
+.commits .hash:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+
+/* repository years and Selected: name, then a muted description */
+.repos .desc { margin-top: 2px; color: var(--muted); }
+.repos .meta { margin-top: var(--s1); }
+
+/* dated list (About) */
+.dated { margin: 0; padding: 0; list-style: none; }
+.dated li {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  column-gap: var(--s4);
+  align-items: baseline;
+  margin: 0 0 var(--s4);
+}
+.dated li:last-child { margin-bottom: 0; }
+.dated time { font-size: var(--t2); font-variant-numeric: tabular-nums; color: var(--muted); }
+.dated time.dup { color: transparent; }
+.dated .talk { display: block; }
+.dated .entry-title { font-weight: 400; }
+
+.page .older { margin: var(--s7) 0 0; font-size: var(--t2); }
+.older a { color: var(--muted); transition: color var(--ease); }
+.older a:hover { color: var(--ink); }
+
+/* 404: the message in three languages */
+.nf section + section { margin-top: var(--s6); }
+.nf h1, .nf h2 {
+  margin: 0 0 var(--s1);
+  font-size: var(--t3);
+  font-weight: var(--title-weight);
+  line-height: 1.5;
+  color: var(--ink);
+}
+.nf [lang="ja"] { font-family: "CJK Punct JA", -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Noto Sans JP", sans-serif; line-height: 1.75; }
+.nf [lang="zh-Hans"] { font-family: "CJK Punct ZH", -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", sans-serif; line-height: 1.75; }
+
+/* ---------- footer ---------- */
+
+.site-footer { margin-top: var(--s10); }
+.footer-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s2) var(--s4);
+  padding-top: var(--s5);
+  padding-bottom: var(--s8);
+  background:
+    linear-gradient(var(--rule), var(--rule)) var(--gutter) 0 / calc(100% - 2 * var(--gutter)) 1px no-repeat;
+  font-size: var(--t1);
+  color: var(--muted);
+}
+.site-footer .email { color: var(--muted); padding-block: var(--s2); transition: color var(--ease); }
+.site-footer .email:hover { color: var(--ink); }
+/* three icons, solid, matched by eye to the same visual weight */
+.social { display: flex; margin: 0 calc(-1 * var(--s2)) 0 0; padding: 0; list-style: none; }
+.social a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--s6);
+  height: var(--s6);
+  color: var(--muted);
+  transition: color var(--ease);
+}
+.social a:hover { color: var(--ink); }
+.social .icon-gh svg { width: 16px; height: 16px; }
+.social .icon-x svg { width: 14px; height: 14px; }
+.social .icon-in svg { width: 15px; height: 15px; }
+
+/* ---------- small screens ---------- */
+
+@media (max-width: 560px) {
+  :root { --gutter: 20px; }
+  .site-header { padding-top: var(--s5); gap: var(--s3); }
+  .header-right, .site-nav { gap: var(--s4); }
+  .lang-header { display: none; }
+  .lang-footer { display: flex; flex-basis: 100%; }
+  .page main { padding-top: var(--s7); }
+  .site-footer { margin-top: var(--s9); }
+  /* Japanese era years and Chinese years are longer: six tabs become two even rows of three */
+  :lang(ja) .years, :lang(zh) .years { display: grid; grid-template-columns: repeat(3, max-content); column-gap: var(--s5); }
+  .entries.commits > li { grid-template-columns: 1fr auto; }
+  .commits .proj { grid-column: 1 / -1; }
+  .entries.commits > li:not(.first) .proj { display: none; }
+}
+
+/* ---------- dark scheme (inner pages only) ---------- */
+
+@media (prefers-color-scheme: dark) {
+  html:has(body.page) { background: #121212; }
+  body.page {
+    --ink: #ececec;
+    --text: #c8c8c8;
+    --muted: #9b9b9b;
+    --faint: #5c5c5c;
+    --rule: #2c2c2c;
+    --underline: #5a5a5a;
+    --surface: #121212;
+    --focus: #7aa7e8;
+    --selection: #2c3e55;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; }
+}
+
+/* ---------- print ---------- */
+
+@media print {
+  @page { margin: 18mm 16mm; }
+  body.home { background: none; display: block; min-height: 0; }
+  .header-right, .years-nav, .site-footer .social, .lang, .older { display: none; }
+  .page main { padding-top: var(--s6); }
+  .home main { width: 60%; min-width: 0; }
+  .home .painting { box-shadow: none; }
+  main a[href^="http"]::after { content: " <" attr(href) ">"; font-size: 0.8em; word-break: break-all; color: var(--muted); }
+  .entries > li, .dated li { break-inside: avoid; }
+}
+
+.profile-title { font-size: var(--t5); line-height: 1.3; color: var(--ink); margin-bottom: var(--s5); text-wrap: balance; }
+.page p.code-intro { margin-bottom: var(--s6); }
+
+/* Paper discussions: restrained editorial tables and readable mathematics. */
+.paper-notes .math-block {
+  overflow-x: auto;
+  overflow-y: hidden;
+  margin: var(--s5) 0;
+  padding: var(--s4) 0;
+}
+.paper-notes .katex { font-size: 1.08em; }
+.paper-notes .katex-display { margin: 0; text-align: center; }
+.paper-notes .katex-display > .katex { text-align: center; }
+.paper-notes .math-results { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--s3) var(--s6); }
+.paper-notes .math-results > span { white-space: nowrap; }
+.paper-notes .table-scroll { margin: var(--s6) 0; }
+.research-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-size: var(--t2);
+  line-height: 1.55;
+}
+.research-table caption {
+  text-align: left;
+  color: var(--muted);
+  font-size: var(--t1);
+  padding-bottom: var(--s3);
+}
+.research-table th, .research-table td {
+  padding: var(--s4) 0;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+  text-align: left;
+}
+.research-table thead th {
+  border-top: 1px solid var(--rule);
+  color: var(--muted);
+  font-size: var(--t1);
+  font-weight: 500;
+  padding-block: var(--s3);
+}
+.research-table tbody th { font-weight: 400; padding-right: var(--s5); }
+.research-table th:last-child, .research-table td:last-child {
+  width: 7em;
+  text-align: right;
+  font-variant-numeric: lining-nums tabular-nums;
+  white-space: nowrap;
+}
+.research-table td { color: var(--ink); }
+@media (max-width: 560px) {
+  .paper-notes .math-block { padding: var(--s3) 0; }
+  .research-table tbody th { padding-right: var(--s4); }
+  .research-table th:last-child, .research-table td:last-child { width: 5.5em; }
+}

@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#121212" media="(prefers-color-scheme: dark)">
+  <title>博客（2020 年）｜潘旻琦</title>
+  <meta name="description" content="AAAI 2020 见闻，以及关于五篇机器学习论文（能量模型、深度马尔可夫模型、图神经网络、神经常微分方程）的中文笔记；LaTeX 排版，附摘要、更正、PDF 与源码。">
+  <meta name="author" content="潘旻琦">
+  <link rel="canonical" href="https://minqi-pan.com/blog/2020.zh.html">
+  <link rel="alternate" hreflang="en" href="https://minqi-pan.com/blog/2020.html">
+  <link rel="alternate" hreflang="ja" href="https://minqi-pan.com/blog/2020.ja.html">
+  <link rel="alternate" hreflang="zh-Hans" href="https://minqi-pan.com/blog/2020.zh.html">
+  <link rel="alternate" hreflang="x-default" href="https://minqi-pan.com/blog/2020.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="潘旻琦">
+  <meta property="og:title" content="博客（2020 年）｜潘旻琦">
+  <meta property="og:description" content="AAAI 2020 见闻，以及关于五篇机器学习论文（能量模型、深度马尔可夫模型、图神经网络、神经常微分方程）的中文笔记；LaTeX 排版，附摘要、更正、PDF 与源码。">
+  <meta property="og:url" content="https://minqi-pan.com/blog/2020.zh.html">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:locale:alternate" content="ja_JP">
+  <meta property="og:image" content="https://minqi-pan.com/img/og.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="拉斯洛·莫霍利-纳吉的画作《CHX》（1939），下方为 Minqi Pan 的名字">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://minqi-pan.com/img/og.jpg">
+  <meta name="twitter:image:alt" content="拉斯洛·莫霍利-纳吉的画作《CHX》（1939），下方为 Minqi Pan 的名字">
+  <link rel="icon" href="../favicon.ico" sizes="32x32">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="stylesheet" href="../css/site.css">
+</head>
+<body class="page">
+  <header class="site-header">
+    <a class="home-link" href="../index.zh.html">潘旻琦</a>
+    <div class="header-right">
+      <nav aria-label="网站"><ul class="site-nav"><li><a href="../code/index.zh.html">代码</a></li><li><a href="../blog/2026.zh.html" aria-current="true">博客</a></li><li><a href="../about.zh.html">关于</a></li></ul></nav>
+      <nav class="lang lang-header" aria-label="语言"><svg class="globe" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" aria-hidden="true" focusable="false"><circle cx="8" cy="8" r="6.4"/><path d="M1.6 8h12.8M8 1.6c1.8 1.7 2.7 3.9 2.7 6.4S9.8 12.7 8 14.4M8 1.6C6.2 3.3 5.3 5.5 5.3 8s.9 4.7 2.7 6.4"/></svg><ul><li><a href="../blog/2020.html" hreflang="en" lang="en">English</a></li><li><a href="../blog/2020.ja.html" hreflang="ja" lang="ja">日本語</a></li><li><span aria-current="page" lang="zh-Hans">中文</span></li></ul></nav>
+    </div>
+  </header>
+  <main>
+    <h1 class="visually-hidden">博客（2020 年）</h1>
+    <nav class="years-nav" aria-label="年份"><ul class="years"><li><a href="2026.zh.html">2026年</a></li><li><a href="2021.zh.html">2021年</a></li><li><a href="2020.zh.html" aria-current="page">2020年</a></li><li><a href="2017.zh.html">2017年</a></li><li><a href="2016.zh.html">2016年</a></li><li><a href="2015.zh.html">2015年</a></li></ul></nav>
+    <ol class="entries">
+      <li>
+        <span class="entry-title"><a href="2020/aaai_2020_thirty_fourth_aaai_conference_on_artificial_intelligence_observations.pdf" type="application/pdf">AAAI 2020（第三十四届 AAAI 人工智能大会）见闻</a></span>
+        <span class="meta"><span class="nb">纽约，2020 年 2 月</span> <span class="sep" aria-hidden="true">·</span> <span class="nb">中文笔记，14 页</span> <span class="sep" aria-hidden="true">·</span> <span class="nb"><a href="https://github.com/pmq20/pmq20.github.io/blob/main/blog/2020/aaai_2020_thirty_fourth_aaai_conference_on_artificial_intelligence_observations.tex">LaTeX 源码</a></span></span>
+        <span class="desc">六天教程、研讨会与分会场的逐日记录，重点关注图神经网络与微分方程模型。</span>
+        <span class="fix"><span class="fix-label">更正（2026）</span> 1(a) 中 GraphSAGE、GAT、MPNN 属于空域（消息传递）方法，而非谱滤波。1(g)–(h) 中 Real NVP 是 NICE 的仿射耦合扩展，并非连续时间版本；所列流模型中只有 GraphNVP 用于生成图。</span>
+      </li>
+      <li>
+        <span class="entry-title"><a href="2020/minqi_s_comments_on_nijkamp_et_al_2019_on_the_anatomy_of_mcmc_based_maximum_likelihood_learning_of_energy_based_models.pdf" type="application/pdf"><span lang="en">On the Anatomy of <span class="nb">MCMC-Based</span> Maximum Likelihood Learning of <span class="nb">Energy-Based</span> Models</span></a></span>
+        <span class="meta">评论 Nijkamp、Hill、Han、Zhu、Wu（AAAI 2020）<span class="sep" aria-hidden="true">·</span> <span class="nb">2020 年 4 月</span> <span class="sep" aria-hidden="true">·</span> <span class="nb">中文笔记，5 页</span> <span class="sep" aria-hidden="true">·</span> <span class="nb"><a href="https://github.com/pmq20/pmq20.github.io/blob/main/blog/2020/minqi_s_comments_on_nijkamp_et_al_2019_on_the_anatomy_of_mcmc_based_maximum_likelihood_learning_of_energy_based_models.tex">LaTeX 源码</a></span> <span class="sep" aria-hidden="true">·</span> <span class="nb"><a href="2020/nijkamp_et_al_2019_on_the_anatomy_of_mcmc_based_maximum_likelihood_learning_of_energy_based_models.pdf" type="application/pdf">幻灯片（英文）</a></span> <span class="sep" aria-hidden="true">·</span> <span class="nb"><a href="https://arxiv.org/abs/1903.12370">论文</a></span></span>
+        <span class="desc">论文留下的问题（短程 Langevin 链为何在实践中难以收敛），用作者公开的代码复现其三个实验，以及从代码还原的玩具分布。</span>
+        <span class="fix"><span class="fix-label">更正（2026）</span> 论文使用的是未校正的 Langevin 采样，没有 Metropolis–Hastings 的接受/拒绝步骤（第 3 条）；在过阻尼 Langevin 动力学中，粘滞阻力与外力 −∇<i>U</i> 及噪声相平衡，而不等于能量梯度（第 4 条）。第 7 条中数据噪声的协方差为 0.015²<i>I</i> 而非 <i>I</i>；长程样本质量好只与收敛相容，并不能证明收敛。</span>
+      </li>
+      <li>
+        <span class="entry-title"><a href="2020/minqi_s_comments_on_tan_et_al_2019_factorized_inference_in_deep_markov_models_for_incomplete_multimodal_time_series.pdf" type="application/pdf"><span lang="en">Factorized Inference in Deep Markov Models for Incomplete Multimodal Time Series</span></a></span>
+        <span class="meta"><span class="nb">评论 Tan、Soh、Ong（AAAI 2020）</span> <span class="sep" aria-hidden="true">·</span> <span class="nb">2020 年 4 月</span> <span class="sep" aria-hidden="true">·</span> <span class="nb">中文笔记，11 页</span> <span class="sep" aria-hidden="true">·</span> <span class="nb"><a href="https://github.com/pmq20/pmq20.github.io/blob/main/blog/2020/minqi_s_comments_on_tan_et_al_2019_factorized_inference_in_deep_markov_models_for_incomplete_multimodal_time_series.tex">LaTeX 源码</a></span> <span class="sep" aria-hidden="true">·</span> <span class="nb"><a href="2020/tan_et_al_2019_factorized_inference_in_deep_markov_models_for_incomplete_multimodal_time_series.pdf" type="application/pdf">幻灯片（英文）</a></span> <span class="sep" aria-hidden="true">·</span> <span class="nb"><a href="https://arxiv.org/abs/1905.13570">论文</a></span></span>
+        <span class="desc">逐步推导论文未给出证明的、按时间与模态因式分解的平滑后验；从作者源代码还原数据集；并尝试复现带噪螺旋与 Weizmann 人体动作实验。</span>
+        <span class="fix"><span class="fix-label">更正（2026）</span> 第 3 条中边缘分布之积 <i>p</i>(<i>x</i><sub><i>t</i>+1:<i>T</i></sub>) ∏<sub><i>m</i></sub> <i>p</i>(<i>x</i><sub><i>t</i></sub><sup><i>m</i></sup>) 并不等于联合分布 <i>p</i>(<i>x</i><sub><i>t</i>:<i>T</i></sub>)，该步仅在相差一个与 <i>z</i><sub><i>t</i></sub> 无关的因子的意义下成立。第 6(c) 条中 <i>L</i><sub>match</sub> 用于强制满足模型“单一时不变先验 <i>p</i>(<i>z</i>)”的假设，而非修正采样误差。我对带噪螺旋实验的复现没有成功。</span>
+      </li>
+      <li>
+        <span class="entry-title"><a href="2020/minqi_s_comments_on_zang_and_wang_2019_neural_dynamics_on_complex_networks.pdf" type="application/pdf"><span lang="en">Neural Dynamics on Complex Networks</span></a></span>
+        <span class="meta"><span class="nb">评论 Zang、Wang（KDD 2020；arXiv 2019）</span> <span class="sep" aria-hidden="true">·</span> <span class="nb">2020 年 4 月</span> <span class="sep" aria-hidden="true">·</span> <span class="nb">中文笔记，7 页</span> <span class="sep" aria-hidden="true">·</span> <span class="nb"><a href="https://github.com/pmq20/pmq20.github.io/blob/main/blog/2020/minqi_s_comments_on_zang_and_wang_2019_neural_dynamics_on_complex_networks.tex">LaTeX 源码</a></span> <span class="sep" aria-hidden="true">·</span> <span class="nb"><a href="2020/zang_and_wang_2019_neural_dynamics_on_complex_networks.pdf" type="application/pdf">幻灯片（英文）</a></span> <span class="sep" aria-hidden="true">·</span> <span class="nb"><a href="https://arxiv.org/abs/1908.06491">论文</a></span></span>
+        <span class="desc">基于神经常微分方程的连续深度图网络：扩散算子 Φ(α) 及其与 Kipf 和 Welling 归一化邻接矩阵的关系、伴随法的推导，以及依据论文与代码重建的节点分类与合成网络实验设置。</span>
+        <span class="fix"><span class="fix-label">更正（2026）</span> Planetoid 版 Cora 文件中的 10,556 条有向边本身已对称，即 5,278 条无向边；5,429 是原始 LINQS 版本的边数。Kipf 与 Welling 关于“边不一定编码节点相似性”的论述针对的是拉普拉斯正则化，而非 GCN 或 NDCN。伴随法推导缺少边界条件以及最终梯度 d<i>L</i>/d<i>θ</i> = <i>a</i><sub><i>θ</i></sub>(<i>t</i><sub>0</sub>)。</span>
+      </li>
+      <li>
+        <span class="entry-title"><a href="2020/minqi_s_comments_on_poli_et_al_2019_graph_neural_ordinary_differential_equations.pdf" type="application/pdf"><span lang="en">Graph Neural Ordinary Differential Equations</span></a></span>
+        <span class="meta">评论 Poli、Massaroli、Park、Yamashita、Asama、Park（arXiv 2019）<span class="sep" aria-hidden="true">·</span> <span class="nb">2020 年 4 月</span> <span class="sep" aria-hidden="true">·</span> <span class="nb">中文笔记，4 页</span> <span class="sep" aria-hidden="true">·</span> <span class="nb"><a href="https://github.com/pmq20/pmq20.github.io/blob/main/blog/2020/minqi_s_comments_on_poli_et_al_2019_graph_neural_ordinary_differential_equations.tex">LaTeX 源码</a></span> <span class="sep" aria-hidden="true">·</span> <span class="nb"><a href="2020/poli_et_al_2019_graph_neural_ordinary_differential_equations.pdf" type="application/pdf">幻灯片（英文）</a></span> <span class="sep" aria-hidden="true">·</span> <span class="nb"><a href="https://arxiv.org/abs/1911.07532">论文</a></span></span>
+        <span class="desc">以 Battaglia 等人的关系归纳偏置框架解读该模型，并追问：深层图卷积网络已知会过度平滑，为何此处的节点嵌入却发散。</span>
+        <span class="fix"><span class="fix-label">更正（2026）</span> 第 4 条的核心论证是错误的。作者所用的 DGL 版 Cora 是对称图，有向性无法解释轨迹发散；Li 等人的收敛结论针对的是无限次施加的固定算子，而 GCDE 含有可学习的权重与非线性，且只积分有限时间。此外，激活函数是 Softplus 而非 Softmax；Li 等人的极限与 <i>D</i><sup>1/2</sup><b>1</b> 成正比；论文表 1 并未显示仅靠 ODE 化就优于调优后的 GCN。</span>
+      </li>
+      <li>
+        <span class="entry-title"><a href="2020/minqi_s_comments_on_xu_et_al_2019_how_powerful_are_graph_neural_networks.pdf" type="application/pdf"><span lang="en">How Powerful are Graph Neural Networks?</span></a></span>
+        <span class="meta">评论 Xu、Hu、Leskovec、Jegelka（ICLR 2019）<span class="sep" aria-hidden="true">·</span> <span class="nb">2020 年 4 月</span> <span class="sep" aria-hidden="true">·</span> <span class="nb">中文笔记，3 页</span> <span class="sep" aria-hidden="true">·</span> <span class="nb"><a href="https://github.com/pmq20/pmq20.github.io/blob/main/blog/2020/minqi_s_comments_on_xu_et_al_2019_how_powerful_are_graph_neural_networks.tex">LaTeX 源码</a></span> <span class="sep" aria-hidden="true">·</span> <span class="nb"><a href="2020/xu_et_al_2019_how_powerful_are_graph_neural_networks.pdf" type="application/pdf">幻灯片（英文）</a></span> <span class="sep" aria-hidden="true">·</span> <span class="nb"><a href="https://openreview.net/forum?id=ryGs6iA5Km">论文</a></span></span>
+        <span class="desc">以 Weisfeiler–Lehman 测试为上界的表达能力，借助可数性（Rudin《数学分析原理》定理 2.13）得到论文引理 4 的简短路径，以及该上界对邻域聚合的意义。</span>
+        <span class="fix"><span class="fix-label">更正（2026）</span> GIN 仅在特征可数的邻域聚合类 GNN 中表达能力最强，与 1-WL 测试等价而不超过它。将有界多重集视为 𝒳<sup><i>n</i></sup>（第 3 条）需要用哑元补齐并固定顺序，论文中较长的证明正是在做这件事。</span>
+      </li>
+    </ol>
+    <p class="older"><a href="2017.zh.html">2017年 <span aria-hidden="true">→</span></a></p>
+  </main>
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <a class="email" href="mailto:hello@minqi-pan.com">hello@minqi-pan.com</a>
+      <ul class="social">
+        <li><a class="icon-gh" href="https://github.com/pmq20" aria-label="GitHub"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a></li>
+        <li><a class="icon-x" href="https://x.com/psvr" aria-label="X"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a></li>
+        <li><a class="icon-in" href="https://www.linkedin.com/in/minqi-pan-fintech" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a></li>
+      </ul>
+      <div class="lang lang-footer" role="group" aria-label="语言"><svg class="globe" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" aria-hidden="true" focusable="false"><circle cx="8" cy="8" r="6.4"/><path d="M1.6 8h12.8M8 1.6c1.8 1.7 2.7 3.9 2.7 6.4S9.8 12.7 8 14.4M8 1.6C6.2 3.3 5.3 5.5 5.3 8s.9 4.7 2.7 6.4"/></svg><ul><li><a href="../blog/2020.html" hreflang="en" lang="en">English</a></li><li><a href="../blog/2020.ja.html" hreflang="ja" lang="ja">日本語</a></li><li><span aria-current="page" lang="zh-Hans">中文</span></li></ul></div>
+    </div>
+  </footer>
+</body>
+</html>

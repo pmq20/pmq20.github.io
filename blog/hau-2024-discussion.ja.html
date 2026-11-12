@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#121212" media="(prefers-color-scheme: dark)">
+  <title>論文紹介：Hau et al. (2024), FinTech Credit and Entrepreneurial Growth — Minqi Pan</title>
+  <meta name="description" content="KOMOJU 社内の論文紹介をもとにした Minqi Pan の公開ノート。与信アクセス、ファジー回帰不連続デザイン、加盟店リスクへの示唆と限界。">
+  <meta name="author" content="パン　ミンチ">
+  <link rel="canonical" href="https://minqi-pan.com/blog/hau-2024-discussion.ja.html">
+  <link rel="alternate" hreflang="en" href="https://minqi-pan.com/blog/hau-2024-discussion.html">
+  <link rel="alternate" hreflang="ja" href="https://minqi-pan.com/blog/hau-2024-discussion.ja.html">
+  <link rel="alternate" hreflang="zh-Hans" href="https://minqi-pan.com/blog/hau-2024-discussion.zh.html">
+  <link rel="alternate" hreflang="x-default" href="https://minqi-pan.com/blog/hau-2024-discussion.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="パン　ミンチ">
+  <meta property="og:title" content="論文紹介：Hau et al. (2024), FinTech Credit and Entrepreneurial Growth — Minqi Pan">
+  <meta property="og:description" content="KOMOJU 社内の論文紹介をもとにした Minqi Pan の公開ノート。与信アクセス、ファジー回帰不連続デザイン、加盟店リスクへの示唆と限界。">
+  <meta property="og:url" content="https://minqi-pan.com/blog/hau-2024-discussion.ja.html">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta property="og:image" content="https://minqi-pan.com/img/og.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="モホリ＝ナジ・ラースローの絵画《CHX》（1939年）と、その下に Minqi Pan の名">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://minqi-pan.com/img/og.jpg">
+  <meta name="twitter:image:alt" content="モホリ＝ナジ・ラースローの絵画《CHX》（1939年）と、その下に Minqi Pan の名">
+  <link rel="icon" href="../favicon.ico" sizes="32x32">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="stylesheet" href="../css/site.css?v=4d604568cf">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.19.1/dist/katex.min.css" integrity="sha384-WwGtaC6ywCHxA5cstpj/3+xIZvTez8dq2IcBQaXRkenHZ7FVVq1ZROtURwfbtTlG" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.19.1/dist/katex.min.js" integrity="sha384-a1WQdjRj162i159OYq041X6I4K8NenkrI09LlPmiHg0YOb7CR+wJOraXwK9abpnE" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.19.1/dist/contrib/auto-render.min.js" integrity="sha384-bjyGPfbij8/NDKJhSGZNP/khQVgtHUE5exjm4Ydllo42FwIgYsdLO2lXGmRBf5Mz" crossorigin="anonymous" onload="renderMathInElement(document.querySelector('main'));"></script>
+</head>
+<body class="page">
+  <header class="site-header">
+    <a class="home-link" href="../index.ja.html">パン　ミンチ</a>
+    <div class="header-right">
+      <nav aria-label="サイト"><ul class="site-nav"><li><a href="../code/index.ja.html">コード</a></li><li><a href="../blog/2026.ja.html" aria-current="true">ブログ</a></li><li><a href="../about.ja.html">プロフィール</a></li></ul></nav>
+      <nav class="lang lang-header" aria-label="言語"><svg class="globe" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" aria-hidden="true" focusable="false"><circle cx="8" cy="8" r="6.4"/><path d="M1.6 8h12.8M8 1.6c1.8 1.7 2.7 3.9 2.7 6.4S9.8 12.7 8 14.4M8 1.6C6.2 3.3 5.3 5.5 5.3 8s.9 4.7 2.7 6.4"/></svg><ul><li><a href="../blog/hau-2024-discussion.html" hreflang="en" lang="en">English</a></li><li><span aria-current="page" lang="ja">日本語</span></li><li><a href="../blog/hau-2024-discussion.zh.html" hreflang="zh-Hans" lang="zh-Hans">中文</a></li></ul></nav>
+    </div>
+  </header>
+  <main class="paper-notes">
+<h1 class="profile-title">論文紹介：Hau et al. (2024)「FinTech Credit and Entrepreneurial Growth」</h1>
+<p class="meta">Minqi Pan · KOMOJU 社内論文紹介 · 2026年1月</p>
+<p>KOMOJU の社内勉強会で紹介した論文の公開ノートです。著者らの分析方法と、加盟店リスクの仕事に関連して議論した点をまとめました。研究と実証推定は Hau らによるもので、私が結果を再現したわけではありません。</p>
+<h2 class="label">信用供与によって何が変わるのか</h2>
+<p>好調な加盟店は、融資を受けやすく、その後も成長しやすいかもしれません。借り手と非借り手を比較するだけでは、こうした選択と融資の効果が混ざります。Hau らは、Ant の過去の審査方針にあった信用スコア 480 の境界を使って両者を区別します。これは信用へのアクセスの効果を調べる研究であり、スコアのデフォルト予測精度を検証する研究ではありません。</p>
+<p>480 を超えると承認確率は上がりますが、承認が必ず決まるわけではありません。他の条件によって境界より上でも除外される場合があり、スコアの観測時点と審査時点の違いによって下でも承認された記録が生じます。このため、<em>ファジー回帰不連続デザイン</em>となります。承認後に借りないという選択は別の問題です。処置変数は信用枠へのアクセスであり、実際の借入額ではありません。</p>
+<h2 class="label">なぜ二つの不連続の比を取るのか</h2>
+<p>信用スコアから 480 を引いた値を \(S\)、信用枠へのアクセスの有無を \(D\)、結果変数を \(Y\) とします。\(\Delta_0\) は境界の直上と直下における条件付き平均の極限の差です。局所的な操作変数の解釈は次のようになります。</p>
+<div class="math-block">\[\tau_{\mathrm{local}}=\frac{\Delta_0\,\mathbb{E}[Y\mid S]}{\Delta_0\,\mathbb{E}[D\mid S]}.\]</div>
+<p>分子は結果の不連続ですが、それだけでは信用枠を得る効果になりません。境界によってアクセスが変わる企業は一部だからです。分母はアクセス確率の変化を表します。論文では、境界の指示変数を操作変数とする二段階最小二乗法を用い、スコア、企業の種類、月をコントロールしています。</p>
+<p>この解釈には、図に段差があること以上の条件が必要です。処置がなければ期待される結果は境界で滑らかに変わること、境界が信用へのアクセスを通じて結果に影響すること、境界を超えることでアクセスが増える企業と減る企業が混在しないことが求められます。推定の対象は、境界付近で、境界によってアクセスが変わる企業です。479 と 480 のスコアを持つ加盟店が完全に同じという意味ではありません。</p>
+<p>著者らはスコア操作を検討し、密度に有意な不連続を認めていません。これは設計を支持しますが、すべての仮定を証明するものではありません。頑健性の検証では、帯域幅、関数形、結果の定義、期間を変更しています。スコアの範囲を狭くすれば比較はより局所的になりますが、推定に使える情報も減ります。</p>
+<h2 class="label">主な結果の読み方</h2>
+<p>公刊論文の基本サンプルは、スコア 460〜500 の 547,491 社、1,196,887 企業・月観測です。対象期間は 2014年11月から2015年6月までで、境界の運用が停止された2014年12月を除きます。これは私のスライドに記載した小さすぎるサンプル数を修正したものです。</p>
+<div class="table-scroll"><table class="research-table"><caption>原論文の Table III から抜粋した推定値</caption><thead><tr><th scope="col">指標</th><th scope="col">推定値</th></tr></thead><tbody><tr><th scope="row">信用アクセス確率の不連続</th><td>0.2872</td></tr><tr><th scope="row">操作変数で推定した売上成長の係数</th><td>0.3631</td></tr><tr><th scope="row">操作変数で推定した取引成長の係数</th><td>0.2691</td></tr></tbody></table></div>
+<p>第一段階の変化は約 28.7 パーセントポイントです。成長指標は信用枠付与の前月から翌月までの対数変化です。著者らは成長の係数を次のように換算しています。</p>
+<div class="math-block math-results"><span>\(e^{0.3631}-1\approx43.8\%\)</span><span>\(e^{0.2691}-1\approx30.9\%\)</span></div>
+<p>これが、2か月の測定期間における売上約 44%、取引約 31% という論文の効果推定です。識別の仮定の下での局所的な推定であり、融資を受けるすべての加盟店の成長予測ではありません。取引件数はユニーク顧客数とも異なります。</p>
+<p>信用枠は、まだ借りていなくても意味を持ちます。必要時に使える資金があれば、不測の資金不足に備えて現金を遊休させる必要を減らせるためです。論文はこの流動性保険の経路を論じ、広告、商品種類、転換率の増加や顧客評価の改善と整合的な証拠を示しています。ただし、加盟店の成長のうち、新たな需要と競合から移った売上がそれぞれどれだけかは確定していません。</p>
+<h2 class="label">実務で考えたこと</h2>
+<p>勉強会では Prophet による時系列分解を使い、売上履歴の二つの用途を説明しました。異常な観測は調査のきっかけとなり、長期的な傾向はリスク評価の材料になります。ただし、外れ値や下降傾向だけで不正やデフォルトを証明することはできません。</p>
+<p>信用枠は流動性を供給し、ローリングリザーブは資金を留保します。どちらも加盟店のキャッシュフローに影響しますが、損失エクスポージャーは異なります。この論文には加盟店スコアをリザーブ率に変換する式はありません。それにはシグナルとエクスポージャー、損失を結ぶ証拠に加え、加盟店の現金を拘束するコストを考える必要があります。480 という境界は当時の Ant の方針とスコア尺度に属し、別のプラットフォームにそのまま移せません。</p>
+<p>私にとって有用なのは、監視、予測、因果関係の証拠を区別することです。ダッシュボードは変化を示し、予測モデルは結果を推定できます。この研究が問うのは、信用が利用可能になったことによって何が変わるかです。一つに答えても、残りの答えが自動的に得られるわけではありません。</p>
+<h2 class="label">参考文献</h2>
+<p>Harald Hau, Yi Huang, Chen Lin, Hongzhe Shan, Zixia Sheng and Lai Wei (2024). <i>FinTech Credit and Entrepreneurial Growth.</i> <i>The Journal of Finance</i> 79(5), 3309–3359. <a href="https://doi.org/10.1111/jofi.13384">doi:10.1111/jofi.13384</a>. Sections II.B, III.A, V–VIII; Table III.</p>
+<p class="meta">公刊論文に基づいて整理した公開ノートです。社内の加盟店事例、企業データ、運用上の閾値は含みません。</p>
+  </main>
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <a class="email" href="mailto:hello@minqi-pan.com">hello@minqi-pan.com</a>
+      <ul class="social">
+        <li><a class="icon-gh" href="https://github.com/pmq20" aria-label="GitHub"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a></li>
+        <li><a class="icon-x" href="https://x.com/psvr" aria-label="X"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a></li>
+        <li><a class="icon-in" href="https://www.linkedin.com/in/minqi-pan-fintech" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a></li>
+      </ul>
+      <div class="lang lang-footer" role="group" aria-label="言語"><svg class="globe" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" aria-hidden="true" focusable="false"><circle cx="8" cy="8" r="6.4"/><path d="M1.6 8h12.8M8 1.6c1.8 1.7 2.7 3.9 2.7 6.4S9.8 12.7 8 14.4M8 1.6C6.2 3.3 5.3 5.5 5.3 8s.9 4.7 2.7 6.4"/></svg><ul><li><a href="../blog/hau-2024-discussion.html" hreflang="en" lang="en">English</a></li><li><span aria-current="page" lang="ja">日本語</span></li><li><a href="../blog/hau-2024-discussion.zh.html" hreflang="zh-Hans" lang="zh-Hans">中文</a></li></ul></div>
+    </div>
+  </footer>
+</body>
+</html>

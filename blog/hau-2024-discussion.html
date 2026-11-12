@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#121212" media="(prefers-color-scheme: dark)">
+  <title>Discussion of Hau et al. (2024): FinTech Credit and Entrepreneurial Growth — Minqi Pan</title>
+  <meta name="description" content="Minqi Pan’s public notes from an internal paper discussion at KOMOJU: credit access, fuzzy regression discontinuity and what the findings do not establish about merchant risk.">
+  <meta name="author" content="Minqi Pan">
+  <link rel="canonical" href="https://minqi-pan.com/blog/hau-2024-discussion.html">
+  <link rel="alternate" hreflang="en" href="https://minqi-pan.com/blog/hau-2024-discussion.html">
+  <link rel="alternate" hreflang="ja" href="https://minqi-pan.com/blog/hau-2024-discussion.ja.html">
+  <link rel="alternate" hreflang="zh-Hans" href="https://minqi-pan.com/blog/hau-2024-discussion.zh.html">
+  <link rel="alternate" hreflang="x-default" href="https://minqi-pan.com/blog/hau-2024-discussion.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Minqi Pan">
+  <meta property="og:title" content="Discussion of Hau et al. (2024): FinTech Credit and Entrepreneurial Growth — Minqi Pan">
+  <meta property="og:description" content="Minqi Pan’s public notes from an internal paper discussion at KOMOJU: credit access, fuzzy regression discontinuity and what the findings do not establish about merchant risk.">
+  <meta property="og:url" content="https://minqi-pan.com/blog/hau-2024-discussion.html">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="ja_JP">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta property="og:image" content="https://minqi-pan.com/img/og.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="CHX (1939), a painting by László Moholy-Nagy, above the name Minqi Pan">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://minqi-pan.com/img/og.jpg">
+  <meta name="twitter:image:alt" content="CHX (1939), a painting by László Moholy-Nagy, above the name Minqi Pan">
+  <link rel="icon" href="../favicon.ico" sizes="32x32">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="stylesheet" href="../css/site.css?v=4d604568cf">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.19.1/dist/katex.min.css" integrity="sha384-WwGtaC6ywCHxA5cstpj/3+xIZvTez8dq2IcBQaXRkenHZ7FVVq1ZROtURwfbtTlG" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.19.1/dist/katex.min.js" integrity="sha384-a1WQdjRj162i159OYq041X6I4K8NenkrI09LlPmiHg0YOb7CR+wJOraXwK9abpnE" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.19.1/dist/contrib/auto-render.min.js" integrity="sha384-bjyGPfbij8/NDKJhSGZNP/khQVgtHUE5exjm4Ydllo42FwIgYsdLO2lXGmRBf5Mz" crossorigin="anonymous" onload="renderMathInElement(document.querySelector('main'));"></script>
+</head>
+<body class="page">
+  <header class="site-header">
+    <a class="home-link" href="../index.html">Minqi Pan</a>
+    <div class="header-right">
+      <nav aria-label="Site"><ul class="site-nav"><li><a href="../code/index.html">Code</a></li><li><a href="../blog/2026.html" aria-current="true">Blog</a></li><li><a href="../about.html">About</a></li></ul></nav>
+      <nav class="lang lang-header" aria-label="Language"><svg class="globe" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" aria-hidden="true" focusable="false"><circle cx="8" cy="8" r="6.4"/><path d="M1.6 8h12.8M8 1.6c1.8 1.7 2.7 3.9 2.7 6.4S9.8 12.7 8 14.4M8 1.6C6.2 3.3 5.3 5.5 5.3 8s.9 4.7 2.7 6.4"/></svg><ul><li><span aria-current="page" lang="en">English</span></li><li><a href="../blog/hau-2024-discussion.ja.html" hreflang="ja" lang="ja">日本語</a></li><li><a href="../blog/hau-2024-discussion.zh.html" hreflang="zh-Hans" lang="zh-Hans">中文</a></li></ul></nav>
+    </div>
+  </header>
+  <main class="paper-notes">
+<h1 class="profile-title">Discussion of Hau et al. (2024): FinTech Credit and Entrepreneurial Growth</h1>
+<p class="meta">Minqi Pan · Paper discussion, KOMOJU · January 2026</p>
+<p>I presented this paper in our internal knowledge-sharing series at KOMOJU. These public notes explain the authors’ method and the questions it raised for our merchant-risk work. The research and empirical estimates are by Hau and his coauthors; I have not replicated their results.</p>
+<h2 class="label">What does access to credit change?</h2>
+<p>Strong merchants may be more likely both to receive credit and to grow. Comparing borrowers with nonborrowers mixes that selection with the effect of credit. Hau et al. use a change in Ant’s approval policy at a credit score of 480 to separate the two. This is a study of what credit access does, not a test of how accurately a score predicts default.</p>
+<p>Crossing 480 raised the probability of approval but did not determine it perfectly. Additional rules could exclude merchants above the cutoff, and differences between the timing of observed scores and credit decisions could produce approvals below it. That makes this a <em>fuzzy regression discontinuity</em>. Choosing not to borrow after approval is a separate issue: the treatment is access to a credit line, not the amount drawn.</p>
+<h2 class="label">Why divide one jump by another?</h2>
+<p>Let \(S\) be the credit score minus 480, \(D\) indicate credit access, and \(Y\) be an outcome. Write \(\Delta_0\) for the difference between the conditional means just above and just below the cutoff. The local instrumental-variable interpretation is:</p>
+<div class="math-block">\[\tau_{\mathrm{local}}=\frac{\Delta_0\,\mathbb{E}[Y\mid S]}{\Delta_0\,\mathbb{E}[D\mid S]}.\]</div>
+<p>The numerator is the jump in the outcome. It is not yet the effect of receiving access, because only some firms change credit status at the threshold. The denominator measures that change in access probability. The paper implements the design with two-stage least squares, using the threshold indicator as an instrument and controlling for score, firm type and month.</p>
+<p>This interpretation needs more than a visible jump. Without the treatment, expected outcomes should vary smoothly through the cutoff. The threshold must affect outcomes through credit access, and crossing it should not reduce access for some firms while increasing it for others. The estimated effect concerns firms whose access changes because of the threshold, near that threshold. A score of 479 does not make a merchant identical to one with 480.</p>
+<p>The authors test for manipulation of the score and find no significant density discontinuity. That supports the design; it does not prove all its assumptions. Their robustness checks vary bandwidths, functional forms, outcome definitions and time windows. Narrowing the score window makes the comparison more local but also leaves less information for estimation.</p>
+<h2 class="label">Reading the main result</h2>
+<p>The published baseline sample contains 1,196,887 firm-month observations for 547,491 firms, with scores from 460 to 500. The period is November 2014 to June 2015, excluding December 2014, when the threshold was suspended. These are the published counts, correcting the smaller sample described in my slides.</p>
+<div class="table-scroll"><table class="research-table"><caption>Selected estimates from the authors’ Table III</caption><thead><tr><th scope="col">Quantity</th><th scope="col">Estimate</th></tr></thead><tbody><tr><th scope="row">Jump in credit-access probability</th><td>0.2872</td></tr><tr><th scope="row">Sales-growth coefficient, instrumented access</th><td>0.3631</td></tr><tr><th scope="row">Transaction-growth coefficient, instrumented access</th><td>0.2691</td></tr></tbody></table></div>
+<p>The first-stage jump is about 28.7 percentage points. The growth outcomes are log changes from the month before to the month after credit allocation. The authors convert the growth coefficients as follows:</p>
+<div class="math-block math-results"><span>\(e^{0.3631}-1\approx43.8\%\)</span><span>\(e^{0.2691}-1\approx30.9\%\)</span></div>
+<p>That gives the paper’s roughly 44% sales and 31% transaction effects over its two-month measurement window. These are local estimates under the design’s assumptions, not a forecast for every merchant offered a loan. Transaction counts are not counts of distinct customers.</p>
+<p>A credit line can matter even before the merchant borrows: having funds available can reduce the need to keep cash idle against an unexpected shortfall. The paper discusses this liquidity-insurance channel and reports evidence consistent with increased advertising, product variety and conversion, alongside improved customer ratings. It does not settle how much merchant growth is new demand rather than business diverted from competitors.</p>
+<h2 class="label">What this raised for our work</h2>
+<p>During the discussion, I used a Prophet time-series decomposition to explain two possible uses of revenue history. Unusual observations can prompt investigation; the longer-run trend can inform risk assessment. Neither an outlier nor a falling trend is, by itself, proof of fraud or default.</p>
+<p>A credit line supplies liquidity; a rolling reserve withholds it. Both affect merchant cash flow, but they have different loss exposures. The paper gives no formula for converting a merchant score into a reserve percentage. That would require evidence connecting signals to exposure and losses, together with the cost of tying up merchant cash. Ant’s cutoff of 480 belongs to its historical policy and score scale; it cannot simply be copied to another platform.</p>
+<p>For me, the useful distinction is between monitoring, prediction and causal evidence. A dashboard can show that something changed. A predictive model can estimate an outcome. This study asks what changes because credit becomes available. Those are different questions, and answering one does not automatically answer the others.</p>
+<h2 class="label">Reference</h2>
+<p>Harald Hau, Yi Huang, Chen Lin, Hongzhe Shan, Zixia Sheng and Lai Wei (2024). <i>FinTech Credit and Entrepreneurial Growth.</i> <i>The Journal of Finance</i> 79(5), 3309–3359. <a href="https://doi.org/10.1111/jofi.13384">doi:10.1111/jofi.13384</a>. Sections II.B, III.A, V–VIII; Table III.</p>
+<p class="meta">Public notes edited against the published paper. Internal merchant examples, company data and operating thresholds are omitted.</p>
+  </main>
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <a class="email" href="mailto:hello@minqi-pan.com">hello@minqi-pan.com</a>
+      <ul class="social">
+        <li><a class="icon-gh" href="https://github.com/pmq20" aria-label="GitHub"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a></li>
+        <li><a class="icon-x" href="https://x.com/psvr" aria-label="X"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a></li>
+        <li><a class="icon-in" href="https://www.linkedin.com/in/minqi-pan-fintech" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a></li>
+      </ul>
+      <div class="lang lang-footer" role="group" aria-label="Language"><svg class="globe" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" aria-hidden="true" focusable="false"><circle cx="8" cy="8" r="6.4"/><path d="M1.6 8h12.8M8 1.6c1.8 1.7 2.7 3.9 2.7 6.4S9.8 12.7 8 14.4M8 1.6C6.2 3.3 5.3 5.5 5.3 8s.9 4.7 2.7 6.4"/></svg><ul><li><span aria-current="page" lang="en">English</span></li><li><a href="../blog/hau-2024-discussion.ja.html" hreflang="ja" lang="ja">日本語</a></li><li><a href="../blog/hau-2024-discussion.zh.html" hreflang="zh-Hans" lang="zh-Hans">中文</a></li></ul></div>
+    </div>
+  </footer>
+</body>
+</html>
