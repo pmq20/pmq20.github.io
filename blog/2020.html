@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#121212" media="(prefers-color-scheme: dark)">
+  <title>Blog, 2020 — Minqi Pan</title>
+  <meta name="description" content="Notes from AAAI 2020 and on five machine-learning papers (energy-based models, deep Markov models, graph neural networks, neural ODEs): study notes in Chinese, typeset in LaTeX, with English summaries, corrections, PDF and source.">
+  <meta name="author" content="Minqi Pan">
+  <link rel="canonical" href="https://minqi-pan.com/blog/2020.html">
+  <link rel="alternate" hreflang="en" href="https://minqi-pan.com/blog/2020.html">
+  <link rel="alternate" hreflang="ja" href="https://minqi-pan.com/blog/2020.ja.html">
+  <link rel="alternate" hreflang="zh-Hans" href="https://minqi-pan.com/blog/2020.zh.html">
+  <link rel="alternate" hreflang="x-default" href="https://minqi-pan.com/blog/2020.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Minqi Pan">
+  <meta property="og:title" content="Blog, 2020 — Minqi Pan">
+  <meta property="og:description" content="Notes from AAAI 2020 and on five machine-learning papers (energy-based models, deep Markov models, graph neural networks, neural ODEs): study notes in Chinese, typeset in LaTeX, with English summaries, corrections, PDF and source.">
+  <meta property="og:url" content="https://minqi-pan.com/blog/2020.html">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="ja_JP">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta property="og:image" content="https://minqi-pan.com/img/og.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="CHX (1939), a painting by László Moholy-Nagy, above the name Minqi Pan">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://minqi-pan.com/img/og.jpg">
+  <meta name="twitter:image:alt" content="CHX (1939), a painting by László Moholy-Nagy, above the name Minqi Pan">
+  <link rel="icon" href="../favicon.ico" sizes="32x32">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="stylesheet" href="../css/site.css">
+</head>
+<body class="page">
+  <header class="site-header">
+    <a class="home-link" href="../index.html">Minqi Pan</a>
+    <div class="header-right">
+      <nav aria-label="Site"><ul class="site-nav"><li><a href="../code/index.html">Code</a></li><li><a href="../blog/2026.html" aria-current="true">Blog</a></li><li><a href="../about.html">About</a></li></ul></nav>
+      <nav class="lang lang-header" aria-label="Language"><svg class="globe" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" aria-hidden="true" focusable="false"><circle cx="8" cy="8" r="6.4"/><path d="M1.6 8h12.8M8 1.6c1.8 1.7 2.7 3.9 2.7 6.4S9.8 12.7 8 14.4M8 1.6C6.2 3.3 5.3 5.5 5.3 8s.9 4.7 2.7 6.4"/></svg><ul><li><span aria-current="page" lang="en">English</span></li><li><a href="../blog/2020.ja.html" hreflang="ja" lang="ja">日本語</a></li><li><a href="../blog/2020.zh.html" hreflang="zh-Hans" lang="zh-Hans">中文</a></li></ul></nav>
+    </div>
+  </header>
+  <main>
+    <h1 class="visually-hidden">Blog, 2020</h1>
+    <nav class="years-nav" aria-label="Years"><ul class="years"><li><a href="2026.html">2026</a></li><li><a href="2021.html">2021</a></li><li><a href="2020.html" aria-current="page">2020</a></li><li><a href="2017.html">2017</a></li><li><a href="2016.html">2016</a></li><li><a href="2015.html">2015</a></li></ul></nav>
+    <ol class="entries">
+      <li>
+        <span class="entry-title"><a href="2020/aaai_2020_thirty_fourth_aaai_conference_on_artificial_intelligence_observations.pdf" type="application/pdf">AAAI 2020: notes from the <span class="nb">Thirty-Fourth</span> AAAI Conference on Artificial Intelligence</a></span>
+        <span class="meta"><span class="nb">New York, February 2020</span> <span class="sep" aria-hidden="true">·</span> <span class="nb">notes in Chinese, 14 pages</span> <span class="sep" aria-hidden="true">·</span> <span class="nb"><a href="https://github.com/pmq20/pmq20.github.io/blob/main/blog/2020/aaai_2020_thirty_fourth_aaai_conference_on_artificial_intelligence_observations.tex">LaTeX source</a></span></span>
+        <span class="desc">A day-by-day log of six days of tutorials, workshops and technical sessions, centered on graph neural networks and differential-equation models.</span>
+        <span class="fix"><span class="fix-label">Corrections (2026).</span> In 1(a), GraphSAGE, GAT and MPNN are spatial (message-passing) methods, not spectral filters. In 1(g)–(h), Real NVP is an affine-coupling extension of NICE rather than a continuous-time version, and of the flows listed only GraphNVP generates graphs.</span>
+      </li>
+      <li>
+        <span class="entry-title"><a href="2020/minqi_s_comments_on_nijkamp_et_al_2019_on_the_anatomy_of_mcmc_based_maximum_likelihood_learning_of_energy_based_models.pdf" type="application/pdf">On the Anatomy of <span class="nb">MCMC-Based</span> Maximum Likelihood Learning of <span class="nb">Energy-Based</span> Models</a></span>
+        <span class="meta">Comments on Nijkamp, Hill, Han, Zhu and Wu (AAAI 2020) <span class="sep" aria-hidden="true">·</span> <span class="nb">April 2020</span> <span class="sep" aria-hidden="true">·</span> <span class="nb">notes in Chinese, 5 pages</span> <span class="sep" aria-hidden="true">·</span> <span class="nb"><a href="https://github.com/pmq20/pmq20.github.io/blob/main/blog/2020/minqi_s_comments_on_nijkamp_et_al_2019_on_the_anatomy_of_mcmc_based_maximum_likelihood_learning_of_energy_based_models.tex">LaTeX source</a></span> <span class="sep" aria-hidden="true">·</span> <span class="nb"><a href="2020/nijkamp_et_al_2019_on_the_anatomy_of_mcmc_based_maximum_likelihood_learning_of_energy_based_models.pdf" type="application/pdf">Slides (English)</a></span> <span class="sep" aria-hidden="true">·</span> <span class="nb"><a href="https://arxiv.org/abs/1903.12370">Paper</a></span></span>
+        <span class="desc">Open questions the paper leaves (why short-run Langevin chains rarely converge in practice), replications of its three experiments from the authors’ released code, and the toy densities reconstructed from that code.</span>
+        <span class="fix"><span class="fix-label">Corrections (2026).</span> The paper’s sampler is unadjusted Langevin, which has no Metropolis–Hastings accept/reject step (item 3), and in overdamped Langevin dynamics the drag balances the force −∇<i>U</i> plus noise rather than equaling the energy gradient (item 4). The data noise in item 7 has covariance 0.015²<i>I</i>, not <i>I</i>; good long-run samples are consistent with convergence but do not prove it.</span>
+      </li>
+      <li>
+        <span class="entry-title"><a href="2020/minqi_s_comments_on_tan_et_al_2019_factorized_inference_in_deep_markov_models_for_incomplete_multimodal_time_series.pdf" type="application/pdf">Factorized Inference in Deep Markov Models for Incomplete Multimodal Time Series</a></span>
+        <span class="meta">Comments on Tan, Soh and Ong (AAAI 2020) <span class="sep" aria-hidden="true">·</span> <span class="nb">April 2020</span> <span class="sep" aria-hidden="true">·</span> <span class="nb">notes in Chinese, 11 pages</span> <span class="sep" aria-hidden="true">·</span> <span class="nb"><a href="https://github.com/pmq20/pmq20.github.io/blob/main/blog/2020/minqi_s_comments_on_tan_et_al_2019_factorized_inference_in_deep_markov_models_for_incomplete_multimodal_time_series.tex">LaTeX source</a></span> <span class="sep" aria-hidden="true">·</span> <span class="nb"><a href="2020/tan_et_al_2019_factorized_inference_in_deep_markov_models_for_incomplete_multimodal_time_series.pdf" type="application/pdf">Slides (English)</a></span> <span class="sep" aria-hidden="true">·</span> <span class="nb"><a href="https://arxiv.org/abs/1905.13570">Paper</a></span></span>
+        <span class="desc">Derives, step by step, the smoothing posteriors the paper states without proof, factorized over time and modality; reconstructs the datasets from the authors’ code; and attempts to reproduce the noisy-spiral and Weizmann human-action experiments.</span>
+        <span class="fix"><span class="fix-label">Corrections (2026).</span> In item 3, the product of marginals <i>p</i>(<i>x</i><sub><i>t</i>+1:<i>T</i></sub>) ∏<sub><i>m</i></sub> <i>p</i>(<i>x</i><sub><i>t</i></sub><sup><i>m</i></sup>) is not the joint <i>p</i>(<i>x</i><sub><i>t</i>:<i>T</i></sub>); the step holds only up to a factor constant in <i>z</i><sub><i>t</i></sub>. In item 6(c), <i>L</i><sub>match</sub> enforces the model’s assumption of a single time-invariant prior <i>p</i>(<i>z</i>); it does not correct sampling error. My replication of the noisy-spiral experiment did not succeed.</span>
+      </li>
+      <li>
+        <span class="entry-title"><a href="2020/minqi_s_comments_on_zang_and_wang_2019_neural_dynamics_on_complex_networks.pdf" type="application/pdf">Neural Dynamics on Complex Networks</a></span>
+        <span class="meta">Comments on Zang and Wang (KDD 2020; arXiv 2019) <span class="sep" aria-hidden="true">·</span> <span class="nb">April 2020</span> <span class="sep" aria-hidden="true">·</span> <span class="nb">notes in Chinese, 7 pages</span> <span class="sep" aria-hidden="true">·</span> <span class="nb"><a href="https://github.com/pmq20/pmq20.github.io/blob/main/blog/2020/minqi_s_comments_on_zang_and_wang_2019_neural_dynamics_on_complex_networks.tex">LaTeX source</a></span> <span class="sep" aria-hidden="true">·</span> <span class="nb"><a href="2020/zang_and_wang_2019_neural_dynamics_on_complex_networks.pdf" type="application/pdf">Slides (English)</a></span> <span class="sep" aria-hidden="true">·</span> <span class="nb"><a href="https://arxiv.org/abs/1908.06491">Paper</a></span></span>
+        <span class="desc">Continuous-depth graph networks built on neural ODEs: the diffusion operator Φ(α) and its link to Kipf and Welling’s normalized adjacency, a derivation of the adjoint method, and the node-classification and synthetic-network set-ups rebuilt from the paper and code.</span>
+        <span class="fix"><span class="fix-label">Corrections (2026).</span> The Planetoid Cora file has 10,556 directed arcs that are already symmetric, i.e. 5,278 undirected edges; 5,429 is the count in the original LINQS release. Kipf and Welling’s remark that edges need not encode similarity concerns Laplacian regularization, not GCN or NDCN. The adjoint derivation omits the boundary conditions and the final gradient d<i>L</i>/d<i>θ</i> = <i>a</i><sub><i>θ</i></sub>(<i>t</i><sub>0</sub>).</span>
+      </li>
+      <li>
+        <span class="entry-title"><a href="2020/minqi_s_comments_on_poli_et_al_2019_graph_neural_ordinary_differential_equations.pdf" type="application/pdf">Graph Neural Ordinary Differential Equations</a></span>
+        <span class="meta">Comments on Poli, Massaroli, Park, Yamashita, Asama and Park (arXiv 2019) <span class="sep" aria-hidden="true">·</span> <span class="nb">April 2020</span> <span class="sep" aria-hidden="true">·</span> <span class="nb">notes in Chinese, 4 pages</span> <span class="sep" aria-hidden="true">·</span> <span class="nb"><a href="https://github.com/pmq20/pmq20.github.io/blob/main/blog/2020/minqi_s_comments_on_poli_et_al_2019_graph_neural_ordinary_differential_equations.tex">LaTeX source</a></span> <span class="sep" aria-hidden="true">·</span> <span class="nb"><a href="2020/poli_et_al_2019_graph_neural_ordinary_differential_equations.pdf" type="application/pdf">Slides (English)</a></span> <span class="sep" aria-hidden="true">·</span> <span class="nb"><a href="https://arxiv.org/abs/1911.07532">Paper</a></span></span>
+        <span class="desc">Reads the model through the relational inductive biases of Battaglia et al., and asks why node embeddings diverge here when deep graph convolutional networks are known to over-smooth.</span>
+        <span class="fix"><span class="fix-label">Corrections (2026).</span> The central argument of item 4 is mistaken. The DGL Cora graph the authors used is symmetric, so directedness cannot explain the diverging trajectories; Li et al.’s convergence result concerns a fixed operator applied indefinitely, whereas a GCDE has learned weights and a nonlinearity and runs for a finite time. The activation is Softplus, not Softmax; Li et al.’s limit is proportional to <i>D</i><sup>1/2</sup><b>1</b>; and the paper’s Table 1 shows no gain from the ODE formulation alone over a tuned GCN.</span>
+      </li>
+      <li>
+        <span class="entry-title"><a href="2020/minqi_s_comments_on_xu_et_al_2019_how_powerful_are_graph_neural_networks.pdf" type="application/pdf">How Powerful are Graph Neural Networks?</a></span>
+        <span class="meta">Comments on Xu, Hu, Leskovec and Jegelka (ICLR 2019) <span class="sep" aria-hidden="true">·</span> <span class="nb">April 2020</span> <span class="sep" aria-hidden="true">·</span> <span class="nb">notes in Chinese, 3 pages</span> <span class="sep" aria-hidden="true">·</span> <span class="nb"><a href="https://github.com/pmq20/pmq20.github.io/blob/main/blog/2020/minqi_s_comments_on_xu_et_al_2019_how_powerful_are_graph_neural_networks.tex">LaTeX source</a></span> <span class="sep" aria-hidden="true">·</span> <span class="nb"><a href="2020/xu_et_al_2019_how_powerful_are_graph_neural_networks.pdf" type="application/pdf">Slides (English)</a></span> <span class="sep" aria-hidden="true">·</span> <span class="nb"><a href="https://openreview.net/forum?id=ryGs6iA5Km">Paper</a></span></span>
+        <span class="desc">Expressive power bounded by the Weisfeiler–Lehman test, a shorter route to the paper’s Lemma 4 through countability (Rudin, <i>Principles of Mathematical Analysis</i>, Theorem 2.13), and what the bound means for neighborhood aggregation.</span>
+        <span class="fix"><span class="fix-label">Corrections (2026).</span> GIN is the most expressive only among neighborhood-aggregation GNNs with countable features, matching but not exceeding the 1-WL test. Treating bounded multisets as 𝒳<sup><i>n</i></sup> (item 3) needs padding with a dummy element and a fixed order, which is what the paper’s longer proof supplies.</span>
+      </li>
+    </ol>
+    <p class="older"><a href="2017.html">2017 <span aria-hidden="true">→</span></a></p>
+  </main>
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <a class="email" href="mailto:hello@minqi-pan.com">hello@minqi-pan.com</a>
+      <ul class="social">
+        <li><a class="icon-gh" href="https://github.com/pmq20" aria-label="GitHub"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a></li>
+        <li><a class="icon-x" href="https://x.com/psvr" aria-label="X"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a></li>
+        <li><a class="icon-in" href="https://www.linkedin.com/in/minqi-pan-fintech" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a></li>
+      </ul>
+      <div class="lang lang-footer" role="group" aria-label="Language"><svg class="globe" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" aria-hidden="true" focusable="false"><circle cx="8" cy="8" r="6.4"/><path d="M1.6 8h12.8M8 1.6c1.8 1.7 2.7 3.9 2.7 6.4S9.8 12.7 8 14.4M8 1.6C6.2 3.3 5.3 5.5 5.3 8s.9 4.7 2.7 6.4"/></svg><ul><li><span aria-current="page" lang="en">English</span></li><li><a href="../blog/2020.ja.html" hreflang="ja" lang="ja">日本語</a></li><li><a href="../blog/2020.zh.html" hreflang="zh-Hans" lang="zh-Hans">中文</a></li></ul></div>
+    </div>
+  </footer>
+</body>
+</html>
